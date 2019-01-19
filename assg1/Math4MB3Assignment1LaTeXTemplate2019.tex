@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FANCY HEADER AND FOOTER STUFF %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage{fancyhdr,lastpage}
+\usepackage{fancyhdr,lastpage, dsfont}
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer parameters
 %%%\lhead{Student Name: \theblank{4cm}}
@@ -26,7 +26,7 @@
 \smallskip
 2019 ASSIGNMENT {\color{blue}1}}\\
 \medskip
-\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctore}}\\
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\
 \medskip
 \underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}
 \end{center}
@@ -38,8 +38,24 @@
 
   {\color{blue}
     \begin{proof}
-      {\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
-      When referring to equation~\eqref{E:SI} make sure to use ~\verb|equation~\eqref{E:SI}|~ in your source file so that you obtain a hyperlinked reference that is automatically numbered correctly.
+      $ $\newline	
+      Consider the open set $D: \{I\in \mathds{R}| 0 < I < N+\epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of        equation~\eqref{E:SI}, where $\epsilon > 0$ is constant. 
+      Suppose a continuous differentiable function $L:D\rightarrow \mathds{R}$  is in the form 
+      \begin{equation}
+      L(I) = a(N-I)^b
+      \end{equation} where $a$ and $b$ are constants and $a, b > 0$.\\
+      
+      Then by Lyapunov's Direct Method,
+      \begin{enumerate}[(a)]
+      	\item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
+      	\item $\dot{L}(I)=\frac{dL}{dI}\frac{dI}{dt} \\
+      	=-ab(N-I)^{b-1}\beta I(N-I)\\
+      	=-ab\beta I(N-I)^b$\\
+      	Let $a = 1$ and $b = 2$. Assuming $\beta>0$, then\\
+      	$\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\in D\backslash \{I_*\}$
+      	\item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I\}$
+      \end{enumerate}
+  	  Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable. 
     \end{proof}
   }
 
@@ -49,12 +65,31 @@
 
     {\color{blue}
       \begin{proof}
-        {\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}
-        Since an exactly solution is requested, there will no doubt be an equation of the form
+        $ $\newline
+      	$\frac{dI}{dt} = \beta I(N-I)$\\
+      	$\int\frac{1}{I(N-I)} = \int\beta dt$\\
+      	$\frac{1}{N}\int (\frac{1}{I} + \frac{1}{N-1})dI = \beta t + C$\\
+      	$\frac{1}{N}(ln|I|- ln|N-I|) =\beta t + C$\\
+      	$ln\abs{\frac{I}{N-I}} = N \beta t + NC$\\
+      	$\frac{N-I}{I} = \pm e^{-NC}e^{-N\beta t}$\\
+      	
+      	Let $k = \pm e^{-NC}$\\
+      	$\frac{N-I}{I} = ke^{-N\beta t}$\\
+      	$\frac{N}{I} - 1 = ke^{-N\beta t}$\\
+      	$\frac{N}{I} = 1 + ke^{-N\beta t}$\\
+      	$I(t) = \frac{N}{1 + ke^{-N\beta t}}$\\      	
+      	
+      	To solve for $k$, let $I(0) = I_0$.\\
+      	$I(0) = I_0 = \frac{N}{1 + k}$\\ 
+      	$k = \frac{N - I_0}{I_0}$\\
+      	
+        So the exact solution of the model is
         \begin{equation}
-          I(t) = \cdots \text{blah blah blah} \cdots ,
+          I(t) =  \frac{N}{1+\frac{N-I_0}{I_0}(e^{-\beta N t})}
         \end{equation}
-        which will be extremely enlightening.
+        Since $$\lim_{t\to\infty} e^{-\beta N t} = 0$$
+       $$\lim_{t\to\infty} I(t) = \frac{N}{1 +\frac{N-I_0}{I_0}(0)} = N$$
+       then every solution that starts in the interval $(0, N)$ converges to the EE. 
       \end{proof}
     }
 
