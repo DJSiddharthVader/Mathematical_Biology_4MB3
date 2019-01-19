@@ -1,0 +1,66 @@
+\documentclass[12pt]{article}
+
+\input{../preamble_for_assignments}
+\input{4mba1q} % questions
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FANCY HEADER AND FOOTER STUFF %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt} % Removes funny header line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+%Title
+\begin{center}
+{\bfseries Mathematics 4MB3/6MB3 Mathematical Biology\\
+\smallskip
+2019 ASSIGNMENT {\color{blue}1}}\\
+\medskip
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctore}}\\
+\medskip
+\underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}
+\end{center}
+\section{Analysis of the SI model}
+\SIanalIntro
+\begin{enumerate}[(a)]
+\item
+\item
+  \begin{enumerate}[(i)]
+  \item
+  \item
+  \end{enumerate}
+\end{enumerate}
+\section{Analysis of the basic SIR  model}
+\basicSIRanalIntro
+\begin{enumerate}[(a)]
+\item
+The peak prevalence of the disease will be the maximum number of people infected at a given time $t$ during the infection.
+This implies that the peak prevalence is the maximum value of the function $I(t)$.
+All maxima and minima of a function occur at points $(x,y) | f'(x) = 0$.
+$\frac{dI}{dt} = {\mathcal R}SI - I$
+\item
+  \begin{enumerate}[(i)]
+      \item
+      \item
+      \item
+      \item
+  \end{enumerate}
+\item
+\item
+\end{enumerate}
+%End
+\centerline{\bf--- END OF ASSIGNMENT ---}
+\bigskip
+Compile time for this document:
+\today\ @ \thistime
+\end{document}
