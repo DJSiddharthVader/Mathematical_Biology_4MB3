@@ -1,40 +1,36 @@
 %Proof
 \begin{proof} $ $\newline
-Consider the open set $D: \{I \in \mathbb{R}| 0 < I < N+ \epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of equation~\eqref{E:SI}, where $\epsilon > 0$ is constant.
-Suppose a continuous differentiable function $L:D\rightarrow \mathbb{R}$  is in the form
-\begin{equation}
-  L(I) = a(N-I)^b
-\end{equation}
-where $a$ and $b$ are constants and $a, b > 0$.\\
-
-Then by Lyapunov's Direct Method,
-\begin{enumerate}[(a)]
-    \item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
-    \item
-    \begin{align*}
-        \dot{L}(I)  &= \frac{dL}{dI} \frac{dI}{dt} \\
-                    &= -ab(N-I)^{b-1}\beta I(N-I)\\
-                    &= -ab\beta I(N-I)^b\\
-    \end{align*}
-    Let $a = 1$ and $b = 2$. Assuming $\beta>0$, then\\
-    $\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\ in D \backslash \{I_*\}$
-    \item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I_*\}$
-\end{enumerate}
-
-    Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable.
-\end{proof}
-      \begin{enumerate}[(a)]
-      	\item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
-      	\item
+    Consider the open set $D: \{I \in \mathbb{R}| 0 < I < N+ \epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of equation~\eqref{E:SI}, where $\epsilon > 0$ is constant.
+    Suppose a continuous differentiable function $L:D\rightarrow \mathbb{R}$  is in the form
+    \begin{equation}
+        L(I) = a(N-I)^b
+    \end{equation}
+    where $a$ and $b$ are constants and $a, b > 0$.\\
+    Then by Lyapunov's Direct Method,
+    \begin{enumerate}[(a)]
+        \item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
+        \item
         \begin{align*}
             \dot{L}(I)  &= \frac{dL}{dI} \frac{dI}{dt} \\
-      					&= -ab(N-I)^{b-1}\beta I(N-I)\\
-      					&= -ab\beta I(N-I)^b\\
-      	\end{align*}
-      	Let $a = 1$ and $b = 2$. Assuming $\beta>0$, then\\
-      	$\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\in D \backslash \{I_*\}$
-      	\item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I_*\}$
-      \end{enumerate}
-
-  	  Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable.
-    \end{proof}
+            &= -ab(N-I)^{b-1}\beta I(N-I)\\
+            &= -ab\beta I(N-I)^b\\
+        \end{align*}
+        Let $a = 1$ and $b = 2$. Assuming $\beta>0$, then
+        $$\dot{L}(I) = -2\beta I(N-I)^2 \leq 0 \, \forall I\ in D \backslash \{I_*\}$$
+        \item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I_*\}$
+    \end{enumerate}
+    Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable.
+    \begin{enumerate}[(a)]
+        \item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
+        \item
+        \begin{align*}
+            \dot{L}(I)  &= \frac{dL}{dI} \frac{dI}{dt} \\
+            &= -ab(N-I)^{b-1}\beta I(N-I)\\
+            &= -ab\beta I(N-I)^b\\
+        \end{align*}
+        Let $a = 1$ and $b = 2$. Assuming $\beta>0$, then\\
+        $\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\in D \backslash \{I_*\}$
+        \item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I_*\}$
+    \end{enumerate}
+    Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable.
+\end{proof}
