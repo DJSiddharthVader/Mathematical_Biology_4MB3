@@ -1,0 +1,31 @@
+
+The peak prevalence of the disease will be the maximum number of people infected at a given time $t$ during the infection.
+%proof
+This implies that the peak prevalence is the maximum value of the function $I(t)$.
+In order to get a function of $I$ with the initial conditions $(S_0,I_0)$ as parameters we can consider the phase portrait solution:
+$$ I_{max} = I_0 + S_0 - \frac{1}{\mathcal R_0} + \frac{1}{\mathcal R_0}log(\frac{1}{S_0\mathcal R_0}))$$
+which can be derived as follows:
+%I(S) derivation
+\begin{align*}
+    \frac{dI}{dS}     &= \frac{dI/dt}{dS/dt}\\
+                      &= -1 + \frac{1}{S\mathcal R_0}\\
+    \int_{I_0}^{I} dI &= \int_{S_0}^{S} -1 + \frac{1}{S\mathcal R_0}dS\\
+    I - I_0           &= -(S - S_0) + \frac{1}{\mathcal R_0}log(\frac{S}{S_0})\\
+    I                 &= I_0 + S_0 - S + \frac{1}{\mathcal R_0}log(\frac{S}{S_0})
+\end{align*}
+%max val of I(S)
+All maxima and minima of a function occur at points $(x,y)$ such that $f'(x) = 0$, thus
+\begin{align*}
+    \frac{dI/dt}{dS/dt} &= \frac{{\mathcal R_0}SI - I}{-\mathcal R_0SI}\\
+    \frac{dI/dt}{dS/dt} &= -1 + \frac{1}{S\mathcal R_0}\\
+    0                   &= -1 + \frac{1}{S\mathcal R_0}\\
+    1                   &= \frac{1}{S\mathcal R_0}\\
+    1                   &= S{\mathcal R_0}
+\end{align*}
+This equation is true when $S = \frac{1}{\mathcal R_0}$, thus the maximum value for the function $I(S)$ occurs when $S = \frac{1}{\mathcal R_0}$.
+Substituting this into $I(S)$ will give an expression for $I_{max}$ in terms of the initial conditions $(S_0,I_0)$
+$$ I_{max} = I_0 + S_0 - \frac{1}{\mathcal R_0} + \frac{1}{\mathcal R_0}log(\frac{1}{S_0\mathcal R_0}))$$
+%Justification
+This quantity may be important to a public health officials for triage. If an epidemic is expected to have a low peak prevalence, fewer health-related resources would need to be allocated to treatment and prevention.
+If the peak prevalence is estimated to be high then more effort may be directed towards prevention and treatment of the disease.
+Further if the peak prevalence is estimated the time of peak prevalence can be derived easily using the $I(t)$ function, to estimate how much time exists to prepare for the peak of the infection, when resources (money, health personnel, equipment, etc.) will be most strained.
