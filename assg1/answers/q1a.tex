@@ -1,14 +1,13 @@
-\usepackage{dsfont}
 %Proof
     \begin{proof}
       $ $\newline	
-      Consider the open set $D: \{I \in \mathds{R}| 0 < I < N+ \epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of equation~\eqref{E:SI}, where $\epsilon > 0$ is constant. 
-      Suppose a continuous differentiable function $L:D\rightarrow \mathds{R}$  is in the form
+      Consider the open set $D: \{I \in \mathbb{R}| 0 < I < N+ \epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of equation~\eqref{E:SI}, where $\epsilon > 0$ is constant. 
+      Suppose a continuous differentiable function $L:D\rightarrow \mathbb{R}$  is in the form
       \begin{equation}
       L(I) = a(N-I)^b
       \end{equation} where $a$ and $b$ are constants and $a, b > 0$.\\
       
-Then by Lyapunov's Direct Method,
+      Then by Lyapunov's Direct Method,
 
       \begin{enumerate}[(a)]
       	\item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
@@ -25,5 +24,3 @@ Then by Lyapunov's Direct Method,
       
   	  Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable. 
     \end{proof}
-  }
-
