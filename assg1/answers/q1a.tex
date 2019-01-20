@@ -12,11 +12,14 @@ Then by Lyapunov's Direct Method,
 
       \begin{enumerate}[(a)]
       	\item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
-      	\item $\dot{L}(I)=\frac{dL}{dI}\frac{dI}{dt} \\
-      	=-ab(N-I)^{b-1}\beta I(N-I)\\
-      	=-ab\beta I(N-I)^b$\\
+      	\item
+        \begin{align*}
+            \dot{L}(I)  &= \frac{dL}{dI} \frac{dI}{dt} \\
+      					&= -ab(N-I)^{b-1}\beta I(N-I)\\
+      					&= -ab\beta I(N-I)^b\\
+      	\end{align*}
       	Let $a = 1$ and $b = 2$. Assuming $\beta>0$, then\\
-      	$\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\in D\backslash \{I_*\}$
+      	$\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\ in D \backslash \{I_*\}$
       	\item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I\}$
       \end{enumerate}
       
