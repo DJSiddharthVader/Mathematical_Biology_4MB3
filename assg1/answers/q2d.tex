@@ -1,5 +1,5 @@
 All points $(S,0) S \in 0 \leq S \leq 1$ are equilibria for the SIR model.
-The jacobian of the system is
+The Jacobian of the system is
 $$ DF_{(S,I)} =
 \begin{bmatrix}
     -{\mathcal R_0}I & -{\mathcal R_0}S\\
@@ -22,12 +22,12 @@ The eigenvalues of the matrix are the roots of the equation $\lambda^2 - T\lambd
 For one of the eigenvalues $R(\lambda) = 0$, therefore the equilibria are non-hyperbolic and the stability must be assessed in some other way.
 %Lyapunov explanation
 This assessment can be done by examining a Lyapunov function.
-Lyapunov's theorem states that foran equilibrium point $X_*$ of $X'=F(X)$ and some set ${\mathcal S}$ if $\exists L(X)$ such that
-\begin{align*}
-    L(X_*) &= 0\\
-    L(X) &\geq 0\quad \forall X \in S\char`\\ \{X_*\}\\
-    \nabla L(X) \cdot X' &< 0 \quad \forall X \in S\char`\\ \{X_*\}
-\end{align*}
+Lyapunov's theorem states that for an equilibrium point $X_*$ of $X'=F(X)$ and some set ${\mathcal S}$ if $\exists L(X)$ such that
+\begin{enumerate}[(i)]
+    \item $L(X_*) = 0$
+    \item $L(X) \geq 0\quad \forall X \in S\char`\\ \{X_*\}$
+    \item $\dot{L}(S,I) = \nabla L(X) \cdot X' < 0 \quad \forall X \in S\char`\\ \{X_*\}$
+\end{enumerate}
 then $L(X)$ is a strict Lyapunov function and $X_*$ is asymptotically stable.
 %Lyapunov proof for SIR
 The function $L(S,I) = S + I$ satisfies $L(S,I) \geq 0$ and is a candidate for a strict Lyapunov function.
@@ -38,4 +38,4 @@ Further only values in $[0,1]$ are considered for $S$ and $I$ as only those valu
     &=-{\mathcal R_0}SI + {\mathcal R_0}SI-I\\
     &=-I
 \end{align*}
-Since $\nabla L \cdot X' = -I < 0\quad \forall (S,I) \in \mathbb{R}^2\char`\\ \{(S,0)\quad \forall S \in \mathbb{R}\}$ all equilibria $(S,0)$ are asymptotically stable by Lyapunov's theorem.
+Since $\nabla L \cdot X' = -I < 0\quad \forall (S,I) \in \mathbb{R}^2\char`\\ \{(S,0)\quad \forall S \in \mathbb{R}\}$ all equilibria $(S,0)$ are globally asymptotically stable by Lyapunov's theorem.

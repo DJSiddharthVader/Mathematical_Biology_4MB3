@@ -1,2 +1,29 @@
-tmp
-
+$I^*=0$ is a non-hyperbolic equilibrium, so to prove that all solutions to the SIR model approach $I=0$ asymptotically stability cannot be assessed using the linearization theorem.
+However, the existance of a Lyapunov function would be able to prove the stability of these eqiuilibria.
+A function $L(S,I)$ is a Lyapunov function if:
+\begin{enumerate}[(i)]
+    \item $L(S^*,I^*) = 0$
+    \item $L(S,I) > 0 \quad \forall (S,I) \in \mathbb{R^2} \char`\\ \{S \in \mathbb{R},I=0 \}$
+    \item $\nabla L(X) \cdot X' < 0 \quad \forall X \in \mathbb{R^2}\char`\\ \{X_*\}$
+\end{enumerate}
+If a Lyapunov function exists for the equilibrium point $(S^*,I^*)$ then that point is asymptotically stable.
+We consider the function $L(S,I) = I$ and check whether it is a valid Lyapunov function for the eqilibria $(S^*,I^*) = (S,0)\quad \forall S \in \mathbb{R}$:
+\begin{align*}
+    L(S^*,I^*) &= I^* = 0\\
+    L(S,I)     &= I > 0\\
+\end{align*}
+Note $I >0$ since we are examining the endemic equilibrium whch includes al values in $(0,1]$ since $I=0$ is the equilibrium point and thus not considered.
+Now we shoe that $\dot{L}(S,I) < 0$
+\begin{align*}
+    \dot{L}(S,I) &= \nabla L(S,I) \cdot X'\\
+                 &= \frac{\partial L}{\partial S}\cdot \frac{dS}{dt}\\
+                 & = 0 + (1)\frac{dI}{dt}\\
+                 &={\mathcal R_0}SI -I\\
+                 &=I({\mathcal R_0}S-1)
+    0            &> I({\mathcal R_0}S-1) \label{eq:1}\\
+\end{align*}
+Since $I > 0$ $L(S,I) = I$ is a Lyapunov function when ${\mathcal R_0}S -1 < 0 \implies {\mathcal R_0} < \frac{1}{S}$ which holds for all cases as $S \to S^*$.
+This proves that $L(S,I) = I$ is a strict Luapunov function and that the equilibria $(S^*,I^*) = (S,0)\quad \forall S \in \mathbb{R}$ is asymptotically stable.\par
+As the infection spreads, individuals move from the succeptible class to the infected class while individuals move from the infected class to the recovered class.
+As there in never an increase in the succeptible class the number of individuals entering the recovered class will be greater than the number of individuals entering the infected class.
+The number of individuals in the infected class will continuously decrease as people recover and $I \to 0$.

@@ -1,5 +1,29 @@
-%proof
+%derivation of S(R)
+First the function $S(R)$ is computed
+\begin{align*}
+    \frac{dS}{dR}       &= \frac{dS/dt}{dR/dt}\\
+    \frac{dS/dt}{dR/dt} &= \frac{-{\mathcal R_0}SI}{I}\\
+                        &= -{\mathcal R_0}S\\
+    \frac{dS}{S}        &= -{\mathcal R_0}dR\\
+    \int \frac{dS}{S}   &= \int -{\mathcal R_0}dR\\
+    ln(S)               &= \int -{\mathcal R_0}R + C\\
+    S                   &= C_1e^{-{\mathcal R_0}R}\\
+    S(0)                &= S_0 = C_1e^{-{\mathcal R_0}(0)}\\
+    S_0                 &= C_1(1)\\
+    S(R)                &= S_0e^{-{\mathcal R_0}R}
+\end{align*}
+%derivation of t(R)
+From the function $S(R)$ and the relationship $S+I+R=N$ t(R) can be computed as an integral using the $\frac{dR}{dt}$ relation.
 \begin{align*}
     S(R) &= S_0e^{-{\mathcal R_0}R}\\
     S + I& + R = 1 \implies I = 1 - S - R\\
+    \frac{dR}{dt} &= 1 - S_0e^{-{\mathcal R_0}R} - R\\
+    \int dR &= \int (1 - S_0e^{-{\mathcal R_0}R} - R) dt\\
+    R + C_0 &= t - tS_0e^{-{\mathcal R_0}R} - Rt\\
+    R + C_0 &= t(1 - S_0e^{-{\mathcal R_0}R} - R)\\
+    t(R)  &= \frac{R + C_0}{1 - S_0e^{-{\mathcal R_0}R} - R}\\
+    t(O)  &= t_0 = \frac{C_0}{1 - S_0} = 0\\
+    C_0   &= t_0(a-S_0)\\
+    C_0   &= 0\\
+    t(R)  &= \frac{R}{1 - S_0e^{-{\mathcal R_0}R} - R}
 \end{align*}
