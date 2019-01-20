@@ -1,35 +1,35 @@
 \begin{proof}
-      	\begin{align*}
-      		\frac{dI}{dt}                                   &= \beta I(N-I)\\
-      		\int\frac{1}{I(N-I)}                            &= \int\beta dt\\
-      		\frac{1}{N}\int (\frac{1}{I} + \frac{1}{N-1})dI &= \beta t + C\\
-      		\frac{1}{N}(ln|I|- ln|N-I|)                     &= \beta t + C\\
-      		ln\abs{\frac{I}{N-I}}                           &= N \beta t + NC\\
-      		\frac{N-I}{I}                                   &= \pm e^{-NC}e^{-N\beta t}\\	
-      	\end{align*}
-           	
-      	Let $k = \pm e^{-C_2}$\\
-      	\begin{align*}
-      		\frac{N-I}{I} 	  &= ke^{-N\beta t}\\
-      		\frac{N}{I} - 1   &= ke^{-N\beta t}\\
-      		\frac{N}{I} 	    &= 1 + ke^{-N\beta t}\\
-      		I(t) 			        &= \frac{N}{1 + ke^{-N\beta t}}\\
-      	\end{align*}
-      	
-      	To solve for $k$, let $I(0) = I_0$.\\
-      	\begin{align*}
-      		I(0) 	&= I_0 = \frac{N}{1 + k}\\ 
-      		k 		&= \frac{N - I_0}{I_0}\\
-      	\end{align*}
-      	
-        So the exact solution of the model is
-        \begin{equation}
-          I(t) =  \frac{N}{1+\frac{N-I_0}{I_0}(e^{-\beta N t})}
-        \end{equation}
-        
-        Since 
-        $$\lim_{t\to\infty} e^{-\beta N t} = 0$$
-       $$\lim_{t\to\infty} I(t) = \frac{N}{1 +\frac{N-I_0}{I_0}(0)} = N$$
-       then every solution that starts in the interval $(0, N)$ converges to the EE. 
-      \end{proof}
+%Solve N-I/I
+\begin{align*}
+    \frac{dI}{dt}                                   &= \beta I(N-I)\\
+    \int\frac{1}{I(N-I)}                            &= \int\beta dt\\
+    \frac{1}{N}\int (\frac{1}{I} + \frac{1}{N-1})dI &= \beta t + C\\
+    \frac{1}{N}(ln|I|- ln|N-I|)                     &= \beta t + C\\
+    ln\abs{\frac{I}{N-I}}                           &= N \beta t + NC\\
+    \frac{N-I}{I}                                   &= \pm e^{-NC}e^{-N\beta t}\\
+\end{align*}
+%Solve I(t)
+Let $k = \pm e^{-C_2}$\\
+\begin{align*}
+    \frac{N-I}{I} 	  &= ke^{-N\beta t}\\
+    \frac{N}{I} - 1   &= ke^{-N\beta t}\\
+    \frac{N}{I} 	  &= 1 + ke^{-N\beta t}\\
+    I(t) 			  &= \frac{N}{1 + ke^{-N\beta t}}\\
+\end{align*}
+%solve for k
+To solve for $k$, let $I(0) = I_0$.\\
+\begin{align*}
+    I(0) 	&= I_0 = \frac{N}{1 + k}\\
+    k 		&= \frac{N - I_0}{I_0}\\
+\end{align*}
+So the exact solution of the model is
+\begin{equation}
+  I(t) =  \frac{N}{1+\frac{N-I_0}{I_0}(e^{-\beta N t})}
+\end{equation}
+
+Since
+$$\lim_{t\to\infty} e^{-\beta N t} = 0$$
+$$\lim_{t\to\infty} I(t) = \frac{N}{1 +\frac{N-I_0}{I_0}(0)} = N$$
+then every solution that starts in the interval $(0, N)$ converges to the EE.
+\end{proof}
 
