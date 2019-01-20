@@ -41,22 +41,88 @@
   \end{enumerate}
 \end{enumerate}
 \section{Analysis of the basic SIR  model}
-\basicSIRanalIntro
 \begin{enumerate}[(a)]
-\item
+\item %2 a)
 The peak prevalence of the disease will be the maximum number of people infected at a given time $t$ during the infection.
+%proof
 This implies that the peak prevalence is the maximum value of the function $I(t)$.
-All maxima and minima of a function occur at points $(x,y) | f'(x) = 0$.
-$\frac{dI}{dt} = {\mathcal R}SI - I$
-\item
+In order to get a function of $I$ with the initial conditions $(S_0,I_0)$ as parameters we can consider the phase portrait solution:
+$$ I_{max} = I_0 + S_0 - \frac{1}{\mathcal R_0} + \frac{1}{\mathcal R_0}log(\frac{1}{S_0\mathcal R_0}))$$
+which can be derived as follows:
+%I(S) derivation
+\begin{align*}
+    \frac{dI}{dS}     &= \frac{dI/dt}{dS/dt}\\
+                      &= -1 + \frac{1}{S\mathcal R_0}\\
+    \int_{I_0}^{I} dI &= \int_{S_0}^{S} -1 + \frac{1}{S\mathcal R_0}dS\\
+    I - I_0           &= -(S - S_0) + \frac{1}{\mathcal R_0}log(\frac{S}{S_0})\\
+    I                 &= I_0 + S_0 - S + \frac{1}{\mathcal R_0}log(\frac{S}{S_0})
+\end{align*}
+%max val of I(S)
+All maxima and minima of a function occur at points $(x,y)$ such that $f'(x) = 0$, thus
+\begin{align*}
+    \frac{dI/dt}{dS/dt} &= \frac{{\mathcal R_0}SI - I}{-\mathcal R_0SI}\\
+    \frac{dI/dt}{dS/dt} &= -1 + \frac{1}{S\mathcal R_0}\\
+    0                   &= -1 + \frac{1}{S\mathcal R_0}\\
+    1                   &= \frac{1}{S\mathcal R_0}\\
+    1                   &= S{\mathcal R_0}
+\end{align*}
+This equation is true when $S = \frac{1}{\mathcal R_0}$, thus the maximum value for the function $I(S)$ occurs when $S = \frac{1}{\mathcal R_0}$.
+Substituting this into $I(S)$ will give an expression for $I_{max}$ in terms of the initial conditions $(S_0,I_0)$
+$$ I_{max} = I_0 + S_0 - \frac{1}{\mathcal R_0} + \frac{1}{\mathcal R_0}log(\frac{1}{S_0\mathcal R_0}))$$
+%Justification
+This quantity may be important to a public health officials for triage. If an epidemic is expected to have a low peak prevalence, fewer health-related resources would need to be allocated to treatment and prevention.
+If the peak prevalence is estimated to be high then more effort may be directed towards prevention and treatment of the disease.
+Further if the peak prevalence is estimated the time of peak prevalence can be derived easily using the $I(t)$ function, to estimate how much time exists to prepare for the peak of the infection, when resources (money, health personnel, equipment, etc.) will be most strained.
+\item %2 b)
   \begin{enumerate}[(i)]
-      \item
-      \item
-      \item
-      \item
+      \item % i)
+      \item % ii)
+      \item % iii)
+      \item % iv)
   \end{enumerate}
-\item
-\item
+\item %2 c)
+\item %2 d)
+All points $(S,0) S \in 0 \leq S \leq 1$ are equilibria for the SIR model.
+The jacobian of the system is
+$$ DF_{(S,I)} =
+\begin{bmatrix}
+    -{\mathcal R_0}I & -{\mathcal R_0}S\\
+     {\mathcal R_0}I &  {\mathcal R_0}S - 1\\
+\end{bmatrix} $$
+Substituting in the equilibrium point gives:
+$$ DF_{(S,0)} =
+\begin{bmatrix}
+    0 & -{\mathcal R_0}S\\
+    0 &  {\mathcal R_0}S - 1\\
+\end{bmatrix} $$
+The eigenvalues of the matrix are the roots of the equation $\lambda^2 - T\lambda + D$ where $T$ and $D$ are the trace and determinant respectively.
+\begin{align*}
+    T &= {\mathcal R_0}S - 1\\
+    D &= 0\\
+    0 &= \lambda^2 - ({\mathcal R_0}S - 1)\lambda + (0)\\
+    0 &= \lambda({\mathcal R_0}S - 1 + \lambda)\\\\
+    \lambda &= 0\qquad or\qquad \lambda &= -({\mathcal R_0}S - 1)
+\end{align*}
+For one of the eigenvalues $R(\lambda) = 0$, therefore the equilibria are non-hyperbolic and the stability must be assessed in some other way.
+%Lyapunov explanation
+This assessment can be done by examining a Lyapunov function.
+Lyapunov's theorem states that foran equilibrium point $X_*$ of $X'=F(X)$ and some set ${\mathcal S}$ if $\exists L(X)$ such that
+\begin{align*}
+    L(X_*) &= 0\\
+    L(X) &\geq 0\quad \forall X \in S\char`\\ \{X_*\}\\
+    \nabla L(X) \cdot X' &< 0 \quad \forall X \in S\char`\\ \{X_*\}
+\end{align*}
+then $L(X)$ is a strict Lyapunov function and $X_*$ is asymptotically stable.
+%Lyapunov proof for SIR
+The function $L(S,I) = S + I$ satisfies $L(S,I) \geq 0$ and is a candidate for a strict Lyapunov function.
+Further only values in $[0,1]$ are considered for $S$ and $I$ as only those values have biological interpretations for the model (i.e ${\mathcal S} = [0,1]$).
+\begin{align*}
+    \nabla L &= (1,1)\\
+    \nabla L \cdot X' &= (1,1)\cdot(-{\mathcal R_0}SI,{\mathcal R_0}SI-I)\\
+    &=-{\mathcal R_0}SI + {\mathcal R_0}SI-I\\
+    &=-I
+\end{align*}
+Since $\nabla L \cdot X' = -I < 0\quad \forall (S,I) \in \mathbb{R}^2\char`\\ \{(S,0)\quad \forall S \in \mathbb{R}\}$ all equilibria $(S,0)$ are asymptotically stable.
 \end{enumerate}
 %End
 \centerline{\bf--- END OF ASSIGNMENT ---}
