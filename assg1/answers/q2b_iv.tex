@@ -1,1 +1,25 @@
-tmp
+It is possible to find an exact analytical solution fro $t$ as a function of $S$
+\begin{align*}
+\frac{dS}{dR}&=-R_0S\\
+\int \frac{dS}{S}&=\int -R_0dR\\
+\ln{S}&=-R_0(R)+C_1\\
+\frac{C_1-\ln{S_0}}{R_0}&=R(S)\\
+R(S_0)&=\frac{C_1-\ln{S_0}}{R_0}\\
+0&=C_1-\ln{S_0}\\
+C_1&=\ln{S-0}\\
+R(S)&=\frac{\ln{\frac{S_0}{S}}}{R_0}\\
+\end{align*}
+We can then use the fact that $I=1-S-R$ and incorporate the previous function $R(S)$ and $\frac{dS}{dt}$ to yield t(S)\\
+\begin{align*}
+\frac{dS}{dt}&= -R_0SI\\
+\frac{dS}{dt}&=-R_0S(1-S-\frac{\ln{\frac{S_0}{S}}}{R_0})\\
+\frac{dS}{dt}&=R_0S^2-R_0S+S\ln{\frac{S_0}{S}}\\
+\int{dS}&=\int{R_0S^2-R_0S+S\ln{\frac{S_0}{S}}}dt\\
+S+C_2&=(R_0S^2-R_0S+S\ln{\frac{S_0}{S}})t\\
+t(S)&=\frac{S+C_2}{R_0S^2-R_0S+S\ln{\frac{S_0}{S}}}\\
+t(S_0)&=\frac{S_0+C_2}{R_0S_0^2-R_0S_0+S_0\ln{\frac{S_0}{S_0}}}\\
+0&=\frac{S_0+C_2}{R_0S_0^2-R_0S_0+S_0\ln{1}}\\
+0&={S_0+C_2}\\
+C_2&=-S_0\\
+t(S)&=\frac{S+S_0}{R_0S^2-R_0S+S\ln{\frac{S_0}{S}}}\\
+\end{align*}
