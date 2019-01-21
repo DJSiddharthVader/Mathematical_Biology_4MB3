@@ -3,7 +3,7 @@
     \begin{align*}
         \frac{dI}{dt}                                   &= \beta I(N-I)\\
         \int\frac{1}{I(N-I)}                            &= \int\beta dt\\
-        \frac{1}{N}\int (\frac{1}{I} + \frac{1}{N-1})dI &= \beta t + C\\
+        \frac{1}{N}\int (\frac{1}{I} + \frac{1}{N-I})dI &= \beta t + C\\
         \frac{1}{N}(ln|I|- ln|N-I|)                     &= \beta t + C\\
         ln\abs{\frac{I}{N-I}}                           &= N \beta t + NC\\
         \frac{N-I}{I}                                   &= \pm e^{-NC}e^{-N\beta t}\\
