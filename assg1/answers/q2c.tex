@@ -12,7 +12,7 @@ We consider the function $L(S,I) = I$ and check whether it is a valid Lyapunov f
     L(S^*,I^*) &= I^* = 0\\
     L(S,I)     &= I > 0\\
 \end{align*}
-Note $I >0$ since we are examining the endemic equilibrium whch includes al values in $(0,1]$ since $I=0$ is the equilibrium point and thus not considered.
+Note $I >0$ since we are examining the endemic equilibrium whch includes all values in $(0,1]$ since $I=0$ is the equilibrium point and thus not considered.
 Now we show that $\dot{L}(S,I) < 0$
 \begin{align*}
     \dot{L}(S,I) &= \nabla L(S,I) \cdot X'\\
@@ -23,6 +23,6 @@ Now we show that $\dot{L}(S,I) < 0$
     0            &> I({\mathcal R_0}S-1) \label{eq:1}\\
 \end{align*}
 Since $I > 0$ $L(S,I) = I$ is a Lyapunov function when ${\mathcal R_0}S -1 < 0 \implies {\mathcal R_0} < \frac{1}{S}$ which holds for all cases as $S \to S^*$.
-This proves that $L(S,I) = I$ is a strict Luapunov function and that the equilibria $(S^*,I^*) = (S,0)\quad \forall S \in \mathbb{R}$ is asymptotically stable.\par
+This proves that $L(S,I) = I$ is a strict Lyapunov function and that the equilibria $(S^*,I^*) = (S,0)\quad \forall S \in \mathbb{R}$ is asymptotically stable.\par
 As the infection spreads, individuals move from the succeptible class to the infected class while individuals move from the infected class to the recovered class.\\
 As there is never an increase in the succeptible class, the number of individuals entering the recovered class will be greater than the number of individuals entering the infected class, causing the number of individuals in the infected class to continuously decrease as people recover and $I \to 0$.
