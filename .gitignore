@@ -2,3 +2,8 @@
 *.log
 *.out
 
+.Rproj.user
+*.Rproj
+*Rplots.pdf
+*concordance.tex
+*.synctex.gz
