@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\input{4mbapreamble}
+\input{../../preamble_for_assignments.tex}
 \input{4mba2q}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -48,7 +48,7 @@ This assignment was due in class on \textcolor{red}{\bf Monday 4 February 2019 a
 datafile <- "pim_us_phila_city_1918_dy.csv"
 philadata <- read.csv(datafile)
 philadata$date <- as.Date(philadata$date)
-@ 
+@
 \PhilaDataReadB
 
 \item \PhilaDataReproduceA
@@ -79,7 +79,7 @@ philadata$date <- as.Date(philadata$date)
   {\color{magenta}\dots beautifully clear text and plot(s) here \dots\ interspersed with \Rlogo code if this is a \texttt{knitr} script}
   \end{proof}
   }
-  
+
 \item \EstimateRnc
 
   {\color{blue} \begin{proof}[Solution]
@@ -100,7 +100,7 @@ philadata$date <- as.Date(philadata$date)
     \item Your code will first need to load the \code{deSolve} package:
 <<load.deSolve,message=FALSE,warning=FALSE>>=
 library("deSolve")
-@       
+@
     \item \FitSIRbii
 <<plot.sine,fig.height=4>>=
 plot.sine <- function( xmin=0, xmax=2*pi ) {
@@ -109,7 +109,7 @@ plot.sine <- function( xmin=0, xmax=2*pi ) {
   grid() # add a light grey grid
 }
 plot.sine(xmax=4*pi)
-@ 
+@
   \item \FitSIRbiiiA
 <<SI.vec.fld>>=
 ## Vector Field for SI model
@@ -121,22 +121,22 @@ SI.vector.field <- function(t, vars, parms=c(beta=2,gamma=1)) {
     return(list(vec.fld)) # ode() requires a list
   })
 }
-@ 
+@
 
 \FitSIRbiiiB
 <<draw.soln,tidy=FALSE>>=
 ## Draw solution
-draw.soln <- function(ic=c(x=1,y=0), tmax=1, 
-                      times=seq(0,tmax,by=tmax/500), 
+draw.soln <- function(ic=c(x=1,y=0), tmax=1,
+                      times=seq(0,tmax,by=tmax/500),
                       func, parms, ... ) {
   soln <- ode(ic, times, func, parms)
   lines(times, soln[,"y"], col="blue", lwd=3, ... )
 }
-@ 
+@
 \FitSIRbiiiC
 <<eval=FALSE>>=
   soln <- ode(times=times, func=func, parms=parms, y=ic)
-@ 
+@
 
 We can now use our \code{draw.soln()} function to plot a few solutions of the SI model.
 
@@ -158,11 +158,11 @@ for (i in 1:length(betavals)) {
             lty=i # use a different line style for each solution
             )
 }
-@ 
+@
 
 
   \end{itemize}
- 
+
  {\color{blue} \begin{proof}[Solution]
  {\color{magenta}\dots If this is a \texttt{knitr} script then your code should be displayed here.  Otherwise, you should state here the name of the file where the \Rlogo code is, and the names of any functions you defined\dots}
  \end{proof}
@@ -174,14 +174,14 @@ for (i in 1:length(betavals)) {
   {\color{magenta}\dots beautifully clear text and plot(s) here \dots\ preceded by \Rlogo code if this is a \texttt{knitr} script}
   \end{proof}
   }
-  
+
 \item \FitSIRd
 
   {\color{blue} \begin{proof}[Solution]
   {\color{magenta}\dots beautifully clear text and plot(s) here \dots\ interspersed with \Rlogo code if this is a \texttt{knitr} script}
   \end{proof}
   }
- 
+
 \end{enumerate}
 
 \section{Executive summary for the Public Health Agency}
