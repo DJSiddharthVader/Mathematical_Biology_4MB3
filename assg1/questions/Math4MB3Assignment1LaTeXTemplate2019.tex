@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\input{../preamble_for_assignments}
+\input{../../preamble_for_assignments}
 \input{4mba1q} % questions
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -38,13 +38,13 @@
 
   {\color{blue}
     \begin{proof}
-      $ $\newline	
-      Consider the open set $D: \{I\in \mathds{R}| 0 < I < N+\epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of        equation~\eqref{E:SI}, where $\epsilon > 0$ is constant. 
-      Suppose a continuous differentiable function $L:D\rightarrow \mathds{R}$  is in the form 
+      $ $\newline
+      Consider the open set $D: \{I\in \mathds{R}| 0 < I < N+\epsilon \}$ containing the the endemic equilibrium (EE) $I_* = N$ of        equation~\eqref{E:SI}, where $\epsilon > 0$ is constant.
+      Suppose a continuous differentiable function $L:D\rightarrow \mathds{R}$  is in the form
       \begin{equation}
       L(I) = a(N-I)^b
       \end{equation} where $a$ and $b$ are constants and $a, b > 0$.\\
-      
+
       Then by Lyapunov's Direct Method,
       \begin{enumerate}[(a)]
       	\item $L(I_*) = a(N-N)^b = 0$ and $L(I)>0$ \, $\forall I\in D\backslash \{I_*\}$
@@ -55,7 +55,7 @@
       	$\dot{L}(I) = -2\beta I(N-I)^2 \leq 0$ \, $\forall I\in D\backslash \{I_*\}$
       	\item $\dot{L}(I) < 0$ \, $\forall I\in D\backslash \{I\}$
       \end{enumerate}
-  	  Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable. 
+  	  Since the above (a), (b), and (c) hold true for $L(I) = (N-I)^2$, then by Lyapunov's Stability Theorem, $I_* = N$ is globally asymptotically stable.
     \end{proof}
   }
 
@@ -72,24 +72,24 @@
       	$\frac{1}{N}(ln|I|- ln|N-I|) =\beta t + C$\\
       	$ln\abs{\frac{I}{N-I}} = N \beta t + NC$\\
       	$\frac{N-I}{I} = \pm e^{-NC}e^{-N\beta t}$\\
-      	
+
       	Let $k = \pm e^{-NC}$\\
       	$\frac{N-I}{I} = ke^{-N\beta t}$\\
       	$\frac{N}{I} - 1 = ke^{-N\beta t}$\\
       	$\frac{N}{I} = 1 + ke^{-N\beta t}$\\
-      	$I(t) = \frac{N}{1 + ke^{-N\beta t}}$\\      	
-      	
+      	$I(t) = \frac{N}{1 + ke^{-N\beta t}}$\\
+
       	To solve for $k$, let $I(0) = I_0$.\\
-      	$I(0) = I_0 = \frac{N}{1 + k}$\\ 
+      	$I(0) = I_0 = \frac{N}{1 + k}$\\
       	$k = \frac{N - I_0}{I_0}$\\
-      	
+
         So the exact solution of the model is
         \begin{equation}
           I(t) =  \frac{N}{1+\frac{N-I_0}{I_0}(e^{-\beta N t})}
         \end{equation}
         Since $$\lim_{t\to\infty} e^{-\beta N t} = 0$$
        $$\lim_{t\to\infty} I(t) = \frac{N}{1 +\frac{N-I_0}{I_0}(0)} = N$$
-       then every solution that starts in the interval $(0, N)$ converges to the EE. 
+       then every solution that starts in the interval $(0, N)$ converges to the EE.
       \end{proof}
     }
 
@@ -147,7 +147,7 @@ Since no numerical analysis or graphics were requested, there is no need to use 
 }
 \begin{center}
 \scalebox{3}{
-\includegraphics{images/Rlogo.pdf}
+\includegraphics{../../images/Rlogo.pdf}
 }
 \end{center}
 
