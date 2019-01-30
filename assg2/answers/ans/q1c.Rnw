@@ -1,0 +1,5 @@
+q1c
+<<plot1, message=FALSE, warning=FALSE, dev='tikz'>>=
+#enter R code here
+
+@

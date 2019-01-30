@@ -1,0 +1,5 @@
+q3d
+<<SIRfit, message=FALSE, warning=FALSE, dev='tikz'>>=
+#enter R code here
+
+@

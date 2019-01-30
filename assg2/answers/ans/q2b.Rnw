@@ -1,0 +1,6 @@
+
+q2b
+<<plot2, message=FALSE, warning=FALSE, dev='tikz'>>=
+#enter R code here
+
+@
