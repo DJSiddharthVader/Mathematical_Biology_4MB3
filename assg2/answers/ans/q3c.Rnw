@@ -1,6 +1,0 @@
-q3c
-
-<<SIRplot, message=FALSE, warning=FALSE, dev='tikz'>>=
-#enter R code here
-
-@
