@@ -1,0 +1,4 @@
+q1c
+<<plot1, message=FALSE, warning=FALSE, dev='tikz'>>=
+plot(1, main="this is a test")
+@
