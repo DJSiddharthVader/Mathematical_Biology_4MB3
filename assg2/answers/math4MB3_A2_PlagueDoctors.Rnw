@@ -1,7 +1,7 @@
 \documentclass[12pt]{article}
 
-\input{../../preamble.tex}
-\input{../questions_files/4mba2q.tex}
+\input{preamble.tex}
+\input{4mba2q.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FANCY HEADER AND FOOTER STUFF %%
@@ -20,6 +20,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{standalone}
 \begin{document}
+
+<<setup, include=FALSE, cache=FALSE>>=
+library(knitr)
+library(tikzDevice)
+library(deSolve)
+opts_chunk$set(dev = 'tikz')
+@
 
 \begin{center}
 {\bf Mathematics 4MB3/6MB3 Mathematical Biology\\
@@ -53,7 +60,7 @@ philadata$date <- as.Date(philadata$date)
 
 \item \PhilaDataReproduceA
 
-<<q1c, child='ans/q1c.Rnw', message=F, warning=F, echo=F>>=
+<<q1c, child='q1c.Rnw', message=F, warning=F, echo=F>>=
 @
 
 \end{enumerate}
@@ -64,17 +71,17 @@ philadata$date <- as.Date(philadata$date)
 
 \item \EstimateRna
 
-<<q2a, child='ans/q2a.Rnw', message=F, warning=F, echo=F>>=
+<<q2a, child='q2a.Rnw', message=F, warning=F, echo=F>>=
 @
 
 \item \EstimateRnb
 
-<<q2b, child='ans/q2b.Rnw', message=F, warning=F, echo=F>>=
+<<q2b, child='q2b.Rnw', message=F, warning=F, echo=F>>=
 @
   
 \item \EstimateRnc
 
-<<q2c, child='ans/q2c.Rnw', message=F, warning=F, echo=F>>=
+<<q2c, child='q2c.Rnw', message=F, warning=F, echo=F>>=
 @
 
 \end{enumerate}
@@ -87,17 +94,17 @@ philadata$date <- as.Date(philadata$date)
 
 \item \FitSIRbIntro
 
-<<q3b, child='ans/q3b.Rnw', message=F, warning=F, echo=F>>=
+<<q3b, child='q3b.Rnw', message=F, warning=F, echo=F>>=
 @
 
 \item \FitSIRc
 
-<<q3c, child='ans/q3c.Rnw', message=F, warning=F, echo=F>>=
+<<q3c, child='q3c.Rnw', message=F, warning=F, echo=F>>=
 @
   
 \item \FitSIRd
 
-<<q3d, child='ans/q3d.Rnw', message=F, warning=F, echo=F>>=
+<<q3d, child='q3d.Rnw', message=F, warning=F, echo=F>>=
 @
  
 \end{enumerate}
@@ -105,7 +112,7 @@ philadata$date <- as.Date(philadata$date)
 \newpage
 \section{Executive summary for the Public Health Agency}
 
-\input{ans/q4.tex}
+\input{q4.tex}
 
 \bigskip
 
