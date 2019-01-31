@@ -2,7 +2,7 @@ To compile the final PDF:
 
 1.
 Make sure knitr is your default program to weave Rnw files 
-(see RStudio > Preferences > Sweave, uncheck ‘Always enable Rnw concordance’)
+(see RStudio > Preferences > Sweave, also select the option ‘pdflatex’ in ‘Typeset LaTeX into PDF using:’)
 2. 
 Open math4MB3_A2_PlagueDoctors.Rnw in RStudio
 3. 
