@@ -1,1 +1,22 @@
-q2c
+<<slope>>=
+#Slope of the linear regression line
+line <- lm(log(pim[15:35]) ~ date[15:35], data=philadata)
+line
+@
+The slope of the fitted line is $0.2316$. In the SIR model, this value corresponds to the initial growth rate, $\beta - \gamma$ because if $S \thicksim 1$ initially, then\\
+\begin{align*}
+  \frac{dI}{dt}   &= \beta SI - \gamma I \\
+                  &\approx (\beta - \gamma )I\\
+\end{align*}
+
+An independent measure of the mean infectious period, $(\frac{1}{\gamma})$, is needed to estimate $\R_0$ because $\R_0$ is the product between $\frac{1}{\gamma}$ and $\beta$, the transmission rate.\\
+
+To calculate an estimate of $\R_0$ given $\frac{1}{\gamma} = 4$:\\
+\begin{align*}
+  \gamma   &= 0.25 \\
+  0.2316   &= \beta - \gamma  \\
+  \beta    &= 0.2316 + 0.25 = 0.4816\\
+  \R_0     &= \beta \gamma = (0.4816*4) = 1.9264 \\
+\end{align*}
+
+The estimated $\R_0$ is 1.9264.
