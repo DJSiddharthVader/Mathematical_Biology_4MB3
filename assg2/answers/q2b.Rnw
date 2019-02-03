@@ -1,6 +1,19 @@
-
-q2b
-<<plot2, message=FALSE, warning=FALSE, dev='tikz'>>=
-#enter R code here
-
+<<plot2, message=FALSE, warning=FALSE, fig.align='center', fig.height=4.35, dev='tikz'>>=
+date <- philadata$date
+pim <- philadata$pim
+logpim <- log10(philadata$pim) 
+#linear model fitted on data points 15 to 35 (looks linear)
+line <- lm(logpim[15:35] ~ date[15:35], data=philadata)
+#plotting setup
+par(las=1, bty="l", mai=c(1,.7,1,.7))
+plot(date, pim, log="y", ann=FALSE, xaxt = "n")
+#plotting lines and red points
+lines(date, pim); points(date, pim, pch=21, bg="red")
+#adjusting the axis and labels
+xaxis <- seq(as.Date("1918-09-01"), by="months", length.out = 4)
+axis(1, xaxis, format(xaxis, "%b"))
+mtext("P\\&I Deaths",side=3, line=0, adj=0,col="blue",cex=2)
+mtext("Date",side=1,line=1,adj=1,col="blue",cex=2)
+#overlaying line of best fit
+abline(line, col="blue", lwd=2)
 @
