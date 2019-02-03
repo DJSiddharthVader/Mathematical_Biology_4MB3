@@ -60,7 +60,7 @@ philadata$date <- as.Date(philadata$date)
 
 \item \PhilaDataReproduceA
 
-<<q1c, child='q1c.Rnw', message=F, warning=F, echo=F>>=
+<<q1c, child='q1c.Rnw', message=F, warning=F>>=
 @
 
 \end{enumerate}
@@ -71,17 +71,17 @@ philadata$date <- as.Date(philadata$date)
 
 \item \EstimateRna
 
-<<q2a, child='q2a.Rnw', message=F, warning=F, echo=F>>=
+<<q2a, child='q2a.Rnw', message=F, warning=F>>=
 @
 
 \item \EstimateRnb
 
-<<q2b, child='q2b.Rnw', message=F, warning=F, echo=F>>=
+<<q2b, child='q2b.Rnw', message=F, warning=F>>=
 @
   
 \item \EstimateRnc
 
-<<q2c, child='q2c.Rnw', message=F, warning=F, echo=F>>=
+<<q2c, child='q2c.Rnw', message=F, warning=F>>=
 @
 
 \end{enumerate}
@@ -94,17 +94,17 @@ philadata$date <- as.Date(philadata$date)
 
 \item \FitSIRbIntro
 
-<<q3b, child='q3b.Rnw', message=F, warning=F, echo=F>>=
+<<q3b, child='q3b.Rnw', message=F, warning=F>>=
 @
 
 \item \FitSIRc
 
-<<q3c, child='q3c.Rnw', message=F, warning=F, echo=F>>=
+<<q3c, child='q3c.Rnw', message=F, warning=F>>=
 @
   
 \item \FitSIRd
 
-<<q3d, child='q3d.Rnw', message=F, warning=F, echo=F>>=
+<<q3d, child='q3d.Rnw', message=F, warning=F>>=
 @
  
 \end{enumerate}
@@ -112,7 +112,8 @@ philadata$date <- as.Date(philadata$date)
 \newpage
 \section{Executive summary for the Public Health Agency}
 
-\input{q4.tex}
+<<q4, child='q4.Rnw', message=F, warning=F>>=
+@
 
 \bigskip
 
