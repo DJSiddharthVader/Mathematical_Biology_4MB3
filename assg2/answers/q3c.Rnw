@@ -2,16 +2,17 @@ q3c
 
 <<SIRplot, message=FALSE, warning=FALSE, dev='tikz'>>=
 library(deSolve) 
-SI.vector.field <- function(t, vars, parms=c(beta=2,gamma=1)) {
+SIR.vector.field <- function(t, vars, parms=c(beta=2,gamma=1)) {
   with(as.list(c(parms, vars)), {
     dx <- -beta*x*y # dS/dt
     dy <- beta*x*y-gamma*y # dI/dt
-    vec.fld <- c(dx=dx, dy=dy)
+    dz<- gamma*y #dR/dt 
+    vec.fld <- c(dx=dx, dy=dy,dz=dz)
     return(list(vec.fld)) # ode() requires a list
   })
 }
 ##Plots the solution I(t) of the SIR model
-plot.It <- function(ic=c(x=1,y=0), tmax=1,
+plot.It <- function(ic=c(x=1,y=0,z=0), tmax=1,
                     times=seq(0,tmax,by=tmax/500),
                     func, parms, ... ) {
   It <- ode(ic, times, func, parms) 
@@ -26,20 +27,18 @@ mif<-4 #mean infectious period
 R0vals <- c(1.2, 1.5, 1.8, 2, 3, 4)
 
 ## draws the empty plot:
-plot(0,0,xlim=c(0,tmax),ylim=c(0,0.45),
+plot(0,0,xlim=c(0,tmax),ylim=c(0,1),
      type="n",bty="L",xlab="Time (t)",ylab="Prevalence (I)",las=1)
 ##Draws the graph with the various solutions for the given initial
 ##conditions and parameter values
 for (i in 1:length(R0vals)) {
-  plot.It(ic=c(x=S0,y=I0), tmax=tmax,
-            func=SI.vector.field,
-            parms=c(beta=R0vals[i]/mif,gamma=1/mif),
-            lty=i # use a different line style for each solution
+  plot.It(ic=c(x=S0,y=I0,z=0), tmax=tmax,
+            func=SIR.vector.field,
+            parms=c(beta=R0vals[i]/mif,gamma=1/mif),#assigns the parameter value
+            lty=i #each solution has a different style
   )
-  ##Makes the legend
   legend( "topright",legend=c(R0vals),
           col="green",lty=1:6,lwd=3,cex=0.8)
 }
-
 
 @
