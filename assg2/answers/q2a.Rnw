@@ -1,1 +1,16 @@
-q2a
+<<slopes>>=
+Considering the time period with an exponential growth, we can assume $M(t) = \exp( \alpha (t))$ for some arbitrary constant $\alpha$. Therefore, the slope of the log function of $M(t)$ in that time period is $\alpha$.
+By our assumptions, plugging this into the $I(t)$ equation we get:
+
+\begin{align*}
+ I(t)= \eta e^{\alpha (t - \tau)}\\
+ or \; I(t)= \frac{\eta}{e^{\alpha \tau}} e^{\alpha (t)}
+\end{align*}
+
+Taking the log of both sides we get:
+\begin{align*}
+\log I(t) = \alpha t + \log (\frac{\eta}{e^{\alpha \tau}})
+\end{align*}
+
+As we can see, the slope of $I(t)$ is also exactly $\alpha$. Ergo, the exponential rates of $M$ and $I$ are identical if both are growing exactly exponentially over some period of time.
+@
