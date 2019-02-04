@@ -1,5 +1,63 @@
 q3d
 <<SIRfit, message=FALSE, warning=FALSE, dev='tikz'>>=
-#enter R code here
+Through trial and error we found the values $R0=0.000705$ and $\gamma=0.23419$
+To yield a solution of the SIR model that fit the Philadelphia P&I time series,
+that was satisfactory when assesed with the Euclidean distance between the model
+and the data.
+
+##The following code shows how this was done
+##The part of the time series were infection does not appear to spread was removed
+datafile <- "C:/Users/danie/Downloads/pim_us_phila_city_1918_dy.csv"
+philadata <- read.csv(datafile)
+philadata$date <- as.Date(philadata$date)
+redphildata<-philadata[21:120, ]#Reduced Philadelphia Time serier
+
+##Next is the 
+library(deSolve) 
+SIR.vector.field <- function(t, vars, parms=c(beta=2,gamma=1)) {
+  with(as.list(c(parms, vars)), {
+    dx <- -beta*x*y # dS/dt of SIR model
+    dy <- beta*x*y-gamma*y # dI/dt of SIR model
+    dz<- gamma*y #dR/dt of SIR model
+    vec.fld <- c(dx=dx, dy=dy,dz=dz)
+    return(list(vec.fld)) # ode() requires a list
+  })
+}
+
+plot.It <- function(ic=c(x=1,y=0,z=0), tmax=1,
+                    times=seq(0,tmax,by=tmax/500),
+                    func, parms, ... ) {
+  It <- ode(ic, times, func, parms) 
+  lines(times, It[,"y"], col="green", lwd=2, ... )
+}
+I0<-4
+S0 <- 3500
+R0 <- 0.000705
+mif<-(4.27)
+tmax=102 #number of items in redphildata
+##the graphs were plotted together for visualization
+plot(0,0,xlim=c(0,102),ylim=c(0,1000), 
+     type="n",bty="L",xlab="Time (t)",ylab="P&I Deaths",las=1)
+points(redphildata[2],pch=21,bg="red")
+{
+  plot.It(ic=c(x=S0,y=I0,z=0), tmax=tmax,
+          func=SIR.vector.field,
+          parms=c(beta=R0/mif,gamma=(1/mif))
+  )
+}
+It <- ode(y=c(x=S0,y=I0,z=0), times=seq(0,tmax,by=1), 
+          func=SIR.vector.field,
+          parms=c(beta=R0/mif,gamma=1/mif))
+redphildata$date<-NULL #removes the date column
+Newvector<-It[,3]#Only has the I(t) values
+Total<-0
+Newtotal<-0
+#Euclidean Distance to asses quality of fit
+for (i in 1:100) {
+  Newtotal<-Total+(redphildata[i,]-Newvector[i])^2
+  Total<-Newtotal
+}
+Euclidean.Distance<-sqrt(Newtotal)
+print(Euclidean.Distance) #Euclidean distance
 
 @
