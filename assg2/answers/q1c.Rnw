@@ -1,4 +1,22 @@
-q1c
 <<plot1, message=FALSE, warning=FALSE, dev='tikz'>>=
-plot(1, main="this is a test")
+datafile <- "pim_us_phila_city_1918_dy.csv"
+philadata <- read.csv(datafile)
+philadata$date <- as.Date(philadata$date)
+#plot without axis labels. las set to one for horizontal labeling.
+#xaxs was set to "i" for the x axis to begin at the origin.
+plot(philadata$date, philadata$pim,
+     xlab="",
+     ylab="",
+     xaxt="n",
+     pch=21,
+     bg="red",
+     las=1,
+     type = "o",
+     bty="l",
+     xaxs="i")
+#Date x-axis designed.
+axis.Date(1, at=seq(min(philadata$date), max(philadata$date), by="month"), lty=1)
+# adj values outside of [0,1] were used to align labels similar to the requested graph.
+mtext("P&I Deaths", col = "blue", line = 0.5, cex = 1.2, font = 2, side = 3, las = 1, adj = -0.1)
+mtext("Date", col = "blue", line = 2, cex = 1.2, font = 2, side = 1, adj = 1.02)
 @
