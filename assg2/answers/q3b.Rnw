@@ -1,10 +1,10 @@
 q3b
 <<SIRmodel, message=FALSE, warning=FALSE, dev='tikz'>>=
 library(deSolve) 
-SI.vector.field <- function(t, vars, parms=c(R0=2,gamma=1)) {
+SI.vector.field <- function(t, vars, parms=c(beta=2,gamma=1)) {
 with(as.list(c(parms, vars)), {
-dx <- -R0*x*y # dS/dt of SIR model
-dy <- R0*x*y-gamma*y # dI/dt of SIR model
+dx <- -beta*x*y # dS/dt of SIR model
+dy <- beta*x*y-gamma*y # dI/dt of SIR model
 vec.fld <- c(dx=dx, dy=dy)
 return(list(vec.fld)) # ode() requires a list
 })
@@ -16,22 +16,23 @@ func, parms, ... ) {
 It <- ode(ic, times, func, parms) 
 lines(times, It[,"y"], col="green", lwd=2, ... )
 }
-tmax <- 10 # end time for numerical integration of the ODE
+tmax <- 50 # end time for numerical integration of the ODE
 ## draws the empty plot:
 plot(0,0,xlim=c(0,tmax),ylim=c(0,1),
 type="n",bty="L",xlab="Time (t)",ylab="Prevalence (I)",las=1)
 
+##The following is an example of a graph using the function plot.It
 ## Given initial conditions and parameter values:
-I0 <- 0.1
+I0 <- 0.001
 S0 <- 1 - I0
-R0 <- 4
-mif<-2 #mean infectious period
-##the following is an example of a graph using the function plot.It
+R0 <- 6
+mif<-7 #mean infectious period
 {
 plot.It(ic=c(x=S0,y=I0), tmax=tmax,
 func=SI.vector.field,
-parms=c(R0,gamma=(1/mif))
+parms=c(beta=R0/mif,gamma=(1/mif))
 )
 }
+
 
 @
