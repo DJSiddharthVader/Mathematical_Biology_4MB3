@@ -1,4 +1,5 @@
 q3b
+The following code writes a function that can plot the solution $I(t)$ of the SIR model
 <<SIRmodel, message=FALSE, warning=FALSE, dev='tikz'>>=
 library(deSolve) 
 SI.vector.field <- function(t, vars, parms=c(beta=2,gamma=1)) {
