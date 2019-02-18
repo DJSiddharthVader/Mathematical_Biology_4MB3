@@ -1,0 +1,7 @@
+<<parent, echo=FALSE, cache=FALSE>>=
+knitr::set_parent('../main.Rnw')
+@
+
+Now some latex $\mathbb{R_0}$
+<<>>=
+@
