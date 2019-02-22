@@ -51,6 +51,9 @@
 \usepackage{alltt}
 \input{preamble.tex}
 \input{4mba3q.tex}
+\usepackage{amsthm}
+%\theoremstyle{definition}
+\newtheorem{definition}{Definition}
 
 %% FANCY HEADER AND FOOTER STUFF %%
 \usepackage{fancyhdr,lastpage}
@@ -87,48 +90,21 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Mo
 \SIRintro
 
 \begin{enumerate}[(a)]
-
-\item \SIRa
-
-
-
-Now some latex $\mathbb{R_0}$ stuff
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlnum{1}\hlopt{+}\hlnum{1}
-\end{alltt}
-\begin{verbatim}
-## [1] 2
-\end{verbatim}
-\end{kframe}
-\end{knitrout}
-
-\item \SIRb
-
-
-
-Now some latex $\mathbb{R_0}$
-
-
-\item \SIRc
-
-\item \SIRd
-
-\item \SIRe
-
-\item \SIRf
-
-\item \SIRg
-
-\item \SIRh
-
-\item \SIRi
-
-\item \SIRj
-
-\item \SIRk
-
+\item \input{./sections/qa.tex}
+\item \input{./sections/qb.tex}
+\item \input{./sections/qc.tex}
+\item \input{./sections/qd.tex}
+\item \input{./sections/qe.tex}
+\item \input{./sections/qf.tex}
+\item \input{./sections/qg.tex}
+\item \input{./sections/qh.tex}
+\item
+%<<qi,child='./sections/qi.Rnw'>>=
+%@
+\item
+%<<qj,child='./sections/qj.Rnw'>>=
+%@
+\item \input{./sections/qk.tex}
 \end{enumerate}
 
 %%\newpage
