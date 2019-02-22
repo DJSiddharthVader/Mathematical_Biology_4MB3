@@ -1,0 +1,23 @@
+%Size constancy
+Since equations (1) represent all changes in the size of each population compartment, the net change in the total population should be the sum of the change in each compartment, i.e. the sum of all equations (1).
+If the sum of all equations (1) is zero, $\frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} = 0$, the the change in total population size must be zero and the total population size $N$ must be constant.
+\begin{align}
+   \frac{dS}{dt} + \frac{dI}{dt} + \frac{dR}{dt} &= \mu N -\frac{\beta}{N} SI - \mu S + \frac{\beta}{N} SI - \gamma I - \mu I + \gamma I - \mu R\\
+   &= \mu N - \mu S - \mu I - \mu R (-\frac{\beta}{N} SI + \frac{\beta}{N} SI) (- \gamma I  + \gamma I)\\
+   &= \mu (N - (S + I + R)) \label{qa1}
+\end{align}
+Since $N = S + I + R$, i.e. the sum of all population compartments is equal tot the total population size, \ref{qa1} evaluates to 0.
+Thus the sum of population changes in all population compartments is 0 and the total population size remains constant.\\\\
+%Forward Invariance
+\begin{definition}{Forward Invariant Set\\}
+Given a dynamical system $\dot{x}=f(x)$, a solution $x(t,x_0)$ with $x_0$ as the initial condition, a set $\Delta = \{x \in {\mathbb R}\ | \phi(x) = 0 \}$ iwith some positive function $\phi(x)$ is forward invariant if $x_0 \in \Delta \implies x(t,x_0) \in \Delta\ \forall\ t \geq 0$.
+%$x_0 \in S \implies \varphi(t,x_0) \in S\ \forall\ t \in I(x_0)\ \textrm{and}\ t \geq 0$, where $I(x_0)$ is the maximum interval of existence for the solution and $\varphi(t,x_0)$ is a solution to the ODE with initial condition $x_0$ after time $t$.
+\end{definition}
+Since the population size has been shown to be constant and equal to $N$, the function $\phi(S,I,R) = N - (S+I+R)$ is always equal to zero, given any initial condition.
+%Bio States
+\begin{definition}{Biologically Meaningful States\\}
+Define the set $\Delta = \{(S,I,R)\ |\ 0 \leq S,I,R \ \textrm{and}\ \phi(S,I,R) = 0\}$ where $\phi(S,I,R) = N - (S+I+R)$, to be the set of biologically meaningful states for this model.
+\end{definition}
+Once the total population is equal to $N$, it will remain equal to $N$ in all subsequent time steps due to the population size constancy.
+If all initial conditions are defined such that they satisfy $\phi(S,I,R) = 0$, then they can only evolve towards other states that satisfy $\phi(S,I,R) = 0$ due to the constant population size.
+This if the set $\Delta$ is defined to include all initial conditions $x_0$ that have a total population equal to $N$ (i.e. all 3-tuples of positive integers $x_0 = (S,I,R)$ such that $\phi(S,I,R) = 0$), then they must necessarily include all possible time steps for solutions to the dynamical system with initial condition $x_0$, since the total population must remain constant.

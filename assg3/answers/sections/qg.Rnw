@@ -1,5 +1,0 @@
-% !Rnw root = main.Rnw
-<<parent, echo=FALSE, cache=FALSE>>=
-knitr::set_parent('../main.Rnw')
-@
-

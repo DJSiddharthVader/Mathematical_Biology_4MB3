@@ -1,8 +1,0 @@
-<<q1a, echo = FALSE>>=
-knitr::set_parent('../main.Rnw')
-@
-
-Now some latex $\mathbb{R_0}$ stuff
-<<1a>>=
-1+1
-@

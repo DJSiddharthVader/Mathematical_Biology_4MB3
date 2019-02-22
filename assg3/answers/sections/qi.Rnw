@@ -3,3 +3,4 @@
 knitr::set_parent('../main.Rnw')
 @
 
+tmp
