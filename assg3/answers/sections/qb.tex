@@ -1,24 +1,26 @@
 Set the following variables:
-\begin{align*}
+\begin{subequations}\label{pvars}
+\begin{align}
     S_p &= \frac{S}{N}\\
     I_p &= \frac{I}{N}\\
     R_p &= \frac{R}{N}\\
     N_p &= \frac{N}{N} = 1
-\end{align*}
-Then substitute these variables into the equations (1)
-\begin{align}
-  \frac{dS_p}{dt} &= \mu N_p -\frac{\beta}{N_p} S_p I_p - \mu S_p\\
-                  &= \mu 1 -\frac{\beta}{1} S_p I_p - \mu S_p\\
-                  &= \frac{1}{N}(\mu -\beta SI - \mu S)\\
-                  &= \frac{1}{N} \frac{dS}{dt}\\
-  \vspace{8pt}
-  \frac{dI_p}{dt} &= \frac{\beta}{N_p} S_p I_p - \gamma I_p - \mu I_p\\
-                  &= \frac{\beta}{1} S_p I_p - \gamma I_p - \mu I_p\\
-                  &= \frac{1}{N} (\beta SI - \gamma I - \mu I)\\
-                  &= \frac{1}{N} \frac{dI}{dt}\\
-  \vspace{8pt}
-  \frac{dR_p}{dt} &= \gamma I_p - \mu R_p\\
-                  &= \frac{1}{N} (\gamma I - \mu R)\\
-                  &= \frac{1}{N} \frac{dR}{dt}
 \end{align}
-From this it is clear that the proportional equations for $\frac{dS_p}{dt},\frac{dI_p}{dt},\frac{dR_p}{dt}$ are equivalent to the original equations (1), just scaled by a constant factor of $\frac{1}{N}$, and thus will retain the same dynamical behaviour.
+\end{subequations}
+Then substituting equations \ref{pvars} into equations (1)
+\begin{align}
+  \frac{dS_p}{dt} &= \mu N_p -\frac{\beta}{N_p} S_p I_p - \mu S_p\nonumber\\
+                  &= \mu 1 -\frac{\beta}{1} S_p I_p - \mu S_p\nonumber\\
+                  &= \frac{1}{N}(\mu -\beta SI - \mu S)\nonumber\\
+                  &= \frac{1}{N} \frac{dS}{dt}\label{sp}\\
+  \vspace{8pt}
+  \frac{dI_p}{dt} &= \frac{\beta}{N_p} S_p I_p - \gamma I_p - \mu I_p\nonumber\\
+                  &= \frac{\beta}{1} S_p I_p - \gamma I_p - \mu I_p\nonumber\\
+                  &= \frac{1}{N} (\beta SI - \gamma I - \mu I)\nonumber\\
+                  &= \frac{1}{N} \frac{dI}{dt}\label{ip}\\
+  \vspace{8pt}
+  \frac{dR_p}{dt} &= \gamma I_p - \mu R_p\nonumber\\
+                  &= \frac{1}{N} (\gamma I - \mu R)\nonumber\\
+                  &= \frac{1}{N} \frac{dR}{dt}\label{rp}
+\end{align}
+From this it is clear that the proportional equations \ref{sp},\ref{ip} and \ref{rp} are equivalent to the original equations (1), just scaled by a constant factor of $\frac{1}{N}$, and thus will retain the same dynamical behaviour.

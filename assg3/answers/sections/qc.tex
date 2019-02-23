@@ -1,3 +1,55 @@
+%d/dtau
+First we express $dt$ in terms of $\tau$
+\begin{align}
+    \tau &= (\gamma + \mu)t\nonumber\\
+    d\tau &= dt(\gamma + \mu)\nonumber\\
+    \frac{d\tau}{dt} &= (\gamma + \mu)\nonumber\\
+    \frac{d\tau}{dt}\frac{d}{d\tau} &= \frac{d}{dt}\nonumber\\
+    (\gamma+\mu)\frac{d}{d\tau} &= \frac{d}{dt}\nonumber\\
+    \frac{d}{d\tau} &= \frac{1}{(\gamma+\mu)}\frac{d}{dt}\label{tau}
+\end{align}
+%isloate gamma,beta,mu
+Next we isolate $\gamma,\beta,\mu$,
+\begin{align}
+    \eps &= \frac{\mu}{\gamma+\mu}\nonumber\\
+    \frac{\mu}{\eps} &= \gamma+\mu\nonumber\\
+    \eps \gamma + \eps \mu &= \mu\nonumber\\
+    \eps \gamma &= \mu(1-\eps)\nonumber\\
+    \gamma &= \frac{\mu}{\eps}(1-\eps)\nonumber\\
+    \gamma &= (\gamma+\mu)(1-\eps)\label{gamma}\\
+    \textrm{From (2b) it follows that}\ \beta &= {\mathcal R_0}(\gamma+\mu)\label{beta}\\
+    \textrm{From (2c) it follows that}\ \mu &= \eps(\gamma+\mu)\label{mu}
+\end{align}
+%dS/dt
+Next, expressing $\frac{dS}{dt}$ in terms of $\tau$ using \ref{tau} and substituting equations \ref{gamma},\ref{beta} and \ref{mu} gives
+\begin{align}
+    \frac{dS}{d\tau} &= \frac{1}{\gamma+\mu}\frac{dS}{dt}\nonumber\\
+     &= \frac{1}{\gamma+\mu}[\mu-\beta SI -\mu S]\nonumber\\
+     &= \frac{1}{\gamma+\mu}[\mu(1-S)-\beta SI]\\
+     &= \frac{1}{\gamma+\mu}[\eps(\gamma+\mu)(1-S)- (\gamma+\mu){\mathcal R_0}SI]\nonumber\\
+     &= \frac{1}{\gamma+\mu}(\gamma+\mu)[\eps(1-S)- {\mathcal R_0}SI]\nonumber\\
+     &= \eps(1-S)- {\mathcal R_0}SI
+\end{align}
+%dI/dt
+Substituting \ref{tau}, \ref{gamma}, \ref{beta} and \ref{mu} into $\frac{dI}{dt}$ gives
+\begin{align}
+    \frac{dI}{d\tau} &= \frac{1}{\gamma+\mu}\frac{dI}{dt}\nonumber\\
+     &= \frac{1}{\gamma+\mu}[\beta SI -\gamma I-\mu I]\nonumber\\
+     &= \frac{1}{\gamma+\mu}[(\gamma+\mu){\mathcal R_0}SI -(\gamma+\mu)(1-\eps) I-(\gamma+\mu)\eps I]\nonumber\\
+     &= \frac{1}{\gamma+\mu}(\gamma+\mu)[{\mathcal R_0}SI -(1-\eps) I-\eps I]\nonumber\\
+     &= {\mathcal R_0}SI -(1-\eps) I-\eps I\nonumber\\
+     &= {\mathcal R_0}SI -(1-2\eps) I
+\end{align}
+%dR/dt
+Finally substituting \ref{tau}, \ref{gamma}, \ref{beta} and \ref{mu} into $\frac{dR}{dt}$ gives
+\begin{align*}
+    \frac{dR}{d\tau} &= \frac{1}{\gamma+\mu}\frac{dR}{dt}\nonumber\\
+     &= \frac{1}{\gamma+\mu}[(\gamma+\mu)(1-\eps)I - \eps(\gamma+\mu)R]\nonumber\\
+     &= \frac{1}{\gamma+\mu}(\gamma+\mu)[(1-\eps)I - \eps R]\nonumber\\
+     &= (1-\eps)I - \eps R
+\end{align*}
+%Biological meanings
 $\tau$ is the proportion of people leaving the $I$ class.
 ${\mathcal R_0}$ is the number of secondary infections per infection.
-$\epsilon$ is the ratio of new people who can be infected (births) to people who can no longer be infected (recover or die).
+$\eps$ is the ratio of new people who can be infected (births) to people who can no longer be infected (recover or die), or the rate at which the succeptible class grows.
+%disease epsilon
