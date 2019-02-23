@@ -1,6 +1,6 @@
 \documentclass[12pt]{article}
 
-\input{4mbapreamble}
+\input{preamble}
 \input{4mba3q}
 \newcommand{\BeautifulSolution}{{\color{blue}\begin{proof}{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}\end{proof}}}
 
@@ -48,7 +48,7 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Mo
 
 \item \SIRa
 \BeautifulSolution
- 
+
 \item \SIRb
 \BeautifulSolution
 
