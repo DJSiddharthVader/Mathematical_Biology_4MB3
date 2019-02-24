@@ -14,6 +14,13 @@
 %%%\rhead{Student Number: \theblank{3cm}}
 %%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
 \lfoot{}
+%Referenes
+\usepackage[natbib=true,
+            style=nature,
+            backend=biber,
+            useprefix=true]{biblatex}
+\addbibresource{./refs.bib}
+
 \cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
 \rfoot{}
 \renewcommand\headrulewidth{0pt} % Removes funny header line
@@ -55,6 +62,7 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Mo
 %@
 \item \input{./sections/qk.tex}
 \end{enumerate}
+\printbibliography
 
 %%\newpage
 %%\bibliographystyle{vancouver}

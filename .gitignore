@@ -10,3 +10,9 @@
 .DS_Store
 *.fdb_latexmk
 *.fls
+*.bbl
+*.bcg
+*.bcf
+*.blg
+*.run.xml
+*.bib
