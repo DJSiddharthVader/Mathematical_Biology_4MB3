@@ -1,6 +1,104 @@
 % !Rnw root = main.Rnw
 <<parent, echo=FALSE, cache=FALSE>>=
 knitr::set_parent('../main.Rnw')
+library(deSolve)
 @
 
-tmp
+%%EXPRESSIONS OF PERIOD and E-FOLDING TIME%%
+Assuming $\epsilon < \epsilon^*$, the period of damped oscillations to the EE and the $e$-folding time of decay of the amplitude of oscilations is determined by analyzing the complex eigenvalue of the Jacobian of the system evaluated at the EE.\\
+
+The Jacobian of the system is:
+$$ J(S, I) =
+\begin{bmatrix}
+    -\beta I - \mu   & -\beta S                  & 0\\
+    \beta I         & \beta S - (\mu + \gamma)  & 0\\
+    0               & \gamma                    & -\mu\\
+\end{bmatrix} 
+$$
+
+To simplify, the above Jacobian can be reduced to the upper left $ 2 \times 2$ matrix (since the system can be reduced to the first two equations) and evaluated at the EE $(\hat{S}, \hat{I})$. The characteristic polynomial is computed by substracting $\lambda$ on the diagonal and calculating the determinant.\\
+So simplifying $J(\hat{S}, \hat{I})$, the characteristic polynomial is:
+\begin{equation}
+  (-\beta \hat{I} - \mu - \lambda)(\beta \hat{S} - (\mu + \gamma) - \lambda) + \beta^2 \hat{S}\hat{I} = 0
+\end{equation}
+ The EE is $(\frac{\mu + \gamma}{\beta}, \frac{\mu}{\beta}(R_0 - 1))$ so the characteristic polynomial at the EE is:
+ 
+ \begin{align*}
+  0 &= (-\beta \hat{I} - \mu - \lambda)(\beta \hat{S} - (\mu + \gamma) - \lambda) + \beta^2 \hat{S}\hat{I}\\
+  0 &= (-\mu(R_0 - 1) - \mu - \lambda)(- \lambda) + (\mu + \gamma) \mu(R_0 - 1)\\
+  0 &= \lambda^2 + (\mu R_0)\lambda + (\mu + \gamma)\mu(R_0 - 1)\\
+\end{align*}
+
+Solving for the eigenvalue, $\lambda$, using the quadratic equation:
+\begin{equation}
+  \lambda = -\frac{\mu R_0}{2} \pm \frac {\sqrt{(\mu R_0)^2-4(\mu + \gamma)\mu(R_0 - 1)}}{2}
+\end{equation}
+
+Assuming that$(\mu R_0)^2$ is relatively small, then this eigenvalue will be complex, $\lambda = -\frac{\mu R_0}{2} \pm iM$. The period of damped oscillations, $T$, is $T = 2\pi\frac{1}{M}$ and the $e$-folding time, $t_e = \frac{1}{re(\lambda)}$, is $t_e = \frac{2}{\mu R_0}$. \\
+
+Furthermore if we assume that $(\mu R_0)^2 \approx 0$, the above can be simplified to:
+
+\begin{equation}
+  \lambda \approx -\frac{\mu R_0}{2} \pm i \sqrt{(\mu + \gamma)\mu(R_0 - 1)}
+\end{equation}
+
+So the period of damped oscillations can be approximated as $T \approx \frac{2\pi}{\sqrt{(\mu + \gamma)\mu(R_0 - 1)}}$. \par
+
+The period of damped oscillations can observed in the following graph which uses $I(0) = 0.00025, S(0) = 0.1, \beta = 550, \gamma=365/7, \mu=1/70$. 
+
+%%GRAPH EXAMPLE%%
+<<SIRmodel, message=FALSE, warning=FALSE, fig.height=3.75>>=
+SIR.vector.field <- function(t, vars, parms=c(beta=3,gamma=1, mu=0.05)) {
+with(as.list(c(parms, vars)), {
+dx <- -beta*x*y + mu - mu*x # dS/dt of SIR model
+dy <- beta*x*y - gamma*y - mu*y # dI/dt of SIR model
+dz <- gamma*y - mu*z #dR/dt of SIR model
+vec.fld <- c(dx=dx, dy=dy, dz=dz)
+return(list(vec.fld)) # ode() requires a list
+})
+}
+##Plots the solution I(t) of the SIR model
+plot.It <- function(ic=c(x=1,y=0,z=0), tmax=1,
+times=seq(0,tmax,by=tmax/500),
+func, parms, ... ) {
+It <- ode(ic, times, func, parms) 
+lines(times, It[,"y"], col="blue", lwd=2, ... )
+}
+
+tmax <- 70 # end time for numerical integration of the ODE
+## draws the empty plot:
+plot(0,0,xlim=c(0,70),ylim=c(0.00005,0.0006), xaxs="i", 
+type="n",bty="L",xlab="Time (t)",ylab="Prevalence (I)",las=1)
+
+## Given initial conditions and parameter values:
+I0 <- 0.00025
+S0 <- 0.1
+
+{
+plot.It(ic=c(x=S0,y=I0,z=0), tmax=tmax,
+func=SIR.vector.field,
+parms=c(beta=550,
+        gamma=365/7, #mean infectious period is 7 days in a year
+        mu=1/70 #the average lifespan in the population is 70 years
+        )
+)
+}
+@
+
+<<period.calculation>>=
+beta <- 550
+gamma <- 365/7
+mu <- 1/70
+
+R0 <- beta/(gamma+mu)
+A <- (gamma+mu)*mu*(R0-1)
+epsilon <- mu/(gamma+mu)
+period <- 2*pi/Im(sqrt(as.complex((mu*R0)^2-4*A))/2) #equation from previous analysis
+efold <- 2/(mu*R0)
+R0
+epsilon
+period
+efold
+@
+
+In the graph, the distance from peak to peak is slightly larger than 2 years, indicating approximately a 2-year cycle of oscillations. This is confirmed with the above calculation where the period is 2.356 years.
