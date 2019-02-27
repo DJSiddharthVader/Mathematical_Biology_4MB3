@@ -30,3 +30,25 @@ Further
     \frac{\partial^2 L}{\partial I^2} &= \hat{I}I^{-2} \textrm{at} \hat{I} = \frac{\hat{I}}{\hat{I}^2} = \frac{1}{\hat{I}}\nonumber\\
 \end{align}
 are non-negative at the minimum point $(\hat{S},\hat{I})$, thus $L(S,I) > L(\hat{S},\hat{I}) \forall\ (S,I) \in {\mathcal O} \setminus \{(\hat{S},\hat{I})\}$.
+From \ref{sp}, \ref{ip}
+\begin{align}
+    0 &= \beta \hat{S} \hat{I} - \gamma \hat{I} - \mu \hat{I} \implies \beta \hat{S} \hat{I} = \gamma \hat{I} + \mu \hat{I}\nonumber\\
+    0 &= \mu - \beta \hat{S} \hat{I} + \mu \hat{S} \implies \beta \hat{S} \hat{I} = \mu - \mu \hat{S}\nonumber\\
+    \dot{L} &= (1-\frac{1}{{\mathcal R_0}})(\mu - \beta SI - \mu S) + (1 - \frac{\eps(1 - \frac{1}{{\mathcal R_0}})}{I})(\beta SI - \gamma I \mu I)\nonumber\\
+            &= \mu - \mu \hat{S} - \frac{\mu}{{\mathcal R_0}\hat{S}} + \frac{\beta \hat{I}}{{\mathcal R_0}} + \frac{\mu}{{\mathcal R_0}} - \gamma \hat{I} - \mu \hat{I} - \beta \hat{S} \hat{I} + \gamma \hat{I} + \mu \hat{I}\nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S}) + \frac{\beta I}{{\mathcal R_0}} - \frac{\beta S}{\mathcal R_0}(\eps{\mathcal R_0}-\eps) - I(\gamma+\mu)\nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S}) + \frac{\beta}{{\mathcal R_0}}(I - S\eps {\mathcal R_0} + S \eps) - I \frac{\mu}{\eps}\nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S}) + \frac{\mu}{\eps}(I - S\eps {\mathcal R_0} + S \eps) - I \frac{\mu}{\eps}\nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S}) + \frac{\mu}{\eps}(I - S\eps {\mathcal R_0} + S \eps -I) \nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S}) + \frac{\mu}{\eps}(-S\eps {\mathcal R_0} + S \eps) \nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S}) + \mu(-S {\mathcal R_0} + S) \nonumber\\
+            &= \mu(2 - S - \frac{1}{{\mathcal R_0} S} -S {\mathcal R_0} + S) \nonumber\\
+            &= \mu(2 - \frac{\hat{S}}{S} - \frac{S}{\hat{S}})\nonumber\\
+            &= -\mu( \frac{\hat{S}}{S} + \frac{S}{\hat{S}}-2)\nonumber\\
+            &= -\mu\frac{\hat{S}}{S}(1- 2\frac{S^2}{\hat{S}^2})\nonumber\\
+            &= -\mu\frac{\hat{S}}{S}(1- \frac{S}{\hat{S}})^2\label{fin}
+\end{align}
+
+By \ref{fin} $\dot{L}(S,I) \leq 0 \forall\ (S,I) \in (0,1)$ and from earlier $\dot{L}(\hat{S},\hat{I}) = 0$.
+Hence $\dot{L}$ is negative definite on $(0,1)$.
+Therefore $L(S,I)$ is a strict Lyapunov function for the EE for the biologically relevant states, excluding the DFE, which implies the EE is GAS.
