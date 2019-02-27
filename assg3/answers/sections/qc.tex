@@ -1,3 +1,11 @@
+Using the equations
+\begin{subequations}\label{cstart}
+\begin{align}
+  \tau &= (\gamma+\mu)t\\
+  {\mathcal R_0} &= \frac{\beta}{\gamma+\mu}\\
+  \eps &= \frac {\mu}{\gamma+\mu}
+\end{align}
+\end{subequations}
 %d/dtau
 First we express $dt$ in terms of $\tau$
 \begin{align}
@@ -17,8 +25,8 @@ Next we isolate $\gamma,\beta,\mu$,
     \eps \gamma &= \mu(1-\eps)\nonumber\\
     \gamma &= \frac{\mu}{\eps}(1-\eps)\nonumber\\
     \gamma &= (\gamma+\mu)(1-\eps)\label{gamma}\\
-    \textrm{From (2b) it follows that}\ \beta &= (\gamma+\mu){\mathcal R_0}\label{beta}\\
-    \textrm{From (2c) it follows that}\ \mu &= (\gamma+\mu)\eps\label{mu}
+    \textrm{From \ref{cstart} it follows that}\ \beta &= (\gamma+\mu){\mathcal R_0}\label{beta}\\
+    \textrm{From \ref{cstart} it follows that}\ \mu &= (\gamma+\mu)\eps\label{mu}
 \end{align}
 %dS/dt
 Next, expressing $\frac{dS}{dt}$ in terms of $\tau$ using \ref{tau} and substituting equations \ref{gamma},\ref{beta} and \ref{mu} gives
@@ -61,6 +69,7 @@ The biological meanings of $\tau, {\mathcal R_0}$ and $\eps$ are
 \end{itemize}
 %justification for tau,epsilon,rnot
 One reason these are good choices for non-dimensionalizing equations because they do not create more complex equations than the originals.
+These choices also reduce the total number of parameters from 3 ($\beta ,\mu ,\gamma$) to 3 ($\eps ,\mathcal{R_0})$.
 They all also have clear biological interpretations, making it easier to understand the biological relationships represeted by any mathematical reasoning done with them.
 %disease epsilon
 In the UK the morality rate from penumonia between 2001-2010 was estimated to be $0.0214\%$ of people\cite{pneu}.

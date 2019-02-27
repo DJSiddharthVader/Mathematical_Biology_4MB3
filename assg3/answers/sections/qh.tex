@@ -1,0 +1,64 @@
+%explanation
+Since the EE is GAS, any oscillations will be damped and approaching the EE.
+Oscillations will occur if the imaginary parts of the eigenvalues of the Jacobian, evaluated at the EE $(\hat{S},\hat{I}) = (\frac{1}{\mathcal R_0},\eps(1-\frac{1}{\mathcal R_0})$, are non-zero.
+Since the Jacobian is a $2\times 2$ matrix, the eigenvalues are the roots of the equation $\lambda^2 - T\lambda + D = 0$ where T and D are the trace and determinant of the Jacobian respectively.
+The roots can be found using the quadratic formula $\frac{-b \pm \sqrt{b^2-4ac}}{2a}$.
+The imaginary part of the roots will only be non-zero if $\sqrt{b^2-4ac} < 0$, thus proving $\sqrt{b^2-4ac} < 0$ implies damped oscillations approaching the EE.\\
+The Jacobian at the EE is
+\begin{align}
+J &=
+\begin{bmatrix}
+    \frac{\partial S}{\partial S} & \frac{\partial S}{\partial I}\\
+    \frac{\partial I}{\partial S} & \frac{\partial I}{\partial I}
+\end{bmatrix}\\
+&=
+\begin{bmatrix}
+    -\beta I - \mu & -\beta S\\
+    \beta I &\beta S - (\gamma+\mu)
+\end{bmatrix}\\
+J(\hat{S},\hat{I}) &= J(\frac{1}{\mathcal R_0},\eps(1-\frac{1}{\mathcal R_0})\\
+&=
+\begin{bmatrix}
+    -\beta \eps(1-\frac{1}{\mathcal R_0}) - \mu & -\beta \frac{1}{\mathcal R_0}\\
+    \beta \eps(1-\frac{1}{\mathcal R_0}) &\beta \frac{1}{\mathcal R_0} - (\gamma+\mu)
+\end{bmatrix}\\
+& \textrm{Next substitute $\beta, \gamma, \mu$ using equations \ref{gamma},\ref{beta},\ref{mu}}\nonumber\\
+&=
+\begin{bmatrix}
+    -(\gamma+\mu){\mathcal R_0} \eps(1-\frac{1}{\mathcal R_0}) - \eps(\gamma+\mu) & -(\gamma+\mu){\mathcal R_0} \frac{1}{\mathcal R_0}\\
+    (\gamma+\mu){\mathcal R_0} \eps(1-\frac{1}{\mathcal R_0}) &(\gamma+\mu){\mathcal R_0} \frac{1}{\mathcal R_0} - (\gamma+\mu)
+\end{bmatrix}\\
+&= (\gamma+\mu)
+\begin{bmatrix}
+    -\eps {\mathcal R_0}  & -1\\
+    \eps({\mathcal R_0}-1) & 0
+\end{bmatrix}
+\end{align}
+Next the trace $T$, determinant $D$, and the terms of the quadratic formula $a,b,c$ are
+\begin{align}
+    T &= -\eps {\mathcal R_0} + 0\\
+    D &= (-\eps {\mathcal R_0})(0) - (-1)(\eps({\mathcal R_0}-1)\\
+      &= \eps({\mathcal R_0}-1)\\
+    0 &= \lambda^2 - T \lambda + D \implies a = 1\ \ b = -T\ \ c = D\\
+    b &= \eps {\mathcal R_0}\\
+    c &= \eps({\mathcal R_0}-1)\\
+    \sqrt{b^2-4ac} &= \sqrt{\eps^2 {\mathcal R_0}^2 - 4(1)(\eps({\mathcal R_0}-1))}\\
+                   &= \sqrt{\eps^2 {\mathcal R_0}^2 - 4(\eps({\mathcal R_0}+4\eps}\\
+                   &= \sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)}\label{bsqr}
+\end{align}
+Now if we show that the when the inequality
+\begin{equation}\label{eqee}
+    \sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)} < 0
+\end{equation}
+holds it implies $\eps < \eps^* = \frac{4{\mathcal R_0}-1}{{\mathcal R_0}^2}$, then this proves that the approach to EE via damped oscillations occurs iff $\eps < \eps^*$
+\begin{align}
+    \sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)} &< 0\\
+    \sqrt{\frac{4{\mathcal R_0}-1}{{\mathcal R_0}^2}(\frac{4({\mathcal R_0}-1)}{{\mathcal R_0}^2}{\mathcal R_0}^2 - 4{\mathcal R_0}+4)} &< 0\\
+    \sqrt{\frac{4{\mathcal R_0}-1}{{\mathcal R_0}^2}(4({\mathcal R_0}-1) - 4{\mathcal R_0}+4)} &< 0\\
+    \sqrt{\frac{4{\mathcal R_0}-1}{{\mathcal R_0}^2}(4{\mathcal R_0}-4 - 4{\mathcal R_0}+4)} &< 0\\
+    \sqrt{\frac{4{\mathcal R_0}-1}{{\mathcal R_0}^2}(0)} &< 0\\
+    0 &< 0 \textrm{which is false}
+\end{align}
+Since \ref{eeqe} is 0 when $\eps = \eps^*$, increasing $\eps$ will cause $\sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)}$ to become positive and decreasing $\eps$ will cause $\sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)}$ to become negative.
+Since $\sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)}$ is only negative when $\eps < \eps^*$ and $\sqrt{\eps(\eps{\mathcal R_0}^2 - 4{\mathcal R_0}+4)} < 0$ implies non-negative imaginary components of the eigenvalue of $J(\hat{S},\hat{I})$, which in turn implies dampened oscillations when the model is approaching the EE.
+Thus $\eps < \eps^*$ is a necessary condition for dampened oscillations in the model while approaching the EE.
