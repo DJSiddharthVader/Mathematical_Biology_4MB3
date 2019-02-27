@@ -6,14 +6,14 @@ If the sum of all equations (1) is zero, $\frac{dS}{dt} + \frac{dI}{dt} + \frac{
    &= \mu N - \mu S - \mu I - \mu R (-\frac{\beta}{N} SI + \frac{\beta}{N} SI) (- \gamma I  + \gamma I)\\
    &= \mu (N - (S + I + R)) \label{qa1}
 \end{align}
-Since $N = S + I + R$, i.e. the sum of all population compartments is equal tot the total population size, \ref{qa1} evaluates to 0.
+Since $N = S + I + R$, i.e. the sum of all population compartments is equal to the total population size, \ref{qa1} evaluates to 0.
 Thus the sum of population changes in all population compartments is 0 and the total population size remains constant.\\\\
 %Forward Invariance
 \begin{definition}{Forward Invariant Set\\}
 Given a dynamical system $\dot{x}=f(x)$, a solution $x(t,x_0)$ with initial condition $x_0$, a set $\Delta = \{x \in {\mathbb R}\ | \phi(x) = 0 \}$ for some positive definite function $\phi(x)$ is forward invariant if $x_0 \in \Delta \implies x(t,x_0) \in \Delta\ \forall\ t \geq 0$.
 %$x_0 \in S \implies \varphi(t,x_0) \in S\ \forall\ t \in I(x_0)\ \textrm{and}\ t \geq 0$, where $I(x_0)$ is the maximum interval of existence for the solution and $\varphi(t,x_0)$ is a solution to the ODE with initial condition $x_0$ after time $t$.
 \end{definition}
-Since the population size has been shown to be constant and equal to $N$, the function $\phi(S,I,R) = N - (S+I+R)$ is always equal to zero, given any initial condition.
+Since the population size has been shown to be constant and equal to $N$, the function $\phi(S,I,R) = N - (S+I+R)$ is always equal to zero, given any initial condition $(S,I,R)$ satisfying $0 \leq S,I,R \leq N$ and $S+I+R = N$.
 %Bio States
 \begin{definition}{Biologically Meaningful States\\}
 Define the set $\Delta = \{(S,I,R)\ |\ 0 \leq S,I,R \ \textrm{and}\ \phi(S,I,R) = 0\}$ where $\phi(S,I,R) = N - (S+I+R)$, to be the set of biologically meaningful states for this model.

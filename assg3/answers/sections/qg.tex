@@ -1,14 +1,32 @@
 The EE is $(\hat{S},\hat{I}) = (\frac{1}{{\mathcal R_0}},\eps(1-\frac{1}{{\mathcal R_0}})$.
-Consider the Lyapunov function with ${\mathcal O} = \{(S,I) | 0\leq S,I \leq 1\ and\ S+I = 1\} \setminus \{(\hat{S},\hat{I})\}$
+Consider the Lyapunov function with ${\mathcal O} = \{(S,I) | 0\leq S,I \leq 1\ and\ S+I = 1\} $
 \begin{align}
     L(S,I) &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps(1-\frac{1}{{\mathcal R_0}})log(I)\nonumber\\
-           &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) -\frac{\eps}{{\mathcal R_0}})log(I)\nonumber\\
-           &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) (\frac{1}{{\mathcal R_0}}-1)\label{lup}\\
+           &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) -(\frac{\eps}{{\mathcal R_0}})log(I)\nonumber\\
+           &= S - \frac{1}{{\mathcal R_0}}log(S) + I + \eps log(I) (\frac{1}{{\mathcal R_0}}-1)\label{lup}\\
     0 \leq S,I \leq 1 &\implies log(S), log(I) < 0 \implies \nonumber\\
-    0   &< S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) (\frac{1}{{\mathcal R_0}}-1)\label{pos}
+    0   &< S - \frac{1}{{\mathcal R_0}}log(S) + I + \eps log(I) (\frac{1}{{\mathcal R_0}}-1)\label{pos}
 \end{align}
 Thus \ref{pos} shows that \ref{lup} is positive on $[0,1]$, the the function is postive definite on $[0,1]$.
 \begin{align}
-    L(\hat{S},\hat{I})  &= \hat{S} - \hat{S}log(\hat{S}) + \hat{I}
+    L(\hat{S},\hat{I})  &= \hat{S} - \hat{S}log(\hat{S}) + \hat{I}\\
     &= \hat{S} - \frac{1}{{\mathcal R_0}}log(\frac{1}{{\mathcal R_0}}) + I - \eps(1-\frac{1}{{\mathcal R_0}})log(I)\label{lupeq}\\
 \end{align}
+From Lyapunov's theorem, a function $L(X)$ satisfies $L(X) > L(X_*) \forall\ X \in {\mathcal O} \setminus \{X_*\}$ where $X_* = (\hat{S},\hat{I})$, and using the same set ${\mathcal O}$ as defined earilier.
+\begin{align}
+    L(S,I) &> L(\hat{S},\hat{I})\nonumber\\
+    S - \hat{S}log(S) +I - \hat{I}log(I) &> \hat{S} - \hat{S}log(\hat{S}) +\hat{I} - \hat{I}log(\hat{I})\nonumber
+\end{align}
+\begin{align}
+    \frac{\partial L}{\partial S} &= 1 - \frac{\hat{S}}{S}\nonumber\\
+    \frac{\partial L}{\partial S} &= 1 - \frac{\hat{S}}{S} = 0 \implies S = \hat{S}\nonumber\\
+    \frac{\partial L}{\partial I} &= 1 - \frac{\hat{I}}{I}\nonumber\\
+    \frac{\partial L}{\partial I} &= 1 - \frac{\hat{I}}{I} = 0 \implies I = \hat{I}\nonumber
+\end{align}
+The functions $log(S), log(I)$ increase monotonically with respect to $\hat{S},\hat{I}$. Both partial derivatives $\frac{\partial L}{\partial S}, \frac{\partial L}{\partial I}$ as well, the by \ref{mono1}, \ref{mono2} show that $(\hat{S},\hat{I}$ must be the global minimum of $L(S,I)$ on $[0,1]$.\\
+Further
+\begin{align}
+    \frac{\partial^2 L}{\partial S^2} &= \hat{S}S^{-2} \textrm{at} \hat{S} = \frac{\hat{S}}{\hat{S}^2} = \frac{1}{\hat{S}}\nonumber\\
+    \frac{\partial^2 L}{\partial I^2} &= \hat{I}I^{-2} \textrm{at} \hat{I} = \frac{\hat{I}}{\hat{I}^2} = \frac{1}{\hat{I}}\nonumber\\
+\end{align}
+are non-negative at the minimum point $(\hat{S},\hat{I})$, thus $L(S,I) > L(\hat{S},\hat{I}) \forall\ (S,I) \in {\mathcal O} \setminus \{(\hat{S},\hat{I})\}$.
