@@ -1,1 +1,14 @@
-tmp
+The EE is $(\hat{S},\hat{I}) = (\frac{1}{{\mathcal R_0}},\eps(1-\frac{1}{{\mathcal R_0}})$.
+Consider the Lyapunov function with ${\mathcal O} = \{(S,I) | 0\leq S,I \leq 1\ and\ S+I = 1\} \setminus \{(\hat{S},\hat{I})\}$
+\begin{align}
+    L(S,I) &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps(1-\frac{1}{{\mathcal R_0}})log(I)\nonumber\\
+           &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) -\frac{\eps}{{\mathcal R_0}})log(I)\nonumber\\
+           &= S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) (\frac{1}{{\mathcal R_0}}-1)\label{lup}\\
+    0 \leq S,I \leq 1 &\implies log(S), log(I) < 0 \implies \nonumber\\
+    0   &< S - \frac{1}{{\mathcal R_0}}log(S) + I - \eps log(I) (\frac{1}{{\mathcal R_0}}-1)\label{pos}
+\end{align}
+Thus \ref{pos} shows that \ref{lup} is positive on $[0,1]$, the the function is postive definite on $[0,1]$.
+\begin{align}
+    L(\hat{S},\hat{I})  &= \hat{S} - \hat{S}log(\hat{S}) + \hat{I}
+    &= \hat{S} - \frac{1}{{\mathcal R_0}}log(\frac{1}{{\mathcal R_0}}) + I - \eps(1-\frac{1}{{\mathcal R_0}})log(I)\label{lupeq}\\
+\end{align}
