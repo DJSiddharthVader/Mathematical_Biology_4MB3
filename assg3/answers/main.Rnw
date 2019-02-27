@@ -55,11 +55,11 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Mo
 \item \input{./sections/qg.tex}
 \item \input{./sections/qh.tex}
 \item
-%<<qi,child='./sections/qi.Rnw'>>=
-%@
+<<child='./sections/qi.Rnw'>>=
+@
 \item
-%<<qj,child='./sections/qj.Rnw'>>=
-%@
+<<child='./sections/qj.Rnw'>>=
+@
 \item \input{./sections/qk.tex}
 \end{enumerate}
 \printbibliography

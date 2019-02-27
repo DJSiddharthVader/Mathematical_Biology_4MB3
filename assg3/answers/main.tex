@@ -106,11 +106,210 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Mo
 \item \input{./sections/qg.tex}
 \item \input{./sections/qh.tex}
 \item
-%<<qi,child='./sections/qi.Rnw'>>=
-%@
+
+% !Rnw root = main.Rnw
+
+
+%%EXPRESSIONS OF PERIOD and E-FOLDING TIME%%
+Assuming $\epsilon < \epsilon^*$, the period of damped oscillations to the EE and the $e$-folding time of decay of the amplitude of oscilations is determined by analyzing the complex eigenvalue of the Jacobian of the system evaluated at the EE.\\
+
+The Jacobian of the system is:
+$$ J(S, I) =
+\begin{bmatrix}
+    -\beta I - \mu  & -\beta S                 & 0\\
+    \beta I         & \beta S - (\mu + \gamma)  & 0\\
+    0               & \gamma                    & -\mu\\
+\end{bmatrix} 
+$$
+
+To simplify, the above Jacobian can be reduced to the upper left $ 2 \times 2$ matrix (since the system can be reduced to the first two equations) and evaluated at the EE $(\hat{S}, \hat{I})$. The characteristic polynomial is computed by substracting $\lambda$ on the diagonal and calculating the determinant.\\
+So simplifying $J(\hat{S}, \hat{I})$, the characteristic polynomial is:
+\begin{equation}
+  (-\beta \hat{I} - \mu - \lambda)(\beta \hat{S} - (\mu + \gamma) - \lambda) + \beta^2 \hat{S}\hat{I} = 0
+\end{equation}
+ The EE is $(\frac{\mu + \gamma}{\beta}, \frac{\mu}{\beta}(\mathcal R_0 - 1))$ so the characteristic polynomial at the EE is:
+ 
+ \begin{align*}
+  0 &= (-\beta \hat{I} - \mu - \lambda)(\beta \hat{S} - (\mu + \gamma) - \lambda) + \beta^2 \hat{S}\hat{I}\\
+  0 &= (-\mu(\mathcal R_0 - 1) - \mu - \lambda)(- \lambda) + (\mu + \gamma) \mu(\mathcal R_0 - 1)\\
+  0 &= \lambda^2 + (\mu \mathcal R_0)\lambda + (\mu + \gamma)\mu(\mathcal R_0 - 1)\\
+\end{align*}
+
+Solving for the eigenvalue, $\lambda$, using the quadratic equation:
+\begin{equation}
+  \lambda = -\frac{\mu \mathcal R_0}{2} \pm \frac {\sqrt{(\mu \mathcal R_0)^2-4(\mu + \gamma)\mu(\mathcal R_0 - 1)}}{2}
+\end{equation}
+
+Assuming that$(\mu \mathcal R_0)^2$ is relatively small, then this eigenvalue will be complex, $\lambda = -\frac{\mu \mathcal R_0}{2} \pm iM$. The period of damped oscillations, $T$, is $T = 2\pi\frac{1}{M}$ and the $e$-folding time, $t_e = \frac{1}{re(\lambda)}$, is $t_e = \frac{2}{\mu \mathcal R_0}$. \\
+
+Furthermore if we assume that $(\mu \mathcal R_0)^2 \approx 0$, the above can be simplified to:
+
+\begin{equation}
+  \lambda \approx -\frac{\mu \mathcal R_0}{2} \pm i \sqrt{(\mu + \gamma)\mu(\mathcal R_0 - 1)}
+\end{equation}
+
+So the period of damped oscillations can be approximated as $T \approx \frac{2\pi}{\sqrt{(\mu + \gamma)\mu(\mathcal R_0 - 1)}}$. \par
+
+The period of damped oscillations can observed in the following graph which uses $I(0) = 0.00025, S(0) = 0.1, \beta = 550, \gamma=365/7, \mu=1/70$. 
+
+%%GRAPH EXAMPLE%%
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{SIR.vector.field} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{t}\hlstd{,} \hlkwc{vars}\hlstd{,} \hlkwc{parms}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{beta}\hlstd{=}\hlnum{3}\hlstd{,}\hlkwc{gamma}\hlstd{=}\hlnum{1}\hlstd{,} \hlkwc{mu}\hlstd{=}\hlnum{0.05}\hlstd{)) \{}
+\hlkwd{with}\hlstd{(}\hlkwd{as.list}\hlstd{(}\hlkwd{c}\hlstd{(parms, vars)), \{}
+\hlstd{dx} \hlkwb{<-} \hlopt{-}\hlstd{beta}\hlopt{*}\hlstd{x}\hlopt{*}\hlstd{y} \hlopt{+} \hlstd{mu} \hlopt{-} \hlstd{mu}\hlopt{*}\hlstd{x} \hlcom{# dS/dt of SIR model}
+\hlstd{dy} \hlkwb{<-} \hlstd{beta}\hlopt{*}\hlstd{x}\hlopt{*}\hlstd{y} \hlopt{-} \hlstd{gamma}\hlopt{*}\hlstd{y} \hlopt{-} \hlstd{mu}\hlopt{*}\hlstd{y} \hlcom{# dI/dt of SIR model}
+\hlstd{dz} \hlkwb{<-} \hlstd{gamma}\hlopt{*}\hlstd{y} \hlopt{-} \hlstd{mu}\hlopt{*}\hlstd{z} \hlcom{#dR/dt of SIR model}
+\hlstd{vec.fld} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwc{dx}\hlstd{=dx,} \hlkwc{dy}\hlstd{=dy,} \hlkwc{dz}\hlstd{=dz)}
+\hlkwd{return}\hlstd{(}\hlkwd{list}\hlstd{(vec.fld))} \hlcom{# ode() requires a list}
+\hlstd{\})}
+\hlstd{\}}
+\hlcom{##Plots the solution I(t) of the SIR model}
+\hlstd{plot.It} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{ic}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{y}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{z}\hlstd{=}\hlnum{0}\hlstd{),} \hlkwc{tmax}\hlstd{=}\hlnum{1}\hlstd{,}
+\hlkwc{times}\hlstd{=}\hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,tmax,}\hlkwc{by}\hlstd{=tmax}\hlopt{/}\hlnum{500}\hlstd{),}
+\hlkwc{func}\hlstd{,} \hlkwc{parms}\hlstd{,} \hlkwc{...} \hlstd{) \{}
+\hlstd{It} \hlkwb{<-} \hlkwd{ode}\hlstd{(ic, times, func, parms)}
+\hlkwd{lines}\hlstd{(times, It[,}\hlstr{"y"}\hlstd{],} \hlkwc{col}\hlstd{=}\hlstr{"blue"}\hlstd{,} \hlkwc{lwd}\hlstd{=}\hlnum{2}\hlstd{, ... )}
+\hlstd{\}}
+
+\hlstd{tmax} \hlkwb{<-} \hlnum{70} \hlcom{# end time for numerical integration of the ODE}
+\hlcom{## draws the empty plot:}
+\hlkwd{plot}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0}\hlstd{,}\hlkwc{xlim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{70}\hlstd{),}\hlkwc{ylim}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0.00005}\hlstd{,}\hlnum{0.0006}\hlstd{),} \hlkwc{xaxs}\hlstd{=}\hlstr{"i"}\hlstd{,}
+\hlkwc{type}\hlstd{=}\hlstr{"n"}\hlstd{,}\hlkwc{bty}\hlstd{=}\hlstr{"L"}\hlstd{,}\hlkwc{xlab}\hlstd{=}\hlstr{"Time (t)"}\hlstd{,}\hlkwc{ylab}\hlstd{=}\hlstr{"Prevalence (I)"}\hlstd{,}\hlkwc{las}\hlstd{=}\hlnum{1}\hlstd{)}
+
+\hlcom{## Given initial conditions and parameter values:}
+\hlstd{I0} \hlkwb{<-} \hlnum{0.00025}
+\hlstd{S0} \hlkwb{<-} \hlnum{0.1}
+
+\hlstd{\{}
+\hlkwd{plot.It}\hlstd{(}\hlkwc{ic}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{x}\hlstd{=S0,}\hlkwc{y}\hlstd{=I0,}\hlkwc{z}\hlstd{=}\hlnum{0}\hlstd{),} \hlkwc{tmax}\hlstd{=tmax,}
+\hlkwc{func}\hlstd{=SIR.vector.field,}
+\hlkwc{parms}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{beta}\hlstd{=}\hlnum{550}\hlstd{,}
+        \hlkwc{gamma}\hlstd{=}\hlnum{365}\hlopt{/}\hlnum{7}\hlstd{,} \hlcom{#mean infectious period is 7 days in a year}
+        \hlkwc{mu}\hlstd{=}\hlnum{1}\hlopt{/}\hlnum{70} \hlcom{#the average lifespan in the population is 70 years}
+        \hlstd{)}
+\hlstd{)}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/SIRmodel-1} 
+
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlstd{beta} \hlkwb{<-} \hlnum{550}
+\hlstd{gamma} \hlkwb{<-} \hlnum{365}\hlopt{/}\hlnum{7}
+\hlstd{mu} \hlkwb{<-} \hlnum{1}\hlopt{/}\hlnum{70}
+
+\hlstd{R0} \hlkwb{<-} \hlstd{beta}\hlopt{/}\hlstd{(gamma}\hlopt{+}\hlstd{mu)}
+\hlstd{A} \hlkwb{<-} \hlstd{(gamma}\hlopt{+}\hlstd{mu)}\hlopt{*}\hlstd{mu}\hlopt{*}\hlstd{(R0}\hlopt{-}\hlnum{1}\hlstd{)}
+\hlstd{epsilon} \hlkwb{<-} \hlstd{mu}\hlopt{/}\hlstd{(gamma}\hlopt{+}\hlstd{mu)}
+\hlstd{period} \hlkwb{<-} \hlnum{2}\hlopt{*}\hlstd{pi}\hlopt{/}\hlkwd{Im}\hlstd{(}\hlkwd{sqrt}\hlstd{(}\hlkwd{as.complex}\hlstd{((mu}\hlopt{*}\hlstd{R0)}\hlopt{^}\hlnum{2}\hlopt{-}\hlnum{4}\hlopt{*}\hlstd{A))}\hlopt{/}\hlnum{2}\hlstd{)} \hlcom{#equation from previous analysis}
+\hlstd{efold} \hlkwb{<-} \hlnum{2}\hlopt{/}\hlstd{(mu}\hlopt{*}\hlstd{R0)}
+\hlstd{R0}
+\end{alltt}
+\begin{verbatim}
+## [1] 10.54506
+\end{verbatim}
+\begin{alltt}
+\hlstd{epsilon}
+\end{alltt}
+\begin{verbatim}
+## [1] 0.0002738976
+\end{verbatim}
+\begin{alltt}
+\hlstd{period}
+\end{alltt}
+\begin{verbatim}
+## [1] 2.356981
+\end{verbatim}
+\begin{alltt}
+\hlstd{efold}
+\end{alltt}
+\begin{verbatim}
+## [1] 13.27636
+\end{verbatim}
+\end{kframe}
+\end{knitrout}
+
+In the graph, the distance from peak to peak is slightly larger than 2 years, indicating approximately a 2-year cycle of oscillations. This is confirmed with the above calculation where the period is 2.356 years.
 \item
-%<<qj,child='./sections/qj.Rnw'>>=
-%@
+
+As $\mathcal R_0$ is increased from 0 to $\infty$, using the dimensionless forms of the differential equations, it is apparent that one of the bifurcations of $\mathcal R_0$ is $\mathcal R_0 = 1$ (which is the transcritical bifurcation).
+
+Consider $\frac{dI}{d\tau} = I(\mathcal R_0 S - 1)$ when and initially $S\approx 1$ and $I \ll 1$. Then an epidemic can occur if $\frac{dI}{d\tau} > 0$ (meaning that the number of infectious people increases).
+Hence, for an epidemic (i.e. convergence to the EE):
+\begin{align*}
+  I(\mathcal R_0 S - 1) &> 0\\
+  \mathcal R_0 - 1 &> 0\\
+  \mathcal R_0 &> 1
+\end{align*}
+
+The two ``bifurcations" that yield biologically relevant changes can be determined by looking at the boundaries of $\mathcal R_0$ in terms of $\epsilon^*$ threshold of damped oscilation in part (h):
+
+\begin{align*}
+  \epsilon &= \frac{4(\mathcal R_0 - 1)}{(\mathcal R_0)^2}\\
+  \epsilon (\mathcal R_0)^2 - 4 \mathcal R_0 + 4 &= 0\\
+\end{align*}
+
+Using the quadratic formula, it follows that there are two possible $\mathcal R_0$ values:
+\begin{align*}
+  \mathcal R_0 &= \frac{4 \pm \sqrt{16 - 16 \epsilon}}{2 \epsilon} \\
+\end{align*}
+
+To visualize these results, a value of $\epsilon = \frac{8}{9}$ will be used since it is a biologically reasonable value (and the corresponding ``bifurcations" are also biologically valid). Using this value we get $\mathcal R_0 = 1.5 , 3$.\par
+When $0 < \mathcal R_0 < 1$, then solutions will converge to the DFE. When $1 < \mathcal R_0 < 1.5$, then dynamics will be less oscillatory, meaning that recurrent epidemics will dampen out relatively quickly. This is also similar to the dynamics of the system when $3 < \mathcal R_0 < Z$, where $Z$ is large. 
+When $1.5 < \mathcal R_0 < 3$, the system will likely show slower damped oscillatory dynamics, where more reccurent epidemics are possible before the system converges to the EE. 
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{##Dimensionless form (only parameters are epsilon and \textbackslash{}mathcal R_0)##}
+\hlstd{SIR.vector.field} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{t}\hlstd{,} \hlkwc{vars}\hlstd{,} \hlkwc{parms}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{epsilon} \hlstd{=} \hlnum{8}\hlopt{/}\hlnum{9}\hlstd{,} \hlkwc{R0} \hlstd{=} \hlnum{5}\hlstd{)) \{}
+\hlkwd{with}\hlstd{(}\hlkwd{as.list}\hlstd{(}\hlkwd{c}\hlstd{(parms, vars)), \{}
+\hlstd{dx} \hlkwb{<-} \hlstd{epsilon}\hlopt{*}\hlstd{(}\hlnum{1}\hlopt{-}\hlstd{x)}\hlopt{-}\hlstd{R0}\hlopt{*}\hlstd{x}\hlopt{*}\hlstd{y} \hlcom{# dS/dt of SIR model}
+\hlstd{dy} \hlkwb{<-} \hlstd{R0}\hlopt{*}\hlstd{x}\hlopt{*}\hlstd{y} \hlopt{-} \hlstd{y} \hlcom{# dI/dt of SIR model}
+\hlstd{dz} \hlkwb{<-} \hlstd{(}\hlnum{1}\hlopt{-}\hlstd{epsilon)}\hlopt{*}\hlstd{y} \hlopt{-} \hlstd{epsilon}\hlopt{*}\hlstd{z} \hlcom{#dR/dt of SIR model}
+\hlstd{vec.fld} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlkwc{dx}\hlstd{=dx,} \hlkwc{dy}\hlstd{=dy,} \hlkwc{dz}\hlstd{=dz)}
+\hlkwd{return}\hlstd{(}\hlkwd{list}\hlstd{(vec.fld))}
+\hlstd{\})}
+\hlstd{\}}
+
+\hlcom{##S(I) plotting function##}
+\hlstd{plot.SI} \hlkwb{<-} \hlkwa{function}\hlstd{(}\hlkwc{ic}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{1}\hlstd{,}\hlkwc{y}\hlstd{=}\hlnum{0}\hlstd{,}\hlkwc{z}\hlstd{=}\hlnum{0}\hlstd{),} \hlkwc{tmax}\hlstd{=}\hlnum{1}\hlstd{,}
+\hlkwc{times}\hlstd{=}\hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,tmax,}\hlkwc{by}\hlstd{=tmax}\hlopt{/}\hlnum{500}\hlstd{),}
+\hlkwc{func}\hlstd{,} \hlkwc{parms}\hlstd{,} \hlkwc{...} \hlstd{) \{}
+\hlstd{St} \hlkwb{<-} \hlkwd{ode}\hlstd{(ic, times, func, parms)}
+\hlkwd{lines}\hlstd{(St[,}\hlstr{"x"}\hlstd{], St[,}\hlstr{"y"}\hlstd{],} \hlkwc{col}\hlstd{=}\hlstr{"blue"}\hlstd{,} \hlkwc{lwd}\hlstd{=}\hlnum{1.5}\hlstd{, ... )}
+\hlstd{\}}
+
+\hlcom{##Various R0 values##}
+\hlstd{R0vals} \hlkwb{<-} \hlkwd{c}\hlstd{(}\hlnum{0.9}\hlstd{,} \hlnum{1.1}\hlstd{,} \hlnum{2.25}\hlstd{,} \hlnum{5}\hlstd{)}
+\hlcom{#intial conditions}
+\hlstd{S0} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{0.9}\hlstd{,}\hlkwc{by}\hlstd{=}\hlnum{0.1}\hlstd{)[}\hlopt{-}\hlnum{1}\hlstd{]}
+\hlstd{I0} \hlkwb{<-} \hlkwd{seq}\hlstd{(}\hlnum{0.9}\hlstd{,}\hlnum{0}\hlstd{,} \hlkwc{by}\hlstd{=}\hlopt{-}\hlnum{0.1}\hlstd{)[}\hlopt{-}\hlnum{10}\hlstd{]}
+\hlkwd{par}\hlstd{(}\hlkwc{mfrow} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{2}\hlstd{,}\hlnum{2}\hlstd{))} \hlcom{#Setting up the subplots}
+\hlkwa{for} \hlstd{(i} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(R0vals)) \{}
+  \hlstd{pars} \hlkwb{<-}  \hlkwd{c}\hlstd{(}\hlkwc{epsilon} \hlstd{=} \hlnum{1}\hlopt{/}\hlnum{9}\hlstd{,} \hlkwc{R0} \hlstd{= R0vals[i])}
+  \hlstd{title} \hlkwb{<-} \hlkwd{paste}\hlstd{(}\hlstr{"R_0 ="}\hlstd{, R0vals[i])} \hlcom{#labelling R0 for each plot}
+  \hlkwd{plot}\hlstd{(}\hlkwc{x}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{y}\hlstd{=}\hlnum{0}\hlstd{,} \hlkwc{type} \hlstd{=} \hlstr{"n"}\hlstd{,} \hlkwc{xlim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{),} \hlkwc{ylim} \hlstd{=} \hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{),} \hlcom{#empty subplot}
+       \hlkwc{xlab} \hlstd{=} \hlstr{"Susceptible (S)"}\hlstd{,} \hlkwc{ylab}\hlstd{=} \hlstr{"Infected (I)"}\hlstd{,} \hlkwc{main}\hlstd{=title)}
+  \hlkwd{lines}\hlstd{(}\hlkwc{x}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{1}\hlstd{,}\hlnum{0}\hlstd{),}\hlkwc{y}\hlstd{=}\hlkwd{c}\hlstd{(}\hlnum{0}\hlstd{,}\hlnum{1}\hlstd{),}\hlkwc{col}\hlstd{=}\hlstr{"grey"}\hlstd{,}\hlkwc{lty}\hlstd{=}\hlstr{"dotted"}\hlstd{)}
+  \hlkwa{for} \hlstd{(j} \hlkwa{in} \hlnum{1}\hlopt{:}\hlkwd{length}\hlstd{(S0)) \{}
+    \hlkwd{plot.SI}\hlstd{(}\hlkwc{ic}\hlstd{=}\hlkwd{c}\hlstd{(}\hlkwc{x}\hlstd{=S0[j],}\hlkwc{y}\hlstd{=I0[j],}\hlkwc{z}\hlstd{=}\hlnum{0}\hlstd{),} \hlkwc{tmax}\hlstd{=tmax,}
+            \hlkwc{func}\hlstd{=SIR.vector.field,}
+            \hlkwc{parms}\hlstd{=pars}
+  \hlstd{)}
+  \hlstd{\}}
+\hlstd{\}}
+\end{alltt}
+\end{kframe}
+\includegraphics[width=\maxwidth]{figure/phase_portraits-1} 
+
+\end{knitrout}
 \item \input{./sections/qk.tex}
 \end{enumerate}
 \printbibliography
