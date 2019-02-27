@@ -1,0 +1,30 @@
+Set the following variables:
+\begin{subequations}\label{pvars}
+\begin{align}
+    S_p &= \frac{S}{N}\\
+    I_p &= \frac{I}{N}\\
+    R_p &= \frac{R}{N}\\
+    N_p &= \frac{N}{N} = 1
+\end{align}
+\end{subequations}
+Then substituting equations \ref{pvars} into equations (1)
+\begin{align}
+  \frac{dS_p}{dt} &= \mu N_p -\frac{\beta}{N_p} S_p I_p - \mu S_p\nonumber\\
+                  &= \mu 1 -\frac{\beta}{1} S_p I_p - \mu S_p\nonumber\\
+                  &= \mu -\beta S_p I_p - \mu S_p\nonumber\\
+                  &= \mu -\frac{\beta}{N} \frac{S I}{N} - \mu \frac{S}{N}\nonumber\\
+                  &= \frac{1}{N}(\mu N -\frac{\beta}{N} SI - \mu S)\nonumber\\
+                  &= \frac{1}{N} \frac{dS}{dt}\label{sp}\\
+  \vspace{8pt}
+  \frac{dI_p}{dt} &= \frac{\beta}{N_p} S_p I_p - \gamma I_p - \mu I_p\nonumber\\
+                  &= \frac{\beta}{1} S_p I_p - \gamma I_p - \mu I_p\nonumber\\
+                  &= \frac{\beta}{N} \frac{S I}{N} - \gamma \frac{I}{N} - \mu \frac{I}{N}\nonumber\\
+                  &= \frac{1}{N} (\frac{\beta}{N} SI - \gamma I - \mu I)\nonumber\\
+                  &= \frac{1}{N} \frac{dI}{dt}\label{ip}\\
+  \vspace{8pt}
+  \frac{dR_p}{dt} &= \gamma I_p - \mu R_p\nonumber\\
+  \frac{dR_p}{dt} &= \gamma \frac{I}{N} - \mu \frac{R}{N}\nonumber\\
+                  &= \frac{1}{N} (\gamma I - \mu R)\nonumber\\
+                  &= \frac{1}{N} \frac{dR}{dt}\label{rp}
+\end{align}
+From equations \ref{sp},\ref{ip} and \ref{rp} it is clear that the proportional equations are equivalent to the original equations (1) scaled by a constant factor of $\frac{1}{N}$, and thus will retain the same dynamical behaviour.

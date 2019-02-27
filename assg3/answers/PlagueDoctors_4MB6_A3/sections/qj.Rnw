@@ -1,0 +1,66 @@
+As $\mathcal R_0$ is increased from 0 to $\infty$, using the dimensionless forms of the differential equations, it is apparent that one of the bifurcations of $\mathcal R_0$ is $\mathcal R_0 = 1$ (which is the transcritical bifurcation).
+
+Consider $\frac{dI}{d\tau} = I(\mathcal R_0 S - 1)$ when and initially $S\approx 1$ and $I \ll 1$. Then an epidemic can occur if $\frac{dI}{d\tau} > 0$ (meaning that the number of infectious people increases).
+Hence, for an epidemic (i.e. convergence to the EE):
+\begin{align*}
+  I(\mathcal R_0 S - 1) &> 0\\
+  \mathcal R_0 - 1 &> 0\\
+  \mathcal R_0 &> 1
+\end{align*}
+
+The two ``bifurcations" that yield biologically relevant changes can be determined by looking at the boundaries of $\mathcal R_0$ in terms of $\epsilon^*$ threshold of damped oscilation in part (h):
+
+\begin{align*}
+  \epsilon &= \frac{4(\mathcal R_0 - 1)}{(\mathcal R_0)^2}\\
+  \epsilon (\mathcal R_0)^2 - 4 \mathcal R_0 + 4 &= 0\\
+\end{align*}
+
+Using the quadratic formula, it follows that there are two possible $\mathcal R_0$ values:
+\begin{align*}
+  \mathcal R_0 &= \frac{4 \pm \sqrt{16 - 16 \epsilon}}{2 \epsilon} \\
+\end{align*}
+
+To visualize these results, a value of $\epsilon = \frac{8}{9}$ will be used since it is a biologically reasonable value (and the corresponding ``bifurcations" are also biologically valid). Using this value we get $\mathcal R_0 = 1.5 , 3$.\par
+When $0 < \mathcal R_0 < 1$, then solutions will converge to the DFE. When $1 < \mathcal R_0 < 1.5$, then dynamics will be less oscillatory, meaning that recurrent epidemics will dampen out relatively quickly. This is also similar to the dynamics of the system when $3 < \mathcal R_0 < Z$, where $Z$ is large. 
+When $1.5 < \mathcal R_0 < 3$, the system will likely show slower damped oscillatory dynamics, where more reccurent epidemics are possible before the system converges to the EE. 
+
+<<phase.portraits>>=
+##Dimensionless form (only parameters are epsilon and \mathcal R_0)##
+SIR.vector.field <- function(t, vars, parms=c(epsilon = 8/9, R0 = 5)) {
+with(as.list(c(parms, vars)), {
+dx <- epsilon*(1-x)-R0*x*y # dS/dt of SIR model
+dy <- R0*x*y - y # dI/dt of SIR model
+dz <- (1-epsilon)*y - epsilon*z #dR/dt of SIR model
+vec.fld <- c(dx=dx, dy=dy, dz=dz)
+return(list(vec.fld))
+})
+}
+
+##S(I) plotting function##
+plot.SI <- function(ic=c(x=1,y=0,z=0), tmax=1,
+times=seq(0,tmax,by=tmax/500),
+func, parms, ... ) {
+St <- ode(ic, times, func, parms) 
+lines(St[,"x"], St[,"y"], col="blue", lwd=1.5, ... )
+}
+
+##Various R0 values##
+R0vals <- c(0.9, 1.1, 2.25, 5)
+#intial conditions
+S0 <- seq(0,0.9,by=0.1)[-1]
+I0 <- seq(0.9,0, by=-0.1)[-10]  
+par(mfrow = c(2,2)) #Setting up the subplots
+for (i in 1:length(R0vals)) {
+  pars <-  c(epsilon = 1/9, R0 = R0vals[i])
+  title <- paste("R_0 =", R0vals[i]) #labelling R0 for each plot
+  plot(x=0, y=0, type = "n", xlim = c(0,1), ylim = c(0,1), #empty subplot
+       xlab = "Susceptible (S)", ylab= "Infected (I)", main=title)
+  lines(x=c(1,0),y=c(0,1),col="grey",lty="dotted")
+  for (j in 1:length(S0)) {
+    plot.SI(ic=c(x=S0[j],y=I0[j],z=0), tmax=tmax,
+            func=SIR.vector.field,
+            parms=pars
+  )
+  }
+}
+@
