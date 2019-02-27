@@ -1,1 +1,13 @@
-tmp
+Let us start by using the Lyapunov function $L = I$.
+$L = 0$ when $(S,I) = (1,0)$. Since $R_0 \leq 1$ we can conclude that $\beta \leq \gamma + \mu$ or $\beta - \gamma - \mu \leq 0$. Calculating $\.{L}$ we have:
+
+\begin{align*}
+	\.{L} = \frac{dL}{dI} \frac{dI}{dt} + \frac{dL}{dS} \frac{dS}{dt} \\
+	= \beta SI - \gamma I - \mu I + \mu I - \beta S I^2 - \mu SI \\
+	= I (\beta S - \gamma - \mu S - \beta SI) \\ 
+	\leq I (\beta S - \gamma S - \mu S - \beta SI) \\
+	= I [S (\beta - \gamma - \mu) - \beta SI]\\
+	< 0 \forall S,I \in (0,1)
+\end{align*}
+
+$L(1,0) = 0$ and $\.{L} < 0$ $\forall S,I \in (0,1)$. Hence, L is negative definite on the interval (0,1). L is therefore a strict Lyapunov function for the DFE on the entire biologically relevant space, which implies that the DFE is globally asymptotically stable.
