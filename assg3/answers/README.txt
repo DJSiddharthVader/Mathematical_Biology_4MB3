@@ -14,6 +14,12 @@ If you pressed the button, the PDF should be open in your default viewer. If you
 
 
 Notes:
+Included is a script knitpdf.sh that knits and double compiles the resulting tex file.
+usage: ./knitpdf.sh main.Rnw
+requires:
+    - knitr
+    - latexmk (optional)
+    - pdflatex
 
 If you want to compile a single question file, include the R chunk at the top of the question file:
 <<set-parent, echo=FALSE, cache=FALSE>>=
