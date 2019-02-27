@@ -1,6 +1,5 @@
 % !Rnw root = main.Rnw
-<<parent, echo=FALSE, cache=FALSE>>=
-knitr::set_parent('../main.Rnw')
+<<setup, echo=FALSE, cache=FALSE>>=
 library(deSolve)
 @
 
@@ -21,28 +20,28 @@ So simplifying $J(\hat{S}, \hat{I})$, the characteristic polynomial is:
 \begin{equation}
   (-\beta \hat{I} - \mu - \lambda)(\beta \hat{S} - (\mu + \gamma) - \lambda) + \beta^2 \hat{S}\hat{I} = 0
 \end{equation}
- The EE is $(\frac{\mu + \gamma}{\beta}, \frac{\mu}{\beta}(\R_0 - 1))$ so the characteristic polynomial at the EE is:
+ The EE is $(\frac{\mu + \gamma}{\beta}, \frac{\mu}{\beta}(\mathcal R_0 - 1))$ so the characteristic polynomial at the EE is:
  
  \begin{align*}
   0 &= (-\beta \hat{I} - \mu - \lambda)(\beta \hat{S} - (\mu + \gamma) - \lambda) + \beta^2 \hat{S}\hat{I}\\
-  0 &= (-\mu(\R_0 - 1) - \mu - \lambda)(- \lambda) + (\mu + \gamma) \mu(\R_0 - 1)\\
-  0 &= \lambda^2 + (\mu \R_0)\lambda + (\mu + \gamma)\mu(\R_0 - 1)\\
+  0 &= (-\mu(\mathcal R_0 - 1) - \mu - \lambda)(- \lambda) + (\mu + \gamma) \mu(\mathcal R_0 - 1)\\
+  0 &= \lambda^2 + (\mu \mathcal R_0)\lambda + (\mu + \gamma)\mu(\mathcal R_0 - 1)\\
 \end{align*}
 
 Solving for the eigenvalue, $\lambda$, using the quadratic equation:
 \begin{equation}
-  \lambda = -\frac{\mu \R_0}{2} \pm \frac {\sqrt{(\mu \R_0)^2-4(\mu + \gamma)\mu(\R_0 - 1)}}{2}
+  \lambda = -\frac{\mu \mathcal R_0}{2} \pm \frac {\sqrt{(\mu \mathcal R_0)^2-4(\mu + \gamma)\mu(\mathcal R_0 - 1)}}{2}
 \end{equation}
 
-Assuming that$(\mu \R_0)^2$ is relatively small, then this eigenvalue will be complex, $\lambda = -\frac{\mu \R_0}{2} \pm iM$. The period of damped oscillations, $T$, is $T = 2\pi\frac{1}{M}$ and the $e$-folding time, $t_e = \frac{1}{re(\lambda)}$, is $t_e = \frac{2}{\mu \R_0}$. \\
+Assuming that$(\mu \mathcal R_0)^2$ is relatively small, then this eigenvalue will be complex, $\lambda = -\frac{\mu \mathcal R_0}{2} \pm iM$. The period of damped oscillations, $T$, is $T = 2\pi\frac{1}{M}$ and the $e$-folding time, $t_e = \frac{1}{re(\lambda)}$, is $t_e = \frac{2}{\mu \mathcal R_0}$. \\
 
-Furthermore if we assume that $(\mu \R_0)^2 \approx 0$, the above can be simplified to:
+Furthermore if we assume that $(\mu \mathcal R_0)^2 \approx 0$, the above can be simplified to:
 
 \begin{equation}
-  \lambda \approx -\frac{\mu \R_0}{2} \pm i \sqrt{(\mu + \gamma)\mu(\R_0 - 1)}
+  \lambda \approx -\frac{\mu \mathcal R_0}{2} \pm i \sqrt{(\mu + \gamma)\mu(\mathcal R_0 - 1)}
 \end{equation}
 
-So the period of damped oscillations can be approximated as $T \approx \frac{2\pi}{\sqrt{(\mu + \gamma)\mu(\R_0 - 1)}}$. \par
+So the period of damped oscillations can be approximated as $T \approx \frac{2\pi}{\sqrt{(\mu + \gamma)\mu(\mathcal R_0 - 1)}}$. \par
 
 The period of damped oscillations can observed in the following graph which uses $I(0) = 0.00025, S(0) = 0.1, \beta = 550, \gamma=365/7, \mu=1/70$. 
 
