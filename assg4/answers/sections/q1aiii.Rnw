@@ -1,0 +1,5 @@
+% !Rnw root = main.Rnw
+<<setup, echo=FALSE, cache=FALSE>>=
+@
+
+

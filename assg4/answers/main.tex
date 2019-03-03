@@ -1,0 +1,151 @@
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+\input{preamble}
+\input{4mba4q}
+\newcommand{\BeautifulSolution}{{\color{blue}\begin{proof}{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}\end{proof}}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% FANCY HEADER AND FOOTER STUFF %%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt} % Removes funny header line
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+%Title
+\begin{center}
+{\bf Mathematics 4MB3/6MB3 Mathematical Biology\\
+\smallskip
+\url{http://www.math.mcmaster.ca/earn/4MB3}\\
+\smallskip
+2019 ASSIGNMENT 4}\\
+\medskip
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Rolling Stones}}\\
+\medskip
+\underline{\emph{Group Members}}: {\color{blue}Mick Jagger, Keith Richards, Ronnie Wood, Charlie Watts}
+\end{center}
+
+\bigskip
+\noindent
+This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 13 2019 at 10:30am}.
+\bigskip
+\begin{enumerate}
+    \item %TSintro
+    \begin{enumerate}[(a)]
+        \item \TSa
+        \begin{enumerate}[(i)]
+            \item
+
+% !Rnw root = main.Rnw
+
+
+
+            \item
+
+% !Rnw root = main.Rnw
+
+
+            \item
+
+% !Rnw root = main.Rnw
+
+
+
+        \end{enumerate}
+        \item
+
+% !Rnw root = main.Rnw
+
+tmp
+
+
+    \end{enumerate}
+    \item \SEintro
+    \begin{enumerate}[(a)]
+        \item
+
+% !Rnw root = main.Rnw
+
+
+        \item
+
+% !Rnw root = main.Rnw
+
+tmp
+    \end{enumerate}
+    \item \Rintro
+    \smpxnathistfig
+    \begin{enumerate}[(a)]
+        \item \input{./sections/q3a.tex}
+        \item \input{./sections/q3b.tex}
+        \item \input{./sections/q3c.tex}
+        \item \input{./sections/q3d.tex}
+        \item \input{./sections/q3e.tex}
+    \end{enumerate}
+\end{enumerate}
+%%\newpage
+%%\bibliographystyle{vancouver}
+%%\bibliography{DavidEarn,MyPubs}
+\bigskip\vfill
+\centerline{\bf--- END OF ASSIGNMENT ---}
+\bigskip
+Compile time for this document:
+\today\ @ \thistime
+\end{document}
