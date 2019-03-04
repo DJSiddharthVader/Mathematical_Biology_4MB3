@@ -7,7 +7,7 @@ if [ $# -eq 0 ]; then
 else
     file="$1"
     #check file exists
-    if [ ! -f "$file " ]; then
+    if [ ! -f "$file" ]; then
         echo "file $1 not found"
         exit 1
     fi
