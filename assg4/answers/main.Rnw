@@ -26,42 +26,44 @@
 \smallskip
 2019 ASSIGNMENT 4}\\
 \medskip
-\underline{\emph{Group Name}}: \texttt{{\color{blue}The Rolling Stones}}\\
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\
 \medskip
-\underline{\emph{Group Members}}: {\color{blue}Mick Jagger, Keith Richards, Ronnie Wood, Charlie Watts}
+\underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}
 \end{center}
 
+%due date
 \bigskip
 \noindent
 This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 13 2019 at 10:30am}.
 \bigskip
+%Answers
 \begin{enumerate}
     \item %TSintro
     \begin{enumerate}[(a)]
         \item \TSa
         \begin{enumerate}[(i)]
             \item
-            <<child='./sections/q1ai.Rnw'>>=
-            @
+<<child='./sections/q1ai.Rnw'>>=
+@
             \item
-            <<child='./sections/q1aii.Rnw'>>=
-            @
+<<child='./sections/q1aii.Rnw'>>=
+@
             \item
-            <<child='./sections/q1aiii.Rnw'>>=
-            @
+<<child='./sections/q1aiii.Rnw'>>=
+@
         \end{enumerate}
-        \item
-        <<child='./sections/q1b.Rnw'>>=
-        @\\
+        \item \TSb
+<<child='./sections/q1b.Rnw'>>=
+@
     \end{enumerate}
     \item \SEintro
     \begin{enumerate}[(a)]
         \item
-        <<child='./sections/q2a.Rnw'>>=
-        @
+<<child='./sections/q2a.Rnw'>>=
+@
         \item
-        <<child='./sections/q2b.Rnw'>>=
-        @
+<<child='./sections/q2b.Rnw'>>=
+@
     \end{enumerate}
     \item \Rintro
     \smpxnathistfig
@@ -73,9 +75,7 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
         \item \input{./sections/q3e.tex}
     \end{enumerate}
 \end{enumerate}
-%%\newpage
-%%\bibliographystyle{vancouver}
-%%\bibliography{DavidEarn,MyPubs}
+%End Note
 \bigskip\vfill
 \centerline{\bf--- END OF ASSIGNMENT ---}
 \bigskip

@@ -1,5 +1,6 @@
 % !Rnw root = main.Rnw
-<<setup, echo=FALSE, cache=FALSE>>=
+<<1aiii, echo=FALSE, cache=FALSE>>=
 @
+tmp
 
 

@@ -1,4 +1,11 @@
 % !Rnw root = main.Rnw
-<<setup, echo=FALSE, cache=FALSE>>=
+<<multipanelgillespie, message=FALSE, warning=FALSE>>=
+source('gillespie.R')
+#simulation vars
+beta = 1
+ns = c(32,100,1000,10000)
+I0 = 1
+tmax = 50
+realizations = 30
+multipanel(realizations,beta,ns,I0,tmax)
 @
-tmp
