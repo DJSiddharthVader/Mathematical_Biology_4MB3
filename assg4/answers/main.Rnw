@@ -2,9 +2,7 @@
 \input{preamble}
 \input{4mba4q}
 \newcommand{\BeautifulSolution}{{\color{blue}\begin{proof}{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}\end{proof}}}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% FANCY HEADER AND FOOTER STUFF %%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usepackage{fancyhdr,lastpage}
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer parameters
@@ -67,6 +65,7 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
     \end{enumerate}
     \item \Rintro
     \smpxnathistfig
+    \FloatBarrier
     \begin{enumerate}[(a)]
         \item \input{./sections/q3a.tex}
         \item \input{./sections/q3b.tex}
