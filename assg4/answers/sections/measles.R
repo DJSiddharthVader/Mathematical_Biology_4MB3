@@ -22,12 +22,13 @@ smoothData <- function(counts,a){
     return(smoothed)
 }
 
-time.plot <- function(df,add=FALSE,smooth=TRUE,a=5,...){
+time.plot <- function(df,add=FALSE,smooth=TRUE,a,...){
     #to smooth?
     if (smooth | add){
         print(paste("smoothing with moving average, a =",a))
         date <- df$date
         cases <- smoothData(df$cases,a)
+        #cases <- filter(df$cases,1,method='convolution',sides=2)
     } else { #normal plotting
         time <- df$date
         cases <- df$cases
@@ -39,26 +40,24 @@ time.plot <- function(df,add=FALSE,smooth=TRUE,a=5,...){
         plot(date,cases,...)
     }
 }
+
 periodogram <- function(df,method,timestart=1,timerange=-1,add=FALSE,...){
     #specify time range
     if (timerange == -1){
         timerange <- length(df$date)-1
     }
+    #get power spectrum
     specdata <- spectrum(df$cases[seq(timestart,timestart+timerange)],plot=FALSE,method=method)
-    freq <- specdata$freq
-    period <- lapply(freq, function(x) { return(1/x) })
+    period <- lapply(specdata$freq, function(x) { return(1/x) })
     spec <- specdata$spec
     #if add
     if (add){
-#        startdate <- df$date[timestart]
-#        enddate <- df$date[timestart+timerange]
-#        timeinterval <- difftime(enddate,startdate)/(length(freq)-1)
-#        dates <- seq.Date(from=startdate,to=enddate,by=timeinterval)
-        plot(period,spec,...)
+        lines(period,spec,...)
     } else {
         plot(period,spec,...)
     }
 }
+
 multipanel <- function(){
 }
 #df <- read.ymdc('./sections/meas_uk__lon_1944-94_wk.csv')
