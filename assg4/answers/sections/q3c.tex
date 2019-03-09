@@ -1,3 +1,4 @@
+Assuming that $\mathcal{F} =$ inflow of new infecteds to infected compartments, and $\mathcal{V} =$ outflow from infected compartments minus inflow of non-new infecteds we have:
 \begin{gather*}
 \mathcal{F} = \left(\begin{array}{c}
 \beta_r I_r S+ \beta_e I_e S+ \beta_m I_m S+ \beta_l I_l S\\
@@ -12,7 +13,11 @@
 -\sigma_2 I_r + \sigma_3 I_e + \mu I_e \\
 -\sigma_3 I_e + \sigma_4 I_m + \mu I_m \\
 -\sigma_4 I_m + \gamma I_l + \mu I_l
-\end{array}\right)\\
+\end{array}\right)
+\end{gather*}\\
+Let $F=$ linearization of $\mathcal{F}$ at DFE.\\
+Let $V=$ linearization of $\mathcal{V}$ at DFE. Calculating F and V we have:
+\begin{gather*}
 F=\left(\begin{array}{rrrrr}
 0 & \beta_r & \beta_e & \beta_m & \beta_l \\
 0 & 0 & 0 & 0 & 0 \\
@@ -27,7 +32,8 @@ V=\left(\begin{array}{rrrrr}
 0 & 0 & -\sigma_3 & (\sigma_4 + \mu) & 0 \\
 0 & 0 & 0 & -\sigma_4 & (\gamma + \mu)
 \end{array}\right)
-\end{gather*}
+\end{gather*}\\
+The next generation matrix is $FV^{-1}$. Calculating $FV^{-1}$ using a symbolic manipulation software we get:
 \begin{align*}
 &FV^{-1}= \left(\begin{array}{rrrrr}
 m_1 & m_2 & m_3 & m_4 & m_5 \\
@@ -36,6 +42,8 @@ m_1 & m_2 & m_3 & m_4 & m_5 \\
 0 & 0 & 0 & 0 & 0 \\
 0 & 0 & 0 & 0 & 0
 \end{array}\right)\\
+\end{align*}
+\begin{align*}
 where \\
 &m_1 = \frac{\beta_r \sigma_{1}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)}} + \frac{\beta_e \sigma_{1} \sigma_{2}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)}} \\ 
 &+ \frac{\beta_m \sigma_{1} \sigma_{2} \sigma_{3}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)} {\left(\sigma_{4} + \mu\right)}} + \frac{\beta_l \sigma_{1} \sigma_{2} \sigma_{3} \sigma_{4}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)} {\left(\sigma_{4} + \mu\right)} {\left(\mu + \gamma\right)}} \\
@@ -43,7 +51,9 @@ where \\
 &m_3= \frac{\beta_e}{\sigma_{3} + \mu} + \frac{\beta_m \sigma_{3}}{{\left(\sigma_{3} + \mu\right)} {\left(\sigma_{4} + \mu\right)}} + \frac{\beta_l \sigma_{3} \sigma_{4}}{{\left(\sigma_{3} + \mu\right)} {\left(\sigma_{4} + \mu\right)} {\left(\mu + \gamma\right)}} \\
 &m_4= \frac{\beta_m}{\sigma_{4} + \mu} + \frac{\beta_l \sigma_{4}}{{\left(\sigma_{4} + \mu\right)} {\left(\mu + \gamma\right)}} \\
 &m_5= \frac{\beta_l}{\mu + \gamma} \\
-Therefore: \\
-&R_0 = \frac{\beta_r \sigma_{1}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)}} + \frac{\beta_e \sigma_{1} \sigma_{2}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)}} \\ 
+\end{align*}\\
+$R_0$ can be calculated as the spectral radius of the matrix $FV^{-1}$ (or $\rho(FV^{-1})$). Therefore:
+\begin{align*}
+&R_0 = \rho(FV^{-1}) = \frac{\beta_r \sigma_{1}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)}} + \frac{\beta_e \sigma_{1} \sigma_{2}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)}} \\ 
 &+ \frac{\beta_m \sigma_{1} \sigma_{2} \sigma_{3}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)} {\left(\sigma_{4} + \mu\right)}} + \frac{\beta_l \sigma_{1} \sigma_{2} \sigma_{3} \sigma_{4}}{{\left(\sigma_{1} + \mu\right)} {\left(\sigma_{2} + \mu\right)} {\left(\sigma_{3} + \mu\right)} {\left(\sigma_{4} + \mu\right)} {\left(\mu + \gamma\right)}}
 \end{align*}
