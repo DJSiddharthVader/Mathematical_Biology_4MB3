@@ -41,6 +41,17 @@ time.plot <- function(df,add=FALSE,smooth=TRUE,a,...){
     }
 }
 
+correlogram <- function(df,add=FALSE,k,...){
+    print(paste("Using lag k =",k))
+    lags <- 1:(k+1)
+    autocorr <- acf(df$cases,k,plot=FALSE)$acf
+    #if add
+    if (add){
+        lines(lags,autocorr,...)
+    } else {
+        plot(lags,autocorr,...)
+    }
+}
 periodogram <- function(df,method,timestart=1,timerange=-1,add=FALSE,...){
     #specify time range
     if (timerange == -1){

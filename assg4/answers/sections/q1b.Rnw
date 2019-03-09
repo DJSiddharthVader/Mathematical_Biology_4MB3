@@ -1,4 +1,76 @@
 % !Rnw root = main.Rnw
-<<q1b, echo=FALSE, cache=FALSE>>=
+<<1b, echo=FALSE, cache=FALSE,fig.height=5,fig.pos='H'>>=
+#parameters
+a=30
+k=1100
+basecol = 'red'
+smthcol = 'blue'
+corrcol = 'green'
+source('./measles.R')
+#London Data
+londf <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
+#regular time series
+plot(londf$date,
+     londf$cases,
+     col='red',
+     type='l',
+     xlab='Date',
+     ylab='Cases',
+     main='Influenza Cases in London')
+#moving average
+time.plot(londf,
+          add=TRUE,
+          smooth=TRUE,
+          a=a,
+          col=smthcol,
+          type="l")
+#legend
+legend("topright",
+        legend=c("Raw",paste('Smoothed A =',a)),
+        col=c(basecol,smthcol),
+        box.lty=0,
+        lty=1:1,
+        cex=0.8)
+#autocorrelation
+correlogram(londf,
+            add=FALSE,
+            k,
+            col=corrcol,
+            type='l',
+            xlab='Lag',
+            ylab='Autocorrelation',
+            main='Correlogram of London Measels Time Series')
+#Liverpool Data
+lpldf <- read.ymdc('./meas_uk__lpl_1944-94_wk.csv')
+#regular time series
+plot(lpldf$date,
+     lpldf$cases,
+     col='red',
+     type='l',
+     xlab='Date',
+     ylab='Cases',
+     main='Influenza Cases in Liverpool')
+#moving average
+time.plot(lpldf,
+          add=TRUE,
+          smooth=TRUE,
+          a=a,
+          col=smthcol,
+          type="l")
+#legend
+legend("topright",
+        legend=c("Raw",paste('Smoothed A =',a)),
+        col=c(basecol,smthcol),
+        box.lty=0,
+        lty=1:1,
+        cex=0.8)
+#autocorrelation
+correlogram(lpldf,
+            add=FALSE,
+            k,
+            col=corrcol,
+            type='l',
+            xlab='Lag',
+            ylab='Autocorrelation',
+            main='Correlogram of Liverpool Measels Time Series')
 @
-tmp

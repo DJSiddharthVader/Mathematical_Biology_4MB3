@@ -3,11 +3,11 @@
 source('./measles.R')
 df <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
 plot(df$date,df$cases,col='red',type='l',xlab='Date',ylab='Cases',main='Influenza Cases in London')
-a=30
+a=10
 smthcol = 'blue'
 time.plot(df,add=TRUE,smooth=TRUE,a=a,col=smthcol,type="l")
 legend("topright",
-        legend=c("Raw",paste("Smoothed,a=",a)),
+        legend=c("Raw",paste("Smoothed, a=",a)),
         col=c("red",smthcol),
         box.lty=0,
         lty=1:1,

@@ -6,7 +6,7 @@ df <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
 smthcol='green'
 specmethod='pgram'
 print(paste('Using',specmethod,'estimation method'))
-periodogram(df,specmethod,add=FALSE,col=smthcol,type='l',xlab='Period',ylab='Power Spectrum',main='Periodogram Of London Influenza Cases')
+periodogram(df,specmethod,add=FALSE,col=smthcol,type='l',xlab='Period',ylab='Power Spectrum',main='Periodogram Of London Influenza Cases',xlim=c(0,200))
 @
 
 
