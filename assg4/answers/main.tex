@@ -53,7 +53,8 @@
 \input{4mba4q}
 \newcommand{\BeautifulSolution}{{\color{blue}\begin{proof}{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}\end{proof}}}
 %% FANCY HEADER AND FOOTER STUFF %%
-\usepackage{fancyhdr,lastpage}
+\usepackage{fancyhdr,lastpage,tikz}
+\usetikzlibrary{shapes,arrows}
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer parameters
 %%%\lhead{Student Name: \theblank{4cm}}
@@ -115,7 +116,7 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{verbatim}
-## [1] "smoothing with moving average, a = 10"
+## [1] "smoothing with moving average, a = 30"
 \end{verbatim}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/1aii-1} 
@@ -139,30 +140,8 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
         \item \TSb
 
 % !Rnw root = main.Rnw
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{verbatim}
-## [1] "smoothing with moving average, a = 30"
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/1b-1} 
-\begin{kframe}\begin{verbatim}
-## [1] "Using lag k = 1100"
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/1b-2} 
-\begin{kframe}\begin{verbatim}
-## [1] "smoothing with moving average, a = 30"
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/1b-3} 
-\begin{kframe}\begin{verbatim}
-## [1] "Using lag k = 1100"
-\end{verbatim}
-\end{kframe}
-\includegraphics[width=\maxwidth]{figure/1b-4} 
 
-\end{knitrout}
+tmp
     \end{enumerate}
     \item \SEintro
     \begin{enumerate}[(a)]
@@ -198,9 +177,10 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
 \hlstd{beta} \hlkwb{=} \hlnum{1}
 \hlstd{ns} \hlkwb{=} \hlkwd{c}\hlstd{(}\hlnum{32}\hlstd{,}\hlnum{100}\hlstd{,}\hlnum{1000}\hlstd{,}\hlnum{10000}\hlstd{)}
 \hlstd{I0} \hlkwb{=} \hlnum{1}
-\hlstd{tmax} \hlkwb{=} \hlnum{50}
+\hlstd{tmax} \hlkwb{=} \hlnum{30}
 \hlstd{realizations} \hlkwb{=} \hlnum{30}
-\hlkwd{multipanel}\hlstd{(realizations,beta,ns,I0,tmax)}
+\hlstd{colors} \hlkwb{<-} \hlkwd{colors}\hlstd{()}
+\hlkwd{multipanel}\hlstd{(realizations,beta,ns,I0,tmax,}\hlkwc{colors}\hlstd{=colors)}
 \end{alltt}
 \end{kframe}
 \includegraphics[width=\maxwidth]{figure/multipanelgillespie-1} 
