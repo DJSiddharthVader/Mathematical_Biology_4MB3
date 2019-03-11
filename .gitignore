@@ -15,4 +15,6 @@
 *.bcf
 *.blg
 *.run.xml
-*.bib
+figure/
+assg3/answers/PlagueDoctors_4MB6_A3/refs.bib
+assg3/answers/refs.bib
