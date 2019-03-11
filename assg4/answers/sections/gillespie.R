@@ -49,14 +49,18 @@ SI.Deterministic <- function(beta,N,I0,tmax,timepts=500){
     incidences <- ode(ic,times,SI.vector.field,params)
     return(list(times,incidences[,"y"]))
 }
-multipanel <-  function(realizations,beta,ns,I0,tmax){
+multipanel <-  function(realizations,beta,ns,I0,tmax,colors=c('blue')){
+    # set color list
+    if (length(colors) < realizations){
+        colors <- rep(colors,length.out=realizations)
+    }
     par(mfrow = c(2,2))
     for (popsize in ns){
         #plot initial stochatic
         result <- SI.Gillespie(beta,popsize,I0,tmax)
         plot(result[[1]],
              result[[2]],
-             col="blue",
+             col=colors[1],
              type="l",
              xlab="Time (t)",
              ylab="Incidence (I(t))",
@@ -64,15 +68,15 @@ multipanel <-  function(realizations,beta,ns,I0,tmax){
         #plot 30 stochastic realizations
         for (i in seq(0,realizations-1)){
             result <- SI.Gillespie(beta,popsize,I0,tmax)
-            lines(result[[1]],result[[2]],col="blue",type="l")
+            lines(result[[1]],result[[2]],col=colors[i],type="l")
         }
         #deterministic solution
         result <- SI.Deterministic(beta,popsize,I0,tmax)
         lines(result[[1]],result[[2]],col="red",type="l")
         #legend
         legend("right",
-               legend=c("Stochastic","Deterministic"),
-               col=c("blue","red"),
+               legend="Deterministic",
+               col="red",
                box.lty=0,
                lty=1:1,
                cex=0.8)

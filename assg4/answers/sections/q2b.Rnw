@@ -5,7 +5,8 @@ source('gillespie.R')
 beta = 1
 ns = c(32,100,1000,10000)
 I0 = 1
-tmax = 50
+tmax = 30
 realizations = 30
-multipanel(realizations,beta,ns,I0,tmax)
+colors <- colors()
+multipanel(realizations,beta,ns,I0,tmax,colors=colors)
 @
