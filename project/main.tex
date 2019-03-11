@@ -1,0 +1,50 @@
+%Preamble
+\documentclass[12pt]{article}
+\usepackage{scrtime} % for \thistime (this package MUST be listed first!)
+\usepackage[margin=1in]{geometry}
+\usepackage{graphics,graphicx}
+\usepackage{lineno}
+\usepackage{color}
+\definecolor{aqua}{RGB}{0, 128, 225}
+\usepackage[colorlinks=true,citecolor=aqua,linkcolor=aqua,urlcolor=aqua]{hyperref}
+%For Math stuff
+\usepackage{amsmath} % essential for cases environment
+\usepackage{amsthm} % for theorems and proofs
+\usepackage{amsfonts} % mathbb
+%Referenes
+\usepackage[natbib=true,
+            style=nature,
+            backend=biber,
+            useprefix=true]{biblatex}
+\addbibresource{./refs.bib}
+%FANCY HEADER AND FOOTER STUFF
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt} % Removes funny header line
+
+%Title
+\title{The Theory of Everything}
+\author{
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\\\
+\underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}}
+\date{\today\ @ \thistime}
+
+\begin{document}
+\linenumbers
+\maketitle
+\input{./sections/abstract.tex}
+\tableofcontents
+\input{./sections/background.tex}
+\input{./sections/methods.tex}
+\input{./sections/results.tex}
+\input{./sections/discussion.tex}
+\printbibliography
+\end{document}
