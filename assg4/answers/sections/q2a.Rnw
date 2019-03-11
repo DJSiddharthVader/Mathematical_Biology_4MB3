@@ -3,9 +3,9 @@
 source('gillespie.R')
 #simulation vars
 beta = 1
-N = 100
+N = 10000
 I0 = 1
-tmax = 50
+tmax = 20
 realizations = 30
 result <- SI.Gillespie(beta,N,I0,tmax)
 plot(result[[1]], result[[2]], col="green", type="l", xlab="Time (t)",
