@@ -3,7 +3,8 @@
 \input{4mba4q}
 \newcommand{\BeautifulSolution}{{\color{blue}\begin{proof}{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}\end{proof}}}
 %% FANCY HEADER AND FOOTER STUFF %%
-\usepackage{fancyhdr,lastpage}
+\usepackage{fancyhdr,lastpage,tikz}
+\usetikzlibrary{shapes,arrows}
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer parameters
 %%%\lhead{Student Name: \theblank{4cm}}
