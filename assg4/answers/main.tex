@@ -51,7 +51,6 @@
 \usepackage{alltt}
 \input{preamble}
 \input{4mba4q}
-\newcommand{\BeautifulSolution}{{\color{blue}\begin{proof}{\color{magenta}\dots beautifully clear and concise text to be inserted here\dots}\end{proof}}}
 %% FANCY HEADER AND FOOTER STUFF %%
 \usepackage{fancyhdr,lastpage,tikz}
 \usetikzlibrary{shapes,arrows}
@@ -65,7 +64,6 @@
 \cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
 \rfoot{}
 \renewcommand\headrulewidth{0pt} % Removes funny header line
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \IfFileExists{upquote.sty}{\usepackage{upquote}}{}
 \begin{document}
 %Title
@@ -86,6 +84,17 @@
 \noindent
 This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 13 2019 at 10:30am}.
 \bigskip
+
+%Setting seed globally
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#Setting the seed for the entire document, for reproducible stochastic simulations}
+\hlstd{seed} \hlkwb{=} \hlnum{9}
+\hlkwd{set.seed}\hlstd{(seed)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
 %Answers
 \begin{enumerate}
     \item %TSintro
@@ -141,7 +150,6 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
 
 % !Rnw root = main.Rnw
 
-tmp
     \end{enumerate}
     \item \SEintro
     \begin{enumerate}[(a)]
@@ -154,9 +162,9 @@ tmp
 \hlkwd{source}\hlstd{(}\hlstr{'gillespie.R'}\hlstd{)}
 \hlcom{#simulation vars}
 \hlstd{beta} \hlkwb{=} \hlnum{1}
-\hlstd{N} \hlkwb{=} \hlnum{100}
+\hlstd{N} \hlkwb{=} \hlnum{10000}
 \hlstd{I0} \hlkwb{=} \hlnum{1}
-\hlstd{tmax} \hlkwb{=} \hlnum{50}
+\hlstd{tmax} \hlkwb{=} \hlnum{20}
 \hlstd{realizations} \hlkwb{=} \hlnum{30}
 \hlstd{result} \hlkwb{<-} \hlkwd{SI.Gillespie}\hlstd{(beta,N,I0,tmax)}
 \hlkwd{plot}\hlstd{(result[[}\hlnum{1}\hlstd{]], result[[}\hlnum{2}\hlstd{]],} \hlkwc{col}\hlstd{=}\hlstr{"green"}\hlstd{,} \hlkwc{type}\hlstd{=}\hlstr{"l"}\hlstd{,} \hlkwc{xlab}\hlstd{=}\hlstr{"Time (t)"}\hlstd{,}
