@@ -1,0 +1,52 @@
+\documentclass[12pt]{article}
+%Preamble
+\usepackage{scrtime} % for \thistime (this package MUST be listed first!)
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage[T1]{fontenc}
+\usepackage{tikz-cd}
+% So David can comment:
+\newcommand{\de}[1]{{\color{red}{\bfseries DE:} #1}}
+% Use the R logo when referring to R:
+\usepackage{xspace}
+\newcommand{\Rlogo}{\protect\includegraphics[height=2ex,keepaspectratio]
+{images/Rlogo.pdf}\xspace}
+
+%Set Date
+<<echo=FALSE>>=
+this.year <- 2019
+date.string <- function(year,month,day) {
+  return(sprintf("%s %d %s %d",
+                 weekdays(as.Date(paste(year,month,day,sep="-")),abbreviate=FALSE),
+                 day, month.name[month], year))
+}
+@
+
+%Header
+\rhead{\fancyplain{}{4MB3 Project Notebook \Sexpr{this.year} \hfill Siddharth Reed}}
+\title{Math 4MB3 Project Notebook \Sexpr{this.year}}
+\author{Siddharth Reed (The Plague Doctors)}
+\date{\today\ @ \thistime}
+
+\begin{document}
+\maketitle
+\end{document}
+%%Example entry
+%\section*{\Sexpr{date.string(this.year, 3, 15)}}
+%\textbf{Group Meeting} \\
+%\emph{Approximate Duration: 1 Hour}
+%\begin{itemize}
+%\item We discussed what worked on the last album, and how we want things to go this time.
+%\item John doesn't seem to appreciate that the success of the album was entirely due to my songs.
+%\item I think we should face facts and include only my material on the new album.
+%\item John said Yoko has to be present in the studio all the time.  I hit him.  He swore at me.  Ringo said ``Come on boys -- make nice.''  John hit him.  George meditated in a corner.
+%\item George Martin convinced us to break and reconvene in a couple of days.
+%\end{itemize}
+%Time summary
+\section*{Total time spent on this project}
+\begin{quote}
+\emph{Group work:} 96 hours
+\emph{Solo work:} 132 hours
+\end{quote}
+
