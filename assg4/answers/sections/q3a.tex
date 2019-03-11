@@ -1,13 +1,13 @@
 % block and line styles
-\tikzstyle{block} = [rectangle, draw, 
+\tikzstyle{block} = [rectangle, draw,
     text width=2em, text centered, minimum height=3em]
 \tikzstyle{line} = [draw, -latex']
 \tikzstyle{blank} = [inner sep=0,outer sep=0]
-    
+
 \begin{tikzpicture}[node distance=1.7cm, auto]
 % nodes
   \node [block] (S) {S};
-  \node [blank, left of=S] (0) { };
+  \node [blank, above of=S] (0) { };
   \node [block, right of=S] (E) {E};
   \node [block, right of=E] (Ir) {$I_r$};
   \node [block, right of=Ir] (Ie) {$I_e$};
@@ -20,14 +20,14 @@
   \node [blank, below of=Ie] (4){ };
   \node [blank, below of=Im] (5){ };
   \node [blank, below of=Il] (6){ };
-  \node [blank, below of=R] (7) { }; 
+  \node [blank, below of=R] (7) { };
     % Draw arrows
   \path [line] (S) -- node {*}(E);
   \path [line] (E) -- node {$\sigma_1$}(Ir);
   \path [line] (Ir) -- node {$\sigma_2$}(Ie);
   \path [line] (Ie) -- node {$\sigma_3$}(Im);
   \path [line] (Im) -- node {$\sigma_4$}(Il);
-  \path [line] (Il) -- node {$\gamma$}(R);    
+  \path [line] (Il) -- node {$\gamma$}(R);
   \path [line] (0) -- node {$\nu$}(S);
   \path [line] (S) -- node {$\mu$}(1);
   \path [line] (E) -- node {$\mu$}(2);
