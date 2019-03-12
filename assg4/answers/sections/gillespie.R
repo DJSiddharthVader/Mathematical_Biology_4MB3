@@ -68,7 +68,7 @@ multipanel <-  function(realizations,beta,ns,I0,tmax,colors=c('blue')){
         #plot 30 stochastic realizations
         for (i in seq(0,realizations-1)){
             result <- SI.Gillespie(beta,popsize,I0,tmax)
-            lines(result[[1]],result[[2]],col=colors[i],type="l")
+            lines(result[[1]],result[[2]],col=colors[i],type="l",lty=3)
         }
         #deterministic solution
         result <- SI.Deterministic(beta,popsize,I0,tmax)
