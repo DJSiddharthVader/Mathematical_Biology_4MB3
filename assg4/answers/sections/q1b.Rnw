@@ -1,4 +1,7 @@
 % !Rnw root = main.Rnw
 <<q1b, echo=FALSE, cache=FALSE>>=
+source('./measles.R')
+df <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
+#col='red',type='l',xlab='Date',ylab='Cases',main='Influenza Cases in London')
+multipanel(df)
 @
-tmp
