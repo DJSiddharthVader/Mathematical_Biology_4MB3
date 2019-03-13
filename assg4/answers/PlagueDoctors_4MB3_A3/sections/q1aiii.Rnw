@@ -1,0 +1,12 @@
+% !Rnw root = main.Rnw
+<<1aiii, echo=FALSE, cache=FALSE,fig.height=5,fig.pos='H'>>=
+source('./measles.R')
+df <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
+#,wplot(df$date,df$cases,col='red',type='l',xlab='Date',ylab='Cases',main='Influenza Cases in London')
+smthcol='green'
+specmethod='pgram'
+print(paste('Using',specmethod,'estimation method'))
+periodogram(df,specmethod,add=FALSE,col=smthcol,type='l',xlab='Period',ylab='Power Spectrum',main='Periodogram Of London Influenza Cases',xlim=c(0,200))
+@
+
+

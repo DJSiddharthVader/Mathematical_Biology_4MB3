@@ -1,0 +1,11 @@
+% !Rnw root = main.Rnw
+<<1aii, echo=FALSE, cache=FALSE,fig.height=5,fig.pos='H'>>=
+source('./measles.R')
+a=30
+smthcol = 'blue'
+print(paste('Smoothing data with window size',a))
+df <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
+plot(df$date,df$cases,col='red',type='l',xlab='Date',ylab='Cases',main='Influenza Cases in London')
+time.plot(df,add=TRUE,smooth=TRUE,a=a,col=smthcol,type="l")
+legend("topright", legend=c("Raw",paste("Smoothed,a=",a)), col=c("red",smthcol), box.lty=0, lty=1:1, cex=0.8)
+@
