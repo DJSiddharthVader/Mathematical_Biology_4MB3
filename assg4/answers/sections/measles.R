@@ -56,7 +56,6 @@ periodogram <- function(df,method='pgram',timestart=1,timeend=-1,add=FALSE,...){
     #get power spectrum
     cases <- df$cases
     cases <- cases[seq(timestart,timeend)]
-    print(length(cases))
     specdata <- spectrum(cases,plot=FALSE,method=method)
     period <- lapply(specdata$freq, function(x) { return(1/x) })
     spec <- specdata$spec
