@@ -1,0 +1,53 @@
+% block and line styles
+\tikzstyle{block} = [rectangle, draw,
+    text width=2em, text centered, minimum height=3em]
+\tikzstyle{line} = [draw, -latex']
+\tikzstyle{blank} = [inner sep=0,outer sep=0]
+\leavevmode\vadjust{\vspace{-\baselineskip}}\newline
+\begin{center}
+\begin{tikzpicture}[node distance=1.7cm, auto]
+% nodes
+  \node [block] (S) {S};
+  \node [blank, above of=S] (0) { };
+  \node [block, right of=S] (E) {E};
+  \node [block, right of=E] (Ir) {$I_r$};
+  \node [block, right of=Ir] (Ie) {$I_e$};
+  \node [block, right of=Ie] (Im) {$I_m$};
+  \node [block, right of=Im] (Il) {$I_l$};
+  \node [block, right of=Il] (R) {R};
+  \node [blank, below of=S] (1) { };
+  \node [blank, below of=E] (2) { };
+  \node [blank, below of=Ir] (3){ };
+  \node [blank, below of=Ie] (4){ };
+  \node [blank, below of=Im] (5){ };
+  \node [blank, below of=Il] (6){ };
+  \node [blank, below of=R] (7) { };
+    % Draw arrows
+  \path [line] (S) -- node {*}(E);
+  \path [line] (E) -- node {$\sigma_1$}(Ir);
+  \path [line] (Ir) -- node {$\sigma_2$}(Ie);
+  \path [line] (Ie) -- node {$\sigma_3$}(Im);
+  \path [line] (Im) -- node {$\sigma_4$}(Il);
+  \path [line] (Il) -- node {$\gamma$}(R);
+  \path [line] (0) -- node {$\nu$}(S);
+  \path [line] (S) -- node {$\mu$}(1);
+  \path [line] (E) -- node {$\mu$}(2);
+  \path [line] (Ir) -- node {$\mu$}(3);
+  \path [line] (Ie) -- node {$\mu$}(4);
+  \path [line] (Im) -- node {$\mu$}(5);
+  \path [line] (Il) -- node {$\mu$}(6);
+  \path [line] (R) -- node {$\mu$}(7);
+\end{tikzpicture}
+\end{center}
+\textbf{Note:} * = $\beta_r I_r+\beta_e I_e +\beta_m I_m +\beta_l I_l$\\
+Each $I_i$ compartment represents a disease stage (prodrom, early rash, etc.) that has a unique rate of infectiousness (rare, extreme, moderate, and low) and transmission rate $\beta_i$. The parameters $\nu$ and $\mu$ represent the ``birth" and natural death rates, respectively.\par
+
+\begin{align*}
+&\frac{dS}{dt}= \nu - \beta_r I_r S- \beta_e I_e S- \beta_m I_m S- \beta_l I_l S - \mu S \\
+&\frac{dE}{dt}= \beta_r I_r S+ \beta_e I_e S+ \beta_m I_m S+ \beta_l I_l S - \sigma_{1} E - \mu E\\
+&\frac{dI_r}{dt}= \sigma_{1} E - \sigma_{2} I_r - \mu I_r\\
+&\frac{dI_e}{dt}= \sigma_{2} I_r - \sigma_{3} I_e - \mu I_e\\
+&\frac{dI_m}{dt}= \sigma_{3} I_e - \sigma_{4} I_m - \mu I_m\\
+&\frac{dI_l}{dt}= \sigma_{4} I_m - \gamma I_l - \mu I_l\\
+&\frac{dR}{dt}= \gamma I_l - \mu R\\
+\end{align*}
