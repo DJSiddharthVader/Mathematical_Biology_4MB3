@@ -65,7 +65,44 @@ periodogram <- function(df,method='pgram',timestart=1,timerange=-1,add=FALSE,...
     }
 }
 
-multipanel <- function(df){
+maxPower <- function(df){
+    specdata <- spectrum(df$cases[seq(0,(length(df$cases)-1))],plot=FALSE,method='pgram')
+    return(max(specdata$spec))
+}
+
+segmentData <- function(widths,len){
+    lengths <- c()
+    pl <- 0
+    for (w in widths){
+        pl <- pl + as.integer(widths*len)
+        lengths <- c(lengths,pl)
+    }
+    return(lengths)
+}
+multipanel <- function(df,widths){
+    #set vars and layout
+    a=30
+    pxlim = c(0,250)
+    maxpower <- maxPower(df)
+    pylim = c(0,maxpower)
+    lengths <- segmentData(widths,length(df$date))
+    segs <- length(widths)
+    lmat <- rbind(1:segs,rep(segs+1,segs),rep(segs+2,segs))
+    layout(lmat,heights=1,widths=widths)
+    #periodograms
+    par(mar=c(4,4,0,0))
+    periodogram(df,type='l',timestart=1,timerange=lengths[1],col='red',xlim=pxlim,ylab='Power',ylim=pylim)
+    for (i in seq(1,length(widths)-1)){
+        par(mar=c(4,0,0,0))
+        periodogram(df,type='l',timestart=lengths[i],timerange=lengths[i+1],col='blue',xlim=pxlim,yaxt='n',ylim=pylim)
+    }
+#    par(mar=c(4,0,0,0))
+#    periodogram(df,type='l',timestart=lengths[2],timerange=lengths[3],col='green',xlim=pxlim,yaxt='n',ylim=pylim)
+    #Time series
+    par(mar=c(4,4,0,0))
+    time.plot(df,col='red',type='l',xlab='Time',ylab='Cases')
+    time.plot(df,a=a,smooth=TRUE,add=TRUE,col='blue',type='l')
+    legend("topright", legend=c("Raw",paste("Smoothed,a=",a)), col=c("red",'blue'), box.lty=0, lty=1:1, cex=0.8)
     #waveletData
     wavelet <- quiet(analyze.wavelet(df,
                                    'cases',
@@ -73,26 +110,25 @@ multipanel <- function(df){
                                    make.pval=TRUE,
                                    n.sim=10,
                                    verbose=FALSE,
-                                   upperPeriod=200))
+                                   upperPeriod=250))
     #waveletplot
+    par(mar=c(4,4,0,0))
     wt.image(wavelet,
-             color.key = "quantile",
+             color.key = 'i',
              n.levels = 250,
              show.date=TRUE,
-             legend.params = list(lab = "wavelet power levels",
+             timelab='Time',
+             periodlab='Period',
+             #plot.legend=FALSE,
+             legend.params = list(lab = "Power",
+                                  shrink=0.9,
                                   mar = 2.7,
-                                  n.ticks = 5,
-                                  label.digits=5
+                                  n.ticks = 6,
+                                  label.digits=2,
+                                  width=1
                                  ),
              )
-    par(mfrow = c(2,1))
-    time.plot(df,col='red',type='l')
-    time.plot(df,smooth=TRUE,add=TRUE,col='blue',type='l')
-    periodogram(df,type='l',timestart=1,col='red',xlim=c(0,250))
-    periodogram(df,type='l',timestart=1300,timerange=1000,add=TRUE,col='blue')
-    periodogram(df,type='l',timestart=2300,timerange=360,add=TRUE,col='green')
 }
-
 #if name == main
 #if (sys.nframe() == 0){
 #    args <-  commandArgs(trailingOnly=TRUE)

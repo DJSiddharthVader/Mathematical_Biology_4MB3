@@ -62,23 +62,24 @@ multipanel <-  function(realizations,beta,ns,I0,tmax,colors=c('blue')){
              result[[2]],
              col=colors[1],
              type="l",
+             lty=4,
              xlab="Time (t)",
              ylab="Incidence (I(t))",
              main=paste("N =",popsize))
         #plot 30 stochastic realizations
         for (i in seq(0,realizations-1)){
             result <- SI.Gillespie(beta,popsize,I0,tmax)
-            lines(result[[1]],result[[2]],col=colors[i],type="l",lty=3)
+            lines(result[[1]],result[[2]],col=colors[i],type="l",lty=4)
         }
         #deterministic solution
         result <- SI.Deterministic(beta,popsize,I0,tmax)
-        lines(result[[1]],result[[2]],col="red",type="l")
+        lines(result[[1]],result[[2]],col="red",type="l",lty=1)
         #legend
         legend("right",
                legend="Deterministic",
                col="red",
                box.lty=0,
-               lty=1:1,
+               lty=1,
                cex=0.8)
     }
 }
