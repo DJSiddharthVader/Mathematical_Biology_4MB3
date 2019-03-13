@@ -1,8 +1,0 @@
-% !Rnw root = main.Rnw
-<<1ai, echo=FALSE, cache=FALSE>>=
-source('./measles.R')
-df <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
-print('First 5 rows of the dataframe')
-head(df)
-@
-
