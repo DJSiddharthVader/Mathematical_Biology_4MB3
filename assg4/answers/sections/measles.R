@@ -48,13 +48,16 @@ time.plot <- function(df,add=FALSE,smooth=FALSE,a=30,...){
     }
 }
 
-periodogram <- function(df,method='pgram',timestart=1,timerange=-1,add=FALSE,...){
+periodogram <- function(df,method='pgram',timestart=1,timeend=-1,add=FALSE,...){
     #specify time range
-    if (timerange == -1){
-        timerange <- length(df$date)-1
+    if (timeend == -1){
+        timeend <- length(df$date)-1
     }
     #get power spectrum
-    specdata <- spectrum(df$cases[seq(timestart,timestart+timerange)],plot=FALSE,method=method)
+    cases <- df$cases
+    cases <- cases[seq(timestart,timeend)]
+    print(length(cases))
+    specdata <- spectrum(cases,plot=FALSE,method=method)
     period <- lapply(specdata$freq, function(x) { return(1/x) })
     spec <- specdata$spec
     #if add
@@ -66,7 +69,7 @@ periodogram <- function(df,method='pgram',timestart=1,timerange=-1,add=FALSE,...
 }
 
 maxPower <- function(df){
-    specdata <- spectrum(df$cases[seq(0,(length(df$cases)-1))],plot=FALSE,method='pgram')
+    specdata <- spectrum(df$cases,plot=FALSE,method='pgram')
     return(max(specdata$spec))
 }
 
@@ -74,7 +77,7 @@ segmentData <- function(widths,len){
     lengths <- c()
     pl <- 0
     for (w in widths){
-        pl <- pl + as.integer(widths*len)
+        pl <- pl + as.integer(w*len)
         lengths <- c(lengths,pl)
     }
     return(lengths)
@@ -85,20 +88,18 @@ multipanel <- function(df,widths){
     cols <- rainbow(length(widths)+1)
     pxlim = c(0,250)
     maxpower <- maxPower(df)
-    pylim = c(0,(maxpower*1.2))
+    pylim = c(0,(maxpower*1.8))
     lengths <- segmentData(widths,length(df$date))
     segs <- length(widths)
     lmat <- rbind(1:segs,rep(segs+1,segs),rep(segs+2,segs))
     layout(lmat,heights=1,widths=widths)
     #periodograms
     par(mar=c(4,4,0,0))
-    periodogram(df,type='l',timestart=1,timerange=lengths[1],xlim=pxlim,ylab='Power',ylim=pylim,col=cols[1])
+    periodogram(df,type='l',timestart=1,timeend=lengths[1],xlim=pxlim,ylab='Power',ylim=pylim,col=cols[1])
     for (i in seq(1,length(widths)-1)){
         par(mar=c(4,0,0,0))
-        periodogram(df,type='l',timestart=lengths[i],timerange=lengths[i+1],xlim=pxlim,yaxt='n',ylim=pylim,col=cols[i+1])
+        periodogram(df,type='l',timestart=lengths[i],timeend=lengths[i+1],xlim=pxlim,col=cols[i+1],ylim=pylim,yaxt='n')
     }
-#    par(mar=c(4,0,0,0))
-#    periodogram(df,type='l',timestart=lengths[2],timerange=lengths[3],col='green',xlim=pxlim,yaxt='n',ylim=pylim)
     #Time series
     par(mar=c(4,4,0,0))
     time.plot(df,col='red',type='l',xlab='Time',ylab='Cases')
@@ -120,6 +121,7 @@ multipanel <- function(df,widths){
              show.date=TRUE,
              timelab='Time',
              periodlab='Period',
+             plot.ridge=FALSE,
              #plot.legend=FALSE,
              legend.params = list(lab = "Power",
                                   shrink=0.9,
@@ -130,9 +132,3 @@ multipanel <- function(df,widths){
                                  ),
              )
 }
-#if name == main
-#if (sys.nframe() == 0){
-#    args <-  commandArgs(trailingOnly=TRUE)
-#    df <- read.ymdc('/home/sidreed/Documents/4thyear/Math4MB3/assg4/answers/sections/meas_uk__lon_1944-94_wk.csv')
-#    multipanel(df)
-#}

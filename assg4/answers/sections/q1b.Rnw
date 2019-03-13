@@ -1,14 +1,18 @@
 % !Rnw root = main.Rnw
-%{\Large London Influenza Time Series}\\
-<<London, echo=FALSE, cache=FALSE>>=
+\begin{center}
+{\Large London Influenza Time Series}
+\end{center}
+<<London, echo=FALSE, cache=FALSE,fig.align='center'>>=
 source('./measles.R')
 londf <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
 lonwidths <- c(0.51,0.35,0.14)
 multipanel(df,lonwidths)
 @
-%{\Large Liverpool Influenza Time Series}
-<<Liverpool, echo=FALSE, cache=FALSE>>=
+\begin{center}
+{\Large Liverpool Influenza Time Series}
+\end{center}
+<<Liverpool, echo=FALSE, cache=FALSE,fig.align='center'>>=
 lpldf <- read.ymdc('./meas_uk__lpl_1944-94_wk.csv')
-lplwidths <- c(0.45,0.25,.30)
+lplwidths <- c(0.45,0.23,0.20,0.12)
 multipanel(lpldf,lplwidths)
 @
