@@ -3,12 +3,12 @@
 <<London, echo=FALSE, cache=FALSE>>=
 source('./measles.R')
 londf <- read.ymdc('./meas_uk__lon_1944-94_wk.csv')
-widths <- c(0.51,0.35,0.14)
-multipanel(df,widths)
+lonwidths <- c(0.51,0.35,0.14)
+multipanel(df,lonwidths)
 @
 %{\Large Liverpool Influenza Time Series}
 <<Liverpool, echo=FALSE, cache=FALSE>>=
 lpldf <- read.ymdc('./meas_uk__lpl_1944-94_wk.csv')
-widths <- c(0.45,0.33,.12)
-multipanel(df,widths)
+lplwidths <- c(0.45,0.25,.30)
+multipanel(lpldf,lplwidths)
 @

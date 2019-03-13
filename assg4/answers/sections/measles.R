@@ -82,19 +82,20 @@ segmentData <- function(widths,len){
 multipanel <- function(df,widths){
     #set vars and layout
     a=30
+    cols <- rainbow(length(widths)+1)
     pxlim = c(0,250)
     maxpower <- maxPower(df)
-    pylim = c(0,maxpower)
+    pylim = c(0,(maxpower*1.2))
     lengths <- segmentData(widths,length(df$date))
     segs <- length(widths)
     lmat <- rbind(1:segs,rep(segs+1,segs),rep(segs+2,segs))
     layout(lmat,heights=1,widths=widths)
     #periodograms
     par(mar=c(4,4,0,0))
-    periodogram(df,type='l',timestart=1,timerange=lengths[1],col='red',xlim=pxlim,ylab='Power',ylim=pylim)
+    periodogram(df,type='l',timestart=1,timerange=lengths[1],xlim=pxlim,ylab='Power',ylim=pylim,col=cols[1])
     for (i in seq(1,length(widths)-1)){
         par(mar=c(4,0,0,0))
-        periodogram(df,type='l',timestart=lengths[i],timerange=lengths[i+1],col='blue',xlim=pxlim,yaxt='n',ylim=pylim)
+        periodogram(df,type='l',timestart=lengths[i],timerange=lengths[i+1],xlim=pxlim,yaxt='n',ylim=pylim,col=cols[i+1])
     }
 #    par(mar=c(4,0,0,0))
 #    periodogram(df,type='l',timestart=lengths[2],timerange=lengths[3],col='green',xlim=pxlim,yaxt='n',ylim=pylim)
