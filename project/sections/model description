@@ -1,0 +1,17 @@
+\begin{align*}
+dS_i&=\mu N_i-S_1(\beta_n^i+\kappa w_i+\mu)\\
+dI_i&=S_i(\beta_n^i+\kappa w_i)-I_i(\gamma+\mu+\alpha)\\
+dR_i&=\gamma I_i-\mu R_i\\
+dW_i&=\beta_v I_i+\sum_{1}^{j} \frac{w_j}{dist_{i,j}} -\sigma W_i\\
+\beta_w^i&=\sum_{j}^{n}{\beta_t\Big(1-\frac{dist(i,j)}{max dist}\Big)I_j}+\beta_iI_i
+\end{align*}
+\begin{itemize}
+  \item $\mu=$ natural birth/death rate
+  \item $\beta_n^i=$infectivity of all neighbours of i on i
+  \item$\gamma=$rate of recovery from disease
+  \item$\beta_v=$rate infectious people transmit cholera to water
+  \item$\sigma=$ rate of water sanitation/cholera death
+  \item$\alpha=$ death rate from cholera
+  \item$\beta_t=$transmisison rate within a patch
+  \item $\kappa=$ rate at which 1 unit of chlera infects people
+\end{itemize}
