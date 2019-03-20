@@ -1,9 +1,9 @@
 \begin{align*}
 dS_i&=\mu N_i-S_1(\beta_n^i+\kappa W_i+\mu)\\
-dI_i&=S_i(\beta_n^i+\kappa w_i)-I_i(\gamma+\mu+\alpha)\\
+dI_i&=S_i(\beta_n^i+\kappa W_i)-I_i(\gamma+\mu+\alpha)\\
 dR_i&=\gamma I_i-\mu R_i\\
-dW_i&=\beta_v I_i+\sum_{1}^{j} \frac{w_j}{dist_{i,j}} -\sigma W_i\\
-\beta_W^i&=\sum_{j}^{n}{\beta_t\Big(1-\frac{dist(i,j)}{max dist}\Big)I_j}+\beta_iI_i
+dW_i&=\beta_v I_i+\sum_{1}^{j}{\Big(1-\frac{W_j}{dist_{i,j}}\Big)} -\sigma W_i\\
+\beta_n^i&=\sum_{j}^{n}{\beta_t\Big(1-\frac{dist(i,j)}{max dist}\Big)I_j}+\beta_iI_i
 \end{align*}
 \begin{itemize}
   \item $\mu=$ natural birth/death rate
