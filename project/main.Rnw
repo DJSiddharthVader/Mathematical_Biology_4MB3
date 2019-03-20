@@ -1,0 +1,76 @@
+%Preamble
+\documentclass[12pt]{article}
+\usepackage{scrtime} % for \thistime (this package MUST be listed first!)
+\usepackage[margin=1in]{geometry}
+\usepackage{graphics,graphicx}
+\usepackage{lineno}
+\usepackage{color}
+\definecolor{aqua}{RGB}{0, 128, 225}
+\usepackage[colorlinks=true,citecolor=aqua,linkcolor=aqua,urlcolor=aqua]{hyperref}
+%For Math stuff
+\usepackage{amsmath} % essential for cases environment
+\usepackage{amsthm} % for theorems and proofs
+\usepackage{amsfonts} % mathbb
+%Referenes
+\usepackage[natbib=true,
+            style=nature,
+            backend=biber,
+            useprefix=true]{biblatex}
+\addbibresource{./refs.bib}
+%FANCY HEADER AND FOOTER STUFF
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt} % Removes funny header line
+
+\begin{document}
+%Title
+\title{Examining Control Strategies for Cholera Incorporating Spatial Dynamics}
+\author{
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\\\
+\underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}}
+\date{\today\ @ \thistime}
+\maketitle
+%due date
+\bigskip
+\noindent
+This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
+\bigskip
+
+\linenumbers
+\Sexpr{knit_child('./sections/abstract.Rnw')}
+\clearpage
+\tableofcontents
+\clearpage
+%Sections child
+<<child='./sections/background.Rnw'>>=
+@
+<<child='./sections/model_description.Rnw'>>=
+@
+<<child='./sections/multipatch.Rnw'>>=
+@
+<<child='./sections/results.Rnw'>>=
+@
+<<child='./sections/discussion.Rnw'>>=
+@
+%Sections sexpr
+%\Sexpr{knit_child('./sections/background.Rnw')}
+%\Sexpr{knit_child('./sections/model_description.Rnw')}
+%\Sexpr{knit_child('./sections/multipatch.Rnw')}
+%\Sexpr{knit_child('./sections/results.Rnw')}
+%\Sexpr{knit_child('./sections/discussion.Rnw')}
+%End Note
+\bigskip\vfill
+\centerline{\bf--- END OF PROJECT---}
+\bigskip
+Compile time for this document:
+\today\ @ \thistime
+\printbibliography
+\end{document}
