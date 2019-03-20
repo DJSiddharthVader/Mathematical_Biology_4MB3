@@ -1,4 +1,4 @@
-\section{Methods}
+\section{Multipatch Models Of Cholera}
 There is one equation for our theory:
 \begin{linenomath*}
 \begin{equation}\label{E:U}
