@@ -1,5 +1,55 @@
 %Preamble
-\documentclass[12pt]{article}
+\documentclass[12pt]{article}\usepackage[]{graphicx}\usepackage[]{color}
+%% maxwidth is the original width if it is less than linewidth
+%% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
 \usepackage{scrtime} % for \thistime (this package MUST be listed first!)
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
@@ -29,22 +79,113 @@
 \cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
 \rfoot{}
 \renewcommand\headrulewidth{0pt} % Removes funny header line
-
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
 %Title
-\title{The Theory of Everything}
+\title{Examining Control Strategies for Cholera Incorporating Spatial Dynamics}
 \author{
 \underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\\\
 \underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}}
 \date{\today\ @ \thistime}
-
-\begin{document}
-\linenumbers
 \maketitle
-\input{./sections/abstract.tex}
+%due date
+\bigskip
+\noindent
+This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
+\bigskip
+
+\linenumbers
+
+\begin{abstract}
+We solve everything because we're really smart
+\end{abstract}
+
+\clearpage
 \tableofcontents
-\input{./sections/background.tex}
-\input{./sections/methods.tex}
-\input{./sections/results.tex}
-\input{./sections/discussion.tex}
+\clearpage
+%Sections child
+
+\section{Background}
+It's time for a theory of everything.  Since we're all really smart, we've created one.
+
+
+\section{Model Description And Biological Processes}
+\begin{align*}
+    dS_i&=\mu N_i-S_1(\beta_n^i+\kappa W_i+\mu)\\
+    dI_i&=S_i(\beta_n^i+\kappa W_i)-I_i(\gamma+\mu+\alpha)\\
+    dR_i&=\gamma I_i-\mu R_i\\
+    dW_i&=\beta_v I_i+\sum_{1}^{j}{\Big(1-\frac{W_j}{dist_{i,j}}\Big)} -\sigma W_i\\
+    \beta_n^i&=\sum_{j}^{n}{\beta_t\Big(1-\frac{dist(i,j)}{max dist}\Big)I_j}+\beta_iI_i
+\end{align*}
+\begin{itemize}
+  \item $\mu=$ natural birth/death rate
+  \item $\beta_n^i=$infectivity of all neighbours of i on i
+  \item$\gamma=$rate of recovery from disease
+  \item$\beta_v=$rate infectious people transmit cholera to water
+  \item$\sigma=$ rate of water sanitation/cholera death
+  \item$\alpha=$ death rate from cholera
+  \item$\beta_t=$transmisison rate within a patch
+  \item $\kappa=$ rate at which 1 unit of chlera infects people
+\end{itemize}
+
+\section{Multipatch Models Of Cholera}
+There is one equation for our theory:
+\begin{linenomath*}
+\begin{equation}\label{E:U}
+U = 0 \,.
+\end{equation}
+\end{linenomath*}
+We leave it as an exercise for the reader to define $U$.
+We exploit Euler's formula,
+\begin{linenomath*}
+\begin{equation}\label{E:Euler}
+e^{i\pi} + 1 = 0 \,.
+\end{equation}
+\end{linenomath*}
+%Setting seed globally
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\begin{alltt}
+\hlcom{#Setting the seed for the entire document, for reproducible stochastic simulations}
+\hlstd{seed} \hlkwb{<-} \hlnum{9}
+\hlkwd{set.seed}\hlstd{(seed)}
+\end{alltt}
+\end{kframe}
+\end{knitrout}
+
+\section{Comparing Containment Strategies}
+test \cite{link1}
+test \cite{link2}
+test \cite{link3}
+test \cite{link4}
+test \cite{link5}
+test \cite{link6}
+test \cite{link7}
+test \cite{link8}
+test \cite{link9}
+test \cite{link10}
+test \cite{link11}
+test \cite{link12}
+test \cite{link13}
+test \cite{link14}
+test \cite{link15}
+test \cite{link16}
+
+
+\section{Discussion}
+This is really important stuff.
+
+%Sections sexpr
+%knit_child('./sections/background.Rnw')
+%knit_child('./sections/model_description.Rnw')
+%knit_child('./sections/multipatch.Rnw')
+%knit_child('./sections/results.Rnw')
+%knit_child('./sections/discussion.Rnw')
+%End Note
+\bigskip\vfill
+\centerline{\bf--- END OF PROJECT---}
+\bigskip
+Compile time for this document:
+\today\ @ \thistime
 \printbibliography
 \end{document}
