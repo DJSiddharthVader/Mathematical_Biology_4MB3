@@ -1,0 +1,83 @@
+\documentclass[]{article}
+
+
+\usepackage{amsmath}
+\begin{document}
+	
+	\textbf{Base Single Patch Model (with vital dynamics)}
+	\begin{align*}
+		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
+		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dR}{dt}&= \gamma I - \mu R \\
+		\frac{dW}{dt}&= \xi I  - \sigma W\\
+	\end{align*}
+	
+	\begin{itemize}
+		\item$\mu=$ natural death rate
+		\item$\beta_i=$ transmission rate between S and I class
+		\item$\beta_w=$ transmission rate between I and W class
+		\item$\gamma=$ recovery rate (I to R class)
+		\item$\alpha=$ death rate from cholera
+		\item$\xi=$ Shedding rate of cholera from I to W class
+		\item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+	\end{itemize} 
+
+\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L + \beta_H S I_H - \beta_w S W  \\
+	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
+	\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+	\frac{dR}{dt}&= \gamma I_H - \mu R \\
+	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+	\end{align*}
+
+\begin{itemize}
+	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
+	\item$\alpha_i=$ death rate by cholera in low or high intensity 
+	\item$\delta =$ rate at which symptoms increase in severity		
+\end{itemize}
+		
+\textbf{Treatment Plan 1: Sanitation of water over time}
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
+	\frac{dS}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W - \rho (I) W\\
+\end{align*}
+	
+\begin{itemize}
+	\item $\rho (I)= \begin{cases}
+			 			0 & I \geq 0.1 \\
+			 			\lambda & 0 \leq I \leq 0.1 \\
+			 			\end{cases}$\\
+	Represents the sanitation (increased removal of cholera) rate of $\lambda$, implemented at certain threshold of infected (in this case the threshold is based on I but can be based on W (i.e. testing water levels for cholera) %Can Change this part if needed
+\end{itemize} 	 
+		
+
+\textbf{Treatment Plan 2: Vaccinations on Base Model}
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W - \nu S \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R + \nu S\\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+
+\begin{itemize}
+	\item $\nu=$ is vaccination rate on S class
+\end{itemize} 
+
+\textbf{Treatment Plan 3: Antibiotics on Base Model}
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma +\eta + \mu + \alpha ) \\
+	\frac{dR}{dt}&= (\gamma +\eta)I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+\begin{itemize}
+	\item $\eta=$ is antibiotic rate on I class
+\end{itemize} 
+
+\end{document}
