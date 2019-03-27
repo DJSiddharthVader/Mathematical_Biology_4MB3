@@ -1,4 +1,4 @@
-\section{Multi-Patch Models Of Cholera}
+%\section{Multi-Patch Models Of Cholera}
 more text
 
 <<mpcaption,echo=FALSE>>=
@@ -30,3 +30,4 @@ more text
                             tmax=tmax,steps=steps)
     multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
 @
+\FloatBarrier

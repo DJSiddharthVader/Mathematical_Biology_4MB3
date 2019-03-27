@@ -1,5 +1,5 @@
-\section{Single Patch Model Of Cholera}
-	\textbf{Base Single Patch Model (with vital dynamics)}
+%\section{Single Patch Model Of Cholera}
+%	\textbf{Base Single Patch Model (with vital dynamics)}
 	\begin{align*}
 		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
 		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
@@ -46,3 +46,4 @@
     plotSoln(singlesoln, xlim=c(0,tmax), ylim=c(0,1),
              ylab='Population Proportion', xlab='Time')
 @
+\FloatBarrier

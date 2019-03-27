@@ -1,4 +1,4 @@
-\section{Possible Treatment Strategies for Cholera}
+%\section{Possible Treatment Strategies for Cholera}
 \textbf{Treatment Plan 1: Sanitation of water over time}
 
 \begin{align*}
