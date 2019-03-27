@@ -1,14 +1,32 @@
-\section{Multipatch Models Of Cholera}
-There is one equation for our theory:
-\begin{linenomath*}
-\begin{equation}\label{E:U}
-U = 0 \,.
-\end{equation}
-\end{linenomath*}
-We leave it as an exercise for the reader to define $U$.
-We exploit Euler's formula,
-\begin{linenomath*}
-\begin{equation}\label{E:Euler}
-e^{i\pi} + 1 = 0 \,.
-\end{equation}
-\end{linenomath*}
+\section{Multi-Patch Models Of Cholera}
+more text
+
+<<mpcaption,echo=FALSE>>=
+    mu = 0.15
+    beta_i = 0.06 #transmission r. S between I
+    gamma = 1/7 #rate of recovery (days)
+    sigma = 1/14 #sanitation rate (or 1/lifetime bacteria)
+    beta_w = 0.15 #transmission r. I between W
+    i0 <- 0.03
+    w0 <- 0.08
+    influence <- 0.15
+    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$. The influence of neighbouring patches is ',influence,'.',sep='')
+@
+<<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    rows <- 4
+    cols <- 4
+    #dmat <- distmat(rows,cols,method='manhattan')
+    dmat <- neighourmat(rows,cols,influence=influence)
+    ic <- list(rows=rows,
+               cols=cols,
+               i0=i0,
+               w0=w0)
+    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w)
+    tmax <- 500
+    steps <- 5000
+    soln <- solveMultiModel(multiWaterModel,ic,params,
+                            tmax=tmax,steps=steps)
+    multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
+@
