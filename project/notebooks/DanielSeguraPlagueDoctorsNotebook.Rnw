@@ -107,6 +107,11 @@ date.string <- function(year,month,day) {
     \item Editing introduction, biological assumptions, and biological processes section
     \item helped work out how to calculate basic reproductive number for multi-patch model
 \end{itemize}
+\textbf{Group Meeting}\\
+\emph{Approximate Duration: 1 Hour}
+\begin{itemize}
+\item 
+\end{itemize}
 \section*{Total time spent on this project}
 \begin{quote}
 \emph{Group work:} 11 hours
