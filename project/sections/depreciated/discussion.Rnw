@@ -1,3 +1,2 @@
-\section{Discussion}
 This is really important stuff.
 

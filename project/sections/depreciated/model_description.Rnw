@@ -1,4 +1,4 @@
-\section{Model Description And Biological Processes}
+%\section{Model Description And Biological Processes}
 \begin{align*}
     dS_i&=\mu N_i-S_1(\beta_n^i+\kappa W_i+\mu)\\
     dI_i&=S_i(\beta_n^i+\kappa W_i)-I_i(\gamma+\mu+\alpha)\\
