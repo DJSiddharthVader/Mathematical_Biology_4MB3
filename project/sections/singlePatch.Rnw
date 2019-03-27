@@ -1,70 +1,11 @@
-%\section{Single Patch Model Of Cholera}
-%	\textbf{Base Single Patch Model (with vital dynamics)}
-
-In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
-summarize the variables and parameters involved.
-
-%%VARIABLE Table%%
-\begin{center}
-	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
-		\hline
-		\textbf{ }& \textbf{Description} & \textbf{Units} \\
-		\hline
-		S & Susceptible individuals & individuals \\
-		\hline
-		I & infected individuals & individuals \\
-		\hline
-		R & recovered individuals & individuals \\
-		\hline
-		W & Bacterial concentration in water & cells ml$^{-3}$ \\
-		\hline
-		N & Total number of individuals & individuals\\
-		\hline
-	\end{tabular}
-\end{center}
-
-%%PARAMETER Table%%
-\begin{center}
-	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | }
-		\hline
-		\textbf{ }& \textbf{Description} & \textbf{Units} &  \textbf{Estimate} \\
-		\hline
-		$\mu$ & Natural death/birth rate & day $^{-1}$ & \\
-		\hline
-		$b_i$ &  Person-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$ & \\
-		\hline
-		$b_w$ & water reservoir-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$&  \\
-		\hline
-		$\beta_i$ & scaled Person-person transmission/contact rate & day$^{-1}$ & 0.25\\
-		\hline
-		$\beta_w$ & scaled water reservoir-person transmission/contact rate & day$^{-1}$& \num{1e-5} to 1 \\
-		\hline
-		%$\kappa$ & Bacterial concentration in water & cells ml$^{-3}$ \\
-		%\hline
-		$\frac{1}{\gamma}$ & Infectious period & day& 2.9 to 14\\
-		\hline
-		$\sigma$ & Bacterial decay/removal from reservoir & day$^{-1}$& $\frac{1}{3}$ to $\frac{1}{41}$ \\
-		\hline
-		$\xi$ & Person to water reservoir shedding rate  & cells ml$^{-3}$ day$^{-1}$ individuals$^{-1}$ & 0.01 to 10\\
-		\hline
-		$\alpha$ & Death rate by cholera & day$^{-1}$& 0.01 to 0.6 \\
-		\hline
-	\end{tabular}
-\end{center}
-
-Values of estimates are from several references \cite{link5} \cite{link8} \cite{link} and the natural death rate is dependent on various factors such as city or location and year or era of interest.
-
-%%Single Patch Model%%
-\textbf{Base Single Patch Model (with vital dynamics)}
 \begin{linenomath}
 	\begin{align*}
-		\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
-		\frac{dI}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
+		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
 		\frac{dR}{dt}&= \gamma I - \mu R \\
-		\frac{dW}{dt}&= \xi I  - \sigma W\\
+		\frac{dW}{dt}&= \xi I  - \sigma W
 	\end{align*}
 \end{linenomath}
-<<<<<<< HEAD
 \begin{itemize}
     \item$\mu=$ natural death rate
     \item$\beta_i=$ transmission rate between S and I class
@@ -79,18 +20,20 @@ The assumptions for this model are
     \item The population is homogenously succeptible to Cholera infection
     \item No waning immunity; once you recover from cholera you cannot return to the susceptible class
     \item The transmission rate between water the susceptible class  is exponentially distributed
-    \end{itemize}
+\end{itemize}
 <<spcaption,echo=FALSE>>=
     #params
-    mu <- 0.15
-    alpha <- 0
-    beta_i <- 0.06 #transmission r. S between I
-    gamma <- 1/7 #rate of recovery (days)
-    sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
-    beta_w <- 0.15 #transmission r. I between W
+    mu = 1/1537 # avg lifespan 58 yrs
+    beta_i = 0.025 #transmission r. S between I
+    gamma = 1/7 #rate of recovery (days)
+    sigma = 1/25 #rate of water removal
+    beta_w = 0.5 #transmission r. I between W
+    xi = 10 #shedding rate I into W (force it eaual to sigma?)
+    #kappa = 0.15, #bacteria concentration that gives 50% of infection
+    alpha = 0 #death rate by cholera
     i0 <- 0.08
     w0 <- 0.13
-    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'$','.Further the initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
+    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',round(mu,2),'\\ \\beta_i=',round(beta_i,2),'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'\\ \\xi=',xi,'$','.Further the initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
 @
 <<<singlePatch,fig.height=4,echo=FALSE,fig.pos='h',fig.cap=spcap>>=
     source('spatialSIR.R')
@@ -98,7 +41,7 @@ The assumptions for this model are
     params <- list(mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha)
     ic <- c(x=1-i0,y=i0,z=0,w=w0)
     steps <- 5000
-    tmax <- 1300
+    tmax <- 400
     singlesoln <- solveSingleModel(singleWaterModel,ic,params,
                                    tmax=tmax,steps=steps)
     plotSoln(singlesoln, xlim=c(0,tmax), ylim=c(0,1),
