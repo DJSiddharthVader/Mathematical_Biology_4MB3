@@ -1,17 +1,17 @@
 \subsection{Biology of Cholera}
-lthough it is listed as one of the oldest known diseases, cholera remains a major public health concern in areas with poor water sanitation with an estimated 1.3-4 million cases every year \citep{link18}.
-Cholera is an infectious disease caused by the bacterium Vibrio cholerae.
+Although it is listed as one of the oldest known diseases, cholera remains a major public health concern in areas with poor water sanitation with an estimated 1.3-4 million cases every year \citep{link18}.
+Cholera is an infectious disease caused by the bacterium \textit{Vibrio cholerae}.
 The bacterium survives and reproduces in aquatic environments, and is capable of colonizing small intestines \citep{link8}.
 The disease is not airborne, but can be transmitted through contaminated food or water and can survive in some aquatic environments from months to years \citep{link9}.
-The bacterium produces enterotoxins responsible for the symptoms of cholera infection which are severe diarrhea, vomiting and nausea.
-Approximately only one in ten people infected develop symptoms, and If not treated urgently, these symptoms can lead to severe dehydration.
+The bacterium produces enterotoxins responsible for the symptoms of cholera infection which are severe diarrhea, vomiting and nausea \citep{link11}.
+%Approximately only one in ten people infected develop symptoms, and if not treated urgently, these symptoms can lead to severe dehydration.
 Dehydration thickens the blood, causing circulation problems that can lead to death within a few hours.
-Since dehydration is the main problem, rehydration with clean water and minerals (such as ORS packages) is the most effective treatment.
-Current improvements in public health and sanitation largely decrease the likelihood of a cholera outbreak.\par
+Since dehydration is the main problem, rehydration with clean water and minerals (such as ORS packages) is the most effective treatment \citep{link18}.
+Current improvements in public health and sanitation largely decrease the likelihood of a cholera outbreak \citep{link18}.\par
 Four major outbreaks of cholera in the 19th century devastated the London population, resulting in tens of thousands of deaths.
-One of the early theories believed to be the cause of spread of cholera was the Miasma theory, suggesting that cholera is an airborne disease and that impurities in the air induced the spread (-r-).
+One of the early theories believed to be the cause of spread of cholera was the Miasma theory, suggesting that cholera is an airborne disease and that impurities in the air induced the spread \citep{link1}.
 Thus, the suggested solution in 1848 was to discard the contents of cesspools and raw sewage pits into the River Thames.
-Since Thames was the drinking source of many, the misunderstanding about the method of transmission resulted in heightened number of infected individuals, severely worsening the epidemic (-r-).
+Since Thames was the drinking source of many, the misunderstanding about the method of transmission resulted in heightened number of infected individuals, severely worsening the epidemic \citep{link1}.
 Early studies on cholera, such as the work of Jon Snow in the mid 19th century, have been pivotal in the development of modern epidemiology.
 However, the abundance of more recent studies using mathematical frameworks that try to model a framework for anticipating outbreaks of cholera and planning for interventions is the reason for our focus on this particular disease.
 \subsection{Transmission Dynamics of Cholera}
@@ -24,16 +24,16 @@ This is a plausible explanation for why maximum weekly deaths in London increase
 The main treatment strategies for cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
 We can incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
 \subsection{SIRW Model Construction}
-ur model has five distinct departments, a susceptible, exposed, infectious, removed, and water compartment.
+Our model has five distinct departments, a susceptible, exposed, infectious, removed, and water compartment.
 Susceptible: contains the proportion of the population that is capable of becoming infected.
 Individuals are born into compartment S at a rate of $\mu$.
 Individuals leave the compartment in one of two ways, they die at a rate $\mu$, or come into contact with the pathogen and move into the “Infectious” compartment.
-Interactions of susceptibles with infected individuals from the I compartment yields new infected individuals at a rate of $\beta_I$, and interactions of susceptibles with the water compartment W yields new susceptibles at a rate $\beta_w$.\par
+Interactions of susceptible and infected individuals from the I compartment yields new infected individuals at a rate of $\beta_I$, and interactions of susceptible individuals with the water compartment W yields new infected individuals at a rate $\beta_w$.\par
 Infectious: Contains the proportion of individuals that enter from the S compartment in the manner discussed above.
-Individuals in this compartment are capable of infecting susceptibles during interactions at a rate of $\beta_i$.
-They are also capable of contributing to the cholaric load of the water compartment by “shedding” the pathogen at a rate $\xi$.
-Individuals in this compartment recover at a rate $\gamma$, and move to the R compartment, else they leave this compartment as they die (not from Cholera) at a rate $\mu$ and from Chloera at a rate $\alpha$.\par
+Individuals in this compartment are capable of infecting susceptible individuals during interactions at a rate of $\beta_i$.
+They are also capable of contributing to the choleric load of the water compartment by “shedding” the pathogen at a rate $\xi$.
+Individuals in this compartment recover at a rate $\gamma$, and move to the R compartment, else they leave this compartment as they die (not from Cholera) at a rate $\mu$ and from Cholera at a rate $\alpha$.\par
 Recovered: Contains the proportion of individuals that are neither infectious or susceptible to the pathogen.
 They leave this compartment as they die at a rate $\mu$.
-Water: The w term is proportional to the concentration of V. cholera in the environment.
+Water: The w term is proportional to the concentration of Cholera in the environment.
 More bacteria enters the compartment as infected individuals “shed” the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
