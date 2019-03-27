@@ -8,23 +8,21 @@
 		\frac{dW}{dt}&= \xi I  - \sigma W
 	\end{align*}
 \end{linenomath}
-
-	\begin{itemize}
-		\item$\mu=$ natural death rate
-		\item$\beta_i=$ transmission rate between S and I class
-		\item$\beta_w=$ transmission rate between I and W class
-		\item$\gamma=$ recovery rate (I to R class)
-		\item$\alpha=$ death rate from cholera
-		\item$\xi=$ Shedding rate of cholera from I to W class
-		\item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-	\end{itemize}
-
 \begin{itemize}
-	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
-	\item$\alpha_i=$ death rate by cholera in low or high intensity
-	\item$\delta =$ rate at which symptoms increase in severity
+    \item$\mu=$ natural death rate
+    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_w=$ transmission rate between I and W class
+    \item$\gamma=$ recovery rate (I to R class)
+    \item$\alpha=$ death rate from cholera
+    \item$\xi=$ Shedding rate of cholera from I to W class
+    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
 \end{itemize}
-
+The assumptions for this model are
+\begin{itemize}
+    \item The population is homogenously succeptible to Cholera infection
+    \item No waning immunity; once you recover from cholera you cannot return to the susceptible class
+    \item The transmission rate between water the susceptible class  is exponentially distributed
+\end{itemize}
 <<spcaption,echo=FALSE>>=
     #params
     mu <- 0.15
@@ -37,7 +35,7 @@
     w0 <- 0.13
     spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'$','.Further the initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
 @
-<<<singlePatch,fig.height=6,echo=FALSE,fig.cap=spcap>>=
+<<<singlePatch,fig.height=4,echo=FALSE,fig.pos='h',fig.cap=spcap>>=
     source('spatialSIR.R')
     #Single Solution
     params <- list(mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha)

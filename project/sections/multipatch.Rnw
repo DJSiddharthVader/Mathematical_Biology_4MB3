@@ -17,7 +17,9 @@
     \item$\xi=$ Shedding rate of cholera from I to W class
     \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
 \end{itemize}
-
+The assumptions for the single patch model apply here as well the following.
+\begin{itemize}
+\end{itemize}
 <<mpcaption,echo=FALSE>>=
     mu = 0.15
     alpha <- 0

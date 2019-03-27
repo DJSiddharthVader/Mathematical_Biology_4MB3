@@ -45,10 +45,10 @@
 \date{\today\ @ \thistime}
 \maketitle
 %due date
-\bigskip
-\noindent
-This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
-\bigskip
+%\bigskip
+%\noindent
+%This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
+%\bigskip
 
 \linenumbers
 \Sexpr{knit_child('./sections/abstract.Rnw')}
