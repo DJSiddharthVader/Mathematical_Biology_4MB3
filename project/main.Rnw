@@ -52,8 +52,6 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
 %Sections child
 <<child='./sections/background.Rnw'>>=
 @
-<<child='./sections/model_description.Rnw'>>=
-@
 <<child='./sections/multipatch.Rnw'>>=
 @
 <<child='./sections/results.Rnw'>>=
