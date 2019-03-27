@@ -12,6 +12,8 @@
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
 \usepackage{amsfonts, array, siunitx} % mathbb
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
 %Referenes
 \usepackage[natbib=true,
             style=nature,

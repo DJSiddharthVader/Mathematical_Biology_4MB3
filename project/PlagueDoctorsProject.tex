@@ -62,6 +62,8 @@
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
 \usepackage{amsfonts, array, siunitx} % mathbb
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
 %Referenes
 \usepackage[natbib=true,
             style=nature,
@@ -104,10 +106,7 @@
 \linenumbers
 
 \begin{abstract}
-    Cholera has a significant impact on public health, especially in areas with poor water sanitation, with infections estimated to affect between 1.3 and 4 million people annually \citep{link18}.
-    Many people globally still lack proper infrastructure or access to clean water\citep{link19}.
-    While vaccines and antibiotics exist, vaccination can be difficult to achieve at necessary levels for stopping an epidemic and widespread antibiotic usage contributes to the development of antibiotic resistance.
-    Considering the spatial dynamics of water sanitation, antibiotic usage and vaccination are important for creating the most effective and efficient treatment regime in preventing cholera epidemics
+We solve everything because we're really smart
 \end{abstract}
 
 \clearpage
@@ -215,6 +214,58 @@ The natural death rate is dependent on various factors such as city or location 
 
 \subsection{Single Patch SIR Model With A Water Compartment}
 
+\tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
+\tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
+\tikzstyle{blockr} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = yellow!30]
+\tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
+\tikzstyle{blank} = [inner sep=0,outer sep=0]
+\tikzstyle{line} = [draw,->,>=stealth]
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+
+\node [blocks] (S) {S};
+\node [blank, above of=S, yshift=-1cm] (0) { };
+\node [blank, right of=S] (1) { };
+\node [blockb, below of=1, yshift=1.5cm] (W) {W};
+\node [blank, below of=W, yshift=1cm] (2) { };
+\node [blocki, right of=1] (I) {I};
+\node [blockr, right of=I] (R) {R};
+
+\node [blank, below of=S, yshift=1cm] (3) {};
+\node [blank, below of=I, yshift=1cm] (4) {};
+\node [blank, below of=R, yshift=1cm] (5) {};
+
+\path [line] (S) -- node {$\beta_I i + \beta_W w$} (I);
+\path [line] (I) -- node {$\gamma$} (R);
+\path [line] (I) -- node {$\xi$} (W);
+\path [line] (W) -- node[anchor=west] {$\sigma$} (2);
+\path [line] (0) -- node[anchor=west] {$\mu$} (S);
+
+\path [line] (S) -- node[anchor=west] {$\mu$} (3);
+\path [line] (I) -- node[anchor=west] {$\mu$} (4);
+\path [line] (R) -- node[anchor=west] {$\mu$} (5);
+
+
+\end{tikzpicture}
+\end{center}
+
+\begin{align*}
+dS_i&=\mu N_i-S_1(\beta_n^i+\kappa w_i+\mu)\\
+dI_i&=S_i(\beta_n^i+\kappa w_i)-I_i(\gamma+\mu+\alpha)\\
+dR_i&=\gamma I_i-\mu R_i\\
+dW_i&=\beta_v I_i+\sum_{1}^{j} \frac{w_j}{dist_{i,j}} -\sigma W_i\\
+\beta_w^i&=\sum_{j}^{n}{\beta_t\Big(1-\frac{dist(i,j)}{max dist}\Big)I_j}+\beta_iI_i
+\end{align*}
+\begin{itemize}
+  \item $\mu=$ natural birth/death rate
+  \item $\beta_n^i=$infectivity of all neighbours of i on i
+  \item$\gamma=$rate of recovery from disease
+  \item$\beta_v=$rate infectious people transmit cholera to water
+  \item$\sigma=$ rate of water sanitation/cholera death
+  \item$\alpha=$ death rate from cholera
+  \item$\beta_t=$transmisison rate within a patch
+  \item $\kappa=$ rate at which 1 unit of chlera infects people
+\end{itemize}
 \begin{linenomath}
 	\begin{align*}
 		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
@@ -388,9 +439,10 @@ This represents the sanitation rate of $\rho$, implemented at certain threshold 
 \section{Comparing Treatment Strategies For Cholera}
 \subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
 
-%\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
+\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
 
 The following are numerical simulations and phase portraits for the base model with vital dynamics, and the three treatment models.
+
 
 
 \begin{knitrout}
@@ -427,21 +479,6 @@ The following are numerical simulations and phase portraits for the base model w
 
 \FloatBarrier
 
-From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at a much higher level of incidence much quicker than without the treatment.
-However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
-All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
-
-We hope to compare the effectiveness of these methods by comparing the final size, which can be computed from ${\mathcal R_0}$ in $R$ using Lambert's $W$ function, as noted in the supplementary material of \cite{link20}.
-\begin{linenomath}
-\begin{equation}
-    Z({\mathcal R_0}) = 1+\frac{1}{{\mathcal R_0}}W(-{\mathcal R_0}e^{{\mathcal R_0}})
-\end{equation}
-\end{linenomath}
-If similar final sizes are estimated for multiple treatment strategies, then relative costs of the treatments may be compared to decide between them.
-Cost is not necessairily only monetary, as risk is associted with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare or engineering professions.
-Further work and research needs to be done to define a more formal, specific cost comparison scheme in this case.
-%Further peak prevelance can estimated from the initial conditions $S_0,I_0$ and ${\mathcal R_0}$ from following expression
-
 
 %End Note
 
@@ -450,6 +487,6 @@ Further work and research needs to be done to define a more formal, specific cos
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 8.75S seconds.
+CPU time to generate this document: 10.7S seconds.
 \printbibliography
 \end{document}
