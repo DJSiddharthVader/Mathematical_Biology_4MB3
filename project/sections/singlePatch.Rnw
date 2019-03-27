@@ -31,7 +31,6 @@
 \path [line] (R) -- node[anchor=west] {$\mu$} (5);
 \end{tikzpicture}
 \end{center}
-
 \begin{linenomath}
 	\begin{align*}
 		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\

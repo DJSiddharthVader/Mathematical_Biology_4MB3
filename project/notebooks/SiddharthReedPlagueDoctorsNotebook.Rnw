@@ -105,7 +105,7 @@ date.string <- function(year,month,day) {
 \end{itemize}
 \section*{\Sexpr{date.string(this.year, 3, 26)}}
 \textbf{Work Alone} \\
-\emph{Approximate Duration: 11 Hour}
+\emph{Approximate Duration: 13 Hour}
 \begin{itemize}
     \item formattig report (line numbers, worcount script, knitpdf script, references, README, etc.)
     \item finish redone spatial code and plotting code
@@ -117,7 +117,7 @@ date.string <- function(year,month,day) {
 \section*{Total time spent on this project}
 \begin{quote}
 \emph{Group work:} 11 hours
-\emph{Solo work:} 35 hours
+\emph{Solo work:} 37 hours
 \end{quote}
 \end{document}
 %Example entry
