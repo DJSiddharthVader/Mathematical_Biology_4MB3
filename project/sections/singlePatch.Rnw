@@ -1,3 +1,37 @@
+%Tikz figure
+\tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
+\tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
+\tikzstyle{blockr} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = yellow!30]
+\tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
+\tikzstyle{blank} = [inner sep=0,outer sep=0]
+\tikzstyle{line} = [draw,->,>=stealth]
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+
+\node [blocks] (S) {S};
+\node [blank, above of=S, yshift=-1cm] (0) { };
+\node [blank, right of=S] (1) { };
+\node [blockb, below of=1, yshift=1.5cm] (W) {W};
+\node [blank, below of=W, yshift=1cm] (2) { };
+\node [blocki, right of=1] (I) {I};
+\node [blockr, right of=I] (R) {R};
+
+\node [blank, below of=S, yshift=1cm] (3) {};
+\node [blank, below of=I, yshift=1cm] (4) {};
+\node [blank, below of=R, yshift=1cm] (5) {};
+
+\path [line] (S) -- node {$\beta_I i + \beta_W w$} (I);
+\path [line] (I) -- node {$\gamma$} (R);
+\path [line] (I) -- node {$\xi$} (W);
+\path [line] (W) -- node[anchor=west] {$\sigma$} (2);
+\path [line] (0) -- node[anchor=west] {$\mu$} (S);
+
+\path [line] (S) -- node[anchor=west] {$\mu$} (3);
+\path [line] (I) -- node[anchor=west] {$\mu$} (4);
+\path [line] (R) -- node[anchor=west] {$\mu$} (5);
+\end{tikzpicture}
+\end{center}
+
 \begin{linenomath}
 	\begin{align*}
 		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\

@@ -62,6 +62,8 @@
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
 \usepackage{amsfonts, array, siunitx} % mathbb
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
 %Referenes
 \usepackage[natbib=true,
             style=nature,
@@ -214,6 +216,40 @@ Parameter estimates are taken from \cite{link5}, \cite{link8} and \cite{link3}.
 The natural death rate is dependent on various factors such as city or location and year or era of interest.
 
 \subsection{Single Patch SIR Model With A Water Compartment}
+
+%Tikz figure
+\tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
+\tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
+\tikzstyle{blockr} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = yellow!30]
+\tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
+\tikzstyle{blank} = [inner sep=0,outer sep=0]
+\tikzstyle{line} = [draw,->,>=stealth]
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+
+\node [blocks] (S) {S};
+\node [blank, above of=S, yshift=-1cm] (0) { };
+\node [blank, right of=S] (1) { };
+\node [blockb, below of=1, yshift=1.5cm] (W) {W};
+\node [blank, below of=W, yshift=1cm] (2) { };
+\node [blocki, right of=1] (I) {I};
+\node [blockr, right of=I] (R) {R};
+
+\node [blank, below of=S, yshift=1cm] (3) {};
+\node [blank, below of=I, yshift=1cm] (4) {};
+\node [blank, below of=R, yshift=1cm] (5) {};
+
+\path [line] (S) -- node {$\beta_I i + \beta_W w$} (I);
+\path [line] (I) -- node {$\gamma$} (R);
+\path [line] (I) -- node {$\xi$} (W);
+\path [line] (W) -- node[anchor=west] {$\sigma$} (2);
+\path [line] (0) -- node[anchor=west] {$\mu$} (S);
+
+\path [line] (S) -- node[anchor=west] {$\mu$} (3);
+\path [line] (I) -- node[anchor=west] {$\mu$} (4);
+\path [line] (R) -- node[anchor=west] {$\mu$} (5);
+\end{tikzpicture}
+\end{center}
 
 \begin{linenomath}
 	\begin{align*}
@@ -427,7 +463,7 @@ The following are numerical simulations and phase portraits for the base model w
 
 \FloatBarrier
 
-From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at a much higher level of incidence much quicker than without the treatment.
+From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in figure \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at a much higher level of incidence much quicker than without the treatment.
 However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
 All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
 
@@ -450,6 +486,6 @@ Further work and research needs to be done to define a more formal, specific cos
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 8.75S seconds.
+CPU time to generate this document: 8.597S seconds.
 \printbibliography
 \end{document}
