@@ -1,0 +1,60 @@
+\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
+
+The following are numerical simulations and phase portraits for the base model with vital dynamics, and the three treatment models.
+
+<<numsimcap,echo=FALSE>>=
+mu = 1/1537
+beta_i = 0.025 #transmission r. S between I
+gamma = 1/7 #rate of recovery (days)
+sigma = 1/25 #rate of water removal
+beta_w = 0.5 #transmission r. I between W
+xi = 10 #shedding rate I into W (force it eaual to sigma?)
+      #kappa = 0.15, #bacteria concentration that gives 50% of infection
+alpha = 0 #death rate by cholera
+       
+#parameters for intensity model
+beta_l = 0.016 #transmission r. S between I_l
+beta_h = 0.016 #transmission r. S between I_h
+beta_w = 0.5 #transmission r. I between W
+delta = 0.33 #rate of increasing symptom severity
+xi_l = 0.07 #shedding rate I_l into W; maybe equal to sigma?
+xi_h = 0.14
+alpha_l = 0.01 #death rate by cholera with low intensity symptoms
+alpha_h = 0.05 #death rate by cholera with high int. symptoms
+       
+#parameters for water treatment
+rho = 0.005
+#parameters for vaccination
+nu = 0.01
+#parameters for antibiotics
+eta = 0.0001
+
+    mu <- 0.15
+    alpha <- 0
+    beta_i <- 0.06 #transmission r. S between I
+    gamma <- 1/7 #rate of recovery (days)
+    sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
+    beta_w <- 0.15 #transmission r. I between W
+    i0 <- 0.005
+    
+    numsimcap <- paste('\\label{fig:num.sim} Plot of the SIRW model for a single patch and various treatment models. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\xi=',xi,'\\ \\rho=',rho,'\\ \\nu=',nu,'\\ \\eta=',eta,'\\ \\alpha=',alpha,'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
+    
+    phasecap <- paste('\\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\xi=',xi,'\\ \\rho=',rho,'\\ \\nu=',nu,'\\ \\eta=',eta,'\\ \\alpha=',alpha,'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
+@
+
+<<num.sim, fig.align='center', echo=F, out.width='6cm', fig.show='hold', fig.cap=numsimcap>>=
+source("SinglePatchAnalysis.R")
+plot.base()
+plot.treat1()
+plot.treat2()
+plot.treat3()
+@
+
+<<phase.portraits, fig.align='center', echo=F, out.width='6cm', fig.show='hold', fig.cap=phasecap>>=
+phase.portrait()
+phase.portrait.treat1()
+phase.portrait.treat2()
+phase.portrait.treat3()
+@
+
+\FloatBarrier
