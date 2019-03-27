@@ -18,7 +18,7 @@
             citestyle=authoryear,
             backend=biber,
             useprefix=true]{biblatex}
-\addbibresource{./refs.bib}
+\addbibresource{./plagueDoctors.bib}
 %FANCY HEADER AND FOOTER STUFF
 \usepackage{fancyhdr,lastpage}
 \pagestyle{fancy}
@@ -64,6 +64,9 @@ start.time <- proc.time()
 <<child='./sections/background.Rnw'>>=
 @
 \section{Single Patch Models}
+\subsection{Model Introduction And Parameters}
+<<child='./sections/compartmentsAndParameters.Rnw'>>=
+@
 \subsection{Single Patch SIR Model With A Water Compartment}
 <<child='./sections/singlePatch.Rnw'>>=
 @
@@ -80,6 +83,9 @@ start.time <- proc.time()
 <<child='./sections/treatmentStrategies.Rnw'>>=
 @
 \section{Comparing Treatment Strategies For Cholera}
+\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
+<<child='./sections/NumericalSimulations.Rnw'>>=
+@
 
 
 %End Note

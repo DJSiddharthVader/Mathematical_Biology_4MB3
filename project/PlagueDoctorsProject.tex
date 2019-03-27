@@ -61,14 +61,14 @@
 %For Math stuff
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
-\usepackage{amsfonts} % mathbb
+\usepackage{amsfonts, array, siunitx} % mathbb
 %Referenes
 \usepackage[natbib=true,
             style=nature,
             citestyle=authoryear,
             backend=biber,
             useprefix=true]{biblatex}
-\addbibresource{./refs.bib}
+\addbibresource{./plagueDoctors.bib}
 %FANCY HEADER AND FOOTER STUFF
 \usepackage{fancyhdr,lastpage}
 \pagestyle{fancy}
@@ -115,19 +115,19 @@ We solve everything because we're really smart
 \section{Introduction}
 
 \subsection{Biology of Cholera}
-lthough it is listed as one of the oldest known diseases, cholera remains a major public health concern in areas with poor water sanitation with an estimated 1.3-4 million cases every year \citep{link18}.
-Cholera is an infectious disease caused by the bacterium Vibrio cholerae.
+Although it is listed as one of the oldest known diseases, cholera remains a major public health concern in areas with poor water sanitation with an estimated 1.3-4 million cases every year \citep{link18}.
+Cholera is an infectious disease caused by the bacterium \textit{Vibrio cholerae}.
 The bacterium survives and reproduces in aquatic environments, and is capable of colonizing small intestines \citep{link8}.
 The disease is not airborne, but can be transmitted through contaminated food or water and can survive in some aquatic environments from months to years \citep{link9}.
-The bacterium produces enterotoxins responsible for the symptoms of cholera infection which are severe diarrhea, vomiting and nausea.
-Approximately only one in ten people infected develop symptoms, and If not treated urgently, these symptoms can lead to severe dehydration.
+The bacterium produces enterotoxins responsible for the symptoms of cholera infection which are severe diarrhea, vomiting and nausea \citep{link11}.
+%Approximately only one in ten people infected develop symptoms, and if not treated urgently, these symptoms can lead to severe dehydration.
 Dehydration thickens the blood, causing circulation problems that can lead to death within a few hours.
-Since dehydration is the main problem, rehydration with clean water and minerals (such as ORS packages) is the most effective treatment.
-Current improvements in public health and sanitation largely decrease the likelihood of a cholera outbreak.\par
+Since dehydration is the main problem, rehydration with clean water and minerals (such as ORS packages) is the most effective treatment \citep{link18}.
+Current improvements in public health and sanitation largely decrease the likelihood of a cholera outbreak \citep{link18}.\par
 Four major outbreaks of cholera in the 19th century devastated the London population, resulting in tens of thousands of deaths.
-One of the early theories believed to be the cause of spread of cholera was the Miasma theory, suggesting that cholera is an airborne disease and that impurities in the air induced the spread (-r-).
+One of the early theories believed to be the cause of spread of cholera was the Miasma theory, suggesting that cholera is an airborne disease and that impurities in the air induced the spread \citep{link1}.
 Thus, the suggested solution in 1848 was to discard the contents of cesspools and raw sewage pits into the River Thames.
-Since Thames was the drinking source of many, the misunderstanding about the method of transmission resulted in heightened number of infected individuals, severely worsening the epidemic (-r-).
+Since Thames was the drinking source of many, the misunderstanding about the method of transmission resulted in heightened number of infected individuals, severely worsening the epidemic \citep{link1}.
 Early studies on cholera, such as the work of Jon Snow in the mid 19th century, have been pivotal in the development of modern epidemiology.
 However, the abundance of more recent studies using mathematical frameworks that try to model a framework for anticipating outbreaks of cholera and planning for interventions is the reason for our focus on this particular disease.
 \subsection{Transmission Dynamics of Cholera}
@@ -140,24 +140,78 @@ This is a plausible explanation for why maximum weekly deaths in London increase
 The main treatment strategies for cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
 We can incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
 \subsection{SIRW Model Construction}
-ur model has five distinct departments, a susceptible, exposed, infectious, removed, and water compartment.
+Our model has five distinct departments, a susceptible, exposed, infectious, removed, and water compartment.
 Susceptible: contains the proportion of the population that is capable of becoming infected.
 Individuals are born into compartment S at a rate of $\mu$.
 Individuals leave the compartment in one of two ways, they die at a rate $\mu$, or come into contact with the pathogen and move into the “Infectious” compartment.
-Interactions of susceptibles with infected individuals from the I compartment yields new infected individuals at a rate of $\beta_I$, and interactions of susceptibles with the water compartment W yields new susceptibles at a rate $\beta_w$.\par
+Interactions of susceptible and infected individuals from the I compartment yields new infected individuals at a rate of $\beta_I$, and interactions of susceptible individuals with the water compartment W yields new infected individuals at a rate $\beta_w$.\par
 Infectious: Contains the proportion of individuals that enter from the S compartment in the manner discussed above.
-Individuals in this compartment are capable of infecting susceptibles during interactions at a rate of $\beta_i$.
-They are also capable of contributing to the cholaric load of the water compartment by “shedding” the pathogen at a rate $\xi$.
-Individuals in this compartment recover at a rate $\gamma$, and move to the R compartment, else they leave this compartment as they die (not from Cholera) at a rate $\mu$ and from Chloera at a rate $\alpha$.\par
+Individuals in this compartment are capable of infecting susceptible individuals during interactions at a rate of $\beta_i$.
+They are also capable of contributing to the choleric load of the water compartment by “shedding” the pathogen at a rate $\xi$.
+Individuals in this compartment recover at a rate $\gamma$, and move to the R compartment, else they leave this compartment as they die (not from Cholera) at a rate $\mu$ and from Cholera at a rate $\alpha$.\par
 Recovered: Contains the proportion of individuals that are neither infectious or susceptible to the pathogen.
 They leave this compartment as they die at a rate $\mu$.
-Water: The w term is proportional to the concentration of V. cholera in the environment.
+Water: The w term is proportional to the concentration of Cholera in the environment.
 More bacteria enters the compartment as infected individuals “shed” the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
 \section{Single Patch Models}
+\subsection{Model Introduction And Parameters}
+
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
+summarize the variables and parameters involved.
+
+%%VARIABLE Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} \\
+		\hline
+		S & Susceptible individuals & individuals \\
+		\hline
+		I & infected individuals & individuals \\
+		\hline
+		R & recovered individuals & individuals \\
+		\hline
+		W & Bacterial concentration in water & cells ml$^{-3}$ \\
+		\hline
+		N & Total number of individuals & individuals\\
+		\hline
+	\end{tabular}
+\end{center}
+
+%%PARAMETER Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} &  \textbf{Estimate} \\
+		\hline
+		$\mu$ & Natural death/birth rate & day $^{-1}$ & \\
+		\hline
+		$b_i$ &  Person-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$ & \\
+		\hline
+		$b_w$ & water reservoir-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$&  \\
+		\hline
+		$\beta_i$ & scaled Person-person transmission/contact rate & day$^{-1}$ & 0.25\\
+		\hline
+		$\beta_w$ & scaled water reservoir-person transmission/contact rate & day$^{-1}$& \num{1e-5} to 1 \\
+		\hline
+		%$\kappa$ & Bacterial concentration in water & cells ml$^{-3}$ \\
+		%\hline
+		$\frac{1}{\gamma}$ & Infectious period & day& 2.9 to 14\\
+		\hline
+		$\sigma$ & Bacterial decay/removal from reservoir & day$^{-1}$& $\frac{1}{3}$ to $\frac{1}{41}$ \\
+		\hline
+		$\xi$ & Person to water reservoir shedding rate  & cells ml$^{-3}$ day$^{-1}$ individuals$^{-1}$ & 0.01 to 10\\
+		\hline
+		$\alpha$ & Death rate by cholera & day$^{-1}$& 0.01 to 0.6 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Parameter estimates are taken from \cite{link5}, \cite{link8} and \cite{link3}.
+The natural death rate is dependent on various factors such as city or location and year or era of interest.
+
 \subsection{Single Patch SIR Model With A Water Compartment}
 
-%\section{Single Patch Model Of Cholera}
-%	\textbf{Base Single Patch Model (with vital dynamics)}
 \begin{linenomath}
 	\begin{align*}
 		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
@@ -166,27 +220,25 @@ More bacteria enters the compartment as infected individuals “shed” the path
 		\frac{dW}{dt}&= \xi I  - \sigma W
 	\end{align*}
 \end{linenomath}
-
-	\begin{itemize}
-		\item$\mu=$ natural death rate
-		\item$\beta_i=$ transmission rate between S and I class
-		\item$\beta_w=$ transmission rate between I and W class
-		\item$\gamma=$ recovery rate (I to R class)
-		\item$\alpha=$ death rate from cholera
-		\item$\xi=$ Shedding rate of cholera from I to W class
-		\item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-	\end{itemize}
-
 \begin{itemize}
-	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
-	\item$\alpha_i=$ death rate by cholera in low or high intensity
-	\item$\delta =$ rate at which symptoms increase in severity
+    \item$\mu=$ natural death rate
+    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_w=$ transmission rate between I and W class
+    \item$\gamma=$ recovery rate (I to R class)
+    \item$\alpha=$ death rate from cholera
+    \item$\xi=$ Shedding rate of cholera from I to W class
+    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
 \end{itemize}
-
+The assumptions for this model are
+\begin{itemize}
+    \item The population is homogenously succeptible to Cholera infection
+    \item No waning immunity; once you recover from cholera you cannot return to the susceptible class
+    \item The transmission rate between water the susceptible class  is exponentially distributed
+\end{itemize}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[h]
-\includegraphics[width=\maxwidth]{figure/_singlePatch-1} \caption{\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\mu=0.15\ \beta_i=0.06\ \gamma=0.14\ \sigma=0.07\ \beta_w=0.15\ \alpha=0$.Further the initial conditions for the model were $S_0=0.92\ I_0=0.08\ R_0=0$}\label{fig:<singlePatch}
+\includegraphics[width=\maxwidth]{figure/_singlePatch-1} \caption{\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\mu=0\ \beta_i=0.02\ \gamma=0.14\ \sigma=0.04\ \beta_w=0.5\ \alpha=0\ \xi=10$.Further the initial conditions for the model were $S_0=0.92\ I_0=0.08\ R_0=0$}\label{fig:<singlePatch}
 \end{figure}
 
 
@@ -233,8 +285,8 @@ It also has an endemic-equillirbium when ${\mathcal R_0}>1$
 	\end{align*}
 \end{linenomath}
 
+This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding. The assumptions for the single patch model apply here as well.
 \begin{itemize}
-	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
 	\item$\alpha_i=$ death rate by cholera in low or high intensity
 	\item$\delta =$ rate at which symptoms increase in severity
 \end{itemize}
@@ -242,17 +294,21 @@ It also has an endemic-equillirbium when ${\mathcal R_0}>1$
 \section{Multi Patch Model}
 
 %\section{Multi-Patch Models Of Cholera}
+The following equations represent the SIRW model for a single patch $i$ in the multi patch model.
 \begin{linenomath}
 \begin{align*}
-    \frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
-    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
-    \frac{dR}{dt}&= \gamma I - \mu R \\
-    \frac{dW}{dt}&= \xi I  - \sigma W
+    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\
+    \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\
+    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\
+    \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
 \end{align*}
 \end{linenomath}
+Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diagonal patches) of the patch $i$.
 
 \begin{itemize}
     \item$\mu=$ natural death rate
+    \item$\phi=$ person to person contact rate between neighbouring patchs
+    \item$\psi=$ person to water contact rate between neighbouring patchs
     \item$\beta_i=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
@@ -260,11 +316,16 @@ It also has an endemic-equillirbium when ${\mathcal R_0}>1$
     \item$\xi=$ Shedding rate of cholera from I to W class
     \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
 \end{itemize}
-
+The assumptions for the single patch model apply here as well the following.
+\begin{itemize}
+    \item No dispersal of individuals between patches
+    \item infected individuals in patch $i$ can infect succeptible individuals in the neihgbouring patch $j$
+    \item All patches neighbouring $i$ have the same trasmission rate to patch $i$
+\end{itemize}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/_multiPatch-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=0.15\ \beta_i=0.06\ \gamma=0.14\ \sigma=0.07\ \beta_w=0.15\ \alpha=0$. The initial conditions for the model were $S_0=0.97\ I_0=0.03\ R_0=0$. The influence of neighbouring patches is 0.15.}\label{fig:<multiPatch}
+\includegraphics[width=\maxwidth]{figure/_multiPatch-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=0\ \beta_i=0.02\ \gamma=0.14\ \sigma=0.04\ \beta_w=0.5\ \alpha=0\ \xi=10\ \phi=0.01\ \psi=0.05$. The initial conditions for the model were $S_0=0.94\ I_0=0.06\ R_0=0$.}\label{fig:<multiPatch}
 \end{figure}
 
 
@@ -274,23 +335,22 @@ It also has an endemic-equillirbium when ${\mathcal R_0}>1$
 
 %\section{Possible Treatment Strategies for Cholera}
 \subsection{Treatment Plan 1: Sanitation of water over time}
-
+One of main ways control strategies for cholera is to treat the water directly (eg. with chlorine). This would essentially have the effect of increasing the rate of bacteria removal from water (defined as $\sigma$ in the base single patch model). This can be modeled by incorporating a new term $\rho$ in the base model:
 \begin{linenomath}
 \begin{align*}
-	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
-	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
+	\frac{dS}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
 	\frac{dR}{dt}&= \gamma I - \mu R \\
-	\frac{dW}{dt}&= \xi I  - \sigma W - \rho (I) W\\
+	\frac{dW}{dt}&= \xi I  - \sigma W - \rho W\\
 \end{align*}
 \end{linenomath}
 
-\begin{itemize}
-	\item $\rho (I)= \begin{cases}
-			 			\lambda & I \geq 0.1 \\
-			 			0 & 0 \leq I \leq 0.1 \\
-			 			\end{cases}$\\
-	Represents the sanitation (increased removal of cholera) rate of $\lambda$, implemented at certain threshold of infected (in this case the threshold is based on I but can be based on W (i.e. testing water levels for cholera) %Can Change this part if needed
-\end{itemize}
+This new term $\rho$ can be either a constant which is implemented right at the start, or can be a function of time, or can be implemented at a certain threshold depending on the bacterial concentration (W) or the proportion of infecteds (I). For example:
+$$\rho (I)= \begin{cases}
+	\rho & I \geq 0.1 \\
+	0 & 0 \leq I \leq 0.1 \\
+	\end{cases}$$\\
+This represents the sanitation rate of $\rho$, implemented at certain threshold of infected (in this case the threshold is based on $I=0.1$ but can be based on W (i.e. testing water levels for cholera).\\
 
 
 \subsection{Treatment Plan 2: Vaccinations on Base Model}
@@ -323,6 +383,46 @@ It also has an endemic-equillirbium when ${\mathcal R_0}>1$
 \end{itemize}
 
 \section{Comparing Treatment Strategies For Cholera}
+\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
+
+
+The following are numerical simulations and phase portraits for the base model with vital dynamics, and the three treatment models.
+
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+
+{\centering \includegraphics[width=6cm]{figure/num_sim-1} 
+\includegraphics[width=6cm]{figure/num_sim-2} 
+\includegraphics[width=6cm]{figure/num_sim-3} 
+\includegraphics[width=6cm]{figure/num_sim-4} 
+
+}
+
+\caption{\label{fig:num.sim} Plot of the SIRW model for a single patch and various treatment models. Parameters are $\mu=0.15\ \beta_i=0.06\ \gamma=0.14\ \sigma=0.07\ \beta_w=0.15\ \xi=10\ \rho=0.005\ \nu=0.01\ \eta=1e-04\ \alpha=0$. The initial conditions for the model were $S_0=0.995\ I_0=0.005\ R_0=0$}\label{fig:num.sim}
+\end{figure}
+
+
+\end{knitrout}
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+
+{\centering \includegraphics[width=6cm]{figure/phase_portraits-1} 
+\includegraphics[width=6cm]{figure/phase_portraits-2} 
+\includegraphics[width=6cm]{figure/phase_portraits-3} 
+\includegraphics[width=6cm]{figure/phase_portraits-4} 
+
+}
+
+\caption{\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models. Parameters are $\mu=0.15\ \beta_i=0.06\ \gamma=0.14\ \sigma=0.07\ \beta_w=0.15\ \xi=10\ \rho=0.005\ \nu=0.01\ \eta=1e-04\ \alpha=0$. The initial conditions for the model were $S_0=0.995\ I_0=0.005\ R_0=0$}\label{fig:phase.portraits}
+\end{figure}
+
+
+\end{knitrout}
+
+\FloatBarrier
 
 
 %End Note
@@ -332,6 +432,6 @@ It also has an endemic-equillirbium when ${\mathcal R_0}>1$
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 1.128S seconds.
+CPU time to generate this document: 9.073S seconds.
 \printbibliography
 \end{document}
