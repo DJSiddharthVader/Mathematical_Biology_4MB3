@@ -1,0 +1,127 @@
+\documentclass[12pt]{article}
+%Preamble
+\usepackage{scrtime} % for \thistime (this package MUST be listed first!)
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\usepackage[T1]{fontenc}
+\usepackage{tikz-cd}
+% So David can comment:
+\newcommand{\de}[1]{{\color{red}{\bfseries DE:} #1}}
+% Use the R logo when referring to R:
+\usepackage{xspace}
+\newcommand{\Rlogo}{\protect\includegraphics[height=2ex,keepaspectratio]{images/Rlogo.pdf}\xspace}
+
+%Set Date
+<<echo=FALSE>>=
+this.year <- 2019
+date.string <- function(year,month,day) {
+  return(sprintf("%s %d %s %d",
+                 weekdays(as.Date(paste(year,month,day,sep="-")),abbreviate=FALSE),
+                 day, month.name[month], year))
+}
+@
+
+%Header
+\rhead{\fancyplain{}{4MB3 Project Notebook \Sexpr{this.year} \hfill Daniel Segura}}
+\title{Math 4MB3 Project Notebook \Sexpr{this.year}}
+\author{Daniel Segura (The Plague Doctors)}
+\date{\today\ @ \thistime}
+
+\begin{document}
+\maketitle
+\section*{\Sexpr{date.string(this.year, 3, 13)}}
+\textbf{Group Meeting} \\
+\emph{Approximate Duration: 1 Hour}
+\begin{itemize}
+    \item Decided to work on project 2.4, discussed the project and what disease we should be looking at
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 15)}}
+\textbf{Work Alone}\\
+\emph{Approximate Duration: 1.5 Hours}
+\begin{itemize}
+    \item Read literature on medieval diseases to identify which disease to work on.
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 18)}}
+\textbf{Group Meeting} \\
+\emph{Approximate Duration: 4 Hours}
+\begin{itemize}
+    \item Decided to investigate cholera
+    \item Started investigating models of cholera, treatment methods for cholera (modern and old), biology of Cholera, transmission dynamics
+    \item Decided to look at spatial modelling, as Sid and Jessa wanted to pursue a spatial model
+\end{itemize}
+\textbf{Work Alone} \\
+\emph{Approximate Duration: 5 Hours}
+\begin{itemize}
+    \item looked at literature to examine how cholera is usually modelled, and wrote a preliminary model
+    \item Found parameters from literature
+    \item Began writing introduction for project based on preliminary research
+    \item Investigated treatment methods for cholera (modern and old)
+    \item Surveying literature for spatial models of cholera
+    \item Established some assumptions for the model
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 19)}}
+\textbf{Work Alone} \\
+\emph{Approximate Duration: 3 Hour}
+\begin{itemize}
+    \item 
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 20)}}
+\textbf{Group Meeting} \\
+\emph{Approximate Duration: 4 Hour}
+\begin{itemize}
+    \item Specifying model construction, what dynamics we are considering
+    \item Finding paramater estimates in the literature
+    \item Writing biological background information
+    \item Deciding to explore different treatment strategies and their effectiness and how to tailor them to the spatial case
+\end{itemize}
+\textbf{Work Alone} \\
+\emph{Approximate Duration: 2 Hour}
+\begin{itemize}
+    \item Looked at multiple SIRW and SIRB models to understand how water/bacteria compartment works
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 21)}}
+\textbf{Work Alone} \\
+\emph{Approximate Duration: 2 Hours}
+\begin{itemize}
+    \item Reviewing more literature to better understand the SIRW model
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 25)}}
+\textbf{Group Meeting} \\
+\emph{Approximate Duration: 2 Hours}
+\begin{itemize}
+    \item Calculated EE for single-patch SIRW model
+    \item Adding mathematical descriptions of treatment strategies to compare
+    \item Decide to use final size, peak incidence, time to peak incidence (not necessairily all) as metrics to compare treatment strategies
+\end{itemize}
+\textbf{Work Alone} \\
+\emph{Approximate Duration:2 hours }
+\begin{itemize}
+    \item Helped troubleshoot isisues with multi-patch model
+\end{itemize}
+\section*{\Sexpr{date.string(this.year, 3, 26)}}
+\textbf{Work Alone} \\
+\emph{Approximate Duration: 4 hours}
+\begin{itemize}
+    \item Writing up basic reproductive number of single-patcch model as well as DFE and EE
+    \item Editing introduction, biological assumptions, and biological processes section
+    \item helped work out how to calculate basic reproductive number for multi-patch model
+\end{itemize}
+\section*{Total time spent on this project}
+\begin{quote}
+\emph{Group work:} 11 hours
+\emph{Solo work:} 23.5 hours
+\end{quote}
+\end{document}
+%Example entry
+%\section*{\Sexpr{date.string(this.year, 3, 15)}}
+%\textbf{Group Meeting} \\
+%\emph{Approximate Duration: 1 Hour}
+%\begin{itemize}
+%\item We discussed what worked on the last album, and how we want things to go this time.
+%\item John doesn't seem to appreciate that the success of the album was entirely due to my songs.
+%\item I think we should face facts and include only my material on the new album.
+%\item John said Yoko has to be present in the studio all the time.  I hit him.  He swore at me.  Ringo said ``Come on boys -- make nice.''  John hit him.  George meditated in a corner.
+%\item George Martin convinced us to break and reconvene in a couple of days.
+%\end{itemize}
+%Time summary
