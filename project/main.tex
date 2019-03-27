@@ -53,6 +53,7 @@
 \usepackage{scrtime} % for \thistime (this package MUST be listed first!)
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
+\usepackage{placeins}
 \usepackage{lineno}
 \usepackage{color}
 \definecolor{aqua}{RGB}{0, 128, 225}
@@ -85,7 +86,12 @@
 \title{Examining Control Strategies for Cholera Incorporating Spatial Dynamics}
 \author{
 \underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\\\
-\underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}}
+\underline{\emph{Group Members}}:\\
+         Sid Reed\ :\ {\color{blue}reeds4@mcmaster.ca}\\
+         Daniel Segura\ :\ {\color{blue}segurad@mcmaster.ca}\\
+         Jessa Mallare\ :\ {\color{blue}mallarej@mcmaster.ca}\\
+         Aref Jadda\ :\ {\color{blue}hossesa@mcmaster.ca}\\
+}
 \date{\today\ @ \thistime}
 \maketitle
 %due date
@@ -103,89 +109,154 @@ We solve everything because we're really smart
 \clearpage
 \tableofcontents
 \clearpage
-%Sections child
 
-\section{Background}
+%Sections
+\section{Introduction}
+
 It's time for a theory of everything.  Since we're all really smart, we've created one.
 
+\section{Single Patch Model Description}
 
-\section{Model Description And Biological Processes}
-\begin{align*}
-    dS_i&=\mu N_i-S_1(\beta_n^i+\kappa W_i+\mu)\\
-    dI_i&=S_i(\beta_n^i+\kappa W_i)-I_i(\gamma+\mu+\alpha)\\
-    dR_i&=\gamma I_i-\mu R_i\\
-    dW_i&=\beta_v I_i+\sum_{1}^{j}{\Big(1-\frac{W_j}{dist_{i,j}}\Big)} -\sigma W_i\\
-    \beta_n^i&=\sum_{j}^{n}{\beta_t\Big(1-\frac{dist(i,j)}{max dist}\Big)I_j}+\beta_iI_i
-\end{align*}
+%\section{Single Patch Model Of Cholera}
+%	\textbf{Base Single Patch Model (with vital dynamics)}
+	\begin{align*}
+		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
+		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dR}{dt}&= \gamma I - \mu R \\
+		\frac{dW}{dt}&= \xi I  - \sigma W\\
+	\end{align*}
+
+	\begin{itemize}
+		\item$\mu=$ natural death rate
+		\item$\beta_i=$ transmission rate between S and I class
+		\item$\beta_w=$ transmission rate between I and W class
+		\item$\gamma=$ recovery rate (I to R class)
+		\item$\alpha=$ death rate from cholera
+		\item$\xi=$ Shedding rate of cholera from I to W class
+		\item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+	\end{itemize}
+
 \begin{itemize}
-  \item $\mu=$ natural birth/death rate
-  \item $\beta_n^i=$infectivity of all neighbours of i on i
-  \item$\gamma=$rate of recovery from disease
-  \item$\beta_v=$rate infectious people transmit cholera to water
-  \item$\sigma=$ rate of water sanitation/cholera death
-  \item$\alpha=$ death rate from cholera
-  \item$\beta_t=$transmisison rate within a patch
-  \item $\kappa=$ rate at which 1 unit of chlera infects people
+	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
+	\item$\alpha_i=$ death rate by cholera in low or high intensity
+	\item$\delta =$ rate at which symptoms increase in severity
 \end{itemize}
 
-\section{Multipatch Models Of Cholera}
-There is one equation for our theory:
-\begin{linenomath*}
-\begin{equation}\label{E:U}
-U = 0 \,.
-\end{equation}
-\end{linenomath*}
-We leave it as an exercise for the reader to define $U$.
-We exploit Euler's formula,
-\begin{linenomath*}
-\begin{equation}\label{E:Euler}
-e^{i\pi} + 1 = 0 \,.
-\end{equation}
-\end{linenomath*}
-%Setting seed globally
+
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
-\begin{alltt}
-\hlcom{#Setting the seed for the entire document, for reproducible stochastic simulations}
-\hlstd{seed} \hlkwb{<-} \hlnum{9}
-\hlkwd{set.seed}\hlstd{(seed)}
-\end{alltt}
-\end{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/_singlePatch-1} \caption{\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\mu=0.15\ \beta_i=0.06\ \gamma=0.14\ \sigma=0.07\ \beta_w=0.15$.Further the initial conditions for the model were $S_0=0.92\ I_0=0.08\ R_0=0$}\label{fig:<singlePatch}
+\end{figure}
+
+
 \end{knitrout}
+\FloatBarrier
 
-\section{Comparing Containment Strategies}
-test \cite{link1}
-test \cite{link2}
-test \cite{link3}
-test \cite{link4}
-test \cite{link5}
-test \cite{link6}
-test \cite{link7}
-test \cite{link8}
-test \cite{link9}
-test \cite{link10}
-test \cite{link11}
-test \cite{link12}
-test \cite{link13}
-test \cite{link14}
-test \cite{link15}
-test \cite{link16}
+The basic reproductive number $\mathcal R_0$ is defined as the number of secondary infections as a result of introducing a single infected individual into a completely susceptible population. $\mathcal R_0$ can be computed from the next generation matrix approach, where we write the second generation matrix at the disease free equilibrium as $FV^{−1}$, where the $i$$j$ entry of the matrix$ F$ is the rate at
+which infected individuals in compartment j produce new infections in compartment i, and the$ j$$k$ entry of $V^{−1}$ is the average duration of stay in compartment $j$ starting from compartment $k$. For our model, we have
+\begin{align*}
+		F&=\begin{pmatrix}
+			\beta_i & \beta_w\\
+			0 & 0
+			\end{pmatrix}\\
+		V&=\begin{pmatrix}
+			\frac{1}{\gamma+\mu+\alpha} & 0\\
+			\frac{1}{\gamma+\mu+\alpha} &\frac{1}{\theta}
+			\end{pmatrix}
+\end{align*}
+The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as seen in Tien and Earn (2010), which is
+\begin{align*}
+\mathcal R_0&=\rho(FV^{-1}\\
+		&=\frac{\beta_i+\beta_w}{\gamma+\mu}
+\end{align*}
+This singla patch model has a disease-free equillibrium at (S,I,W)=(1,0,0). It also has an endemic-equillirbium for  $\mathcal R_0>1$
 
 
-\section{Discussion}
-This is really important stuff.
+%\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
+	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
+	\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+	\frac{dR}{dt}&= \gamma I_H - \mu R \\
+	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+	\end{align*}
 
-%Sections sexpr
-%knit_child('./sections/background.Rnw')
-%knit_child('./sections/model_description.Rnw')
-%knit_child('./sections/multipatch.Rnw')
-%knit_child('./sections/results.Rnw')
-%knit_child('./sections/discussion.Rnw')
+\begin{itemize}
+	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
+	\item$\alpha_i=$ death rate by cholera in low or high intensity
+	\item$\delta =$ rate at which symptoms increase in severity
+\end{itemize}
+
+\section{Multi Patch Model Description}
+
+%\section{Multi-Patch Models Of Cholera}
+more text
+
+
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/_multiPatch-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=0.15\ \beta_i=0.06\ \gamma=0.14\ \sigma=0.07\ \beta_w=0.15$. The initial conditions for the model were $S_0=0.97\ I_0=0.03\ R_0=0$. The influence of neighbouring patches is 0.15.}\label{fig:<multiPatch}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+\section{Treatment Strategies For Cholera}
+
+%\section{Possible Treatment Strategies for Cholera}
+\textbf{Treatment Plan 1: Sanitation of water over time}
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W - \rho (I) W\\
+\end{align*}
+
+\begin{itemize}
+	\item $\rho (I)= \begin{cases}
+			 			\lambda & I \geq 0.1 \\
+			 			0 & 0 \leq I \leq 0.1 \\
+			 			\end{cases}$\\
+	Represents the sanitation (increased removal of cholera) rate of $\lambda$, implemented at certain threshold of infected (in this case the threshold is based on I but can be based on W (i.e. testing water levels for cholera) %Can Change this part if needed
+\end{itemize}
+
+
+\textbf{Treatment Plan 2: Vaccinations on Base Model}
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W - \nu S \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R + \nu S\\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+
+\begin{itemize}
+	\item $\nu=$ is vaccination rate on S class
+\end{itemize}
+
+\textbf{Treatment Plan 3: Antibiotics on Base Model}
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma +\eta + \mu + \alpha ) \\
+	\frac{dR}{dt}&= (\gamma +\eta)I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+\begin{itemize}
+	\item $\eta=$ is antibiotic rate on I class
+\end{itemize}
+
+\section{Comparing Treatment Strategies For Cholera}
+
+
 %End Note
+
 \bigskip\vfill
 \centerline{\bf--- END OF PROJECT---}
 \bigskip
 Compile time for this document:
-\today\ @ \thistime
+\today\ @ \thistime\\
+CPU time to generate this document: 1.167S seconds.
 \printbibliography
 \end{document}

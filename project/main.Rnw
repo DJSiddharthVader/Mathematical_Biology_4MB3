@@ -3,6 +3,7 @@
 \usepackage{scrtime} % for \thistime (this package MUST be listed first!)
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
+\usepackage{placeins}
 \usepackage{lineno}
 \usepackage{color}
 \definecolor{aqua}{RGB}{0, 128, 225}
@@ -35,7 +36,12 @@
 \title{Examining Control Strategies for Cholera Incorporating Spatial Dynamics}
 \author{
 \underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\\\
-\underline{\emph{Group Members}}: {\color{blue}Sid Reed, Daniel Segura, Jessa Mallare, Aref Jadda}}
+\underline{\emph{Group Members}}:\\
+         Sid Reed\ :\ {\color{blue}reeds4@mcmaster.ca}\\
+         Daniel Segura\ :\ {\color{blue}segurad@mcmaster.ca}\\
+         Jessa Mallare\ :\ {\color{blue}mallarej@mcmaster.ca}\\
+         Aref Jadda\ :\ {\color{blue}hossesa@mcmaster.ca}\\
+}
 \date{\today\ @ \thistime}
 \maketitle
 %due date
@@ -49,26 +55,41 @@ This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf We
 \clearpage
 \tableofcontents
 \clearpage
-%Sections child
+<<global_options,include=FALSE>>=
+#knitr::opts_chunk$set(fig.pos = '!H')
+start.time <- proc.time()
+@
+%Sections
+\section{Introduction}
 <<child='./sections/background.Rnw'>>=
 @
+\section{Single Patch Model Description}
+<<child='./sections/singlePatch.Rnw'>>=
+@
+<<child='./sections/singlePatchAnalysis.Rnw'>>=
+@
+<<child='./sections/singlePatchLowHigh.Rnw'>>=
+@
+\section{Multi Patch Model Description}
 <<child='./sections/multipatch.Rnw'>>=
 @
-<<child='./sections/results.Rnw'>>=
+\section{Treatment Strategies For Cholera}
+<<child='./sections/treatmentStrategies.Rnw'>>=
 @
-<<child='./sections/discussion.Rnw'>>=
-@
-%Sections sexpr
-%\Sexpr{knit_child('./sections/background.Rnw')}
-%\Sexpr{knit_child('./sections/model_description.Rnw')}
-%\Sexpr{knit_child('./sections/multipatch.Rnw')}
-%\Sexpr{knit_child('./sections/results.Rnw')}
-%\Sexpr{knit_child('./sections/discussion.Rnw')}
+\section{Comparing Treatment Strategies For Cholera}
+
+
 %End Note
+<<cputime,include=FALSE>>=
+total.time <- proc.time() - start.time
+cpu.seconds <- summary(total.time)['user']
+cpu.time.string <- as.character(lubridate::seconds_to_period(cpu.seconds))
+@
 \bigskip\vfill
 \centerline{\bf--- END OF PROJECT---}
 \bigskip
 Compile time for this document:
-\today\ @ \thistime
+\today\ @ \thistime\\
+CPU time to generate this document: \Sexpr{cpu.time.string} seconds.
 \printbibliography
 \end{document}
