@@ -11,10 +11,10 @@ One of main ways control strategies for cholera is to treat the water directly (
 \end{linenomath}
 
 This new term $\rho$ can be either a constant which is implemented right at the start, or can be a function of time, or can be implemented at a certain threshold depending on the bacterial concentration (W) or the proportion of infecteds (I). For example:
-$\rho (I)= \begin{cases}
+$$\rho (I)= \begin{cases}
 	\rho & I \geq 0.1 \\
 	0 & 0 \leq I \leq 0.1 \\
-	\end{cases}$\\
+	\end{cases}$$\\
 This represents the sanitation rate of $\rho$, implemented at certain threshold of infected (in this case the threshold is based on $I=0.1$ but can be based on W (i.e. testing water levels for cholera).\\
 
 
