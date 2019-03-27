@@ -1,8 +1,26 @@
 %\section{Multi-Patch Models Of Cholera}
-more text
+\begin{linenomath}
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
+    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+    \frac{dR}{dt}&= \gamma I - \mu R \\
+    \frac{dW}{dt}&= \xi I  - \sigma W
+\end{align*}
+\end{linenomath}
+
+\begin{itemize}
+    \item$\mu=$ natural death rate
+    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_w=$ transmission rate between I and W class
+    \item$\gamma=$ recovery rate (I to R class)
+    \item$\alpha=$ death rate from cholera
+    \item$\xi=$ Shedding rate of cholera from I to W class
+    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+\end{itemize}
 
 <<mpcaption,echo=FALSE>>=
     mu = 0.15
+    alpha <- 0
     beta_i = 0.06 #transmission r. S between I
     gamma = 1/7 #rate of recovery (days)
     sigma = 1/14 #sanitation rate (or 1/lifetime bacteria)
@@ -10,7 +28,7 @@ more text
     i0 <- 0.03
     w0 <- 0.08
     influence <- 0.15
-    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$. The influence of neighbouring patches is ',influence,'.',sep='')
+    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$. The influence of neighbouring patches is ',influence,'.',sep='')
 @
 <<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
     source('spatialSIR.R')
@@ -23,7 +41,7 @@ more text
                cols=cols,
                i0=i0,
                w0=w0)
-    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w)
+    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha)
     tmax <- 500
     steps <- 5000
     soln <- solveMultiModel(multiWaterModel,ic,params,

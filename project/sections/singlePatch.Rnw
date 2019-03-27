@@ -1,11 +1,13 @@
 %\section{Single Patch Model Of Cholera}
 %	\textbf{Base Single Patch Model (with vital dynamics)}
+\begin{linenomath}
 	\begin{align*}
 		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
 		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
 		\frac{dR}{dt}&= \gamma I - \mu R \\
-		\frac{dW}{dt}&= \xi I  - \sigma W\\
+		\frac{dW}{dt}&= \xi I  - \sigma W
 	\end{align*}
+\end{linenomath}
 
 	\begin{itemize}
 		\item$\mu=$ natural death rate
@@ -25,19 +27,20 @@
 
 <<spcaption,echo=FALSE>>=
     #params
-    mu=0.15
-    beta_i = 0.06 #transmission r. S between I
-    gamma = 1/7 #rate of recovery (days)
-    sigma = 1/14 #sanitation rate (or 1/lifetime bacteria)
-    beta_w = 0.15 #transmission r. I between W
-    i0 = 0.08
-    w0 = 0.13
-    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'$','.Further the initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
+    mu <- 0.15
+    alpha <- 0
+    beta_i <- 0.06 #transmission r. S between I
+    gamma <- 1/7 #rate of recovery (days)
+    sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
+    beta_w <- 0.15 #transmission r. I between W
+    i0 <- 0.08
+    w0 <- 0.13
+    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',mu,'\\ \\beta_i=',beta_i,'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'$','.Further the initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
 @
 <<<singlePatch,fig.height=6,echo=FALSE,fig.cap=spcap>>=
     source('spatialSIR.R')
     #Single Solution
-    params <- list(mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w)
+    params <- list(mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha)
     ic <- c(x=1-i0,y=i0,z=0,w=w0)
     steps <- 5000
     tmax <- 1300

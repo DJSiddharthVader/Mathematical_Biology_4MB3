@@ -1,4 +1,5 @@
 %\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
+\begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
 	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
@@ -6,6 +7,7 @@
 	\frac{dR}{dt}&= \gamma I_H - \mu R \\
 	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
 	\end{align*}
+\end{linenomath}
 
 \begin{itemize}
 	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.

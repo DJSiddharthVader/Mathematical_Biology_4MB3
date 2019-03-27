@@ -4,7 +4,7 @@ library('deSolve')
 singleWaterModel <- function(t,vars,params){
     with(as.list(c(vars,params)),{
         dx <- mu - mu*x - x*y*beta_i - x*w*beta_w # dx/dt
-        dy <- x*y*beta_i + x*w*beta_w - gamma*y - mu*y# - alpha*y # dy/dt
+        dy <- x*y*beta_i + x*w*beta_w - gamma*y - mu*y - alpha*y # dy/dt
         dz <- gamma*y - mu*z # dz/dt
         dw <- beta_w*y - sigma*w #dW/dt
         vec.fld <- list(c(dx,dy,dz,dw))
@@ -105,7 +105,7 @@ multiWaterModel <- function(t,state,params){
         z <- state[(2*patches+1):(3*patches+0)]
         w <- state[(3*patches+1):(4*patches+0)]
         dx <- mu - mu*x - dmat %*% x*y*beta_i - dmat %*% x*w*beta_w # dx/dt
-        dy <- dmat %*% x*y*beta_i + dmat %*% x*w*beta_w - gamma*y - mu*y# - alpha*y # dy/dt
+        dy <- dmat %*% x*y*beta_i + dmat %*% x*w*beta_w - gamma*y - mu*y - alpha*y # dy/dt
         dz <- gamma*y - mu*z # dz/dt
         dw <- dmat %*% y*beta_w - sigma*w #dW/dt
         vec.fld <- list(c(dx,dy,dz,dw))

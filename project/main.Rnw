@@ -4,7 +4,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
 \usepackage{placeins}
-\usepackage{lineno}
+\usepackage[displaymath, mathlines]{lineno}
 \usepackage{color}
 \definecolor{aqua}{RGB}{0, 128, 225}
 \usepackage[colorlinks=true,citecolor=aqua,linkcolor=aqua,urlcolor=aqua]{hyperref}
@@ -30,7 +30,6 @@
 \cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
 \rfoot{}
 \renewcommand\headrulewidth{0pt} % Removes funny header line
-
 \begin{document}
 %Title
 \title{Examining Control Strategies for Cholera Incorporating Spatial Dynamics}
@@ -63,14 +62,17 @@ start.time <- proc.time()
 \section{Introduction}
 <<child='./sections/background.Rnw'>>=
 @
-\section{Single Patch Model Description}
+\section{Single Patch Models}
+\subsection{Single Patch SIR Model With A Water Compartment}
 <<child='./sections/singlePatch.Rnw'>>=
 @
+\subsection{Analysis Of Single Patch Model}
 <<child='./sections/singlePatchAnalysis.Rnw'>>=
 @
+\subsection{Single Patch With Low And High Shedding Compartments}
 <<child='./sections/singlePatchLowHigh.Rnw'>>=
 @
-\section{Multi Patch Model Description}
+\section{Multi Patch Model}
 <<child='./sections/multipatch.Rnw'>>=
 @
 \section{Treatment Strategies For Cholera}
