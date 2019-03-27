@@ -1,0 +1,28 @@
+
+The following dimensionless (scaled) form of the differential equations in terms of proportions is obtained by setting $I = \frac{I}{N}$, $S = \frac{S}{N}$, $R = \frac{W}{N}$, and $W = \frac{\sigma}{\xi N} W$, $\beta_w = b_w\frac{N \xi}{\alpha}$ and $\beta_i = b_i N$:
+\begin{linenomath}
+	\begin{align*}
+		\frac{dS}{dt}&= \mu - \mu S - \beta_i SI - \beta_w S W  \\
+		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dR}{dt}&= \gamma I - \mu R \\
+		\frac{dW}{dt}&= \sigma(I - W)\\
+	\end{align*}
+\begin{linenomath}
+
+\textbf{Single Patch Severity Model with vital dynamics}\\
+Papers\cite{link} \cite{link} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class \cite{link}. The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($b_L, b_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
+\begin{linenomath}
+	\begin{align*}
+		\frac{dS}{dt}&= \mu N - \mu S - b_L S I_L - b_H S I_H - \beta_w S W  \\
+		\frac{dI_L}{dt}&= S( b_L I_L + b_H I_H) + b_w S W - I_L (\mu + \delta + \alpha_L) \\
+		\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+		\frac{dR}{dt}&= \gamma I_H - \mu R \\
+		\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+	\end{align*}
+\end{linenomath}
+
+\begin{itemize}
+	\item$\alpha_i=$ death rate by cholera in low or high intensity
+	\item$\delta =$ rate at which symptoms increase in severity
+\end{itemize}
+

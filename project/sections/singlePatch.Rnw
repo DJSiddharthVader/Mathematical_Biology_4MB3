@@ -1,13 +1,70 @@
 %\section{Single Patch Model Of Cholera}
 %	\textbf{Base Single Patch Model (with vital dynamics)}
+
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
+summarize the variables and parameters involved.
+
+%%VARIABLE Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} \\
+		\hline
+		S & Susceptible individuals & individuals \\
+		\hline
+		I & infected individuals & individuals \\
+		\hline
+		R & recovered individuals & individuals \\
+		\hline
+		W & Bacterial concentration in water & cells ml$^{-3}$ \\
+		\hline
+		N & Total number of individuals & individuals\\
+		\hline
+	\end{tabular}
+\end{center}
+
+%%PARAMETER Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} &  \textbf{Estimate} \\
+		\hline
+		$\mu$ & Natural death/birth rate & day $^{-1}$ & \\
+		\hline
+		$b_i$ &  Person-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$ & \\
+		\hline
+		$b_w$ & water reservoir-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$&  \\
+		\hline
+		$\beta_i$ & scaled Person-person transmission/contact rate & day$^{-1}$ & 0.25\\
+		\hline
+		$\beta_w$ & scaled water reservoir-person transmission/contact rate & day$^{-1}$& \num{1e-5} to 1 \\
+		\hline
+		%$\kappa$ & Bacterial concentration in water & cells ml$^{-3}$ \\
+		%\hline
+		$\frac{1}{\gamma}$ & Infectious period & day& 2.9 to 14\\
+		\hline
+		$\sigma$ & Bacterial decay/removal from reservoir & day$^{-1}$& $\frac{1}{3}$ to $\frac{1}{41}$ \\
+		\hline
+		$\xi$ & Person to water reservoir shedding rate  & cells ml$^{-3}$ day$^{-1}$ individuals$^{-1}$ & 0.01 to 10\\
+		\hline
+		$\alpha$ & Death rate by cholera & day$^{-1}$& 0.01 to 0.6 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Values of estimates are from several references \cite{link5} \cite{link8} \cite{link} and the natural death rate is dependent on various factors such as city or location and year or era of interest.
+
+%%Single Patch Model%%
+\textbf{Base Single Patch Model (with vital dynamics)}
 \begin{linenomath}
 	\begin{align*}
-		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
-		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
+		\frac{dI}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
 		\frac{dR}{dt}&= \gamma I - \mu R \\
-		\frac{dW}{dt}&= \xi I  - \sigma W
+		\frac{dW}{dt}&= \xi I  - \sigma W\\
 	\end{align*}
 \end{linenomath}
+<<<<<<< HEAD
 \begin{itemize}
     \item$\mu=$ natural death rate
     \item$\beta_i=$ transmission rate between S and I class
@@ -22,7 +79,7 @@ The assumptions for this model are
     \item The population is homogenously succeptible to Cholera infection
     \item No waning immunity; once you recover from cholera you cannot return to the susceptible class
     \item The transmission rate between water the susceptible class  is exponentially distributed
-\end{itemize}
+    \end{itemize}
 <<spcaption,echo=FALSE>>=
     #params
     mu <- 0.15

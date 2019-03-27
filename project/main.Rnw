@@ -11,7 +11,7 @@
 %For Math stuff
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
-\usepackage{amsfonts} % mathbb
+\usepackage{amsfonts, array, siunitx} % mathbb
 %Referenes
 \usepackage[natbib=true,
             style=nature,
