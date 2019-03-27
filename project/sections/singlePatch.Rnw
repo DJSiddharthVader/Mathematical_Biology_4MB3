@@ -1,28 +1,95 @@
 %\section{Single Patch Model Of Cholera}
 %	\textbf{Base Single Patch Model (with vital dynamics)}
+
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below 	
+summarize the variables and parameters involved.
+
+%%VARIABLE Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | } 
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} \\ 
+		\hline
+		S & Susceptible individuals & individuals \\ 
+		\hline
+		I & infected individuals & individuals \\
+		\hline
+		R & recovered individuals & individuals \\
+		\hline
+		W & Bacterial concentration in water & cells ml$^{-3}$ \\
+		\hline
+		N & Total number of individuals & individuals\\ 
+		\hline 	
+	\end{tabular}
+\end{center}
+
+%%PARAMETER Table%%	
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | } 
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} &  \textbf{Estimate} \\ 
+		\hline
+		$\mu$ & Natural death/birth rate & day $^{-1}$ & \\ 
+		\hline
+		$b_i$ &  Person-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$ & \\
+		\hline
+		$b_w$ & water reservoir-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$&  \\
+		\hline
+		$\beta_i$ & scaled Person-person transmission/contact rate & day$^{-1}$ & 0.25\\
+		\hline
+		$\beta_w$ & scaled water reservoir-person transmission/contact rate & day$^{-1}$& \num{1e-5} to 1 \\
+		\hline
+		%$\kappa$ & Bacterial concentration in water & cells ml$^{-3}$ \\
+		%\hline
+		$\frac{1}{\gamma}$ & Infectious period & day& 2.9 to 14\\ 
+		\hline
+		$\sigma$ & Bacterial decay/removal from reservoir & day$^{-1}$& $\frac{1}{3}$ to $\frac{1}{41}$ \\
+		\hline
+		$\xi$ & Person to water reservoir shedding rate  & cells ml$^{-3}$ day$^{-1}$ individuals$^{-1}$ & 0.01 to 10\\ 
+		\hline
+		$\alpha$ & Death rate by cholera & day$^{-1}$& 0.01 to 0.6 \\ 
+		\hline
+	\end{tabular}
+\end{center}
+
+Values of estimates are from several references \cite{link5} \cite{link8} \cite{link} and the natural death rate is dependent on various factors such as city or location and year or era of interest. 
+
+%%Single Patch Model%%
+\textbf{Base Single Patch Model (with vital dynamics)}
 \begin{linenomath}
 	\begin{align*}
-		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
-		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
+		\frac{dI}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
 		\frac{dR}{dt}&= \gamma I - \mu R \\
-		\frac{dW}{dt}&= \xi I  - \sigma W
+		\frac{dW}{dt}&= \xi I  - \sigma W\\
 	\end{align*}
 \end{linenomath}
 
-	\begin{itemize}
-		\item$\mu=$ natural death rate
-		\item$\beta_i=$ transmission rate between S and I class
-		\item$\beta_w=$ transmission rate between I and W class
-		\item$\gamma=$ recovery rate (I to R class)
-		\item$\alpha=$ death rate from cholera
-		\item$\xi=$ Shedding rate of cholera from I to W class
-		\item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-	\end{itemize}
+The following dimensionless (scaled) form of the differential equations in terms of proportions is obtained by setting $I = \frac{I}{N}$, $S = \frac{S}{N}$, $R = \frac{W}{N}$, and $W = \frac{\sigma}{\xi N} W$, $\beta_w = b_w\frac{N \xi}{\alpha}$ and $\beta_i = b_i N$:
+\begin{linenomath}	
+	\begin{align*}
+		\frac{dS}{dt}&= \mu - \mu S - \beta_i SI - \beta_w S W  \\
+		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dR}{dt}&= \gamma I - \mu R \\
+		\frac{dW}{dt}&= \sigma(I - W)\\
+	\end{align*}
+\begin{linenomath}
+
+\textbf{Single Patch Severity Model with vital dynamics}\\
+Papers\cite{link} \cite{link} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class \cite{link}. The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($b_L, b_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
+\begin{linenomath}
+	\begin{align*}
+		\frac{dS}{dt}&= \mu N - \mu S - b_L S I_L - b_H S I_H - \beta_w S W  \\
+		\frac{dI_L}{dt}&= S( b_L I_L + b_H I_H) + b_w S W - I_L (\mu + \delta + \alpha_L) \\
+		\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+		\frac{dR}{dt}&= \gamma I_H - \mu R \\
+		\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+	\end{align*}
+\end{linenomath}
 
 \begin{itemize}
-	\item This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
-	\item$\alpha_i=$ death rate by cholera in low or high intensity
-	\item$\delta =$ rate at which symptoms increase in severity
+	\item$\alpha_i=$ death rate by cholera in low or high intensity 
+	\item$\delta =$ rate at which symptoms increase in severity		
 \end{itemize}
 
 <<spcaption,echo=FALSE>>=
