@@ -15,6 +15,7 @@
 %Referenes
 \usepackage[natbib=true,
             style=nature,
+            citestyle=authoryear,
             backend=biber,
             useprefix=true]{biblatex}
 \addbibresource{./refs.bib}
@@ -66,7 +67,7 @@ start.time <- proc.time()
 \subsection{Single Patch SIR Model With A Water Compartment}
 <<child='./sections/singlePatch.Rnw'>>=
 @
-\subsection{Analysis Of Single Patch Model}
+\subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
 <<child='./sections/singlePatchAnalysis.Rnw'>>=
 @
 \subsection{Single Patch With Low And High Shedding Compartments}
