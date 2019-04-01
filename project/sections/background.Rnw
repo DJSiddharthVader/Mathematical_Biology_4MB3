@@ -24,7 +24,7 @@ This is a plausible explanation for why maximum weekly deaths in London increase
 The main treatment strategies for cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
 We can incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
 \subsection{SIRW Model Construction}
-Our model has five distinct departments, a susceptible, exposed, infectious, removed, and water compartment.
+Our model has four distinct departments: susceptible, infectious, recovered, and water compartments.
 Susceptible: contains the proportion of the population that is capable of becoming infected.
 Individuals are born into compartment S at a rate of $\mu$.
 Individuals leave the compartment in one of two ways, they die at a rate $\mu$, or come into contact with the pathogen and move into the “Infectious” compartment.
