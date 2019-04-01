@@ -1,0 +1,7 @@
+\begin{abstract}
+    Cholera has a significant impact on public health, especially in areas with poor water sanitation, with infections estimated to affect between 1.3 and 4 million people annually \citep{link18}.
+    Many people globally still lack proper infrastructure or access to clean water\citep{link19}.
+    While vaccines and antibiotics exist, vaccination can be difficult to achieve at necessary levels for stopping an epidemic and widespread antibiotic usage contributes to the development of antibiotic resistance.
+    Considering the spatial dynamics of water sanitation, antibiotic usage and vaccination are important for creating the most effective and efficient treatment regime in preventing cholera epidemics
+\end{abstract}
+

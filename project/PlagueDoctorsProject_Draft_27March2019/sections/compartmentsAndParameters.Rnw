@@ -1,0 +1,54 @@
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
+summarize the variables and parameters involved.
+
+%%VARIABLE Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} \\
+		\hline
+		S & Susceptible individuals & individuals \\
+		\hline
+		I & infected individuals & individuals \\
+		\hline
+		R & recovered individuals & individuals \\
+		\hline
+		W & Bacterial concentration in water & cells ml$^{-3}$ \\
+		\hline
+		N & Total number of individuals & individuals\\
+		\hline
+	\end{tabular}
+\end{center}
+
+%%PARAMETER Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} &  \textbf{Estimate} \\
+		\hline
+		$\mu$ & Natural death/birth rate & day $^{-1}$ & \\
+		\hline
+		$b_i$ &  Person-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$ & \\
+		\hline
+		$b_w$ & water reservoir-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$&  \\
+		\hline
+		$\beta_i$ & scaled Person-person transmission/contact rate & day$^{-1}$ & 0.25\\
+		\hline
+		$\beta_w$ & scaled water reservoir-person transmission/contact rate & day$^{-1}$& \num{1e-5} to 1 \\
+		\hline
+		%$\kappa$ & Bacterial concentration in water & cells ml$^{-3}$ \\
+		%\hline
+		$\frac{1}{\gamma}$ & Infectious period & day& 2.9 to 14\\
+		\hline
+		$\sigma$ & Bacterial decay/removal from reservoir & day$^{-1}$& $\frac{1}{3}$ to $\frac{1}{41}$ \\
+		\hline
+		$\xi$ & Person to water reservoir shedding rate  & cells ml$^{-3}$ day$^{-1}$ individuals$^{-1}$ & 0.01 to 10\\
+		\hline
+		$\alpha$ & Death rate by cholera & day$^{-1}$& 0.01 to 0.6 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+Parameter estimates are taken from \cite{link5}, \cite{link8} and \cite{link3}.
+The natural death rate is dependent on various factors such as city or location and year or era of interest.
+

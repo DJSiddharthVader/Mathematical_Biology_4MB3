@@ -1,0 +1,63 @@
+%\section{Multi-Patch Models Of Cholera}
+The following equations represent the SIRW model for a single patch $i$ in the multi patch model.
+\begin{linenomath}
+\begin{align*}
+    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\
+    \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\
+    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\
+    \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
+\end{align*}
+\end{linenomath}
+Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diagonal patches) of the patch $i$.
+
+\begin{itemize}
+    \item$\mu=$ natural death rate
+    \item$\phi=$ person to person contact rate between neighbouring patchs
+    \item$\psi=$ person to water contact rate between neighbouring patchs
+    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_w=$ transmission rate between I and W class
+    \item$\gamma=$ recovery rate (I to R class)
+    \item$\alpha=$ death rate from cholera
+    \item$\xi=$ Shedding rate of cholera from I to W class
+    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+\end{itemize}
+The assumptions for the single patch model apply here as well the following.
+\begin{itemize}
+    \item No dispersal of individuals between patches
+    \item infected individuals in patch $i$ can infect succeptible individuals in the neihgbouring patch $j$
+    \item All patches neighbouring $i$ have the same trasmission rate to patch $i$
+\end{itemize}
+<<mpcaption,echo=FALSE>>=
+    mu = 1/1537 # avg lifespan 58 yrs
+    beta_i = 0.025 #transmission r. S between I
+    gamma = 1/7 #rate of recovery (days)
+    sigma = 1/25 #rate of water removal
+    beta_w = 0.5 #transmission r. I between W
+    xi = 10 #shedding rate I into W (force it eaual to sigma?)
+    phi <- 0.01
+    psi <- 0.05
+    alpha = 0 #death rate by cholera
+    i0 <- 0.06
+    w0 <- 0.13
+    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',round(mu,2),'\\ \\beta_i=',round(beta_i,2),'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'\\ \\xi=',xi,'\\ \\phi=',phi,'\\ \\psi=',psi,'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$.',sep='')
+@
+<<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    rows <- 3
+    cols <- 3
+    #dmat <- distmat(rows,cols,method='manhattan')
+    nmat <- neighourmat(rows,cols,influence=phi)
+    wmat <- neighourmat(rows,cols,influence=psi)
+    ic <- list(rows=rows,
+               cols=cols,
+               i0=i0,
+               w0=w0)
+    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha,nmat=nmat,wmat=wmat)
+    tmax <- 500
+    steps <- 5000
+    soln <- solveMultiModel(multiWaterModel,ic,params,
+                            tmax=tmax,steps=steps)
+    multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
+@
+\FloatBarrier

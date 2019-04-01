@@ -1,0 +1,49 @@
+%\section{Possible Treatment Strategies for Cholera}
+\subsection{Treatment Plan 1: Sanitation of water over time}
+One of main ways control strategies for cholera is to treat the water directly (eg. with chlorine). This would essentially have the effect of increasing the rate of bacteria removal from water (defined as $\sigma$ in the base single patch model). This can be modeled by incorporating a new term $\rho$ in the base model:
+\begin{linenomath}
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
+	\frac{dS}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W - \rho W\\
+\end{align*}
+\end{linenomath}
+
+This new term $\rho$ can be either a constant which is implemented right at the start, or can be a function of time, or can be implemented at a certain threshold depending on the bacterial concentration (W) or the proportion of infecteds (I). For example:
+$$\rho (I)= \begin{cases}
+	\rho & I \geq 0.1 \\
+	0 & 0 \leq I \leq 0.1 \\
+	\end{cases}$$\\
+This represents the sanitation rate of $\rho$, implemented at certain threshold of infected (in this case the threshold is based on $I=0.1$ but can be based on W (i.e. testing water levels for cholera).\\
+
+
+\subsection{Treatment Plan 2: Vaccinations on Base Model}
+
+\begin{linenomath}
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W - \nu S \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R + \nu S\\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+\end{linenomath}
+
+\begin{itemize}
+	\item $\nu=$ is vaccination rate on S class
+\end{itemize}
+
+\subsection{Treatment Plan 3: Antibiotics on Base Model}
+
+\begin{linenomath}
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma +\eta + \mu + \alpha ) \\
+	\frac{dR}{dt}&= (\gamma +\eta)I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+\end{linenomath}
+\begin{itemize}
+	\item $\eta=$ is antibiotic rate on I class
+\end{itemize}
+
