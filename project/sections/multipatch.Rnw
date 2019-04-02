@@ -25,7 +25,7 @@ The assumptions for the single patch model apply here as well as the following.
 \begin{itemize}
     \item No dispersal of individuals between patches
     \item infected individuals in patch $i$ can infect succeptible individuals in the neihgbouring patch $j$
-    \item All patches neighbouring $i$ have the same trasmission rate to patch $i$
+    \item All patches neighbouring $i$ have the same transmission rate to patch $i$
 \end{itemize}
 <<mpcaption,echo=FALSE>>=
     mu = 1/1537 # avg lifespan 58 yrs
