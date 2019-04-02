@@ -10,14 +10,14 @@ For our model, we have
 			\end{pmatrix}\\
 		V&=\begin{pmatrix}
 			\frac{1}{\gamma+\mu+\alpha} & 0\\
-			\frac{1}{\gamma+\mu+\alpha} &\frac{1}{\theta}
+			\frac{1}{\gamma+\mu+\alpha} &\frac{1}{\sigma}
 			\end{pmatrix}
 \end{align*}
 \end{linenomath}
 The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as seen in \cite{link9}, which is
 \begin{linenomath}
 \begin{align*}
-    {\mathcal R_0} &= \rho(FV^{-1}\\
+    {\mathcal R_0} &= \rho(FV^{-1})\\
 		           &=\frac{\beta_i+\beta_w}{\gamma+\mu}
 \end{align*}
 \end{linenomath}
