@@ -12,8 +12,8 @@ Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diago
 
 \begin{itemize}
     \item$\mu=$ natural death rate
-    \item$\phi=$ person to person contact rate between neighbouring patchs
-    \item$\psi=$ person to water contact rate between neighbouring patchs
+    \item$\phi=$ person to person contact rate between neighbouring patches
+    \item$\psi=$ person to water contact rate between neighbouring patches
     \item$\beta_i=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
@@ -21,7 +21,7 @@ Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diago
     \item$\xi=$ Shedding rate of cholera from I to W class
     \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
 \end{itemize}
-The assumptions for the single patch model apply here as well the following.
+The assumptions for the single patch model apply here as well as the following.
 \begin{itemize}
     \item No dispersal of individuals between patches
     \item infected individuals in patch $i$ can infect succeptible individuals in the neihgbouring patch $j$
@@ -39,7 +39,7 @@ The assumptions for the single patch model apply here as well the following.
     alpha = 0 #death rate by cholera
     i0 <- 0.06
     w0 <- 0.13
-    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',round(mu,2),'\\ \\beta_i=',round(beta_i,2),'\\ \\gamma=',round(gamma,2),'\\ \\sigma=',round(sigma,2),'\\ \\beta_w=',round(beta_w,2),'\\ \\alpha=',alpha,'\\ \\xi=',xi,'\\ \\phi=',phi,'\\ \\psi=',psi,'$','. The initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$.',sep='')
+    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',round(mu,2),',\\ \\beta_i=',round(beta_i,2),',\\ \\gamma=',round(gamma,2),',\\ \\sigma=',round(sigma,2),',\\ \\beta_w=',round(beta_w,2),',\\ \\alpha=',alpha,',\\ \\xi=',xi,',\\ \\phi=',phi,',\\ \\psi=',psi,'$','. The initial conditions for the model were $S_0=',1-i0,',\\ I_0=',i0,',\\ R_0=',0,',$.',sep='')
 @
 <<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
     source('spatialSIR.R')
