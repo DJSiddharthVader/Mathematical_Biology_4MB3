@@ -44,6 +44,6 @@ This represents the sanitation rate of $\rho$, implemented at certain threshold 
 \end{align*}
 \end{linenomath}
 \begin{itemize}
-	\item $\eta=$ is antibiotic rate on I class
+	\item $\eta=$ is the rate at which individuals recover and leave the I class due to antibiotic tratment
 \end{itemize}
 
