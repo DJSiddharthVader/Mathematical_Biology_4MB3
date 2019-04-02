@@ -75,9 +75,9 @@ start.time <- proc.time()
 \subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
 <<child='./sections/singlePatchAnalysis.Rnw'>>=
 @
-\subsection{Single Patch With Low And High Shedding Compartments}
-<<child='./sections/singlePatchLowHigh.Rnw'>>=
-@
+%\subsection{Single Patch With Low And High Shedding Compartments}
+%<<child='./sections/singlePatchLowHigh.Rnw'>>=
+%@
 \section{Multi Patch Model}
 <<child='./sections/multipatch.Rnw'>>=
 @
