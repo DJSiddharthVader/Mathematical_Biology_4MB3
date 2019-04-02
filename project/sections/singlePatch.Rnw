@@ -35,8 +35,8 @@
 
 \begin{linenomath}
 	\begin{align*}
-		\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W  \\
-		\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+		\frac{dS}{dt}&= \mu N - \mu S - \beta_I SI - \beta_w S W  \\
+		\frac{dI}{dt}&= \beta_I S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
 		\frac{dR}{dt}&= \gamma I - \mu R \\
 		\frac{dW}{dt}&= \xi I  - \sigma W
 	\end{align*}
@@ -59,7 +59,7 @@ The assumptions for this model are
 <<spcaption,echo=FALSE>>=
     #params
     mu = 1/1537 # avg lifespan 58 yrs
-    beta_i = 0.025 #transmission r. S between I
+    beta_I = 0.025 #transmission r. S between I
     gamma = 1/7 #rate of recovery (days)
     sigma = 1/25 #rate of water removal
     beta_w = 0.5 #transmission r. I between W
