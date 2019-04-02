@@ -1,6 +1,7 @@
-The basic reproductive number ${\mathcal R_0}$ is defined as the number of secondary infections as a result of a single infective during a time step.
+The basic reproductive number ${\mathcal R_0}$ is defined as the expected number of secondary infections that result from introducing a single infected individual into an otherwise susceptible
+population.
 ${\mathcal R_0}$ can be computed as the spectral radius (i.e. the eigenvalue with the largest absolute value) of the next generation matrix at the disease free equilibrium.
-The next generation matrix $FV^{−1}$, where the entry $F_{ij}$ of the matrix $F$ is the rate at which infected individuals in compartment $j$ produce new infections in compartment $i$, and the entry of $V_{ij}$ of the matrix $V$ is the mean time spent in compartment $j$ after moving into $j$ from compartment $k$.
+The next generation matrix $FV^{−1}$, where entry $F_{ij}$ of the matrix $F$ is the rate at which infected individuals in compartment $j$ produce new infections in compartment $i$, and the entry of $V_{ij}$ of the matrix $V$ is the mean time spent in compartment $j$ after moving into $j$ from compartment $k$.
 For our model, we have
 \begin{linenomath}
 \begin{align*}
@@ -21,6 +22,6 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 		           &=\frac{\beta_i+\beta_w}{\gamma+\mu}
 \end{align*}
 \end{linenomath}
-This singla patch model has a disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
-It also has an endemic-equillirbium when ${\mathcal R_0}>1$
+This singla patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
+It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 
