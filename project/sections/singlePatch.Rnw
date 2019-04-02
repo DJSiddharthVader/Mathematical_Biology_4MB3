@@ -68,7 +68,7 @@ The assumptions for this model are
     alpha = 0 #death rate by cholera
     i0 <- 0.08
     w0 <- 0.13
-    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',round(mu,2),',\\ \\beta_I=',round(beta_i,2),',\\ \\gamma=',round(gamma,2),',\\ \\sigma=',round(sigma,2),',\\ \\beta_w=',round(beta_w,2),',\\ \\alpha=',alpha,',\\ \\xi=',xi,'$','. Further the initial conditions for the model were $S_0=',1-i0,'\\ I_0=',i0,'\\ R_0=',0,'$',sep='')
+    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',round(mu,2),',\\ \\beta_I=',round(beta_i,2),',\\ \\gamma=',round(gamma,2),',\\ \\sigma=',round(sigma,2),',\\ \\beta_w=',round(beta_w,2),',\\ \\alpha=',alpha,',\\ \\xi=',xi,'$','. Further the initial conditions for the model were $S_0=',1-i0,',\\ I_0=',i0,',\\ R_0=',0,'.$',sep='')
 @
 <<<singlePatch,fig.height=4,echo=FALSE,fig.pos='h',fig.cap=spcap>>=
     source('spatialSIR.R')
