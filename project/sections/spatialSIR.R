@@ -24,9 +24,9 @@ solveSingleModel <- function(func,ic,params,tmax=1,steps=5000){
 }
 
 plotSoln <- function(soln,...){
-    scol <- 'red'
-    icol <- 'blue'
-    rcol <- 'green'
+    scol <- 'green'
+    icol <- 'red'
+    rcol <- 'black'
     #plotting
     plot(x=0,y=0,type='l',...)
     lines(soln[,'x'],type='l',col=scol)
@@ -34,7 +34,7 @@ plotSoln <- function(soln,...){
     lines(soln[,'z'],type='l',col=rcol)
     legend("topright",
            legend=c('S','I','R'),
-           col=c('red','blue','green'),
+           col=c('green','red','black'),
            inset=0.02,
            box.lty=0,
            lty=1,
@@ -130,9 +130,9 @@ solveMultiModel <- function(func,ic,params,tmax=1,steps=5000){
 
 multiPlotSoln <- function(rows,cols,soln,...){
     patches <- rows*cols
-    scol <- 'red'
-    icol <- 'blue'
-    rcol <- 'green'
+    scol <- 'green'
+    icol <- 'red'
+    rcol <- 'black'
     #get data
     s <- soln[,(0*patches+2):(1*patches+1)]
     i <- soln[,(1*patches+2):(2*patches+1)]
@@ -171,7 +171,7 @@ initPlot <- function(patch,rows,cols,
     if (topright){
         legend("right",
                legend=c('S','I','R'),
-               col=c('red','blue','green'),
+               col=c('green','red','black'),
                box.lty=0,
                lty=1,
                cex=0.8)
