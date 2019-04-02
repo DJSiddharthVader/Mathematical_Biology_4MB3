@@ -2,12 +2,12 @@
 library(deSolve)
 
 ##Initial Parameters
-pars=c(mu = 1/1537, # avg lifespan 58 yrs 
+pars=c(mu = 1/15370, # avg lifespan 58 yrs 
        beta_i = 0.025, #transmission r. S between I
        gamma = 1/7, #rate of recovery (days)
        sigma = 1/25, #rate of water removal
        beta_w = 0.5, #transmission r. I between W
-       xi = 10, #shedding rate I into W (force it eaual to sigma?)
+       xi = 5, #shedding rate I into W (force it eaual to sigma?)
        #kappa = 0.15, #bacteria concentration that gives 50% of infection
        alpha = 0, #death rate by cholera
        
@@ -22,17 +22,19 @@ pars=c(mu = 1/1537, # avg lifespan 58 yrs
        alpha_h = 0.05, #death rate by cholera with high int. symptoms
        
        #parameters for water treatment
-       rho = 0.005,
+       rho = 0.9,
        #parameters for vaccination
-       nu = 0.01,
+       nu = 0.9,
        #parameters for antibiotics
-       eta = 0.0001
+       eta = 0.9
 )
 ##Initial Conditions for Phase Portraits##
 tmax <- 60
 Z0 <-  0 
 W0 <-  0.2
 int <- "low"
+x0 <- 0.95
+y0 <- 0.05
 
 ############################
 #######VECTOR FIELDS########
@@ -42,10 +44,10 @@ int <- "low"
   SIRW.vector.field <- function(t, vars, 
                                 parms=pars) {
     with(as.list(c(parms, vars)), {
-      dx <- mu - mu*x - beta_i*x*y - beta_w*x*w # dS/dt
-      dy <- beta_i*y*x + beta_w*x*w - gamma*y - mu*y - alpha*y # dI/dt
+      dx <- mu*(x+y+z) - mu*x - beta_i*x*y - beta_w*x*w # dS/dt
+      dy <- beta_i*x*y + beta_w*x*w - gamma*y - mu*y - alpha*y # dI/dt
       dz <- gamma*y - mu*z # dR/dt
-      dw <- sigma*y - sigma*w #dW/dt
+      dw <- xi*y - sigma*w #dW/dt
         vec.fld <- c(dx=dx, dy=dy, dz=dz, dw = dw)
       return(list(vec.fld))
     })
@@ -208,25 +210,25 @@ severity.vector.field <- function(t, vars,
 
 ##plots SIRW over time##
 #base model  
-plot.base <- function(ic=c(x=0.995,y=0.005,z=0, w=W0), tmax=60,
+plot.base <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=60,
                          times=seq(0,tmax,by=tmax/500),
                          func=SIRW.vector.field, parms=pars, ... ) { 
   plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, 1),
-       xlab = "Time", ylab="Proportion", main = "Base Model with Vital Dynamics")
+       xlab = "Time (days)", ylab="Proportion", main = "Base Model with Vital Dynamics")
   St <- ode(ic, times, func, parms) 
-  lines(times, St[,"x"], col="red",lty=3, lwd=1.5, ... )
-  lines(times, St[,"y"], col="blue",lty=1, lwd=1.5, ... )
-  lines(times, St[,"z"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"x"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"y"], col="red",lty=1, lwd=1.5, ... )
+  lines(times, St[,"z"], col="black",lty=3, lwd=1.5, ... )
   #lines(times, St[,"w"], col="orange",lty=3, lwd=1.5, ... )
-  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("red", "blue", "green"))
+  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("green", "red", "black"))
 }
 
 #severity bodel
-plot.severity <- function(ic=c(x=0.995,l=0.005,h=0,z=0, w=W0), tmax=100,
+plot.severity <- function(ic=c(x=0.95,l=0.05,h=0,z=0, w=W0), tmax=100,
                           times=seq(0,tmax,by=tmax/500),
                           func=severity.vector.field, parms=pars, ... ) { 
   plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, 1),
-       xlab = "Time", ylab="Proportion", main = "Severity Model with Vital Dynamics")
+       xlab = "Time (days)", ylab="Proportion", main = "Severity Model with Vital Dynamics")
   St <- ode(ic, times, func, parms) 
   lines(times, St[,"l"], col="red",lty=1, lwd=1.5, ... )
   lines(times, St[,"h"], col="red", lty=2, lwd=1.5, ... )
@@ -235,48 +237,46 @@ plot.severity <- function(ic=c(x=0.995,l=0.005,h=0,z=0, w=W0), tmax=100,
 }
 
 #treat1 model
-plot.treat1 <- function(ic=c(x=0.995,y=0.005,z=0, w=W0), tmax=60,
+plot.treat1 <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=60,
                         times=seq(0,tmax,by=tmax/500),
                         func=treat1.vector.field, parms=pars, ... ) { 
   plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, 1),
-       xlab = "Time", ylab="Proportion", main = "Treatment 1 (water sanitation) Model")
+       xlab = "Time (days)", ylab="Proportion", main = "Treatment 1 (water sanitation) Model")
   St <- ode(ic, times, func, parms) 
-  lines(times, St[,"x"], col="red",lty=3, lwd=1.5, ... )
-  lines(times, St[,"y"], col="blue",lty=1, lwd=1.5, ... )
-  lines(times, St[,"z"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"x"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"y"], col="red",lty=1, lwd=1.5, ... )
+  lines(times, St[,"z"], col="black",lty=3, lwd=1.5, ... )
   #lines(times, St[,"w"], col="orange",lty=3, lwd=1.5, ... )
-  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("red", "blue", "green"))
+  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("green", "red", "black"))
 }
 
 #treat2 model
-plot.treat2 <- function(ic=c(x=0.995,y=0.005,z=0, w=W0), tmax=60,
+plot.treat2 <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=60,
                         times=seq(0,tmax,by=tmax/500),
                         func=treat2.vector.field, parms=pars, ... ) { 
   plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, 1),
-       xlab = "Time", ylab="Proportion", main = "Treatment 2 (vaccination) Model")
+       xlab = "Time (days)", ylab="Proportion", main = "Treatment 2 (vaccination) Model")
   St <- ode(ic, times, func, parms) 
-  lines(times, St[,"x"], col="red",lty=3, lwd=1.5, ... )
-  lines(times, St[,"y"], col="blue",lty=1, lwd=1.5, ... )
-  lines(times, St[,"z"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"x"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"y"], col="red",lty=1, lwd=1.5, ... )
+  lines(times, St[,"z"], col="black",lty=3, lwd=1.5, ... )
   #lines(times, St[,"w"], col="orange",lty=3, lwd=1.5, ... )
-  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("red", "blue", "green"))
+  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("green", "red", "black"))
 }
 
 #treat3 model
-plot.treat3 <- function(ic=c(x=0.995,y=0.005,z=0, w=W0), tmax=60,
+plot.treat3 <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=60,
                         times=seq(0,tmax,by=tmax/500),
                         func=treat3.vector.field, parms=pars, ... ) { 
   plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, 1),
-       xlab = "Time", ylab="Proportion", main = "Treatment 3 (antibiotics) Model")
+       xlab = "Time (days)", ylab="Proportion", main = "Treatment 3 (antibiotics) Model")
   St <- ode(ic, times, func, parms) 
-  lines(times, St[,"x"], col="red",lty=3, lwd=1.5, ... )
-  lines(times, St[,"y"], col="blue",lty=1, lwd=1.5, ... )
-  lines(times, St[,"z"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"x"], col="green",lty=3, lwd=1.5, ... )
+  lines(times, St[,"y"], col="red",lty=1, lwd=1.5, ... )
+  lines(times, St[,"z"], col="black",lty=3, lwd=1.5, ... )
   #lines(times, St[,"w"], col="orange",lty=3, lwd=1.5, ... )
-  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("red", "blue", "green"))
+  legend("topright", legend = c("S", "I","R"), lty=c(3,1,3,3), col=c("green", "red", "black"))
 }
-
-
 
 
 # ##Reproductive Ratio for base model
