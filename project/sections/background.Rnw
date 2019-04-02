@@ -36,8 +36,8 @@ They are also capable of contributing to the choleric load of the water compartm
 Although for cholera the rate of transmission from person to person interactions is much lower in reality than the rate of transmission through contact with infected waters, we decided it still has enough significance to be in the model.
 Individuals in this compartment recover at a rate $\gamma$, and move to the recovered compartment, or they die naturally (not from Cholera) at a rate $\mu$ and from Cholera at a rate $\alpha$. 
 With advances in medicine over the past decades $\alpha$ is no longer a significant parameter in todays world.\par
-  \item [Recovered] The proportion of individuals that are neither infected with cholera or susceptible to the pathogen.
+  \item [Recovered] The proportion of individuals that are neither infected with cholera nor susceptible to the pathogen.
 They leave this compartment as they die naturally at a rate $\mu$.
-  \item [Water] The W term is proportional to the concentration of Cholera in the environment (or in this case the water).
+  \item [Water] The $W$ term is proportional to the concentration of Cholera in the environment (or in this case the water).
 More bacteria enter the compartment as infected individuals shed the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
 \end{description}
