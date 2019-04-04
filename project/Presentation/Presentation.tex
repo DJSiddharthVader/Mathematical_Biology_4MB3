@@ -213,7 +213,7 @@ Instructor: Dr. David Earn}
 
 \end{frame}
 
-\begin{frame}[t]{Effect of the 19th Century Treatments}
+\begin{frame}[t]{Effects of the 19th Century Treatments}
 \begin{itemize}
 \item Added parameter death caused by cholera ($\alpha$)
 \end{itemize}
@@ -247,12 +247,17 @@ Instructor: Dr. David Earn}
 \end{center}
 \end{frame}
 
-\begin{frame}{Effect of the 19th Century Treatments}
+\begin{frame}{Effects of the 19th Century Treatments}
 
 \end{frame}
 
-\begin{frame}{Multi-Patch Model}
-
+\begin{frame}[t]{Multi-Patch Model}
+\begin{align*}
+    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\[1em]
+    \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\[1em]
+    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\[1em]
+    \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
+\end{align*}
 \end{frame}
 
 \begin{frame}{Multi-Patch Model Assumptions}
