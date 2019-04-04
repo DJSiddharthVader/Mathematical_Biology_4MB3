@@ -8,7 +8,6 @@
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
 
-
 \title[Modelling Cholera Treatments]
 {Examining Treatment Strategies for Cholera Incorporating Spatial Dynamics}
 \author[Plague Doctors]{Group: Plague Doctors \\ Jessa Mallare, Sid Reed, Daniel Segura, Aref Jadda}
@@ -44,7 +43,7 @@ Instructor: Dr. David Earn}
 \setlength\itemsep{2em}
 \item Vibrio cholerae
 \item Colonize small intestines
-\item 10% of infected develop symptoms
+\item 10 percent of infected develop symptoms
 \item Causes dehydration
 \end{itemize}
 \column{0.5\textwidth}
@@ -66,7 +65,7 @@ Instructor: Dr. David Earn}
 \end{columns}
 \end{frame}
 
-\begin{frame}{Single-Patch Model}
+\begin{frame}{Developing a Single-Patch Model}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item Entire population (N) included
@@ -220,7 +219,7 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 \begin{frame}{Multi-Patch Model Simulation}
-
+ 
 \end{frame}
 
 \begin{frame}{Treatment Strategies For Cholera}
