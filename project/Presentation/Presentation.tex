@@ -171,8 +171,27 @@ Instructor: Dr. David Earn}
 
 \end{frame}
 
-\begin{frame}{$R_0$ Calculation}
-
+\begin{frame}[t]{$R_0$ Calculation}
+\begin{itemize}
+\item Using the method of Next Generation Matrix (van den Driessche and Watmoug, 2002)
+\end{itemize}
+\begin{align*}
+		F&=\begin{pmatrix}
+			\beta_i & \beta_w\\
+			0 & 0
+			\end{pmatrix}\\
+		V&=\begin{pmatrix}
+			\frac{1}{\gamma+\mu+\alpha} & 0\\
+			\frac{1}{\gamma+\mu+\alpha} &\frac{1}{\sigma}
+			\end{pmatrix}
+\end{align*}
+\begin{itemize}
+\item $R_0$ is computed as the spectral radius of $FV^{-1}$:
+\end{itemize}
+\begin{align*}
+    {\mathcal R_0} &= \rho(FV^{-1})\\
+		           &=\frac{\beta_i+\beta_w}{\gamma+\mu}
+\end{align*}
 \end{frame}
 
 \begin{frame}{Equilibria and Stability}
