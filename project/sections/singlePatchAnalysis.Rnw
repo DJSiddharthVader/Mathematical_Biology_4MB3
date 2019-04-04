@@ -22,6 +22,6 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 		           &=\frac{\beta_i+\beta_w}{\gamma+\mu}
 \end{align*}
 \end{linenomath}
-This singla patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
+This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
 It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 
