@@ -123,7 +123,7 @@ Instructor: Dr. David Earn}
 
 \begin{frame}[t]{$R_0$ Calculation}
 \begin{itemize}
-\item Using the method of Next Generation Matrix (van den Driessche and Watmoug, 2002)
+\item Using the method of Next Generation Matrix (van den Driessche and Watmough, 2002)
 \end{itemize}
 \begin{align*}
 		F&=\begin{pmatrix}
@@ -145,7 +145,17 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 \begin{frame}{Equilibria and Stability}
-
+\begin{itemize}
+\setlength\itemsep{2em}
+\item Two equilibria:\\[1em]
+\begin{enumerate}
+\setlength\itemsep{2em}
+\item DFE: $(S,I,R)=(1,0,0)$
+\item EE: $(s^{*},i^{*},r^{*}) = (\frac{1}{R_0}, \frac{\mu}{\gamma+\mu}(1-s^{*}), i^{*})$
+\end{enumerate}
+\item The DFE is stable when ${\mathcal R_0}<1$
+\item The EE is stable when ${\mathcal R_0}>1$
+\end{itemize}
 \end{frame}
 
 \begin{frame}{Final Size}
