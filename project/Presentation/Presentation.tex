@@ -55,6 +55,7 @@
 \usecolortheme[named=deepcarmine]{structure}
 \usefonttheme[onlymath]{serif}
 \usepackage{tikz}
+\usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
 
 
@@ -212,6 +213,40 @@ Instructor: Dr. David Earn}
 
 \end{frame}
 
+\begin{frame}[t]{Effect of the 19th Century Treatments}
+\begin{itemize}
+\item Added parameter death caused by cholera ($\alpha$)
+\end{itemize}
+
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+
+\node [blocks] (S) {S};
+\node [blank, above of=S, yshift=-1cm] (0) { };
+\node [blank, right of=S] (1) { };
+\node [blockb, below of=1, yshift=1.5cm] (W) {W};
+\node [blank, below of=W, yshift=1cm] (2) { };
+\node [blocki, right of=1] (I) {I};
+\node [blockr, right of=I] (R) {R};
+
+\node [blank, below of=S, yshift=1cm] (3) {};
+\node [blank, below of=I, yshift=1cm] (4) {};
+\node [blank, below of=R, yshift=1cm] (5) {};
+
+\path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
+\path [line] (I) -- node {$\gamma$} (R);
+\path [line] (I) -- node {$\xi$} (W);
+\path [line] (W) -- node[anchor=west] {$\sigma$} (2);
+\path [line] (0) -- node[anchor=west] {$\mu$} (S);
+
+\path [line] (S) -- node[anchor=west] {$\mu$} (3);
+\path [line] (I) -- node[anchor=west] {$\mu$ + \textcolor{red}{$\alpha$}} (4);
+\path [line] (R) -- node[anchor=west] {$\mu$} (5);
+
+\end{tikzpicture}
+\end{center}
+\end{frame}
+
 \begin{frame}{Effect of the 19th Century Treatments}
 
 \end{frame}
@@ -261,7 +296,7 @@ Instructor: Dr. David Earn}
 \path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
 \path [line] (I) -- node {$\gamma$} (R);
 \path [line] (I) -- node {$\xi$} (W);
-\path [line] (W) -- node[anchor=west] {$\sigma + \rho$} (2);
+\path [line] (W) -- node[anchor=west] {$\sigma$ + \textcolor{red}{$\rho$}} (2);
 \path [line] (0) -- node[anchor=west] {$\mu$} (S);
 
 \path [line] (S) -- node[anchor=west] {$\mu$} (3);
@@ -289,7 +324,7 @@ Instructor: Dr. David Earn}
 \node [blank, below of=R, yshift=1cm] (5) {};
 
 \path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
-\path [line] (S) to [bend left,looseness=1] node[above] {$\nu$} (R);
+\path [line] (S) to [bend left,looseness=1] node[above] {\textcolor{red}{$\nu$}} (R);
 \path [line] (I) -- node {$\gamma$} (R);
 \path [line] (I) -- node {$\xi$} (W);
 \path [line] (W) -- node[anchor=west] {$\sigma$} (2);
@@ -320,7 +355,7 @@ Instructor: Dr. David Earn}
 \node [blank, below of=R, yshift=1cm] (5) {};
 
 \path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
-\path [line] (I) -- node {$\gamma + \eta$} (R);
+\path [line] (I) -- node {$\gamma$ + \textcolor{red}{$\eta$}} (R);
 \path [line] (I) -- node {$\xi$} (W);
 \path [line] (W) -- node[anchor=west] {$\sigma$} (2);
 \path [line] (0) -- node[anchor=west] {$\mu$} (S);
