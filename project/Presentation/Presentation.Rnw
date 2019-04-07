@@ -4,7 +4,7 @@
 \usetheme{Madrid}
 \usecolortheme[named=deepcarmine]{structure}
 \usefonttheme[onlymath]{serif}
-\usepackage{tikz}
+\usepackage{tikz, amsfonts}
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
 
@@ -47,7 +47,7 @@ Instructor: Dr. David Earn}
 \item Causes dehydration
 \end{itemize}
 \column{0.5\textwidth}
-\includegraphics[width=0.65\textwidth]{SI.jpg}
+\includegraphics[width=0.65\textwidth]{images/SI.jpg}
 \end{columns}
 \end{frame}
 
@@ -61,7 +61,7 @@ Instructor: Dr. David Earn}
 \item John Snow  
 \end{itemize}
 \column{0.5\textwidth}
-\includegraphics[width=0.65\textwidth]{Snow.jpg}
+\includegraphics[width=0.65\textwidth]{images/Snow.jpg}
 \end{columns}
 \end{frame}
 
@@ -117,10 +117,6 @@ Instructor: Dr. David Earn}
 \end{center}
 \end{frame}
 
-\begin{frame}{SIWR Model Phase Portrait}
-
-\end{frame}
-
 \begin{frame}[t]{$R_0$ Calculation}
 \begin{itemize}
 \item Using the method of Next Generation Matrix (van den Driessche and Watmough, 2002)
@@ -158,8 +154,26 @@ Instructor: Dr. David Earn}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Final Size}
+\begin{frame}{SIWR Model Phase Portrait}
+\includegraphics[width=0.475\textwidth]{images/phasebasewithoutvital.pdf}
+\hfill
+\includegraphics[width=0.475\textwidth]{images/phasebasewithvital.pdf}
+%same parameter values between, only difference is \mu
+%phasebase with vital R_0 = 2.255, phasebase without vital R_0=2.4
+%vital dynamics shows damped oscillations to the EE
+\end{frame}
 
+\begin{frame}{Final Size}
+\begin{columns}[onlytextwidth]
+\column{0.5\textwidth}
+\begin{itemize}
+\setlength\itemsep{2em}
+\item Assuming $\mu =0$ and $\mathcal R_0 > 1$, final size formula still holds:
+\item $Z = 1 - e^{-\mathcal R_0 Z}$
+\end{itemize}
+\column{0.5\textwidth}
+\includegraphics[width=0.95\textwidth]{images/finalsize.pdf}
+\end{columns}
 \end{frame}
 
 \begin{frame}[t]{Effects of the 19th Century Treatments}
@@ -197,7 +211,17 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 \begin{frame}{Effects of the 19th Century Treatments}
-
+\begin{columns}[onlytextwidth]
+\column{0.5\textwidth}
+\includegraphics[width=0.95\textwidth]{images/centurytreatment.pdf}
+\column{0.5\textwidth}
+\begin{itemize}
+\setlength\itemsep{2em}
+\item Estimated death rate of cholera in the 19th century ranges from a small percentage up to fifty percent
+\item Including disease induced death is ''beneficial" if death rate by cholera is high (Why?)
+\item Improper sanitation increases peak prevalence
+\end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}[t]{Multi-Patch Model}
@@ -219,7 +243,7 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 \begin{frame}{Multi-Patch Model Simulation}
- 
+
 \end{frame}
 
 \begin{frame}{Treatment Strategies For Cholera}
@@ -323,7 +347,17 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 \begin{frame}{Comparing the Treatment Strategies}
-
+\begin{columns}[onlytextwidth]
+\column{0.5\textwidth}
+\includegraphics[width=0.95\textwidth]{images/treatcomparison.pdf}
+\column{0.5\textwidth}
+\begin{itemize}
+\setlength\itemsep{2em}
+\item 
+\item 
+\item 
+\end{itemize}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Comparing the Treatment Strategies}
