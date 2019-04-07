@@ -6,7 +6,7 @@ For our model, we have
 \begin{linenomath}
 \begin{align*}
 		F&=\begin{pmatrix}
-			\beta_i & \beta_w\\
+			\beta_I & \beta_w\\
 			0 & 0
 			\end{pmatrix}\\
 		V&=\begin{pmatrix}
