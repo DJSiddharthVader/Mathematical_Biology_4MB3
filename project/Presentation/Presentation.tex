@@ -57,6 +57,8 @@
 \usepackage{tikz, amsfonts}
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
+\addbibresource{references.bib}
+\setbeamertemplate{bibliography item}{}
 
 \title[Modelling Cholera Treatments]
 {Examining Treatment Strategies for Cholera Incorporating Spatial Dynamics}
@@ -91,7 +93,7 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item Vibrio cholerae
+\item Vibrio cholerae 
 \item Colonize small intestines
 \item 10 percent of infected develop symptoms
 \item Causes dehydration
@@ -420,7 +422,7 @@ Instructor: Dr. David Earn}
 \item 19th century outbreaks
 \item Significance of the using multi-patch model
 \item Our treatment simulations suggest…
-\item Further research on the spread of water borne diseases like cholera can be done in areas like…
+\item Further research on the spread of water borne diseases like cholera can be done in areas like… 
 \end{itemize}
 \end{frame}
 
@@ -430,6 +432,12 @@ Instructor: Dr. David Earn}
 \end{center}
 \end{frame}
 
+\begin{frame}[allowframebreaks]
+        \frametitle{References}
+        \nocite{*}
+        \bibliographystyle{vancouver}
+        \bibliography{references.bib}
+\end{frame}
 
 
 \end{document}
