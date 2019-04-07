@@ -149,7 +149,7 @@ Instructor: Dr. David Earn}
 \begin{enumerate}
 \setlength\itemsep{2em}
 \item DFE: $(S,I,R)=(1,0,0)$
-\item EE: $(s^{*},i^{*},r^{*}) = (\frac{1}{R_0}, \frac{\mu}{\gamma+\mu}(1-s^{*}), i^{*})$
+\item EE: $(S^{*},I^{*},R^{*}) = (\frac{1}{R_0}, \frac{\mu}{\gamma+\mu}(1-S^{*}), I^{*})$
 \end{enumerate}
 \item The DFE is stable when ${\mathcal R_0}<1$.
 \item The EE is globally stable when ${\mathcal R_0}>1$ (Tien and Earn, 2010).
