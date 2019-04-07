@@ -8,7 +8,6 @@
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
 \addbibresource{references.bib}
-\setbeamertemplate{bibliography item}{}
 
 \title[Modelling Cholera Treatments]
 {Examining Treatment Strategies for Cholera Incorporating Spatial Dynamics}
@@ -23,6 +22,7 @@ Instructor: Dr. David Earn}
 \tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
 \tikzstyle{blank} = [inner sep=0,outer sep=0]
 \tikzstyle{line} = [draw,->,>=stealth]
+
 
 \begin{document}
 
@@ -361,7 +361,6 @@ Instructor: Dr. David Earn}
 \end{itemize}
 \end{columns}
 \end{frame}
-
 
 \begin{frame}{Conclusions and Further Research}
 \begin{itemize}
