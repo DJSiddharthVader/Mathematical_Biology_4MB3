@@ -170,8 +170,8 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item Assuming $\mu =0$ and $\mathcal R_0 > 1$, final size formula still holds:
-\item $Z = 1 - e^{-\mathcal R_0 Z}$
+\item Assuming $\mu =0$ and $\mathcal R_0 > 1$, final size formula* still holds:
+\item $Z = 1 - \exp{(-\mathcal R_0 Z - \frac{\beta_w}{\sigma}{w_0})}$
 \end{itemize}
 \column{0.5\textwidth}
 \includegraphics[width=0.95\textwidth]{images/finalsize.pdf}
@@ -220,7 +220,7 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item Estimated death rate of cholera in the 19th century ranges from a small percentage up to fifty percent
-\item Including disease induced death is ''beneficial" if death rate by cholera is high (Why?)
+\item Including disease induced death is ``beneficial" if death rate by cholera is high (Why?)
 \item Improper sanitation increases peak prevalence
 \end{itemize}
 \end{columns}
