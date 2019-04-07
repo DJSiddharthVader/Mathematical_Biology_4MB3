@@ -44,9 +44,9 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item \textit{Vibrio cholerae}
-\item Colonize small intestines
-\item 10 percent of infected develop symptoms
-\item Causes dehydration
+\item Colonize the small intestines
+\item 10 percent of infected individuals develop symptoms
+\item Causes severe dehydration
 \end{itemize}
 \column{0.5\textwidth}
 \includegraphics[width=0.65\textwidth]{images/SI.jpg}
@@ -240,7 +240,7 @@ Instructor: Dr. David Earn}
 \setlength\itemsep{2em}
 \item No dispersal of individuals
 \item Infected individuals can infect the susceptible in neighboring patches
-\item All patches neighbouring i have the same transmission rate to patch i 
+\item All patches neighbouring $i$ have the same transmission rate to patch $i$ 
 \end{itemize}
 \end{frame}
 
@@ -355,8 +355,8 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item 
-\item 
+\item Parameters chosen from literature
+\item Lowest peak prevalence for antibiotic treatment
 \item 
 \end{itemize}
 \end{columns}
