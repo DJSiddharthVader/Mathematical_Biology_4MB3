@@ -43,7 +43,7 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item Vibrio cholerae 
+\item \textit{Vibrio cholerae}
 \item Colonize small intestines
 \item 10 percent of infected develop symptoms
 \item Causes dehydration
