@@ -19,7 +19,7 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 \begin{linenomath}
 \begin{align*}
     {\mathcal R_0} &= \rho(FV^{-1})\\
-		           &=\frac{\beta_i+\beta_w}{\gamma+\mu}
+		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
 \end{linenomath}
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
