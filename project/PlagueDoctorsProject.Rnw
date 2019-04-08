@@ -12,6 +12,7 @@
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
 \usepackage{amsfonts, array, siunitx} % mathbb
+\usepackage{animate}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 %Referenes
@@ -46,8 +47,7 @@
 }
 \date{\today\ @ \thistime}
 \maketitle
-%due date
-%\bigskip
+%due date %\bigskip
 %\noindent
 %This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
 %\bigskip

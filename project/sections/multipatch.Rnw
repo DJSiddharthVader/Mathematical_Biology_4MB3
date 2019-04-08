@@ -28,36 +28,78 @@ The assumptions for the single patch model apply here as well as the following.
     \item All patches neighbouring $i$ have the same transmission rate to patch $i$
 \end{itemize}
 <<mpcaption,echo=FALSE>>=
-    mu = 1/1537 # avg lifespan 58 yrs
-    beta_i = 0.025 #transmission r. S between I
-    gamma = 1/7 #rate of recovery (days)
-    sigma = 1/25 #rate of water removal
-    beta_w = 0.5 #transmission r. I between W
-    xi = 10 #shedding rate I into W (force it eaual to sigma?)
-    phi <- 0.01
-    psi <- 0.05
-    alpha = 0 #death rate by cholera
+    #params
+    mu <- 1/1537 # avg lifespan 58 yrs
+    beta_i <- 0.025 #transmission r. S between I
+    beta_w <- 0.5 #transmission r. I between W
+    gamma <- 1/7 #rate of recovery (days)
+    sigma <- 1/25 #rate of water removal
+    dx <- 0.1
+    dy <- dx
+    Dsr <- 0.05
+    Di <- 0.05
+    Dw <- 0.03
+    alpha <- 0 #death rate by cholera
     i0 <- 0.06
     w0 <- 0.13
-    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\\mu=',round(mu,2),',\\ \\beta_i=',round(beta_i,2),',\\ \\gamma=',round(gamma,2),',\\ \\sigma=',round(sigma,2),',\\ \\beta_w=',round(beta_w,2),',\\ \\alpha=',alpha,',\\ \\xi=',xi,',\\ \\phi=',phi,',\\ \\psi=',psi,'$','. The initial conditions for the model were $S_0=',1-i0,',\\ I_0=',i0,',\\ R_0=',0,',$.',sep='')
+    i0 <- 0.06
+    s0 <- 1-i0
+    w0 <- 0.13
+    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are ',
+                   '$\\mu=',round(mu,2),
+                   ',\\beta_i=',round(beta_i,2),
+                   ',\\gamma=',round(gamma,2),
+                   ',\\sigma=',round(sigma,2),
+                   ',\\beta_w=',round(beta_w,2),
+                   ',\\alpha=',alpha,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',s0,
+                   ',I_0=',i0,
+                   ',R_0=',0,',$.',
+                   sep='')
 @
-<<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
+<<<multiPatch,fig.show='animate',fig.height=6,echo=FALSE,fig.cap=mpcap>>=
     source('spatialSIR.R')
     #multipatch
-    rows <- 3
-    cols <- 3
-    #dmat <- distmat(rows,cols,method='manhattan')
-    nmat <- neighourmat(rows,cols,influence=phi)
-    wmat <- neighourmat(rows,cols,influence=psi)
-    ic <- list(rows=rows,
-               cols=cols,
-               i0=i0,
-               w0=w0)
-    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha,nmat=nmat,wmat=wmat)
+    rows <- 10
+    cols <- rows
+    params <- list(rows=rows,
+                   cols=cols,
+                   mu=mu,
+                   beta_i=beta_i,
+                   gamma=gamma,
+                   sigma=sigma,
+                   beta_w=beta_w,
+                   alpha=alpha,
+                   dx=dx,
+                   dy=dy,
+                   Dsr=Dsr,
+                   Di=Di,
+                   Dw=Dw)
     tmax <- 500
-    steps <- 5000
-    soln <- solveMultiModel(multiWaterModel,ic,params,
-                            tmax=tmax,steps=steps)
-    multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
+    steps <- 50
+    soln <- solveMultiModel(multiWaterModel,ic,params, tmax=tmax,steps=steps)
+    image(soln, select=1:4, axes=FALSE, legend = TRUE, ask=FALSE, main=c("Susceptible", "Infectious", "Recovered","Water"), mfrow=c(2,2))
 @
 \FloatBarrier
+
+%<<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
+%    source('spatialSIR.R')
+%    #multipatch
+%    rows <- 3
+%    cols <- 3
+%    #dmat <- distmat(rows,cols,method='manhattan')
+%    nmat <- neighourmat(rows,cols,influence=phi)
+%    wmat <- neighourmat(rows,cols,influence=psi)
+%    ic <- list(rows=rows,
+%               cols=cols,
+%               i0=i0,
+%               w0=w0)
+%    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha,nmat=nmat,wmat=wmat)
+%    tmax <- 500
+%    steps <- 5000
+%    soln <- solveMultiModel(multiWaterModel,ic,params,
+%                            tmax=tmax,steps=steps)
+%    multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
+%@
+%\FloatBarrier

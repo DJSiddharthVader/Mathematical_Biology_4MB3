@@ -1,12 +1,19 @@
 \documentclass{beamer}
 
 \definecolor{deepcarmine}{rgb}{0.66, 0.13, 0.24}
+\usepackage{animate}
+\usepackage{multimedia}
+\usepackage{pdfpc-movie}
 \usetheme{Madrid}
 \usecolortheme[named=deepcarmine]{structure}
 \usefonttheme[onlymath]{serif}
 \usepackage{tikz, amsfonts}
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
+\usepackage[natbib=true,
+            style=nature,
+            backend=biber,
+            useprefix=true]{biblatex}
 \addbibresource{references.bib}
 
 \title[Modelling Cholera Treatments]
@@ -44,7 +51,7 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item \textit{Vibrio cholerae}
-\item Colonize the small intestines
+\item Colonizes the small intestine
 \item 10 percent of infected individuals develop symptoms
 \item Causes severe dehydration
 \end{itemize}
@@ -60,7 +67,7 @@ Instructor: Dr. David Earn}
 \setlength\itemsep{2em}
 \item 1832, 1849, 1854, 1866
 \item Miasma Theory
-\item John Snow  
+\item John Snow
 \end{itemize}
 \column{0.5\textwidth}
 \includegraphics[width=0.65\textwidth]{images/Snow.jpg}
@@ -73,7 +80,7 @@ Instructor: Dr. David Earn}
 \item Entire population (N) included
 \item 3 Compartments : S, I, R
 \item Compartment values are proportional
-\item Environment (Water)
+\item Water compartment for Cholera
 \end{itemize}
 \end{frame}
 
@@ -81,11 +88,11 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item Birth Rate = Natural Death Rate and is constant
-\item Homogenous susceptibility to cholera across population
+\item Population equally succeptible to infection
 \item No waning immunity
 \item No latency period
 \item Only infected individuals can infect the water sources
-\item Water source is still
+\item Water sources can infect individuals
 \end{itemize}
 \end{frame}
 
@@ -180,7 +187,7 @@ Instructor: Dr. David Earn}
 
 \begin{frame}[t]{Effects of the 19th Century Treatments}
 \begin{itemize}
-\item Added parameter death caused by cholera ($\alpha$)
+\item Added parameter for death rate from Cholera: ($\alpha$)
 \end{itemize}
 
 \begin{center}
@@ -219,34 +226,13 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item Estimated death rate of cholera in the 19th century ranges from a small percentage up to fifty percent
+\item Estimated death rate from cholera in the 19th century estimated to be up to $50\%$
 \item Including disease induced death is ``beneficial" if death rate by cholera is high (Why?)
 \item Improper sanitation increases peak prevalence
 \end{itemize}
 \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Multi-Patch Model}
-\begin{align*}
-    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\[1em]
-    \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\[1em]
-    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\[1em]
-    \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
-\end{align*}
-\end{frame}
-
-\begin{frame}{Multi-Patch Model Assumptions}
-\begin{itemize}
-\setlength\itemsep{2em}
-\item No dispersal of individuals
-\item Infected individuals can infect the susceptible in neighboring patches
-\item All patches neighbouring $i$ have the same transmission rate to patch $i$ 
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Multi-Patch Model Simulation}
-
-\end{frame}
 
 \begin{frame}{Treatment Strategies For Cholera}
 \begin{enumerate}
@@ -356,21 +342,55 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item Parameters chosen from literature
-\item Lowest peak prevalence for antibiotic treatment
-\item 
+\item Lowest peak prevalence for vaccination treatment
 \end{itemize}
 \end{columns}
 \end{frame}
 
+\begin{frame}[t]{Multi-Patch Model}
+\begin{align*}
+    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i  - \beta_w S_i W_i + r(S)\\[1em]
+    \frac{dI_i}{dt}&= \beta_i S_i I_i +  \beta_w S_i W_i - I_i (\gamma + \mu + \alpha) \\[1em]
+    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i + r(R)\\[1em]
+    \frac{dW_i}{dt}&= \xi I_i - \sigma W_i + r(W)
+\end{align*}
+\end{frame}
+
+\begin{frame}{Multi-Patch Model Assumptions}
+\begin{itemize}
+\setlength\itemsep{2em}
+\item No dispersal of infected individuals
+\item All patches have the same set of parameter values
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Spatial Dynamics (Base)}
+    \begin{center}
+    \pdfpcmovie{Base}{../sections/gifs/base.gif}
+    \pdfpcmovie{Sanitation}{../sections/gifs/sanitation.gif}
+    \pdfpcmovie{Antibiotics}{../sections/gifs/antibiotics.gif}
+    \pdfpcmovie{Vaccination}{../sections/gifs/vaccination.gif}
+\end{center}
+\end{frame}
+
+\begin{frame}{Comparing the Treatment Strategies In Multipatch Model}
+    \begin{center}
+    \includegraphics[width=0.7\textwidth]{images/spatialTreatments.png}
+    \end{center}
+\end{frame}
+
+
+
 \begin{frame}{Conclusions and Further Research}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item 19th century outbreaks
+\item 19th century outbreaks poorly handeled without antibiotics/vaccines
 \item Different Treatments have different costs and outcomes
-\item Significance of the using multi-patch model
-\item Further research on the spread of water borne diseases
+\item Further research on improving water sanitation effectivness to reduce reliance on vaccines/antibiotics
 \end{itemize}
 \end{frame}
+
 
 \begin{frame}
 \begin{center}
@@ -381,8 +401,9 @@ Instructor: Dr. David Earn}
 \begin{frame}[allowframebreaks]
         \frametitle{References}
         \nocite{*}
-        \bibliographystyle{vancouver}
-        \bibliography{references.bib}
+%        \bibliographystyle{vancouver}
+%        \bibliography{references.bib}
+        \printbibliography
 \end{frame}
 
 
