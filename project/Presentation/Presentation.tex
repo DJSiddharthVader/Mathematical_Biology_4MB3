@@ -50,6 +50,7 @@
 
 \usepackage{alltt}
 
+
 \definecolor{deepcarmine}{rgb}{0.66, 0.13, 0.24}
 \usetheme{Madrid}
 \usecolortheme[named=deepcarmine]{structure}
@@ -57,6 +58,7 @@
 \usepackage{tikz, amsfonts}
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
+\usepackage{biblatex}
 \addbibresource{references.bib}
 
 \title[Modelling Cholera Treatments]
@@ -93,9 +95,9 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item \textit{Vibrio cholerae}
-\item Colonize small intestines
-\item 10 percent of infected develop symptoms
-\item Causes dehydration
+\item Colonize the small intestines
+\item 10 percent of infected individuals develop symptoms
+\item Causes severe dehydration
 \end{itemize}
 \column{0.5\textwidth}
 \includegraphics[width=0.65\textwidth]{images/SI.jpg}
@@ -198,7 +200,7 @@ Instructor: Dr. David Earn}
 \begin{enumerate}
 \setlength\itemsep{2em}
 \item DFE: $(S,I,R)=(1,0,0)$
-\item EE: $(s^{*},i^{*},r^{*}) = (\frac{1}{R_0}, \frac{\mu}{\gamma+\mu}(1-s^{*}), i^{*})$
+\item EE: $(S^{*},I^{*},R^{*}) = (\frac{1}{R_0}, \frac{\mu}{\gamma+\mu}(1-S^{*}), I^{*})$
 \end{enumerate}
 \item The DFE is stable when ${\mathcal R_0}<1$.
 \item The EE is globally stable when ${\mathcal R_0}>1$ (Tien and Earn, 2010).
@@ -219,8 +221,8 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item Assuming $\mu =0$ and $\mathcal R_0 > 1$, final size formula still holds:
-\item $Z = 1 - e^{-\mathcal R_0 Z}$
+\item Assuming $\mu =0$ and $\mathcal R_0 > 1$, final size formula* still holds:
+\item $Z = 1 - \exp{(-\mathcal R_0 Z - \frac{\beta_w}{\sigma}{w_0})}$
 \end{itemize}
 \column{0.5\textwidth}
 \includegraphics[width=0.95\textwidth]{images/finalsize.pdf}
@@ -269,7 +271,7 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item Estimated death rate of cholera in the 19th century ranges from a small percentage up to fifty percent
-\item Including disease induced death is ''beneficial" if death rate by cholera is high (Why?)
+\item Including disease induced death is ``beneficial" if death rate by cholera is high (Why?)
 \item Improper sanitation increases peak prevalence
 \end{itemize}
 \end{columns}
@@ -289,7 +291,7 @@ Instructor: Dr. David Earn}
 \setlength\itemsep{2em}
 \item No dispersal of individuals
 \item Infected individuals can infect the susceptible in neighboring patches
-\item All patches neighbouring i have the same transmission rate to patch i 
+\item All patches neighbouring $i$ have the same transmission rate to patch $i$ 
 \end{itemize}
 \end{frame}
 
@@ -404,8 +406,8 @@ Instructor: Dr. David Earn}
 \column{0.5\textwidth}
 \begin{itemize}
 \setlength\itemsep{2em}
-\item 
-\item 
+\item Parameters chosen from literature
+\item Lowest peak prevalence for antibiotic treatment
 \item 
 \end{itemize}
 \end{columns}
@@ -427,12 +429,12 @@ Instructor: Dr. David Earn}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-        \frametitle{References}
-        \nocite{*}
-        \bibliographystyle{vancouver}
-        \bibliography{references.bib}
-\end{frame}
+
+\begin{frame}[t,allowframebreaks]
+  \frametitle{References}
+    \nocite{*}
+  \printbibliography
+ \end{frame}
 
 
 \end{document}

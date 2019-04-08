@@ -1,5 +1,6 @@
 \documentclass{beamer}
 
+
 \definecolor{deepcarmine}{rgb}{0.66, 0.13, 0.24}
 \usetheme{Madrid}
 \usecolortheme[named=deepcarmine]{structure}
@@ -7,6 +8,7 @@
 \usepackage{tikz, amsfonts}
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
+\usepackage{biblatex}
 \addbibresource{references.bib}
 
 \title[Modelling Cholera Treatments]
@@ -366,9 +368,9 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item 19th century outbreaks
-\item Different Treatments have different costs and outcomes
 \item Significance of the using multi-patch model
-\item Further research on the spread of water borne diseases
+\item Our treatment simulations suggest…
+\item Further research on the spread of water borne diseases like cholera can be done in areas like… 
 \end{itemize}
 \end{frame}
 
@@ -378,12 +380,12 @@ Instructor: Dr. David Earn}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-        \frametitle{References}
-        \nocite{*}
-        \bibliographystyle{vancouver}
-        \bibliography{references.bib}
-\end{frame}
+
+\begin{frame}[t,allowframebreaks]
+  \frametitle{References}
+    \nocite{*}
+  \printbibliography
+ \end{frame}
 
 
 \end{document}
