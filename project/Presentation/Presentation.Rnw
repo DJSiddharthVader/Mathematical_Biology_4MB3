@@ -1,8 +1,7 @@
 \documentclass{beamer}
 
+
 \definecolor{deepcarmine}{rgb}{0.66, 0.13, 0.24}
-\usepackage{animate}
-\usepackage{multimedia}
 \usepackage{pdfpc-movie}
 \usetheme{Madrid}
 \usecolortheme[named=deepcarmine]{structure}
@@ -14,6 +13,7 @@
             style=nature,
             backend=biber,
             useprefix=true]{biblatex}
+\usepackage{biblatex}
 \addbibresource{references.bib}
 
 \title[Modelling Cholera Treatments]
@@ -398,13 +398,11 @@ Instructor: Dr. David Earn}
 \end{center}
 \end{frame}
 
-\begin{frame}[allowframebreaks]
-        \frametitle{References}
-        \nocite{*}
-%        \bibliographystyle{vancouver}
-%        \bibliography{references.bib}
-        \printbibliography
-\end{frame}
 
+\begin{frame}[t,allowframebreaks]
+  \frametitle{References}
+    \nocite{*}
+  \printbibliography
+ \end{frame}
 
 \end{document}
