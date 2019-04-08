@@ -2,19 +2,14 @@
 
 
 \definecolor{deepcarmine}{rgb}{0.66, 0.13, 0.24}
-\usepackage{pdfpc-movie}
+% \usepackage{pdfpc-movie}
 \usetheme{Madrid}
 \usecolortheme[named=deepcarmine]{structure}
 \usefonttheme[onlymath]{serif}
 \usepackage{tikz, amsfonts}
 \usepackage{xcolor}
 \usetikzlibrary{shapes.geometric, arrows}
-\usepackage[natbib=true,
-            style=nature,
-            backend=biber,
-            useprefix=true]{biblatex}
-\usepackage{biblatex}
-\addbibresource{references.bib}
+\setbeamertemplate{bibliography item}{}
 
 \title[Modelling Cholera Treatments]
 {Examining Treatment Strategies for Cholera Incorporating Spatial Dynamics}
@@ -132,7 +127,7 @@ Instructor: Dr. David Earn}
 \end{itemize}
 \begin{align*}
 		F&=\begin{pmatrix}
-			\beta_i & \beta_w\\
+			\beta_I & \beta_w\\
 			0 & 0
 			\end{pmatrix}\\
 		V&=\begin{pmatrix}
@@ -145,7 +140,7 @@ Instructor: Dr. David Earn}
 \end{itemize}
 \begin{align*}
     {\mathcal R_0} &= \rho(FV^{-1})\\
-		           &=\frac{\beta_i+\beta_w}{\gamma+\mu} \approx 1.1 - 2.7
+		           &=\frac{\beta_I+\beta_w}{\gamma+\mu} \approx 1.1 - 2.7
 \end{align*}
 \end{frame}
 
@@ -185,53 +180,53 @@ Instructor: Dr. David Earn}
 \end{columns}
 \end{frame}
 
-\begin{frame}[t]{Effects of the 19th Century Treatments}
-\begin{itemize}
-\item Added parameter for death rate from Cholera: ($\alpha$)
-\end{itemize}
-
-\begin{center}
-\begin{tikzpicture}[node distance=3cm, auto]
-
-\node [blocks] (S) {S};
-\node [blank, above of=S, yshift=-1cm] (0) { };
-\node [blank, right of=S] (1) { };
-\node [blockb, below of=1, yshift=1.5cm] (W) {W};
-\node [blank, below of=W, yshift=1cm] (2) { };
-\node [blocki, right of=1] (I) {I};
-\node [blockr, right of=I] (R) {R};
-
-\node [blank, below of=S, yshift=1cm] (3) {};
-\node [blank, below of=I, yshift=1cm] (4) {};
-\node [blank, below of=R, yshift=1cm] (5) {};
-
-\path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
-\path [line] (I) -- node {$\gamma$} (R);
-\path [line] (I) -- node {$\xi$} (W);
-\path [line] (W) -- node[anchor=west] {$\sigma$} (2);
-\path [line] (0) -- node[anchor=west] {$\mu$} (S);
-
-\path [line] (S) -- node[anchor=west] {$\mu$} (3);
-\path [line] (I) -- node[anchor=west] {$\mu$ + \textcolor{red}{$\alpha$}} (4);
-\path [line] (R) -- node[anchor=west] {$\mu$} (5);
-
-\end{tikzpicture}
-\end{center}
-\end{frame}
-
-\begin{frame}{Effects of the 19th Century Treatments}
-\begin{columns}[onlytextwidth]
-\column{0.5\textwidth}
-\includegraphics[width=0.95\textwidth]{images/centurytreatment.pdf}
-\column{0.5\textwidth}
-\begin{itemize}
-\setlength\itemsep{2em}
-\item Estimated death rate from cholera in the 19th century estimated to be up to $50\%$
-\item Including disease induced death is ``beneficial" if death rate by cholera is high (Why?)
-\item Improper sanitation increases peak prevalence
-\end{itemize}
-\end{columns}
-\end{frame}
+% \begin{frame}[t]{Effects of the 19th Century Treatments}
+% \begin{itemize}
+% \item Added parameter for death rate from Cholera: ($\alpha$)
+% \end{itemize}
+% 
+% \begin{center}
+% \begin{tikzpicture}[node distance=3cm, auto]
+% 
+% \node [blocks] (S) {S};
+% \node [blank, above of=S, yshift=-1cm] (0) { };
+% \node [blank, right of=S] (1) { };
+% \node [blockb, below of=1, yshift=1.5cm] (W) {W};
+% \node [blank, below of=W, yshift=1cm] (2) { };
+% \node [blocki, right of=1] (I) {I};
+% \node [blockr, right of=I] (R) {R};
+% 
+% \node [blank, below of=S, yshift=1cm] (3) {};
+% \node [blank, below of=I, yshift=1cm] (4) {};
+% \node [blank, below of=R, yshift=1cm] (5) {};
+% 
+% \path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
+% \path [line] (I) -- node {$\gamma$} (R);
+% \path [line] (I) -- node {$\xi$} (W);
+% \path [line] (W) -- node[anchor=west] {$\sigma$} (2);
+% \path [line] (0) -- node[anchor=west] {$\mu$} (S);
+% 
+% \path [line] (S) -- node[anchor=west] {$\mu$} (3);
+% \path [line] (I) -- node[anchor=west] {$\mu$ + \textcolor{red}{$\alpha$}} (4);
+% \path [line] (R) -- node[anchor=west] {$\mu$} (5);
+% 
+% \end{tikzpicture}
+% \end{center}
+% \end{frame}
+% 
+% \begin{frame}{Effects of the 19th Century Treatments}
+% \begin{columns}[onlytextwidth]
+% \column{0.5\textwidth}
+% \includegraphics[width=0.95\textwidth]{images/centurytreatment.pdf}
+% \column{0.5\textwidth}
+% \begin{itemize}
+% \setlength\itemsep{2em}
+% \item Estimated death rate from cholera in the 19th century estimated to be up to $50\%$
+% \item Including disease induced death is ``beneficial" if death rate by cholera is high (Why?)
+% \item Improper sanitation increases peak prevalence
+% \end{itemize}
+% \end{columns}
+% \end{frame}
 
 
 \begin{frame}{Treatment Strategies For Cholera}
@@ -365,14 +360,14 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 
-\begin{frame}{Spatial Dynamics (Base)}
-    \begin{center}
-    \pdfpcmovie{Base}{../sections/gifs/base.gif}
-    \pdfpcmovie{Sanitation}{../sections/gifs/sanitation.gif}
-    \pdfpcmovie{Antibiotics}{../sections/gifs/antibiotics.gif}
-    \pdfpcmovie{Vaccination}{../sections/gifs/vaccination.gif}
-\end{center}
-\end{frame}
+% \begin{frame}{Spatial Dynamics (Base)}
+%     \begin{center}
+%     \pdfpcmovie{Base}{../sections/gifs/base.gif}
+%     \pdfpcmovie{Sanitation}{../sections/gifs/sanitation.gif}
+%     \pdfpcmovie{Antibiotics}{../sections/gifs/antibiotics.gif}
+%     \pdfpcmovie{Vaccination}{../sections/gifs/vaccination.gif}
+% \end{center}
+% \end{frame}
 
 \begin{frame}{Comparing the Treatment Strategies In Multipatch Model}
     \begin{center}
@@ -399,10 +394,11 @@ Instructor: Dr. David Earn}
 \end{frame}
 
 
-\begin{frame}[t,allowframebreaks]
-  \frametitle{References}
-    \nocite{*}
-  \printbibliography
- \end{frame}
+\begin{frame}[allowframebreaks]
+        \frametitle{References}
+        \bibliographystyle{vancouver}
+        \bibliography{references.bib}
+        \nocite{*}
+\end{frame}
 
 \end{document}
