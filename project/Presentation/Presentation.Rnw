@@ -366,9 +366,9 @@ Instructor: Dr. David Earn}
 \begin{itemize}
 \setlength\itemsep{2em}
 \item 19th century outbreaks
+\item Different Treatments have different costs and outcomes
 \item Significance of the using multi-patch model
-\item Our treatment simulations suggest…
-\item Further research on the spread of water borne diseases like cholera can be done in areas like… 
+\item Further research on the spread of water borne diseases
 \end{itemize}
 \end{frame}
 
