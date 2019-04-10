@@ -15,14 +15,22 @@ Since Thames was the drinking source of many, the misunderstanding about the met
 Early studies on cholera, such as the work of John Snow in the mid 19th century, have been pivotal in the development of modern epidemiology.
 However, the abundance of more recent studies using mathematical models to anticipate outbreaks of cholera and planning for interventions is the reason for our focus on this particular disease.
 \subsection{Transmission Dynamics of Cholera}
-Before introducing a simple model to simulate the temporal spread of cholera, we must discuss the processes we plan to analyze.
+Before introducing a simple model to simulate the temporal spread of cholera, we must discuss the processes we plan to analyze and our assumptions.
 The model should include the entire population, which for simplicity we will assume is comprised of only three groups: the susceptible, the infected (or infectious), and the recovered.
 The only area still remaining that has a major impact on the epidemic is the environment, or in this case the water.
-We assume that only Infectious individuals can contaminate the water sources by shedding the pathogen into the water.
-The halting remedy suggested increased the rate of water contamination drastically, which in turn increased the transmission rate from individuals coming into contact with the infected water.
+For simplicity we will assume:
+\begin{itemize}
+\item Natural Birth Rate = Natural Death Rate.
+\item The population is equally succeptible to infection.
+\item There is no waning immunity (individuals cannot go back to being susceptible after they recover from cholera).
+\item There is no latency period (no significant latency period was documented in studies).
+\item Only infectious individuals can contaminate the water sources by shedding the pathogen into the water.
+\item The water sources are still.
+\end{itemize}
+The halting remedy suggested in 1848 in London increased the rate of water contamination drastically, which in turn increased the transmission rate from individuals coming into contact with the infected water.
 This is a plausible explanation for why maximum weekly deaths in London increase more than two-fold in the 1848 epidemic compared to the 1832 epidemic \citep{link3}.
-The main treatment strategies for cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
-We can incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
+Three possible treatment strategies for controlling cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
+We will incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
 \subsection{SIRW Model Construction}
 Our model has four distinct departments: susceptible, infectious, recovered, and water compartments \citep{link9}.
 \begin{description}
