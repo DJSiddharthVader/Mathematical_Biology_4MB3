@@ -98,8 +98,7 @@
 }
 \date{\today\ @ \thistime}
 \maketitle
-%due date
-%\bigskip
+%due date %\bigskip
 %\noindent
 %This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
 %\bigskip
@@ -137,14 +136,22 @@ Since Thames was the drinking source of many, the misunderstanding about the met
 Early studies on cholera, such as the work of John Snow in the mid 19th century, have been pivotal in the development of modern epidemiology.
 However, the abundance of more recent studies using mathematical models to anticipate outbreaks of cholera and planning for interventions is the reason for our focus on this particular disease.
 \subsection{Transmission Dynamics of Cholera}
-Before introducing a simple model to simulate the temporal spread of cholera, we must discuss the processes we plan to analyze.
+Before introducing a simple model to simulate the temporal spread of cholera, we must discuss the processes we plan to analyze and our assumptions.
 The model should include the entire population, which for simplicity we will assume is comprised of only three groups: the susceptible, the infected (or infectious), and the recovered.
 The only area still remaining that has a major impact on the epidemic is the environment, or in this case the water.
-We assume that only Infectious individuals can contaminate the water sources by shedding the pathogen into the water.
-The halting remedy suggested increased the rate of water contamination drastically, which in turn increased the transmission rate from individuals coming into contact with the infected water.
+For simplicity we will assume:
+\begin{itemize}
+\item Natural Birth Rate = Natural Death Rate.
+\item The population is equally succeptible to infection.
+\item There is no waning immunity (individuals cannot go back to being susceptible after they recover from cholera).
+\item There is no latency period (no significant latency period was documented in studies).
+\item Only infectious individuals can contaminate the water sources by shedding the pathogen into the water.
+\item The water sources are still.
+\end{itemize}
+The halting remedy suggested in 1848 in London increased the rate of water contamination drastically, which in turn increased the transmission rate from individuals coming into contact with the infected water.
 This is a plausible explanation for why maximum weekly deaths in London increase more than two-fold in the 1848 epidemic compared to the 1832 epidemic \citep{link3}.
-The main treatment strategies for cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
-We can incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
+Three possible treatment strategies for controlling cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
+We will incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
 \subsection{SIRW Model Construction}
 Our model has four distinct departments: susceptible, infectious, recovered, and water compartments \citep{link9}.
 \begin{description}
@@ -285,13 +292,11 @@ The assumptions for this model are
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: rootSolve}}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(ReacTran): there is no package called 'ReacTran'}}
 
-{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: shape}}\end{kframe}\begin{figure}[h]
-\includegraphics[width=\maxwidth]{figure/_singlePatch-1} \caption{\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\mu=0,\ \beta_I=0.02,\ \gamma=0.14,\ \sigma=0.04,\ \beta_w=0.5,\ \alpha=0,\ \xi=10$. Further the initial conditions for the model were $S_0=0.92,\ I_0=0.08,\ R_0=0.$}\label{fig:<singlePatch}
-\end{figure}
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in solveSingleModel(singleWaterModel, ic, params, tmax = tmax, steps = steps): could not find function "{}solveSingleModel"{}}}
 
-
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plotSoln(singlesoln, xlim = c(0, tmax), ylim = c(0, 1), ylab = "{}Population Proportion"{}, : could not find function "{}plotSoln"{}}}\end{kframe}
 \end{knitrout}
 \FloatBarrier
 \subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
@@ -304,7 +309,7 @@ For our model, we have
 \begin{linenomath}
 \begin{align*}
 		F&=\begin{pmatrix}
-			\beta_i & \beta_w\\
+			\beta_I & \beta_w\\
 			0 & 0
 			\end{pmatrix}\\
 		V&=\begin{pmatrix}
@@ -317,10 +322,10 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 \begin{linenomath}
 \begin{align*}
     {\mathcal R_0} &= \rho(FV^{-1})\\
-		           &=\frac{\beta_i+\beta_w}{\gamma+\mu}
+		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
 \end{linenomath}
-This singla patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
+This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
 It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 
 %\subsection{Single Patch With Low And High Shedding Compartments}
@@ -359,63 +364,14 @@ The assumptions for the single patch model apply here as well as the following.
 \end{itemize}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(ReacTran): there is no package called 'ReacTran'}}
 
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in solveMultiModel(multiWaterModel, ic, params, tmax = tmax, steps = steps): could not find function "{}solveMultiModel"{}}}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\begin{kframe}
-
-{\ttfamily\noindent\color{warningcolor}{\#\# Warning in plot.window(...): relative range of values =\ \ 98 * EPS, is small (axis 2)}}\end{kframe}
-
-\begin{figure}
-\animategraphics[,controls,loop]{1}{figure/_multiPatch-}{1}{51}\caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=0,\beta_i=0.02,\gamma=0.14,\sigma=0.04,\beta_w=0.5,\alpha=0$ The initial conditions for the model were $S_0=0.94,I_0=0.06,R_0=0,$.}\label{fig:<multiPatch}
-\end{figure}
-
-
+{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in image(soln, select = 1:4, axes = FALSE, legend = TRUE, ask = FALSE, : object 'soln' not found}}\end{kframe}
 \end{knitrout}
 \FloatBarrier
 
@@ -442,8 +398,15 @@ The assumptions for the single patch model apply here as well as the following.
 \section{Treatment Strategies For Cholera}
 
 %\section{Possible Treatment Strategies for Cholera}
+The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics. 
+The results of the analysis will aid government officials in implementing intervention strategies by determining optimal  parameters (that represent the different intervention strategies) that would be most effective in lowering the estimated reproductive number $\mathcal R_0$, peak prevalence, and the final size.
 \subsection{Treatment Plan 1: Sanitation of water over time}
-One of main ways control strategies for cholera is to treat the water directly (eg. with chlorine). This would essentially have the effect of increasing the rate of bacteria removal from water (defined as $\sigma$ in the base single patch model). This can be modeled by incorporating a new term $\rho$ in the base model:
+Water, sanitation, and hygiene (WASH) intervention is the most simplest and one of the effective ways of to reduce the spread of cholera.
+One of the easiest ways to implement intervention strategies that is easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}. 
+In the following model, a water treatment strategy would affect the water compartment (essentially increasing the removal or death rate of bacteria in water). 
+This can be implemented as a new term $\rho$. \par
+%Biologically relevant parameter ranges for \rho
+
 \begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
@@ -453,15 +416,25 @@ One of main ways control strategies for cholera is to treat the water directly (
 \end{align*}
 \end{linenomath}
 
-This new term $\rho$ can be either a constant which is implemented right at the start, or can be a function of time, or can be implemented at a certain threshold depending on the bacterial concentration (W) or the proportion of infecteds (I). For example:
-$$\rho (I)= \begin{cases}
-	\rho & I \geq 0.1 \\
-	0 & 0 \leq I \leq 0.1 \\
-	\end{cases}$$\\
-This represents the sanitation rate of $\rho$, implemented at certain threshold of infected (in this case the threshold is based on $I=0.1$ but can be based on W (i.e. testing water levels for cholera).\\
+For example, $\rho$ can either be a constant, or dependent on $I$ or $W$:\\
+$\rho (I)= \begin{cases}
+			 			\lambda & I \geq 0.1 \\
+			 			0 & 0 \leq I \leq 0.1 \\
+			 			\end{cases}$\\
+$\rho$ represents the sanitation (increased removal of cholera) rate of $\lambda$, implemented at certain threshold of infected (in this case the threshold is based on I but can be based on W (i.e. testing water levels for cholera).
+For model simplicity, $\rho$ will be regarded as a constant term and can viewed as a sanitation rate. The biologically plausible range for this parameter is $0 \leq \rho \leq 1$.\\ 
+%(Not sure about this upper boundary.
 
+%Model assumptions
+In addition to the base model assumptions, this treatment model assumes that treatment of water only affects the concentration of cholera bacteria within water reservoirs which are the only source of water for the population.
 
 \subsection{Treatment Plan 2: Vaccinations on Base Model}
+Cholera vaccine injections were first invented in 1885 and were first used during the mass vaccination campaigns of the Spain outbreaks \citep{link21}.
+Biotechnological advances in the late 20th century have resulted in the creation of immunization via oral cholera vaccines (OCV) which are more effective than their injective equivalent but require two stage dose administration with immunity imparted after one week after the first dose \citep{link21} \citep{link25}.
+Although the London outbreaks occurred prior to the creation of the vaccine, creating a model that implements vaccination techniques is vital for modelling future cholera outbreaks and can be further analyzed to determine the effect on $\mathcal R_0$ and the final size of the epidemic.\\ 
+This model assumes that vaccination is applied to the susceptible population and not before introduction into the system; this is done instead of vaccination at birth before entry into system since the cholera vaccine is not administered during infancy \citep{link25}.\\
+This model also assumes that the vaccine targets the only strain of the cholera bacteria that has caused the epidemic %(might want to change this wording). 
+It is possible that new strains of cholera can create a reccuring endemic (herald waves) with seasonality as described in Tien et al.\citep{link3}.
 
 \begin{linenomath}
 \begin{align*}
@@ -477,7 +450,9 @@ This represents the sanitation rate of $\rho$, implemented at certain threshold 
 \end{itemize}
 
 \subsection{Treatment Plan 3: Antibiotics on Base Model}
-
+More modern techniques of treating cholera involve the use of antibiotics. Several antibiotics that are regarded as effective against cholera such as azithromicin have been used since the early 1990s \citep{link23}. 
+Use of antbiotics when infected effectively shortens the duration of diarrhea and results in fewer bowel movements and lower stool volume \citep{link24}. This biological process can be either be implemented in the base single patch model by lowering the duration of the infectious period (which can be be viewed as an introduction of a new parameter in $dI/dt$) or by lowering the shedding rate into water (which can be implemented by lowering the shedding rate $\xi$).
+The following model implements a decrease in the duration of the infectious period by using the term $ - \eta I$.
 \begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W \\
@@ -507,6 +482,7 @@ The following are numerical simulations and phase portraits for the base model w
 \includegraphics[width=6cm]{figure/num_sim-2} 
 \includegraphics[width=6cm]{figure/num_sim-3} 
 \includegraphics[width=6cm]{figure/num_sim-4} 
+\includegraphics[width=6cm]{figure/num_sim-5} 
 
 }
 
@@ -549,6 +525,16 @@ Cost is not necessairily only monetary, as risk is associted with overuse of ant
 Further work and research needs to be done to define a more formal, specific cost comparison scheme in this case.
 %Further peak prevelance can estimated from the initial conditions $S_0,I_0$ and ${\mathcal R_0}$ from following expression
 
+\subsection{Treatment Model Discussion}
+ %Why should you implement a treatment over another
+  %cost analysis (?) bit; realistic implementation depending on the country\
+When comparing the treatments solely based on $\mathcal R_0$ and the final size, it easy to overlook the practicality of each treatment. WASH intervention is the simplest treatment technique, with hygiene and clean water distribution usually the first treatment implementation at the start of an outbreak. 
+Chlorination techniques have had a few pitfalls depending on the quality of implementation. 
+Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens\link{link27}.
+In terms of pragmatism, it is impractical to only implement antibiotic prophylaxis to those who are infected as well as those who come in contact with the with the contaminated water source (since mass antibiotic implementation would increase the chance of selecting antibiotic resistant strains) \citep{link23}. 
+
+
+
 
 %End Note
 
@@ -557,6 +543,6 @@ Further work and research needs to be done to define a more formal, specific cos
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 12.395S seconds.
+CPU time to generate this document: 2.038S seconds.
 \printbibliography
 \end{document}
