@@ -12,7 +12,6 @@
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
 \usepackage{amsfonts, array, siunitx} % mathbb
-\usepackage{animate}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 %Referenes
@@ -51,7 +50,6 @@
 %\noindent
 %This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
 %\bigskip
-
 \linenumbers
 \Sexpr{knit_child('./sections/abstract.Rnw')}
 \clearpage
@@ -60,9 +58,91 @@
 <<global_options,include=FALSE>>=
 #knitr::opts_chunk$set(fig.pos = '!H')
 start.time <- proc.time()
+#Jessa Params
+#single patch base
+mu <- 1/15370
+beta_i <- 0.025 #transmission r. S between I
+gamma <- 1/7 #rate of recovery (days)
+sigma <- 1/25 #rate of water removal
+beta_w <- 0.5 #transmission r. I between W
+xi <- 10 #shedding rate I into W (force it eaual to sigma?)
+alpha <- 0 #death rate by cholera
+#parameters for intensity model
+beta_l <- 0.016 #transmission r. S between I_l
+beta_h <- 0.016 #transmission r. S between I_h
+beta_w <- 0.5 #transmission r. I between W
+delta <- 0.33 #rate of increasing symptom severity
+xi_l <- 0.07 #shedding rate I_l into W; maybe equal to sigma?
+xi_h <- 0.14
+alpha_l <- 0.01 #death rate by cholera with low intensity symptoms
+alpha_h <- 0.05 #death rate by cholera with high int. symptoms
+#Treatment params
+rhop <- 0.9#parameters for water treatment
+nup <- 0.9#parameters for vaccination
+etap <- 0.9#parameters for antibiotics
+#old params?
+#mu <- 0.15
+#alpha <- 0
+#beta_i <- 0.06 #transmission r. S between I
+#gamma <- 1/7 #rate of recovery (days)
+#sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
+#beta_w <- 0.15 #transmission r. I between W
+#i0 <- 0.05
+##Sid Params
+rows <- 70
+cols <- rows
+##params
+#mu <- 1/21170 # avg lifespan 58 yrs == 21170
+#beta_l <- 0.1 #transmission r. S between I
+#beta_h <- beta_l*2 #transmission r. S between I
+#gamma <- 1/8 #rate of recovery (days)
+#sigma <- 1/22 #rate of water removal
+#beta_w <- 0.3 #transmission r. I between W
+#xi_l <- 1/22 #shedding rate I into W (force it equal to sigma)
+#xi_h <- xi_l*10 #shedding rate I into W (force it equal to sigma)
+#delta <- 0.00005
+#alpha_l <- 0 #death rate by cholera
+#alpha_h <- 0.0001 #death rate by cholera
+##treatment params
+rho <- 1/20#parameters for water treatment [day^-1]
+nu <- 1/200#parameters for vaccination [day^-1]
+eta <- round(1/60,5) #parameters for antibiotics [day^-1]
+##spatial params
+dx <- 0.3
+dy <- dx
+Dsr <- 0.001
+Dl <- Dsr/10
+Dw <- 0.0001
+params <- list(rows=rows,
+               cols=cols,
+               mu=mu,
+               beta_l=beta_l,
+               beta_h=beta_h,
+               beta_w=beta_w,
+               xi_l=xi_l,
+               xi_h=xi_h,
+               gamma=gamma,
+               sigma=sigma,
+               delta=delta,
+               alpha_l=alpha_l,
+               alpha_h=alpha_h,
+               rho=rho,
+               nu=nu,
+               eta=eta,
+               dx=dx,
+               dy=dy,
+               Dsr=Dsr,
+               Dl=Dl,
+               Dw=Dw)
+#Initial conditions
+i0 <- 0.01
+w0 <- 0.03
+s0 <- 1-i0
+r0 <- 0
+ic <- list(s0=s0,i0=i0,r0=r0,w0=w0)
 @
 %Sections
-\section{Introduction}
+\section{Background}
 <<child='./sections/background.Rnw'>>=
 @
 \section{Single Patch Models}
@@ -75,9 +155,9 @@ start.time <- proc.time()
 \subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
 <<child='./sections/singlePatchAnalysis.Rnw'>>=
 @
-%\subsection{Single Patch With Low And High Shedding Compartments}
-%<<child='./sections/singlePatchLowHigh.Rnw'>>=
-%@
+\subsection{Single Patch With Low And High Shedding Compartments}
+<<child='./sections/singlePatchLowHigh.Rnw'>>=
+@
 \section{Multi Patch Model}
 <<child='./sections/multipatch.Rnw'>>=
 @
@@ -88,8 +168,6 @@ start.time <- proc.time()
 \subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
 <<child='./sections/NumericalSimulations.Rnw'>>=
 @
-
-
 %End Note
 <<cputime,include=FALSE>>=
 total.time <- proc.time() - start.time

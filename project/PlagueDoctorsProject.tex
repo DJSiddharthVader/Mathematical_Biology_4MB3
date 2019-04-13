@@ -62,7 +62,6 @@
 \usepackage{amsmath} % essential for cases environment
 \usepackage{amsthm} % for theorems and proofs
 \usepackage{amsfonts, array, siunitx} % mathbb
-\usepackage{animate}
 \usepackage{tikz}
 \usetikzlibrary{shapes.geometric, arrows}
 %Referenes
@@ -102,7 +101,6 @@
 %\noindent
 %This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
 %\bigskip
-
 \linenumbers
 
 \begin{abstract}
@@ -117,7 +115,7 @@
 \clearpage
 
 %Sections
-\section{Introduction}
+\section{Background}
 
 \subsection{Biology of Cholera}
 Although it is listed as one of the oldest known diseases, cholera remains a major public health concern in areas with poor water sanitation with an estimated 1.3--4 million cases every year \citep{link18}.
@@ -229,12 +227,14 @@ The natural death rate is dependent on various factors such as city or location 
 
 \subsection{Single Patch SIR Model With A Water Compartment}
 
+%Tikz styles
 \tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
 \tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
 \tikzstyle{blockr} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = yellow!30]
 \tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
 \tikzstyle{blank} = [inner sep=0,outer sep=0]
 \tikzstyle{line} = [draw,->,>=stealth]
+%Diagram
 \begin{center}
 \begin{tikzpicture}[node distance=3cm, auto]
 
@@ -259,19 +259,16 @@ The natural death rate is dependent on various factors such as city or location 
 \path [line] (S) -- node[anchor=west] {$\mu$} (3);
 \path [line] (I) -- node[anchor=west] {$\mu$} (4);
 \path [line] (R) -- node[anchor=west] {$\mu$} (5);
-
-
 \end{tikzpicture}
 \end{center}
-
-\begin{linenomath}
-	\begin{align*}
-		\frac{dS}{dt}&= \mu N - \mu S - \beta_I SI - \beta_w S W  \\
-		\frac{dI}{dt}&= \beta_I S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
-		\frac{dR}{dt}&= \gamma I - \mu R \\
-		\frac{dW}{dt}&= \xi I  - \sigma W
-	\end{align*}
-\end{linenomath}
+%Equations
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_I SI - \beta_w S W  \\
+    \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+    \frac{dR}{dt}&= \gamma I - \mu R \\
+    \frac{dW}{dt}&= \xi I  - \sigma W
+\end{align*}
+%Param explanations
 \begin{itemize}
     \item$\mu=$ natural death rate
     \item$\beta_I=$ transmission rate between S and I class
@@ -292,11 +289,17 @@ The assumptions for this model are
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(ReacTran): there is no package called 'ReacTran'}}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: rootSolve}}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in solveSingleModel(singleWaterModel, ic, params, tmax = tmax, steps = steps): could not find function "{}solveSingleModel"{}}}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: shape}}
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in plotSoln(singlesoln, xlim = c(0, tmax), ylim = c(0, 1), ylab = "{}Population Proportion"{}, : could not find function "{}plotSoln"{}}}\end{kframe}
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: testthat}}
+
+{\ttfamily\noindent\itshape\color{messagecolor}{\#\# Loading required package: gsw}}\end{kframe}\begin{figure}[h]
+\includegraphics[width=\maxwidth]{figure/_singlePatch-1} \caption{\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\mu=0\ \beta_I=0.02\ \gamma=0.14\ \sigma=0.04\ \beta_w=0.5\ \alpha=0\ \xi=10$. Further the initial conditions for the model were $S_0=0.99\ I_0=0.01\ R_0=0$.}\label{fig:<singlePatch}
+\end{figure}
+
+
 \end{knitrout}
 \FloatBarrier
 \subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
@@ -306,7 +309,6 @@ population.
 ${\mathcal R_0}$ can be computed as the spectral radius (i.e. the eigenvalue with the largest absolute value) of the next generation matrix at the disease free equilibrium.
 The next generation matrix $FV^{−1}$, where entry $F_{ij}$ of the matrix $F$ is the rate at which infected individuals in compartment $j$ produce new infections in compartment $i$, and the entry of $V_{ij}$ of the matrix $V$ is the mean time spent in compartment $j$ after moving into $j$ from compartment $k$.
 For our model, we have
-\begin{linenomath}
 \begin{align*}
 		F&=\begin{pmatrix}
 			\beta_I & \beta_w\\
@@ -317,34 +319,45 @@ For our model, we have
 			\frac{1}{\gamma+\mu+\alpha} &\frac{1}{\sigma}
 			\end{pmatrix}
 \end{align*}
-\end{linenomath}
 The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as seen in \cite{link9}, which is
-\begin{linenomath}
 \begin{align*}
     {\mathcal R_0} &= \rho(FV^{-1})\\
 		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
-\end{linenomath}
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
 It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 
-%\subsection{Single Patch With Low And High Shedding Compartments}
-%<<child='./sections/singlePatchLowHigh.Rnw'>>=
-%@
+\subsection{Single Patch With Low And High Shedding Compartments}
+
+%\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
+\begin{linenomath}
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
+	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
+	\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+	\frac{dR}{dt}&= \gamma I_H - \mu R \\
+	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+	\end{align*}
+\end{linenomath}
+
+This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding. The assumptions for the single patch model apply here as well.
+\begin{itemize}
+	\item$\alpha_i=$ death rate by cholera in low or high intensity
+	\item$\delta =$ rate at which symptoms increase in severity
+\end{itemize}
+
 \section{Multi Patch Model}
 
 %\section{Multi-Patch Models Of Cholera}
 The following equations represent the SIRW model for a single patch $i$ in the multi patch model.
-\begin{linenomath}
 \begin{align*}
     \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\
     \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\
     \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\
     \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
 \end{align*}
-\end{linenomath}
 Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diagonal patches) of the patch $i$.
-
+%Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
     \item$\phi=$ person to person contact rate between neighbouring patches
@@ -364,46 +377,31 @@ The assumptions for the single patch model apply here as well as the following.
 \end{itemize}
 
 \begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compare-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compare}
+\end{figure}
 
 
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in library(ReacTran): there is no package called 'ReacTran'}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in solveMultiModel(multiWaterModel, ic, params, tmax = tmax, steps = steps): could not find function "{}solveMultiModel"{}}}
-
-{\ttfamily\noindent\bfseries\color{errorcolor}{\#\# Error in image(soln, select = 1:4, axes = FALSE, legend = TRUE, ask = FALSE, : object 'soln' not found}}\end{kframe}
 \end{knitrout}
 \FloatBarrier
 
-%<<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
-%    source('spatialSIR.R')
-%    #multipatch
-%    rows <- 3
-%    cols <- 3
-%    #dmat <- distmat(rows,cols,method='manhattan')
-%    nmat <- neighourmat(rows,cols,influence=phi)
-%    wmat <- neighourmat(rows,cols,influence=psi)
-%    ic <- list(rows=rows,
-%               cols=cols,
-%               i0=i0,
-%               w0=w0)
-%    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha,nmat=nmat,wmat=wmat)
-%    tmax <- 500
-%    steps <- 5000
-%    soln <- solveMultiModel(multiWaterModel,ic,params,
-%                            tmax=tmax,steps=steps)
-%    multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
-%@
-%\FloatBarrier
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
 \section{Treatment Strategies For Cholera}
 
 %\section{Possible Treatment Strategies for Cholera}
-The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics. 
+The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics.
 The results of the analysis will aid government officials in implementing intervention strategies by determining optimal  parameters (that represent the different intervention strategies) that would be most effective in lowering the estimated reproductive number $\mathcal R_0$, peak prevalence, and the final size.
 \subsection{Treatment Plan 1: Sanitation of water over time}
 Water, sanitation, and hygiene (WASH) intervention is the most simplest and one of the effective ways of to reduce the spread of cholera.
-One of the easiest ways to implement intervention strategies that is easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}. 
-In the following model, a water treatment strategy would affect the water compartment (essentially increasing the removal or death rate of bacteria in water). 
+One of the easiest ways to implement intervention strategies that is easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}.
+In the following model, a water treatment strategy would affect the water compartment (essentially increasing the removal or death rate of bacteria in water).
 This can be implemented as a new term $\rho$. \par
 %Biologically relevant parameter ranges for \rho
 
@@ -417,12 +415,12 @@ This can be implemented as a new term $\rho$. \par
 \end{linenomath}
 
 For example, $\rho$ can either be a constant, or dependent on $I$ or $W$:\\
-$\rho (I)= \begin{cases}
+$$\rho (I)= \begin{cases}
 			 			\lambda & I \geq 0.1 \\
 			 			0 & 0 \leq I \leq 0.1 \\
-			 			\end{cases}$\\
+			 			\end{cases}$$
 $\rho$ represents the sanitation (increased removal of cholera) rate of $\lambda$, implemented at certain threshold of infected (in this case the threshold is based on I but can be based on W (i.e. testing water levels for cholera).
-For model simplicity, $\rho$ will be regarded as a constant term and can viewed as a sanitation rate. The biologically plausible range for this parameter is $0 \leq \rho \leq 1$.\\ 
+For model simplicity, $\rho$ will be regarded as a constant term and can viewed as a sanitation rate. The biologically plausible range for this parameter is $0 \leq \rho \leq 1$.\\
 %(Not sure about this upper boundary.
 
 %Model assumptions
@@ -431,9 +429,9 @@ In addition to the base model assumptions, this treatment model assumes that tre
 \subsection{Treatment Plan 2: Vaccinations on Base Model}
 Cholera vaccine injections were first invented in 1885 and were first used during the mass vaccination campaigns of the Spain outbreaks \citep{link21}.
 Biotechnological advances in the late 20th century have resulted in the creation of immunization via oral cholera vaccines (OCV) which are more effective than their injective equivalent but require two stage dose administration with immunity imparted after one week after the first dose \citep{link21} \citep{link25}.
-Although the London outbreaks occurred prior to the creation of the vaccine, creating a model that implements vaccination techniques is vital for modelling future cholera outbreaks and can be further analyzed to determine the effect on $\mathcal R_0$ and the final size of the epidemic.\\ 
+Although the London outbreaks occurred prior to the creation of the vaccine, creating a model that implements vaccination techniques is vital for modelling future cholera outbreaks and can be further analyzed to determine the effect on $\mathcal R_0$ and the final size of the epidemic.\\
 This model assumes that vaccination is applied to the susceptible population and not before introduction into the system; this is done instead of vaccination at birth before entry into system since the cholera vaccine is not administered during infancy \citep{link25}.\\
-This model also assumes that the vaccine targets the only strain of the cholera bacteria that has caused the epidemic %(might want to change this wording). 
+This model also assumes that the vaccine targets the only strain of the cholera bacteria that has caused the epidemic %(might want to change this wording).
 It is possible that new strains of cholera can create a reccuring endemic (herald waves) with seasonality as described in Tien et al.\citep{link3}.
 
 \begin{linenomath}
@@ -450,7 +448,7 @@ It is possible that new strains of cholera can create a reccuring endemic (heral
 \end{itemize}
 
 \subsection{Treatment Plan 3: Antibiotics on Base Model}
-More modern techniques of treating cholera involve the use of antibiotics. Several antibiotics that are regarded as effective against cholera such as azithromicin have been used since the early 1990s \citep{link23}. 
+More modern techniques of treating cholera involve the use of antibiotics. Several antibiotics that are regarded as effective against cholera such as azithromicin have been used since the early 1990s \citep{link23}.
 Use of antbiotics when infected effectively shortens the duration of diarrhea and results in fewer bowel movements and lower stool volume \citep{link24}. This biological process can be either be implemented in the base single patch model by lowering the duration of the infectious period (which can be be viewed as an introduction of a new parameter in $dI/dt$) or by lowering the shedding rate into water (which can be implemented by lowering the shedding rate $\xi$).
 The following model implements a decrease in the duration of the infectious period by using the term $ - \eta I$.
 \begin{linenomath}
@@ -468,12 +466,8 @@ The following model implements a decrease in the duration of the infectious peri
 \section{Comparing Treatment Strategies For Cholera}
 \subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
 
-
-\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
-
+%\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
 The following are numerical simulations and phase portraits for the base model with vital dynamics, and the three treatment models.
-
-
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
@@ -482,16 +476,14 @@ The following are numerical simulations and phase portraits for the base model w
 \includegraphics[width=6cm]{figure/num_sim-2} 
 \includegraphics[width=6cm]{figure/num_sim-3} 
 \includegraphics[width=6cm]{figure/num_sim-4} 
-\includegraphics[width=6cm]{figure/num_sim-5} 
 
 }
 
-\caption{\label{fig:num.sim} Plot of the SIRW model for a single patch and various treatment models. Parameters are $\mu=0.15,\ \beta_i=0.06,\ \gamma=0.14,\ \sigma=0.07,\ \beta_w=0.15,\ \xi=10,\ \rho=0.9,\ \nu=0.9,\ \eta=0.9,\ \alpha=0$. The initial conditions for the model were $S_0=0.95,\ I_0=0.05,\ R_0=0$}\label{fig:num.sim}
+\caption{\label{fig:num.sim} Plot of the SIRW model for a single patch and various treatment models. Parameters are $\mu=6.50618087182824e-05,\ \beta_i=0.025,\ \gamma=0.14,\ \sigma=0.04,\ \beta_w=0.5,\ \xi=10,\ \rho=0.05,\ \nu=0.005,\ \eta=0.01667,\ \alpha=0$. The initial conditions for the model were $S_0=0.99,\ I_0=0.01,\ R_0=0$}\label{fig:num.sim}
 \end{figure}
 
 
 \end{knitrout}
-
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
 
@@ -502,24 +494,20 @@ The following are numerical simulations and phase portraits for the base model w
 
 }
 
-\caption{\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models. Parameters are $\mu=0.15,\ \beta_i=0.06,\ \gamma=0.14,\ \sigma=0.07,\ \beta_w=0.15,\ \xi=10,\ \rho=0.9,\ \nu=0.9,\ \eta=0.9,\ \alpha=0$. The initial conditions for the model were $S_0=0.95,\ I_0=0.05,\ R_0=0$}\label{fig:phase.portraits}
+\caption{\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models. Parameters are $\mu=6.50618087182824e-05,\ \beta_i=0.025,\ \gamma=0.14,\ \sigma=0.04,\ \beta_w=0.5,\ \xi=10,\ \rho=0.05,\ \nu=0.005,\ \eta=0.01667,\ \alpha=0$. The initial conditions for the model were $S_0=0.99,\ I_0=0.01,\ R_0=0$}\label{fig:phase.portraits}
 \end{figure}
 
 
 \end{knitrout}
-
 \FloatBarrier
-
 From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in figure \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at a much higher level of incidence much quicker than without the treatment.
 However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
 All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
 
 We hope to compare the effectiveness of these methods by comparing the final size, which can be computed from ${\mathcal R_0}$ in $R$ using Lambert's $W$ function, as noted in the supplementary material of \cite{link20}.
-\begin{linenomath}
 \begin{equation}
     Z({\mathcal R_0}) = 1+\frac{1}{{\mathcal R_0}}W(-{\mathcal R_0}e^{{\mathcal R_0}})
 \end{equation}
-\end{linenomath}
 If similar final sizes are estimated for multiple treatment strategies, then relative costs of the treatments may be compared to decide between them.
 Cost is not necessairily only monetary, as risk is associted with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare or engineering professions.
 Further work and research needs to be done to define a more formal, specific cost comparison scheme in this case.
@@ -527,15 +515,11 @@ Further work and research needs to be done to define a more formal, specific cos
 
 \subsection{Treatment Model Discussion}
  %Why should you implement a treatment over another
-  %cost analysis (?) bit; realistic implementation depending on the country\
-When comparing the treatments solely based on $\mathcal R_0$ and the final size, it easy to overlook the practicality of each treatment. WASH intervention is the simplest treatment technique, with hygiene and clean water distribution usually the first treatment implementation at the start of an outbreak. 
-Chlorination techniques have had a few pitfalls depending on the quality of implementation. 
-Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens\link{link27}.
-In terms of pragmatism, it is impractical to only implement antibiotic prophylaxis to those who are infected as well as those who come in contact with the with the contaminated water source (since mass antibiotic implementation would increase the chance of selecting antibiotic resistant strains) \citep{link23}. 
-
-
-
-
+  %cost analysis (?) bit; realistic implementation depending on the country
+When comparing the treatments solely based on $\mathcal R_0$ and the final size, it easy to overlook the practicality of each treatment. WASH intervention is the simplest treatment technique, with hygiene and clean water distribution usually the first treatment implementation at the start of an outbreak.
+Chlorination techniques have had a few pitfalls depending on the quality of implementation.
+Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens \citep{link27}.
+In terms of pragmatism, it is impractical to only implement antibiotic prophylaxis to those who are infected as well as those who come in contact with the with the contaminated water source (since mass antibiotic implementation would increase the chance of selecting antibiotic resistant strains) \citep{link23}.
 %End Note
 
 \bigskip\vfill
@@ -543,6 +527,6 @@ In terms of pragmatism, it is impractical to only implement antibiotic prophylax
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 2.038S seconds.
+CPU time to generate this document: 2M 5.158S seconds.
 \printbibliography
 \end{document}
