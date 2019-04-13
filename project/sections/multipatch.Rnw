@@ -1,15 +1,13 @@
 %\section{Multi-Patch Models Of Cholera}
 The following equations represent the SIRW model for a single patch $i$ in the multi patch model.
-\begin{linenomath}
 \begin{align*}
     \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\
     \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\
     \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\
     \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
 \end{align*}
-\end{linenomath}
 Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diagonal patches) of the patch $i$.
-
+%Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
     \item$\phi=$ person to person contact rate between neighbouring patches
@@ -28,29 +26,14 @@ The assumptions for the single patch model apply here as well as the following.
     \item All patches neighbouring $i$ have the same transmission rate to patch $i$
 \end{itemize}
 <<mpcaption,echo=FALSE>>=
-    #params
-    mu <- 1/1537 # avg lifespan 58 yrs
-    beta_i <- 0.025 #transmission r. S between I
-    beta_w <- 0.5 #transmission r. I between W
-    gamma <- 1/7 #rate of recovery (days)
-    sigma <- 1/25 #rate of water removal
-    dx <- 0.1
-    dy <- dx
-    Dsr <- 0.05
-    Di <- 0.05
-    Dw <- 0.03
-    alpha <- 0 #death rate by cholera
-    i0 <- 0.06
-    w0 <- 0.13
-    i0 <- 0.06
-    s0 <- 1-i0
-    w0 <- 0.13
+    dec <- 5
     mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are ',
-                   '$\\mu=',round(mu,2),
-                   ',\\beta_i=',round(beta_i,2),
-                   ',\\gamma=',round(gamma,2),
-                   ',\\sigma=',round(sigma,2),
-                   ',\\beta_w=',round(beta_w,2),
+                   '$\\mu=',round(mu,dec),
+                   ',\\beta_i=',round(beta_i,dec),
+                   ',\\gamma=',round(gamma,dec),
+                   ',\\sigma=',round(sigma,dec),
+                   ',\\beta_w=',round(beta_w,dec),
+                   ',\\xi=',round(xi,dec),
                    ',\\alpha=',alpha,
                    '$ The initial conditions for the model were ',
                    '$S_0=',s0,
@@ -58,48 +41,38 @@ The assumptions for the single patch model apply here as well as the following.
                    ',R_0=',0,',$.',
                    sep='')
 @
-<<<multiPatch,fig.show='animate',fig.height=6,echo=FALSE,fig.cap=mpcap>>=
+<<compare,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
     source('spatialSIR.R')
     #multipatch
-    rows <- 10
-    cols <- rows
-    params <- list(rows=rows,
-                   cols=cols,
-                   mu=mu,
-                   beta_i=beta_i,
-                   gamma=gamma,
-                   sigma=sigma,
-                   beta_w=beta_w,
-                   alpha=alpha,
-                   dx=dx,
-                   dy=dy,
-                   Dsr=Dsr,
-                   Di=Di,
-                   Dw=Dw)
-    tmax <- 500
-    steps <- 50
-    soln <- solveMultiModel(multiWaterModel,ic,params, tmax=tmax,steps=steps)
-    image(soln, select=1:4, axes=FALSE, legend = TRUE, ask=FALSE, main=c("Susceptible", "Infectious", "Recovered","Water"), mfrow=c(2,2))
+    tmax <- 150
+    steps <- 200
+    compareTreatments(ic,params,tmax,steps)
 @
 \FloatBarrier
-
-%<<<multiPatch,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
-%    source('spatialSIR.R')
-%    #multipatch
-%    rows <- 3
-%    cols <- 3
-%    #dmat <- distmat(rows,cols,method='manhattan')
-%    nmat <- neighourmat(rows,cols,influence=phi)
-%    wmat <- neighourmat(rows,cols,influence=psi)
-%    ic <- list(rows=rows,
-%               cols=cols,
-%               i0=i0,
-%               w0=w0)
-%    params <- list(patches=rows*cols, mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha,nmat=nmat,wmat=wmat)
-%    tmax <- 500
-%    steps <- 5000
-%    soln <- solveMultiModel(multiWaterModel,ic,params,
-%                            tmax=tmax,steps=steps)
-%    multiPlotSoln(rows,cols,soln, xlim=c(0,tmax), ylim=c(0,1))
-%@
-%\FloatBarrier
+<<mphlcaption,echo=FALSE>>=
+    dec <- 5
+    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are ',
+                   '$\\mu=',round(mu,dec),
+                   ',\\beta_l=',round(beta_l,dec),
+                   ',\\beta_h=',round(beta_h,dec),
+                   ',\\gamma=',round(gamma,dec),
+                   ',\\sigma=',round(sigma,dec),
+                   ',\\beta_w=',round(beta_w,dec),
+                   ',\\xi_l=',round(xi_l,dec),
+                   ',\\xi_h=',round(xi_h,dec),
+                   ',\\alpha_l=',alpha_l,
+                   ',\\alpha_h=',alpha_h,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',s0,
+                   ',I_0=',i0,
+                   ',R_0=',0,',$.',
+                   sep='')
+@
+<<compareHL,fig.height=12,echo=FALSE,fig.cap=mpcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    tmax <- 150
+    steps <- 200
+    compareHLTreatments(ic,params,tmax,steps)
+@
+\FloatBarrier

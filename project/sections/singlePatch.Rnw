@@ -1,9 +1,11 @@
+%Tikz styles
 \tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
 \tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
 \tikzstyle{blockr} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = yellow!30]
 \tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
 \tikzstyle{blank} = [inner sep=0,outer sep=0]
 \tikzstyle{line} = [draw,->,>=stealth]
+%Diagram
 \begin{center}
 \begin{tikzpicture}[node distance=3cm, auto]
 
@@ -28,19 +30,16 @@
 \path [line] (S) -- node[anchor=west] {$\mu$} (3);
 \path [line] (I) -- node[anchor=west] {$\mu$} (4);
 \path [line] (R) -- node[anchor=west] {$\mu$} (5);
-
-
 \end{tikzpicture}
 \end{center}
-
-\begin{linenomath}
-	\begin{align*}
-		\frac{dS}{dt}&= \mu N - \mu S - \beta_I SI - \beta_w S W  \\
-		\frac{dI}{dt}&= \beta_I S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
-		\frac{dR}{dt}&= \gamma I - \mu R \\
-		\frac{dW}{dt}&= \xi I  - \sigma W
-	\end{align*}
-\end{linenomath}
+%Equations
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_I SI - \beta_w S W  \\
+    \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+    \frac{dR}{dt}&= \gamma I - \mu R \\
+    \frac{dW}{dt}&= \xi I  - \sigma W
+\end{align*}
+%Param explanations
 \begin{itemize}
     \item$\mu=$ natural death rate
     \item$\beta_I=$ transmission rate between S and I class
@@ -57,29 +56,25 @@ The assumptions for this model are
     \item The transmission rate between water the susceptible class  is exponentially distributed
 \end{itemize}
 <<spcaption,echo=FALSE>>=
-    #params
-    mu = 1/1537 # avg lifespan 58 yrs
-    beta_i = 0.025 #transmission r. S between I
-    gamma = 1/7 #rate of recovery (days)
-    sigma = 1/25 #rate of water removal
-    beta_w = 0.5 #transmission r. I between W
-    xi = 10 #shedding rate I into W (force it eaual to sigma?)
-    #kappa = 0.15, #bacteria concentration that gives 50% of infection
-    alpha = 0 #death rate by cholera
-    i0 <- 0.08
-    w0 <- 0.13
-    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are $\\mu=',round(mu,2),',\\ \\beta_I=',round(beta_i,2),',\\ \\gamma=',round(gamma,2),',\\ \\sigma=',round(sigma,2),',\\ \\beta_w=',round(beta_w,2),',\\ \\alpha=',alpha,',\\ \\xi=',xi,'$','. Further the initial conditions for the model were $S_0=',1-i0,',\\ I_0=',i0,',\\ R_0=',0,'.$',sep='')
+    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are ',
+                   '$\\mu=',round(mu,2),
+                   '\\ \\beta_I=',round(beta_i,2),
+                   '\\ \\gamma=',round(gamma,2),
+                   '\\ \\sigma=',round(sigma,2),
+                   '\\ \\beta_w=',round(beta_w,2),
+                   '\\ \\alpha=',alpha,
+                   '\\ \\xi=',xi,'$',
+                   '. Further the initial conditions for the model were ',
+                   '$S_0=',1-i0,
+                   '\\ I_0=',i0,
+                   '\\ R_0=',0,'$.',sep='')
 @
 <<<singlePatch,fig.height=4,echo=FALSE,fig.pos='h',fig.cap=spcap>>=
     source('spatialSIR.R')
-    #Single Solution
-    params <- list(mu=mu, beta_i = beta_i, gamma = gamma, sigma = sigma, beta_w = beta_w,alpha=alpha)
-    ic <- c(x=1-i0,y=i0,z=0,w=w0)
     steps <- 5000
     tmax <- 400
-    singlesoln <- solveSingleModel(singleWaterModel,ic,params,
-                                   tmax=tmax,steps=steps)
-    plotSoln(singlesoln, xlim=c(0,tmax), ylim=c(0,1),
-             ylab='Population Proportion', xlab='Infectious Period')
+    sic <- c(x=s0,y=i0,z=r0,w=w0)
+    singlesoln <- solveSingleModel(singleWaterModel,sic,params, tmax=tmax,steps=steps)
+    plotSoln(singlesoln, xlim=c(0,tmax), ylim=c(0,1), ylab='Population Proportion', xlab='Infectious Period')
 @
 \FloatBarrier
