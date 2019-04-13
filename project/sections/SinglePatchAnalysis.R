@@ -3,7 +3,7 @@
 library(deSolve)
 ##Initial Conditions for Phase Portraits##
 timemax <- 1200
-Z0 <-  0 
+Z0 <-  0
 W0 <-  0
 int <- "low"
 y0 <- 0.001
@@ -22,7 +22,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
        beta_w = 0.3, #transmission r. I between W
        xi = 1/22, #shedding rate I into W (force it equal to sigma)
        alpha = 0, #death rate by cholera
-       
+
        #parameters for intensity model
        beta_l = 0.016, #transmission r. S between I_l
        beta_h = 0.016, #transmission r. S between I_h
@@ -31,9 +31,9 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
        xi_h = 1/7,
        alpha_l = 0.01, #death rate by cholera with low intensity symptoms
        alpha_h = 0.05, #death rate by cholera with high int. symptoms
-       
+
        #parameters for water treatment [day^-1]
-       rho = 1/20, 
+       rho = 1/20,
        #parameters for vaccination [day^-1]
        nu = 1/200,
        #parameters for antibiotics [day^-1]
@@ -43,7 +43,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
 ##VECTOR FIELDS##
 #################
 #VECTOR FIELD SIRW BASE MODEL
-  SIRW.vector.field <- function(t, vars, 
+  SIRW.vector.field <- function(t, vars,
                                 parms=pars) {
     with(as.list(c(parms, vars)), {
       dx <- mu - mu*x - beta_i*x*y - beta_w*x*w # dS/dt
@@ -56,7 +56,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
   }
 
 #VECTOR FIELD treatment 1 MODEL
-  treat1.vector.field <- function(t, vars, 
+  treat1.vector.field <- function(t, vars,
                                   parms=pars) {
     with(as.list(c(parms, vars)), {
       dx <- mu - mu*x - beta_i*x*y - beta_w*x*w # dS/dt
@@ -68,7 +68,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
     })
   }
 #treatment 2 (vaccine) model
-  treat2.vector.field <- function(t, vars, 
+  treat2.vector.field <- function(t, vars,
                                   parms=pars) {
     with(as.list(c(parms, vars)), {
       dx <- mu - mu*x - beta_i*x*y - beta_w*x*w - nu*x# dS/dt
@@ -80,7 +80,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
     })
   }
 #treatment 3 (antibiotic) model
-  treat3.vector.field <- function(t, vars, 
+  treat3.vector.field <- function(t, vars,
                                   parms=pars) {
     with(as.list(c(parms, vars)), {
       dx <- mu - mu*x - beta_i*x*y - beta_w*x*w# dS/dt
@@ -91,9 +91,9 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
       return(list(vec.fld))
     })
   }
-  
+
   #SEVERITY MODEL VECTOR FIELD
-  severity.vector.field <- function(t, vars, 
+  severity.vector.field <- function(t, vars,
                                     parms=pars) {
     with(as.list(c(parms, vars)), {
       dx <- mu*(x+l+h+z) - mu*x - beta_l*x*l - beta_h*x*h - beta_w*x*w # dS/dt
@@ -107,7 +107,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
   }
 
   #DUMPING
-  dump.vector.field <- function(t, vars, 
+  dump.vector.field <- function(t, vars,
                                 parms=pars) {
     with(as.list(c(parms, vars)), {
       dx <- mu - mu*x - beta_i*x*y - beta_w*x*w # dS/dt
@@ -118,14 +118,14 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
       return(list(vec.fld))
     })
   }
-  
+
 ################
 ##PLOTTING FNs##
 ################
   plot.SIRW <- function(ic=c(x=1,y=0,z=0, w=0), tmax=1,
                           times=seq(0,tmax,by=tmax/500),
                           func, parms, ... ) {
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(St[,"x"], St[,"y"], col="black", lwd=2, ... )
   }
   plot.SIIRW <- function(which="low", ic=c(x=1,l=0, h=0.1, z=0), tmax=1,
@@ -139,13 +139,13 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
       lines(St[,"x"], St[,"h"], col="black", lwd=1.5, ... )
     }
   }
-  #base model  
+  #base model
   plot.base <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=timemax,
                         times=seq(0,tmax,by=1),
-                        func=SIRW.vector.field, parms=pars, ... ) { 
+                        func=SIRW.vector.field, parms=pars, ... ) {
     plot(x=0, y=0, type = "n",xlim=c(0, xmax), ylim=c(0, ymax),
          xlab = "Time (days)", ylab="Proportion", main = "Base Model")
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(times, St[,"x"], col="green",lty=1, lwd=2, ... )
     lines(times, St[,"y"], col="red",lty=1, lwd=2, ... )
     lines(times, St[,"z"], col="black",lty=1, lwd=2, ... )
@@ -155,10 +155,10 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
   #severity bodel
   plot.severity <- function(ic=c(x=x0,l=y0,h=0,z=0, w=W0), tmax=timemax,
                             times=seq(0,tmax,by=tmax/500),
-                            func=severity.vector.field, parms=pars, ... ) { 
+                            func=severity.vector.field, parms=pars, ... ) {
     plot(x=0, y=0, type = "n",xlim=c(0, xmax), ylim=c(0, ymax),
          xlab = "Time (days)", ylab="Proportion", main = "Severity Model with Vital Dynamics")
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(times, St[,"l"], col="red",lty=1, lwd=1.5, ... )
     lines(times, St[,"h"], col="red", lty=2, lwd=1.5, ... )
     #lines(times, St[,"w"], col="blue", lty=2, lwd=1.5, ... )
@@ -167,10 +167,10 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
   #treat1 model
   plot.treat1 <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=timemax,
                           times=seq(0,tmax,by=1),
-                          func=treat1.vector.field, parms=pars, ... ) { 
+                          func=treat1.vector.field, parms=pars, ... ) {
     plot(x=0, y=0, type = "n",xlim=c(0, xmax), ylim=c(0, ymax),
          xlab = "Time (days)", ylab="Proportion", main = "Treatment 1: Water Sanitation")
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(times, St[,"x"], col="green",lty=1, lwd=2, ... )
     lines(times, St[,"y"], col="red",lty=1, lwd=2, ... )
     lines(times, St[,"z"], col="black",lty=1, lwd=2, ... )
@@ -180,10 +180,10 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
   #treat2 model
   plot.treat2 <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=timemax,
                           times=seq(0,tmax,by=1),
-                          func=treat2.vector.field, parms=pars, ... ) { 
+                          func=treat2.vector.field, parms=pars, ... ) {
     plot(x=0, y=0, type = "n",xlim=c(0, xmax), ylim=c(0, ymax),
          xlab = "Time (days)", ylab="Proportion", main = "Treatment 2: Vaccination")
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(times, St[,"x"], col="green",lty=1, lwd=2, ... )
     lines(times, St[,"y"], col="red",lty=1, lwd=2, ... )
     lines(times, St[,"z"], col="black",lty=1, lwd=2, ... )
@@ -193,34 +193,34 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
   #treat3 model
   plot.treat3 <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=timemax,
                           times=seq(0,tmax,by=1),
-                          func=treat3.vector.field, parms=pars, ... ) { 
+                          func=treat3.vector.field, parms=pars, ... ) {
     plot(x=0, y=0, type = "n",xlim=c(0, xmax), ylim=c(0, ymax),
          xlab = "Time (days)", ylab="Proportion", main = "Treatment 3: Antibiotics")
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(times, St[,"x"], col="green",lty=1, lwd=2, ... )
     lines(times, St[,"y"], col="red",lty=1, lwd=2, ... )
     lines(times, St[,"z"], col="black",lty=1, lwd=2, ... )
     #lines(times, St[,"w"], col="blue",lty=1, lwd=2, ... )
     legend("topright", legend = c("S", "I","R"), lty=c(1,1,1,1), col=c("green", "red", "black"))
   }
-  
+
   plot.dump <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=timemax,
                         times=seq(0,tmax,by=1),
-                        func=dump.vector.field, parms=pars, ... ) { 
+                        func=dump.vector.field, parms=pars, ... ) {
     plot(x=0, y=0, type = "n",xlim=c(0, xmax), ylim=c(0, ymax),
          xlab = "Time (days)", ylab="Proportion", main = "Base Model: 19th Century")
-    St <- ode(ic, times, func, parms) 
+    St <- ode(ic, times, func, parms)
     lines(times, St[,"x"], col="green",lty=1, lwd=2, ... )
     lines(times, St[,"y"], col="red",lty=1, lwd=2, ... )
     lines(times, St[,"z"], col="black",lty=1, lwd=2, ... )
     #lines(times, St[,"w"], col="blue",lty=1, lwd=2, ... )
     legend("topright", legend = c("S", "I","R"), lty=c(1,1,1,1), col=c("green", "red", "black"))
   }
-  
+
   #overlay of prevalence btwn treatments
  plot.overlay <- function(ic=c(x=x0,y=y0,z=0, w=W0), tmax=timemax,
                                   times=seq(0,tmax,by=1),
-                                  func=func, parms=pars, ... ) { 
+                                  func=func, parms=pars, ... ) {
    Stb <- ode(ic, times, func=SIRW.vector.field, parms)
    St1 <- ode(ic, times, func=treat1.vector.field, parms)
    St2 <- ode(ic, times, func=treat2.vector.field, parms)
@@ -268,7 +268,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
     for (j in 1:length(S0)) {
       plot.SIRW(ic=c(x=S0[j],y=I0[j],z=Z0, w = W0), tmax=timemax,
                 func=SIRW.vector.field,
-                parms = pars 
+                parms = pars
       )
     }
     points(x=S0, y=I0,col="black", pch=21, bg="white", xpd=TRUE, cex=1.2, lwd=2)
@@ -283,7 +283,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
     for (j in 1:length(S0)) {
       plot.SIRW(ic=c(x=S0[j],y=I0[j],z=Z0, w = W0), tmax=timemax,
                 func=treat1.vector.field,
-                parms = pars 
+                parms = pars
       )
     }
     points(x=S0, y=I0,col="black", pch=21, bg="white", xpd=TRUE, cex=1.2, lwd=2)
@@ -298,7 +298,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
     for (j in 1:length(S0)) {
       plot.SIRW(ic=c(x=S0[j],y=I0[j],z=Z0, w = W0), tmax=timemax,
                 func=treat2.vector.field,
-                parms = pars 
+                parms = pars
       )
     }
     points(x=S0, y=I0,col="black", pch=21, bg="white", xpd=TRUE, cex=1.2, lwd=2)
@@ -313,7 +313,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
     for (j in 1:length(S0)) {
       plot.SIRW(ic=c(x=S0[j],y=I0[j],z=Z0, w = W0), tmax=timemax,
                 func=treat3.vector.field,
-                parms = pars 
+                parms = pars
       )
     }
     points(x=S0, y=I0,col="black", pch=21, bg="white", xpd=TRUE, cex=1.2, lwd=2)
@@ -328,7 +328,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
       for (j in 1:length(S0)) {
         plot.SIIRW(int=which, ic=c(x=S0[j],l=I0[j], h=0, z=Z0, w = W0), tmax=timemax,
                    func=severity.vector.field,
-                   parms = pars)      
+                   parms = pars)
       }
     }
     else if (which == "high") {
@@ -338,7 +338,7 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
       for (j in 1:length(S0)) {
         phase.SIIRW(int=which, ic=c(x=S0[j],l=0, h=I0[j],z=Z0, w = W0), tmax=timemax,
                     func=severity.vector.field,
-                    parms = pars)      
+                    parms = pars)
       }
     }
   }
@@ -351,8 +351,8 @@ pars=c(mu = 1/21170, # avg lifespan 58 yrs == 21170
 # plot.treat1()
 # plot.treat2()
 # plot.treat3()
-plot.overlay()
-# 
+# plot.overlay()
+#
 # phase.portrait()
 # phase.portrait.treat1()
 # phase.portrait.treat2()
@@ -367,7 +367,7 @@ plot.overlay()
 # R.0lab <-  c(1, 1.5, 2, "exact")
 # res1 <- mapply(fun1, list(Z1), R_0)
 # tcols <- c("cornflowerblue", "orange", "brown", "black")
-# 
+#
 # fun <- function(Z){(-1/Z)*log(1-Z)}
 # Z <- seq(0, 1, by=1/5000)
 # res <- mapply(fun, list(Z))
@@ -382,12 +382,12 @@ plot.overlay()
 ##Initial Conditions Endemic Equilibrium Phase Portraits##
 # params that give rise to EE
 # timemax <- 500
-# Z0 <-  0 
+# Z0 <-  0
 # W0 <-  0
 # int <- "low"
 # y0 <- 0.01
 # x0 <- 1-y0
-# 
+#
 #################
 ##Parameters EE##
 #################
@@ -399,7 +399,7 @@ plot.overlay()
 #        xi = 1/25, #shedding rate I into W (force it eaual to sigma?)
 #        #kappa = 0.15, #bacteria concentration that gives 50% of infection
 #        alpha = 0, #death rate by cholera
-#        
+#
 #        #parameters for intensity model
 #        beta_l = 0.016, #transmission r. S between I_l
 #        beta_h = 0.016, #transmission r. S between I_h
@@ -409,7 +409,7 @@ plot.overlay()
 #        xi_h = 1/7,
 #        alpha_l = 0.01, #death rate by cholera with low intensity symptoms
 #        alpha_h = 0.05, #death rate by cholera with high int. symptoms
-#        
+#
 #        #parameters for water treatment
 #        rho = 1/70,
 #        #parameters for vaccination
