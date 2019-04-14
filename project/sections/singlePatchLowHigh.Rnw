@@ -11,7 +11,10 @@
 
 This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding. The assumptions for the single patch model apply here as well.
 \begin{itemize}
-	\item$\alpha_i=$ death rate by cholera in low or high intensity
-	\item$\delta =$ rate at which symptoms increase in severity
+	\item $\alpha_L=$ death rate by cholera for low intensity infected
+	\item $\alpha_H=$ death rate by cholera for low intensity infected
+    \item $\xi_L=$ Shedding rate of cholera into water for low intensity infectives
+    \item $\xi_H=$ Shedding rate of cholera into water for hig intensity infectives
+	\item $\delta=$ Transition rate from low intensity to high intensity infection
 \end{itemize}
 
