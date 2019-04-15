@@ -16,7 +16,37 @@ singleWaterModel <- function(t,vars,params){
         return(vec.fld)
     })
 }
-solveSingleModel <- function(func,ic,params,tmax=1,steps=5000){
+sanitationSP <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        dx <- mu - mu*x - x*y*beta_i - x*w*beta_w # dx/dt
+        dy <- x*y*beta_i + x*w*beta_w - gamma*y - mu*y - alpha*y # dy/dt
+        dz <- gamma*y - mu*z # dz/dt
+        dw <- beta_w*y - sigma*w - rho*w#dW/dt
+        vec.fld <- list(c(dx,dy,dz,dw))
+        return(vec.fld)
+    })
+}
+antibioticSP <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        dx <- mu - mu*x - x*y*beta_i - x*w*beta_w # dx/dt
+        dy <- x*y*beta_i + x*w*beta_w - y*(gamma + mu + alpha + eta) #dy/dt
+        dz <- gamma*y + eta*y - mu*z # dz/dt
+        dw <- beta_w*y - sigma*w #dW/dt
+        vec.fld <- list(c(dx,dy,dz,dw))
+        return(vec.fld)
+    })
+}
+vaccinationSP <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        dx <- mu - mu*x - x*y*beta_i - x*w*beta_w -nu*x # dx/dt
+        dy <- x*y*beta_i + x*w*beta_w - gamma*y - mu*y - alpha*y # dy/dt
+        dz <- gamma*y + nu*x - mu*z # dz/dt
+        dw <- beta_w*y - sigma*w #dW/dt
+        vec.fld <- list(c(dx,dy,dz,dw))
+        return(vec.fld)
+    })
+}
+solveSingleModel <- function(func,ic,params,tmax=1,steps=50){
     with(as.list(c(ic,params)),{
         times <- seq(0,tmax,by=tmax/steps)
         soln <- ode(y=ic,
@@ -25,6 +55,30 @@ solveSingleModel <- function(func,ic,params,tmax=1,steps=5000){
                     parms=params)
         return(soln)
     })
+}
+compareSPTreatments <- function(ic,params,tmax,steps,...){
+#    #Data
+    base <- solveSingleModel(singleWaterModel,ic,params,tmax=tmax,steps=steps)
+    bim <- base[,"y"]
+    san <- solveSingleModel(sanitationSP,ic,params,tmax=tmax,steps=steps)
+    sim <- san[,"y"]
+    anti <- solveSingleModel(antibioticSP,ic,params,tmax=tmax,steps=steps)
+    aim <- anti[,"y"]
+    vacc <- solveSingleModel(vaccinationSP,ic,params,tmax=tmax,steps=steps)
+    vim <- vacc[,"y"]
+#    #Legend entries
+    sentry <- paste('Sanitation =',params$rho)
+    ventry <- paste('Vaccination =',params$nu)
+    aentry <- paste('Antibiotics =',params$eta)
+    lentries <- c("Base",sentry,ventry,aentry)
+#    #Plotting
+    treatcol = c("red","cornflowerblue", "orange", "brown") #for overlay graph
+    plot(x=0, y=0, type = "n",xlim=c(0,tmax), ylim=c(0,0.6), xaxs="i", yaxs="i",xlab = "Time (days)", ylab="Proportion (I)")
+    lines(bim,col="red",lty=1, lwd=4,)
+    lines(sim,col="cornflowerblue",lty=1, lwd=4,)
+    lines(vim,col="brown",lty=1, lwd=4,)
+    lines(aim,col="orange",lty=1, lwd=4,)
+    legend("topright",lty=c(1,1,1,1), col = treatcol,legend=lentries)
 }
 plotSoln <- function(soln,...){
     scol <- 'green'
@@ -43,12 +97,109 @@ plotSoln <- function(soln,...){
            lty=1,
            cex=0.8)
 }
-
-#Multi Patch
-makepb <- function(total){
-    pb <- progress_bar$new(format = "[:bar] :percent eta: :eta",total = total, clear = FALSE, width= 75)
-    return(pb)
+#High/low Single Patch
+baseSHL <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        #terms
+        lowinf <- beta_l*l*s
+        highinf  <- beta_h*h*s
+        waterinf <- beta_w*w*s
+        #derivatives
+        ds <- mu - mu*s - lowinf - highinf - waterinf
+        dl <- lowinf + highinf + waterinf - l*(delta + mu + alpha_l)
+        dh <- delta*l - h*(gamma + mu + alpha_h) #dI_h/dt
+        dr <- gamma*h - mu*r
+        dw <- xi_l*l + xi_h*h - sigma*w
+        vec.fld <- list(c(ds,dl,dh,dr,dw))
+        return(vec.fld)
+    })
 }
+sanitationSHL <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        #terms
+        lowinf <- beta_l*l*s
+        highinf  <- beta_h*h*s
+        waterinf <- beta_w*w*s
+        #derivatives
+        ds <- mu - mu*s - lowinf - highinf - waterinf
+        dl <- lowinf + highinf + waterinf - l*(delta + mu + alpha_l)
+        dh <- delta*l - h*(gamma + mu + alpha_h) #dI_h/dt
+        dr <- gamma*h - mu*r
+        dw <- xi_l*l + xi_h*h - sigma*w - rho*w
+        vec.fld <- list(c(ds,dl,dh,dr,dw))
+        return(vec.fld)
+    })
+}
+antibioticSHL <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        #terms
+        lowinf <- beta_l*l*s
+        highinf  <- beta_h*h*s
+        waterinf <- beta_w*w*s
+        #derivatives
+        ds <- mu - mu*s - lowinf - highinf - waterinf
+        dl <- lowinf + highinf + waterinf - l*(delta + mu + alpha_l + eta)
+        dh <- delta*l - h*(gamma + mu + alpha_h) #dI_h/dt
+        dr <- gamma*h - mu*r + eta*l
+        dw <- xi_l*l + xi_h*h - sigma*w
+        vec.fld <- list(c(ds,dl,dh,dr,dw))
+        return(vec.fld)
+    })
+}
+vaccinationSHL <- function(t,vars,params){
+    with(as.list(c(vars,params)),{
+        #terms
+        lowinf <- beta_l*l*s
+        highinf  <- beta_h*h*s
+        waterinf <- beta_w*w*s
+        #derivatives
+        ds <- mu - mu*s - lowinf - highinf - waterinf - nu*s
+        dl <- lowinf + highinf + waterinf - l*(delta + mu + alpha_l)
+        dh <- delta*l - h*(gamma + mu + alpha_h) #dI_h/dt
+        dr <- gamma*h - mu*r + nu*s
+        dw <- xi_l*l + xi_h*h - sigma*w
+        vec.fld <- list(c(ds,dl,dh,dr,dw))
+        return(vec.fld)
+    })
+}
+compareSPHL <- function(ic,params,tmax,steps,...){
+    #Data
+    base <- solveSingleModel(baseSHL,ic,params,tmax=tmax,steps=steps)
+    bl <- base[,"l"]
+    bh <- base[,"h"]
+    san <- solveSingleModel(sanitationSHL,ic,params,tmax=tmax,steps=steps)
+    sl <- san[,"l"]
+    sh <- san[,"h"]
+    anti <- solveSingleModel(antibioticSHL,ic,params,tmax=tmax,steps=steps)
+    al <- anti[,"l"]
+    ah <- anti[,"h"]
+    vacc <- solveSingleModel(vaccinationSHL,ic,params,tmax=tmax,steps=steps)
+    vl <- vacc[,"l"]
+    vh <- vacc[,"h"]
+    #Legend entries
+    sentry <- paste('Sanitation =',params$rho)
+    ventry <- paste('Vaccination =',params$nu)
+    aentry <- paste('Antibiotics =',params$eta)
+    lentries <- c("Base",sentry,ventry,aentry)
+    #Plotting
+    treatcol = c("red","cornflowerblue", "orange", "brown") #for overlay graph
+    par(mfrow=c(2,1))
+    #Low plotting
+    plot(x=0, y=0, type = "n",xlim=c(0,tmax), ylim=c(0,0.3), xaxs="i", yaxs="i",xlab = "Time (days)", ylab="Proportion (I)",main="Low Severity")
+    lines(bl,col="red",lty=1, lwd=4,)
+    lines(sl,col="cornflowerblue",lty=1, lwd=4,)
+    lines(vl,col="brown",lty=1, lwd=4,)
+    lines(al,col="orange",lty=1, lwd=4,)
+    legend("topright",lty=c(1,1,1,1), col = treatcol,legend=lentries)
+    #High plotting
+    plot(x=0, y=0, type = "n",xlim=c(0,tmax), ylim=c(0,0.3), xaxs="i", yaxs="i",xlab = "Time (days)", ylab="Proportion (I)",main="High Severity")
+    lines(bh,col="red",lty=1, lwd=4,)
+    lines(sh,col="cornflowerblue",lty=1, lwd=4,)
+    lines(vh,col="brown",lty=1, lwd=4,)
+    lines(ah,col="orange",lty=1, lwd=4,)
+    legend("topright",lty=c(1,1,1,1), col = treatcol,legend=lentries)
+}
+#Multi Patch
 initModel <- function(rows,cols,i0,w0){
     p = rows*cols
     i <- matrix(rep(0,p),rows,cols)
@@ -59,7 +210,6 @@ initModel <- function(rows,cols,i0,w0){
     w[sample(1:length(w), as.integer(0.05*rows*cols)+1)] <- w0
     return(c(s,i,r,w))
 }
-#Base Models
 multiWaterModel <- function(t,state,params){
     with(as.list(c(params)),{
         #compartment matrices
@@ -146,7 +296,7 @@ antibioticModel <- function(t,state,params){
         #derivatives
         ds <- mu - mu*s - person_infect - water_infect + sdisperse
         di <- person_infect + water_infect - i*gamma -i*mu -i*alpha -eta*i
-        dr <- gamma*i - mu*r +eta*i + rdisperse
+        dr <- gamma*i - mu*r + eta*i + rdisperse
         dw <- xi*i - sigma*w + wdisperse
         vec.fld <- list(c(ds,di,dr,dw))
         return(vec.fld)
@@ -189,16 +339,15 @@ compareTreatments <- function(ic,params,tmax,steps,...){
     aentry <- paste('Antibiotics =',params$eta)
     lentries <- c("Base",sentry,ventry,aentry)
     #Plotting
-    overlaymax <- 0.6 #ymax on overlay graph
     treatcol = c("red","cornflowerblue", "orange", "brown") #for overlay graph
-    plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, overlaymax), xaxs="i", yaxs="i",xlab = "Time (days)", ylab="Proportion (I)")
+    plot(x=0, y=0, type = "n",xlim=c(0,tmax), ylim=c(0,0.6), xaxs="i", yaxs="i",xlab = "Time (days)", ylab="Proportion (I)")
     lines(bim,col="red",lty=1, lwd=4,)
     lines(sim,col="cornflowerblue",lty=1, lwd=4,)
     lines(vim,col="brown",lty=1, lwd=4,)
     lines(aim,col="orange",lty=1, lwd=4,)
     legend("topright",lty=c(1,1,1,1), col = treatcol,legend=lentries)
 }
-#Base Plotting
+#Gif plotting
 gifplot <- function(rows,cols,soln,tmax){
     #get data
     patches <- rows*cols
@@ -220,7 +369,6 @@ gifplot <- function(rows,cols,soln,tmax){
     dir.create(imgdir,showWarnings=FALSE)
     stepsize <- tmax/dim(i)[1]
     dec <- 4
-    pb <- makepb(dim(i)[1])
     for (t in 1:dim(i)[1]){#dim(soln)[2]){
         timestep <- t  #round(t*stepsize,1)
         name <- paste(imgdir,'/','plotframe',str_pad(t,4,pad='0'),'.png',sep='')
@@ -266,67 +414,11 @@ gifplot <- function(rows,cols,soln,tmax){
         par(oma=c(0,0,2,0))
         title(paste('Compartments at Time =',timestep),outer=TRUE)
         dev.off()
-        pb$tick()
     }
     mycommand <- paste('convert ',imgdir,'/*.png -delay 150 filtering.gif',sep='')
     system(mycommand)
 }
-main3 <- function(){
-    set.seed(9)
-    rows <- 80
-    cols <- rows
-    tmax <- 150
-    steps <- 300
-    #params
-    mu = 1/21170 # avg lifespan 58 yrs == 21170
-    beta_i = 0.1 #transmission r. S between I
-    gamma = 1/8 #rate of recovery (days)
-    sigma = 1/22 #rate of water removal
-    beta_w = 0.3 #transmission r. I between W
-    xi = 1/22 #shedding rate I into W (force it equal to sigma)
-    alpha = 0 #death rate by cholera
-    #treatment params
-    rho = 1/20#parameters for water treatment [day^-1]
-    nu = 1/200#parameters for vaccination [day^-1]
-    eta = 1/60#parameters for antibiotics [day^-1]
-    #spatial params
-    dx <- 0.3
-    dy <- dx
-    Dsr <- 0.001
-    Di <- 0
-    Dw <- 0.0001
-    params <- list(rows=rows,
-                   cols=cols,
-                   mu=mu,
-                   beta_i=beta_i,
-                   gamma=gamma,
-                   sigma=sigma,
-                   beta_w=beta_w,
-                   xi=xi,
-                   alpha=alpha,
-                   rho=rho,
-                   nu=nu,
-                   eta=eta,
-                   dx=dx,
-                   dy=dy,
-                   Dsr=Dsr,
-                   Di=Di,
-                   Dw=Dw)
-    #ics
-    i0 <- 0.01
-    w0 <- 0.03
-    ic <- list(rows=rows,
-               cols=cols,
-               i0=i0,
-               w0=w0)
-    soln <- solveMultiModel(vaccinationModel,ic,params,tmax=tmax,steps=steps)
-#    gifplot(rows,cols,soln,tmax)
-#    cmd <- "mpv filtering.gif --loop=inf"
-#    system(cmd)
-    return(soln[,(80*80+2):(80*80*2+1)])
-}
-
-#High/Low Models
+#High/Low Multipatch
 initHLModel <- function(rows,cols,i0,w0){
     p = rows*cols
     l <- matrix(rep(0,p),rows,cols)

@@ -389,20 +389,35 @@ Where the varaibles are
     \item $J$ are the fluxes of each patch
     \item $M_C$ is the diffusion coefficient
 \end{itemize}
-Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \dot rows \dot columns$, which is the area of then entire square region containing all patches.
+Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compare-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model$\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compare}
+\includegraphics[width=\maxwidth]{figure/compareSP-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the single patch SIRW model. The parameter values are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareSP}
 \end{figure}
 
 
 \end{knitrout}
 \FloatBarrier
-
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives.$\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
+\includegraphics[width=\maxwidth]{figure/compareSPHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the single patch model with high and low severity infectives. The parameter values are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareSPHL}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareMP-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model. The parameter values are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareMP}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives. The parameter values are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
 \end{figure}
 
 
@@ -542,6 +557,6 @@ In terms of pragmatism, it is impractical to only implement antibiotic prophylax
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 2M 5.657S seconds.
+CPU time to generate this document: 6.927S seconds.
 \printbibliography
 \end{document}

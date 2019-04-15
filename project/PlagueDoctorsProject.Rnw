@@ -58,7 +58,7 @@
 <<global_options,include=FALSE>>=
 #knitr::opts_chunk$set(fig.pos = '!H')
 start.time <- proc.time()
-#Jessa Params
+set.seed(9)
 #single patch base
 mu <- 1/15370
 beta_i <- 0.025 #transmission r. S between I
@@ -76,38 +76,13 @@ xi_l <- 0.07 #shedding rate I_l into W; maybe equal to sigma?
 xi_h <- 0.14
 alpha_l <- 0.01 #death rate by cholera with low intensity symptoms
 alpha_h <- 0.05 #death rate by cholera with high int. symptoms
-#Treatment params
-rhop <- 0.9#parameters for water treatment
-nup <- 0.9#parameters for vaccination
-etap <- 0.9#parameters for antibiotics
-#old params?
-#mu <- 0.15
-#alpha <- 0
-#beta_i <- 0.06 #transmission r. S between I
-#gamma <- 1/7 #rate of recovery (days)
-#sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
-#beta_w <- 0.15 #transmission r. I between W
-#i0 <- 0.05
-##Sid Params
-rows <- 70
-cols <- rows
-##params
-#mu <- 1/21170 # avg lifespan 58 yrs == 21170
-#beta_l <- 0.1 #transmission r. S between I
-#beta_h <- beta_l*2 #transmission r. S between I
-#gamma <- 1/8 #rate of recovery (days)
-#sigma <- 1/22 #rate of water removal
-#beta_w <- 0.3 #transmission r. I between W
-#xi_l <- 1/22 #shedding rate I into W (force it equal to sigma)
-#xi_h <- xi_l*10 #shedding rate I into W (force it equal to sigma)
-#delta <- 0.00005
-#alpha_l <- 0 #death rate by cholera
-#alpha_h <- 0.0001 #death rate by cholera
-##treatment params
+#treatment params
 rho <- 1/20#parameters for water treatment [day^-1]
 nu <- 1/200#parameters for vaccination [day^-1]
 eta <- round(1/60,5) #parameters for antibiotics [day^-1]
-##spatial params
+#spatial params
+rows <- 10
+cols <- rows
 dx <- 0.3
 dy <- dx
 Dsr <- 0.001
@@ -116,6 +91,9 @@ Dw <- 0.0001
 params <- list(rows=rows,
                cols=cols,
                mu=mu,
+               beta_i=beta_i,
+               alpha=alpha,
+               xi=xi,
                beta_l=beta_l,
                beta_h=beta_h,
                beta_w=beta_w,
@@ -139,7 +117,33 @@ i0 <- 0.01
 w0 <- 0.03
 s0 <- 1-i0
 r0 <- 0
+icx <- c(x=s0,y=i0,z=r0,w=w0)
+ichl <- c(s=s0,l=i0,h=0,r=r0,w=w0)
 ic <- list(s0=s0,i0=i0,r0=r0,w0=w0)
+#Depreciated
+##params
+#mu <- 1/21170 # avg lifespan 58 yrs == 21170
+#beta_l <- 0.1 #transmission r. S between I
+#beta_h <- beta_l*2 #transmission r. S between I
+#gamma <- 1/8 #rate of recovery (days)
+#sigma <- 1/22 #rate of water removal
+#beta_w <- 0.3 #transmission r. I between W
+#xi_l <- 1/22 #shedding rate I into W (force it equal to sigma)
+#xi_h <- xi_l*10 #shedding rate I into W (force it equal to sigma)
+#delta <- 0.00005
+#alpha_l <- 0 #death rate by cholera
+#alpha_h <- 0.0001 #death rate by cholera
+#Treatment params
+#rhop <- 0.9#parameters for water treatment
+#nup <- 0.9#parameters for vaccination
+#etap <- 0.9#parameters for antibiotics
+#mu <- 0.15
+#alpha <- 0
+#beta_i <- 0.06 #transmission r. S between I
+#gamma <- 1/7 #rate of recovery (days)
+#sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
+#beta_w <- 0.15 #transmission r. I between W
+#i0 <- 0.05
 @
 %Sections
 \section{Background}

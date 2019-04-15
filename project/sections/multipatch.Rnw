@@ -38,24 +38,83 @@ Where the varaibles are
     \item $J$ are the fluxes of each patch
     \item $M_C$ is the diffusion coefficient
 \end{itemize}
-Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \dot rows \dot columns$, which is the area of then entire square region containing all patches.
+Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
 <<mpcaption,echo=FALSE>>=
     dec <- 5
-    mpcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model',
-                   '$\\mu=',round(mu,dec),
-                   ',\\beta_i=',round(beta_i,dec),
-                   ',\\gamma=',round(gamma,dec),
-                   ',\\sigma=',round(sigma,dec),
-                   ',\\beta_w=',round(beta_w,dec),
-                   ',\\xi=',round(xi,dec),
-                   ',\\alpha=',alpha,
+    spcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the single patch SIRW model. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_i=',round(params$beta_i,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi=',round(params$xi,dec),
+                   ',\\alpha=',params$alpha,
                    '$ The initial conditions for the model were ',
-                   '$S_0=',s0,
-                   ',I_0=',i0,
-                   ',R_0=',0,',$.',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+    sphlcap <- paste('\\label{fig:multipatch} Plot of different treatments for the single patch model with high and low severity infectives. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_l=',round(params$beta_l,dec),
+                   ',\\beta_h=',round(params$beta_h,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi_l=',round(params$xi_l,dec),
+                   ',\\xi_h=',round(params$xi_h,dec),
+                   ',\\alpha_l=',params$alpha_l,
+                   ',\\alpha_h=',params$alpha_h,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+    mpcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_i=',round(params$beta_i,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi=',round(params$xi,dec),
+                   ',\\alpha=',params$alpha,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+    mphlcap <- paste('\\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_l=',round(params$beta_l,dec),
+                   ',\\beta_h=',round(params$beta_h,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi_l=',round(params$xi_l,dec),
+                   ',\\xi_h=',round(params$xi_h,dec),
+                   ',\\alpha_l=',params$alpha_l,
+                   ',\\alpha_h=',params$alpha_h,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
                    sep='')
 @
-<<compare,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+<<compareSP,fig.height=10,fig.width=8,echo=FALSE,fig.cap=spcap>>=
+    source('spatialSIR.R')
+    tmax <- 100
+    steps <- 200
+    compareSPTreatments(icx,params,tmax,steps)
+@
+\FloatBarrier
+<<compareSPHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=sphlcap>>=
+    source('spatialSIR.R')
+    tmax <- 100
+    steps <- 200
+    compareSPHL(ichl,params,tmax,steps)
+@
+\FloatBarrier
+<<compareMP,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
     source('spatialSIR.R')
     #multipatch
     tmax <- 100
@@ -63,26 +122,7 @@ Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (
     compareTreatments(ic,params,tmax,steps)
 @
 \FloatBarrier
-<<mphlcaption,echo=FALSE>>=
-    dec <- 5
-    mpcap <- paste('\\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives.',
-                   '$\\mu=',round(mu,dec),
-                   ',\\beta_l=',round(beta_l,dec),
-                   ',\\beta_h=',round(beta_h,dec),
-                   ',\\gamma=',round(gamma,dec),
-                   ',\\sigma=',round(sigma,dec),
-                   ',\\beta_w=',round(beta_w,dec),
-                   ',\\xi_l=',round(xi_l,dec),
-                   ',\\xi_h=',round(xi_h,dec),
-                   ',\\alpha_l=',alpha_l,
-                   ',\\alpha_h=',alpha_h,
-                   '$ The initial conditions for the model were ',
-                   '$S_0=',s0,
-                   ',I_0=',i0,
-                   ',R_0=',0,',$.',
-                   sep='')
-@
-<<compareHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+<<compareHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mphlcap>>=
     source('spatialSIR.R')
     #multipatch
     tmax <- 150
