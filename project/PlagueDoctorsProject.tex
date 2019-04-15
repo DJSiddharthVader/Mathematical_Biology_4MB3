@@ -330,7 +330,6 @@ It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 \subsection{Single Patch With Low And High Shedding Compartments}
 
 %\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
-\begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
 	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
@@ -338,47 +337,63 @@ It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 	\frac{dR}{dt}&= \gamma I_H - \mu R \\
 	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
 	\end{align*}
-\end{linenomath}
 
 This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding. The assumptions for the single patch model apply here as well.
 \begin{itemize}
-	\item$\alpha_i=$ death rate by cholera in low or high intensity
-	\item$\delta =$ rate at which symptoms increase in severity
+	\item $\alpha_L=$ death rate by cholera for low intensity infected
+	\item $\alpha_H=$ death rate by cholera for low intensity infected
+    \item $\xi_L=$ Shedding rate of cholera into water for low intensity infectives
+    \item $\xi_H=$ Shedding rate of cholera into water for hig intensity infectives
+	\item $\delta=$ Transition rate from low intensity to high intensity infection
 \end{itemize}
 
 \section{Multi Patch Model}
 
-%\section{Multi-Patch Models Of Cholera}
-The following equations represent the SIRW model for a single patch $i$ in the multi patch model.
+The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
+The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
 \begin{align*}
-    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\
-    \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\
-    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\
-    \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_i S I - \beta_w S W + D(S,M_S)\\
+    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
+    \frac{dR}{dt}&= \gamma I - \mu R  + D(R,M_R) \\
+    \frac{dW}{dt}&= \xi I - \sigma W + D(W,M_W)
 \end{align*}
-Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diagonal patches) of the patch $i$.
 %Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
-    \item$\phi=$ person to person contact rate between neighbouring patches
-    \item$\psi=$ person to water contact rate between neighbouring patches
     \item$\beta_i=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
     \item$\xi=$ Shedding rate of cholera from I to W class
     \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+    \item$M_S$ The dispersal rate of succeptibles between patches
+    \item$M_R=$ The dispersal rate of recovered people between patches
+    \item$M_W=$ The dispersal rate of water between patches
 \end{itemize}
-The assumptions for the single patch model apply here as well as the following.
+The assumptions for the single patch model apply here as well as the following:
 \begin{itemize}
-    \item No dispersal of individuals between patches
-    \item infected individuals in patch $i$ can infect succeptible individuals in the neihgbouring patch $j$
-    \item All patches neighbouring $i$ have the same transmission rate to patch $i$
+    \item No dispersal of infected individuals between patches
+    \item All patches have the same parameter values
 \end{itemize}
+The function $D(C,M_C)$ is defined as
+\begin{align*}
+    \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
+    J &= - M_C \cdot \frac{\partial C}{\partial x}
+\end{align*}
+Where the varaibles are
+\begin{itemize}
+    \item $A$ is the total surface area of the region
+    \item $C$ C is the fraction of the patch population in that compartment
+    \item $x$ is space
+    \item $t$ is time
+    \item $J$ are the fluxes of each patch
+    \item $M_C$ is the diffusion coefficient
+\end{itemize}
+Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \dot rows \dot columns$, which is the area of then entire square region containing all patches.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compare-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compare}
+\includegraphics[width=\maxwidth]{figure/compare-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model$\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compare}
 \end{figure}
 
 
@@ -387,7 +402,7 @@ The assumptions for the single patch model apply here as well as the following.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
+\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives.$\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
 \end{figure}
 
 
@@ -527,6 +542,6 @@ In terms of pragmatism, it is impractical to only implement antibiotic prophylax
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 2M 5.158S seconds.
+CPU time to generate this document: 2M 5.657S seconds.
 \printbibliography
 \end{document}

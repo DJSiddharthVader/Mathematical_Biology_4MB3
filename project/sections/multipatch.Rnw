@@ -39,54 +39,54 @@ Where the varaibles are
     \item $M_C$ is the diffusion coefficient
 \end{itemize}
 Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \dot rows \dot columns$, which is the area of then entire square region containing all patches.
-%<<mpcaption,echo=FALSE>>=
-%    dec <- 5
-%    mpcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model',
-%                   '$\\mu=',round(mu,dec),
-%                   ',\\beta_i=',round(beta_i,dec),
-%                   ',\\gamma=',round(gamma,dec),
-%                   ',\\sigma=',round(sigma,dec),
-%                   ',\\beta_w=',round(beta_w,dec),
-%                   ',\\xi=',round(xi,dec),
-%                   ',\\alpha=',alpha,
-%                   '$ The initial conditions for the model were ',
-%                   '$S_0=',s0,
-%                   ',I_0=',i0,
-%                   ',R_0=',0,',$.',
-%                   sep='')
-%@
-%<<compare,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
-%    source('spatialSIR.R')
-%    #multipatch
-%    tmax <- 100
-%    steps <- 200
-%    compareTreatments(ic,params,tmax,steps)
-%@
-%\FloatBarrier
-%<<mphlcaption,echo=FALSE>>=
-%    dec <- 5
-%    mpcap <- paste('\\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives.',
-%                   '$\\mu=',round(mu,dec),
-%                   ',\\beta_l=',round(beta_l,dec),
-%                   ',\\beta_h=',round(beta_h,dec),
-%                   ',\\gamma=',round(gamma,dec),
-%                   ',\\sigma=',round(sigma,dec),
-%                   ',\\beta_w=',round(beta_w,dec),
-%                   ',\\xi_l=',round(xi_l,dec),
-%                   ',\\xi_h=',round(xi_h,dec),
-%                   ',\\alpha_l=',alpha_l,
-%                   ',\\alpha_h=',alpha_h,
-%                   '$ The initial conditions for the model were ',
-%                   '$S_0=',s0,
-%                   ',I_0=',i0,
-%                   ',R_0=',0,',$.',
-%                   sep='')
-%@
-%<<compareHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
-%    source('spatialSIR.R')
-%    #multipatch
-%    tmax <- 150
-%    steps <- 200
-%    compareHLTreatments(ic,params,tmax,steps)
-%@
-%\FloatBarrier
+<<mpcaption,echo=FALSE>>=
+    dec <- 5
+    mpcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model',
+                   '$\\mu=',round(mu,dec),
+                   ',\\beta_i=',round(beta_i,dec),
+                   ',\\gamma=',round(gamma,dec),
+                   ',\\sigma=',round(sigma,dec),
+                   ',\\beta_w=',round(beta_w,dec),
+                   ',\\xi=',round(xi,dec),
+                   ',\\alpha=',alpha,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',s0,
+                   ',I_0=',i0,
+                   ',R_0=',0,',$.',
+                   sep='')
+@
+<<compare,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    tmax <- 100
+    steps <- 200
+    compareTreatments(ic,params,tmax,steps)
+@
+\FloatBarrier
+<<mphlcaption,echo=FALSE>>=
+    dec <- 5
+    mpcap <- paste('\\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives.',
+                   '$\\mu=',round(mu,dec),
+                   ',\\beta_l=',round(beta_l,dec),
+                   ',\\beta_h=',round(beta_h,dec),
+                   ',\\gamma=',round(gamma,dec),
+                   ',\\sigma=',round(sigma,dec),
+                   ',\\beta_w=',round(beta_w,dec),
+                   ',\\xi_l=',round(xi_l,dec),
+                   ',\\xi_h=',round(xi_h,dec),
+                   ',\\alpha_l=',alpha_l,
+                   ',\\alpha_h=',alpha_h,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',s0,
+                   ',I_0=',i0,
+                   ',R_0=',0,',$.',
+                   sep='')
+@
+<<compareHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    tmax <- 150
+    steps <- 200
+    compareHLTreatments(ic,params,tmax,steps)
+@
+\FloatBarrier
