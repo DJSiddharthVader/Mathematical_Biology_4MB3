@@ -1,78 +1,92 @@
-%\section{Multi-Patch Models Of Cholera}
-The following equations represent the SIRW model for a single patch $i$ in the multi patch model.
+The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
+The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
 \begin{align*}
-    \frac{dS_i}{dt}&= \mu N - \mu S_i - \beta_i S_i I_i - \phi \beta_i S_i \sum_j^n I_j - \beta_w S_i W_i - \psi \beta_w S_i \sum_j^n W_j\\
-    \frac{dI_i}{dt}&= \beta_i S_i I_i + \beta_i \phi S_i \sum_j^n I_j + \beta_w S_i W_i + \beta_i \psi S_i \sum_j^n W_j - I_i (\gamma + \mu + \alpha) \\
-    \frac{dR_i}{dt}&= \gamma I_i - \mu R_i \\
-    \frac{dW_i}{dt}&= \xi I_i + \beta_i \psi I_i \sum_j^n W_j  - \sigma W_i
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_i S I - \beta_w S W + D(S,M_S)\\
+    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
+    \frac{dR}{dt}&= \gamma I - \mu R  + D(R,M_R) \\
+    \frac{dW}{dt}&= \xi I - \sigma W + D(W,M_W)
 \end{align*}
-Where the set $n$ in the set is all neighbours (i.e. adjacent and directly diagonal patches) of the patch $i$.
 %Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
-    \item$\phi=$ person to person contact rate between neighbouring patches
-    \item$\psi=$ person to water contact rate between neighbouring patches
     \item$\beta_i=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
     \item$\xi=$ Shedding rate of cholera from I to W class
     \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+    \item$M_S$ The dispersal rate of succeptibles between patches
+    \item$M_R=$ The dispersal rate of recovered people between patches
+    \item$M_W=$ The dispersal rate of water between patches
 \end{itemize}
-The assumptions for the single patch model apply here as well as the following.
+The assumptions for the single patch model apply here as well as the following:
 \begin{itemize}
-    \item No dispersal of individuals between patches
-    \item infected individuals in patch $i$ can infect succeptible individuals in the neihgbouring patch $j$
-    \item All patches neighbouring $i$ have the same transmission rate to patch $i$
+    \item No dispersal of infected individuals between patches
+    \item All patches have the same parameter values
 \end{itemize}
-<<mpcaption,echo=FALSE>>=
-    dec <- 5
-    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are ',
-                   '$\\mu=',round(mu,dec),
-                   ',\\beta_i=',round(beta_i,dec),
-                   ',\\gamma=',round(gamma,dec),
-                   ',\\sigma=',round(sigma,dec),
-                   ',\\beta_w=',round(beta_w,dec),
-                   ',\\xi=',round(xi,dec),
-                   ',\\alpha=',alpha,
-                   '$ The initial conditions for the model were ',
-                   '$S_0=',s0,
-                   ',I_0=',i0,
-                   ',R_0=',0,',$.',
-                   sep='')
-@
-<<compare,fig.height=6,echo=FALSE,fig.cap=mpcap>>=
-    source('spatialSIR.R')
-    #multipatch
-    tmax <- 150
-    steps <- 200
-    compareTreatments(ic,params,tmax,steps)
-@
-\FloatBarrier
-<<mphlcaption,echo=FALSE>>=
-    dec <- 5
-    mpcap <- paste('\\label{fig:multipatch} Plot of the SIRW model for all patches in a multi patch model. Parameters are ',
-                   '$\\mu=',round(mu,dec),
-                   ',\\beta_l=',round(beta_l,dec),
-                   ',\\beta_h=',round(beta_h,dec),
-                   ',\\gamma=',round(gamma,dec),
-                   ',\\sigma=',round(sigma,dec),
-                   ',\\beta_w=',round(beta_w,dec),
-                   ',\\xi_l=',round(xi_l,dec),
-                   ',\\xi_h=',round(xi_h,dec),
-                   ',\\alpha_l=',alpha_l,
-                   ',\\alpha_h=',alpha_h,
-                   '$ The initial conditions for the model were ',
-                   '$S_0=',s0,
-                   ',I_0=',i0,
-                   ',R_0=',0,',$.',
-                   sep='')
-@
-<<compareHL,fig.height=12,echo=FALSE,fig.cap=mpcap>>=
-    source('spatialSIR.R')
-    #multipatch
-    tmax <- 150
-    steps <- 200
-    compareHLTreatments(ic,params,tmax,steps)
-@
-\FloatBarrier
+The function $D(C,M_C)$ is defined as
+\begin{align*}
+    \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
+    J &= - M_C \cdot \frac{\partial C}{\partial x}
+\end{align*}
+Where the varaibles are
+\begin{itemize}
+    \item $A$ is the total surface area of the region
+    \item $C$ C is the fraction of the patch population in that compartment
+    \item $x$ is space
+    \item $t$ is time
+    \item $J$ are the fluxes of each patch
+    \item $M_C$ is the diffusion coefficient
+\end{itemize}
+Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \dot rows \dot columns$, which is the area of then entire square region containing all patches.
+%<<mpcaption,echo=FALSE>>=
+%    dec <- 5
+%    mpcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model',
+%                   '$\\mu=',round(mu,dec),
+%                   ',\\beta_i=',round(beta_i,dec),
+%                   ',\\gamma=',round(gamma,dec),
+%                   ',\\sigma=',round(sigma,dec),
+%                   ',\\beta_w=',round(beta_w,dec),
+%                   ',\\xi=',round(xi,dec),
+%                   ',\\alpha=',alpha,
+%                   '$ The initial conditions for the model were ',
+%                   '$S_0=',s0,
+%                   ',I_0=',i0,
+%                   ',R_0=',0,',$.',
+%                   sep='')
+%@
+%<<compare,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+%    source('spatialSIR.R')
+%    #multipatch
+%    tmax <- 100
+%    steps <- 200
+%    compareTreatments(ic,params,tmax,steps)
+%@
+%\FloatBarrier
+%<<mphlcaption,echo=FALSE>>=
+%    dec <- 5
+%    mpcap <- paste('\\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives.',
+%                   '$\\mu=',round(mu,dec),
+%                   ',\\beta_l=',round(beta_l,dec),
+%                   ',\\beta_h=',round(beta_h,dec),
+%                   ',\\gamma=',round(gamma,dec),
+%                   ',\\sigma=',round(sigma,dec),
+%                   ',\\beta_w=',round(beta_w,dec),
+%                   ',\\xi_l=',round(xi_l,dec),
+%                   ',\\xi_h=',round(xi_h,dec),
+%                   ',\\alpha_l=',alpha_l,
+%                   ',\\alpha_h=',alpha_h,
+%                   '$ The initial conditions for the model were ',
+%                   '$S_0=',s0,
+%                   ',I_0=',i0,
+%                   ',R_0=',0,',$.',
+%                   sep='')
+%@
+%<<compareHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+%    source('spatialSIR.R')
+%    #multipatch
+%    tmax <- 150
+%    steps <- 200
+%    compareHLTreatments(ic,params,tmax,steps)
+%@
+%\FloatBarrier
