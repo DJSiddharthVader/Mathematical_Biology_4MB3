@@ -189,7 +189,7 @@ compareTreatments <- function(ic,params,tmax,steps,...){
     aentry <- paste('Antibiotics =',params$eta)
     lentries <- c("Base",sentry,ventry,aentry)
     #Plotting
-    overlaymax <- 0.1 #ymax on overlay graph
+    overlaymax <- 0.6 #ymax on overlay graph
     treatcol = c("red","cornflowerblue", "orange", "brown") #for overlay graph
     plot(x=0, y=0, type = "n",xlim=c(0, tmax), ylim=c(0, overlaymax), xaxs="i", yaxs="i",xlab = "Time (days)", ylab="Proportion (I)")
     lines(bim,col="red",lty=1, lwd=4,)
