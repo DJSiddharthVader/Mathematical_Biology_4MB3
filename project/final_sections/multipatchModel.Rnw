@@ -1,15 +1,15 @@
 The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
 The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
 \begin{align*}
-    \frac{dS}{dt}&= \mu N - \mu S - \beta_i S I - \beta_w S W + D(S,M_S)\\
-    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_I S I - \beta_w S W + D(S,M_S)\\
+    \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
     \frac{dR}{dt}&= \gamma I - \mu R  + D(R,M_R) \\
     \frac{dW}{dt}&= \xi I - \sigma W + D(W,M_W)
 \end{align*}
 %Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
-    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_I=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
