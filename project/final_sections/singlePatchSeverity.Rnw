@@ -1,4 +1,5 @@
 Papers \cite{link15} \cite{link18} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus likely affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class (\cite{link15}).
+Papers (\cite{link15} \cite{link18}) also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class (\cite{link15}).
 The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($\beta_L, \beta_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
 \begin{align*}
     \frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
@@ -17,7 +18,7 @@ The parameters not in the basic single patch model are:
 \end{itemize}
 <<sphlcaption,echo=FALSE>>=
     dec <- 5
-    sphlcap <- paste('\\label{fig:basesp} Plot of the SIRW model for a single patch with severity compartments. Parameters are ',
+    sphlcap <- paste('\\label{fig:basesp} Plot of the SIRW model for a single patch with severity compartments. In red is the high intensity infective proportion and in orange is the low intensity infective proportion. Parameters are ',
                    '$\\mu=',round(params$mu,dec),
                    ',\\beta_l=',round(params$beta_l,dec),
                    ',\\beta_h=',round(params$beta_h,dec),

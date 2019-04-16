@@ -23,12 +23,3 @@ It also has a global asymptotically stable endemic-equillirbium when ${\mathcal 
 analysis to prove local stability and through the use of Lyapunov's theorem to show global asymptotic stability.
 
 
-%\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
-\begin{align*}
-	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
-	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
-	\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
-	\frac{dR}{dt}&= \gamma I_H - \mu R \\
-	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
-	\end{align*}
-
