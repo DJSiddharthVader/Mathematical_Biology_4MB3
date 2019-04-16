@@ -16,7 +16,7 @@ For our model, we have
 The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as seen in \cite{link9}, which is
 \begin{align*}
     {\mathcal R_0} &= \rho(FV^{-1})\\
-		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
+		           &=\frac{\beta_I+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
 It also has a global asymptotically stable endemic-equillirbium when ${\mathcal R_0}>1$ as shown in \cite{link9}, using Jacobian stability
