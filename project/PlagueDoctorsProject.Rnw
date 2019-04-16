@@ -54,6 +54,8 @@
 %\bigskip
 \Sexpr{knit_child('./final_sections/abstract.Rnw')}
 \clearpage
+\include{./final_sections/executive_summary}
+\clearpage
 \tableofcontents
 \clearpage
 <<global_options,include=FALSE>>=
@@ -173,6 +175,7 @@ cpu.time.string <- as.character(lubridate::seconds_to_period(cpu.seconds))
 \bigskip\vfill
 \centerline{\bf--- END OF PROJECT---}
 \bigskip
+There are 2982 words in the document.\\
 Compile time for this document:
 \today\ @ \thistime\\
 CPU time to generate this document: \Sexpr{cpu.time.string} seconds.
