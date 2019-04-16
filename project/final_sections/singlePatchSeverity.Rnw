@@ -1,4 +1,5 @@
-Papers\cite{link15} \cite{link18} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class \cite{link15}. The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($\beta_L, \beta_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
+Papers\cite{link15} \cite{link18} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class \cite{link15}.
+The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($\beta_L, \beta_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
 \begin{align*}
     \frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
     \frac{dI_L}{dt}&= S(\beta_L I_L + \beta_H I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
@@ -15,7 +16,8 @@ The parameters not in the basic single patch model are:
 	\item $\delta=$ Transition rate from low intensity to high intensity infection
 \end{itemize}
 <<sphlcaption,echo=FALSE>>=
-    sphlcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are ',
+    dec <- 5
+    sphlcap <- paste('\\label{fig:basesp} Plot of the SIRW model for a single patch with severity compartments. Parameters are ',
                    '$\\mu=',round(params$mu,dec),
                    ',\\beta_l=',round(params$beta_l,dec),
                    ',\\beta_h=',round(params$beta_h,dec),
@@ -28,7 +30,8 @@ The parameters not in the basic single patch model are:
                    ',\\alpha_h=',params$alpha_h,
                    '$ The initial conditions for the model were ',
                    '$S_0=',ic$s0,
-                   ',I_0=',ic$i0,
+                   ',L_0=',ic$i0,
+                   ',H_0=',0,
                    ',R_0=',ic$r0,',$.',
                    sep='')
 @
@@ -36,9 +39,8 @@ The parameters not in the basic single patch model are:
     source('spatialSIR.R')
     steps <- 5000
     tmax <- 400
-    sic <- c(x=s0,y=i0,z=r0,w=w0)
-    singlesoln <- solveSingleModel(baseSHL,sic,params, tmax=tmax,steps=steps)
-    plotHLSoln(singlesoln, xlim=c(0,tmax), ylim=c(0,1), ylab='Population Proportion', xlab='Infectious Period')
+    hlsoln <- solveSingleModel(baseSHL,ichl,params, tmax=tmax,steps=steps)
+    plotHLSoln(hlsoln , xlim=c(0,tmax), ylim=c(0,1), ylab='Population Proportion', xlab='Infectious Period')
 @
 \FloatBarrier
 

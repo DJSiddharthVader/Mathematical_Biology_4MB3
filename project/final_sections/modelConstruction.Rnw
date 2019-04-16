@@ -16,8 +16,8 @@ They leave this compartment as they die naturally at a rate $\mu$.
   \item [Water] The $W$ term is proportional to the concentration of Cholera in the environment (or in this case the water).
 More bacteria enter the compartment as infected individuals shed the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
 \end{description}
-In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
-summarize the variables and parameters involved.
+\subsection{Variables and Parameters}
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below summarize the variables and parameters involved.
 %%VARIABLE Table%%
 \begin{center}
 	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }

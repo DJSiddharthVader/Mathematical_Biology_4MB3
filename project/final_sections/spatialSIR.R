@@ -547,8 +547,8 @@ plotHLSoln <- function(soln,...){
     lines(soln[,'h'],type='l',col=hcol)
     lines(soln[,'w'],type='l',col=rcol)
     legend("topright",
-           legend=c('S','I','R'),
-           col=c(scol,lcol,hcol,rcol)
+           legend=c('S','L','H','R'),
+           col=c(scol,lcol,hcol,rcol),
            inset=0.02,
            box.lty=0,
            lty=1,

@@ -53,6 +53,7 @@
 \usepackage{scrtime} % for \thistime (this package MUST be listed first!)
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
+\usepackage{movie15}
 \usepackage{placeins}
 \usepackage[displaymath, mathlines]{lineno}
 \usepackage{color}
@@ -149,6 +150,9 @@ The halting remedy suggested in 1848 in London increased the rate of water conta
 This is a plausible explanation for why maximum weekly deaths in London increase more than two-fold in the 1848 epidemic compared to the 1832 epidemic \citep{link3}.
 Three possible treatment strategies for controlling cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
 We will incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
+
+\section{Basic Model and Parameters}
+
 \subsection{SIRW Model Construction}
 Our model has four distinct departments: susceptible, infectious, recovered, and water compartments \citep{link9}.
 \begin{description}
@@ -158,21 +162,17 @@ Individuals leave this compartment in one of two ways. They either die at a rate
 Interactions of susceptible and infectious individuals from the I compartment yields new infected individuals at a rate of $\beta_I$, and interactions of susceptible individuals with the water compartment W yields new infected individuals at a rate $\beta_w$.\par
   \item [Infectious] The proportion of individuals that have been infected with cholera.
 Individuals in this compartment are capable of infecting susceptible individuals during interactions at a rate of $\beta_i$.
-They are also capable of contributing to the choleric load of the water compartment by “shedding” the pathogen at a rate $\xi$. 
+They are also capable of contributing to the choleric load of the water compartment by “shedding” the pathogen at a rate $\xi$.
 Although for cholera the rate of transmission from person to person interactions is much lower in reality than the rate of transmission through contact with infected waters, we decided it still has enough significance to be in the model.
-Individuals in this compartment recover at a rate $\gamma$, and move to the recovered compartment, or they die naturally (not from Cholera) at a rate $\mu$ and from Cholera at a rate $\alpha$. 
+Individuals in this compartment recover at a rate $\gamma$, and move to the recovered compartment, or they die naturally (not from Cholera) at a rate $\mu$ and from Cholera at a rate $\alpha$.
 With advances in medicine over the past decades $\alpha$ is no longer a significant parameter in todays world.\par
   \item [Recovered] The proportion of individuals that are neither infected with cholera nor susceptible to the pathogen.
 They leave this compartment as they die naturally at a rate $\mu$.
   \item [Water] The $W$ term is proportional to the concentration of Cholera in the environment (or in this case the water).
 More bacteria enter the compartment as infected individuals shed the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
 \end{description}
-\section{Single Patch Models}
-\subsection{Model Introduction And Parameters}
-
-In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
-summarize the variables and parameters involved.
-
+\subsection{Variables and Parameters}
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below summarize the variables and parameters involved.
 %%VARIABLE Table%%
 \begin{center}
 	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
@@ -191,7 +191,6 @@ summarize the variables and parameters involved.
 		\hline
 	\end{tabular}
 \end{center}
-
 %%PARAMETER Table%%
 \begin{center}
 	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | }
@@ -220,12 +219,8 @@ summarize the variables and parameters involved.
 		\hline
 	\end{tabular}
 \end{center}
-
 Parameter estimates are taken from \cite{link5}, \cite{link8} and \cite{link3}.
 The natural death rate is dependent on various factors such as city or location and year or era of interest.
-
-\subsection{Single Patch SIR Model With A Water Compartment}
-
 %Tikz styles
 \tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
 \tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
@@ -301,7 +296,7 @@ The assumptions for this model are
 
 \end{knitrout}
 \FloatBarrier
-\subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
+\section{Analysis of Single Patch Model}
 
 The basic reproductive number ${\mathcal R_0}$ is defined as the expected number of secondary infections that result from introducing a single infected individual into an otherwise susceptible
 population.
@@ -326,8 +321,6 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
 It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 
-\subsection{Single Patch With Low And High Shedding Compartments}
-
 %\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
@@ -337,7 +330,18 @@ It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
 	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
 	\end{align*}
 
-This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding. The assumptions for the single patch model apply here as well.
+\section{Single Patch Model With Severity}
+
+Papers\cite{link15} \cite{link18} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class \cite{link15}.
+The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($\beta_L, \beta_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
+    \frac{dI_L}{dt}&= S(\beta_L I_L + \beta_H I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
+    \frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+    \frac{dR}{dt}&= \gamma I_H - \mu R \\
+    \frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+\end{align*}
+The parameters not in the basic single patch model are:
 \begin{itemize}
 	\item $\alpha_L=$ death rate by cholera for low intensity infected
 	\item $\alpha_H=$ death rate by cholera for low intensity infected
@@ -346,7 +350,16 @@ This model assumes that you start off with low intensity symptoms (lower rate of
 	\item $\delta=$ Transition rate from low intensity to high intensity infection
 \end{itemize}
 
-\section{Multi Patch Model}
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[h]
+\includegraphics[width=\maxwidth]{figure/_singlePatchHL-1} \caption{\label{fig:basesp} Plot of the SIRW model for a single patch with severity compartments. Parameters are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,L_0=0.01,H_0=0,R_0=0,$.}\label{fig:<singlePatchHL}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+
+\section{Multipatch SIRW Model}
 
 The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
 The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
@@ -389,42 +402,33 @@ Where the varaibles are
     \item $M_C$ is the diffusion coefficient
 \end{itemize}
 Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
-
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compareSP-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the single patch SIRW model. The parameter values are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareSP}
+\begin{figure}[htb!]
+    \includemovie{2cm}{2cm}{./final_sections/gifs/base.gif}
+    \caption{ Gif showing the population fraction in each compartment over time}
 \end{figure}
+\section{Multipatch SIRW Model With Severity}
+
+This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
+There are multiple patches, with migration of members of each compartment except for the high severity infectives.
+The assumptions for the single patch model apply here as well.
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
+    \frac{dI_L}{dt}&= S(\beta_L I_L + \beta_H I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
+    \frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
+    \frac{dR}{dt}&= \gamma I_H - \mu R \\
+    \frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
+\end{align*}
+\begin{itemize}
+	\item $\alpha_L=$ death rate by cholera for low intensity infected
+	\item $\alpha_H=$ death rate by cholera for low intensity infected
+    \item $\xi_L=$ Shedding rate of cholera into water for low intensity infectives
+    \item $\xi_H=$ Shedding rate of cholera into water for hig intensity infectives
+	\item $\delta=$ Transition rate from low intensity to high intensity infection
+\end{itemize}
 
 
-\end{knitrout}
-\FloatBarrier
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compareSPHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the single patch model with high and low severity infectives. The parameter values are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareSPHL}
-\end{figure}
+\section{Treatment Strategy Explanations}
 
-
-\end{knitrout}
-\FloatBarrier
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compareMP-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model. The parameter values are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareMP}
-\end{figure}
-
-
-\end{knitrout}
-\FloatBarrier
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
-\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives. The parameter values are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
-\end{figure}
-
-
-\end{knitrout}
-\FloatBarrier
-\section{Treatment Strategies For Cholera}
-
-%\section{Possible Treatment Strategies for Cholera}
 The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics.
 The results of the analysis will aid government officials in implementing intervention strategies by determining optimal  parameters (that represent the different intervention strategies) that would be most effective in lowering the estimated reproductive number $\mathcal R_0$, peak prevalence, and the final size.
 \subsection{Treatment Plan 1: Sanitation of water over time}
@@ -434,14 +438,12 @@ In the following model, a water treatment strategy would affect the water compar
 This can be implemented as a new term $\rho$. \par
 %Biologically relevant parameter ranges for \rho
 
-\begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
 	\frac{dS}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
 	\frac{dR}{dt}&= \gamma I - \mu R \\
 	\frac{dW}{dt}&= \xi I  - \sigma W - \rho W\\
 \end{align*}
-\end{linenomath}
 
 For example, $\rho$ can either be a constant, or dependent on $I$ or $W$:\\
 $$\rho (I)= \begin{cases}
@@ -463,14 +465,12 @@ This model assumes that vaccination is applied to the susceptible population and
 This model also assumes that the vaccine targets the only strain of the cholera bacteria that has caused the epidemic %(might want to change this wording).
 It is possible that new strains of cholera can create a reccuring endemic (herald waves) with seasonality as described in Tien et al.\citep{link3}.
 
-\begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W - \nu S \\
 	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
 	\frac{dR}{dt}&= \gamma I - \mu R + \nu S\\
 	\frac{dW}{dt}&= \xi I  - \sigma W\\
 \end{align*}
-\end{linenomath}
 
 \begin{itemize}
 	\item $\nu=$ is vaccination rate on S class
@@ -480,22 +480,21 @@ It is possible that new strains of cholera can create a reccuring endemic (heral
 More modern techniques of treating cholera involve the use of antibiotics. Several antibiotics that are regarded as effective against cholera such as azithromicin have been used since the early 1990s \citep{link23}.
 Use of antbiotics when infected effectively shortens the duration of diarrhea and results in fewer bowel movements and lower stool volume \citep{link24}. This biological process can be either be implemented in the base single patch model by lowering the duration of the infectious period (which can be be viewed as an introduction of a new parameter in $dI/dt$) or by lowering the shedding rate into water (which can be implemented by lowering the shedding rate $\xi$).
 The following model implements a decrease in the duration of the infectious period by using the term $ - \eta I$.
-\begin{linenomath}
 \begin{align*}
 	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W \\
 	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma +\eta + \mu + \alpha ) \\
 	\frac{dR}{dt}&= (\gamma +\eta)I - \mu R \\
 	\frac{dW}{dt}&= \xi I  - \sigma W\\
 \end{align*}
-\end{linenomath}
 \begin{itemize}
 	\item $\eta=$ is the rate at which individuals recover and leave the I class due to antibiotic tratment
 \end{itemize}
 
-\section{Comparing Treatment Strategies For Cholera}
-\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
 
-%\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
+
+\section{Comparison of Treatment Strategies}
+
+\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
 The following are numerical simulations and phase portraits for the base model with vital dynamics, and the three treatment models.
 
 \begin{knitrout}
@@ -529,26 +528,60 @@ The following are numerical simulations and phase portraits for the base model w
 
 \end{knitrout}
 \FloatBarrier
-From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in figure \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at a much higher level of incidence much quicker than without the treatment.
+From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in figure \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at lower level of prevalence in comparison to without the treatment.
+All treatments appear to show very similar effects for the single patch model, but how they work in the spatial model may differ, especially since the treatments can be applied heterogenously across the patches in proportion to the initial infectives of each patch.
 However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
 All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
 
-We hope to compare the effectiveness of these methods by comparing the final size, which can be computed from ${\mathcal R_0}$ in $R$ using Lambert's $W$ function, as noted in the supplementary material of \cite{link20}.
-\begin{equation}
-    Z({\mathcal R_0}) = 1+\frac{1}{{\mathcal R_0}}W(-{\mathcal R_0}e^{{\mathcal R_0}})
-\end{equation}
-If similar final sizes are estimated for multiple treatment strategies, then relative costs of the treatments may be compared to decide between them.
-Cost is not necessairily only monetary, as risk is associted with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare or engineering professions.
-Further work and research needs to be done to define a more formal, specific cost comparison scheme in this case.
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareSP-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the single patch SIRW model. The parameter values are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareSP}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareSPHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the single patch model with high and low severity infectives. The parameter values are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareSPHL}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareMP-1} \caption{\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model. The parameter values are $\mu=7e-05,\beta_i=0.025,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi=10,\alpha=0$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareMP}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
+\includegraphics[width=\maxwidth]{figure/compareHL-1} \caption{\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives. The parameter values are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,I_0=0.01,R_0=0,$.}\label{fig:compareHL}
+\end{figure}
+
+
+\end{knitrout}
+\FloatBarrier
+
+
+%\begin{equation}
+%    Z({\mathcal R_0}) = 1+\frac{1}{{\mathcal R_0}}W(-{\mathcal R_0}e^{{\mathcal R_0}})
+%\end{equation}
+%If similar final sizes are estimated for multiple treatment strategies, then relative costs of the treatments may be compared to decide between them.
 %Further peak prevelance can estimated from the initial conditions $S_0,I_0$ and ${\mathcal R_0}$ from following expression
 
+%\section{Possible Treatment Strategies for Cholera}
 \subsection{Treatment Model Discussion}
- %Why should you implement a treatment over another
-  %cost analysis (?) bit; realistic implementation depending on the country
-When comparing the treatments solely based on $\mathcal R_0$ and the final size, it easy to overlook the practicality of each treatment. WASH intervention is the simplest treatment technique, with hygiene and clean water distribution usually the first treatment implementation at the start of an outbreak.
+When comparing the treatments solely based on $\mathcal R_0$ and the final size, it easy to overlook the practicality of each treatment.
+WASH intervention is the simplest treatment technique, with hygiene and clean water distribution usually implemented at the start of an outbreak.
 Chlorination techniques have had a few pitfalls depending on the quality of implementation.
-Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens \citep{link27}.
+Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens \citep{link26}.
 In terms of pragmatism, it is impractical to only implement antibiotic prophylaxis to those who are infected as well as those who come in contact with the with the contaminated water source (since mass antibiotic implementation would increase the chance of selecting antibiotic resistant strains) \citep{link23}.
+Cost is not necessarily only monetary, as risk is associated with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare or engineering professions.
+Additionally, timely implementation of oral vaccination in response to an existing epidemic may prove to be challenging without the ability to predict the outbreak and without enough financial support to properly administer an adequate number vaccines to those who are at risk of cholera.
 %End Note
 
 \bigskip\vfill
@@ -556,6 +589,34 @@ In terms of pragmatism, it is impractical to only implement antibiotic prophylax
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 6.75S seconds.
+CPU time to generate this document: 7.055S seconds.
 \printbibliography
 \end{document}
+%Depreciated old sections
+%Sections
+%\section{Background}
+%<<child='./sections/background.Rnw'>>=
+%@
+%\section{Single Patch Models}
+%\subsection{Model Introduction And Parameters}
+%<<child='./sections/compartmentsAndParameters.Rnw'>>=
+%@
+%\subsection{Single Patch SIR Model With A Water Compartment}
+%<<child='./sections/singlePatch.Rnw'>>=
+%@
+%\subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
+%<<child='./sections/singlePatchAnalysis.Rnw'>>=
+%@
+%\subsection{Single Patch With Low And High Shedding Compartments}
+%<<child='./sections/singlePatchLowHigh.Rnw'>>=
+%@
+%\section{Multi Patch Model}
+%<<child='./sections/multipatch.Rnw'>>=
+%@
+%\section{Treatment Strategies For Cholera}
+%<<child='./sections/treatmentStrategies.Rnw'>>=
+%@
+%\section{Comparing Treatment Strategies For Cholera}
+%\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
+%<<child='./sections/NumericalSimulations.Rnw'>>=
+%@

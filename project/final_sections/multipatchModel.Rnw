@@ -40,6 +40,6 @@ Where the varaibles are
 \end{itemize}
 Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
 \begin{figure}[htb!]
-    \includemovie{2cm}{2cm}{./gifs/base.gif}
+    \includemovie{2cm}{2cm}{./final_sections/gifs/base.gif}
     \caption{ Gif showing the population fraction in each compartment over time}
 \end{figure}

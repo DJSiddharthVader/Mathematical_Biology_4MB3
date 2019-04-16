@@ -51,7 +51,7 @@
 %\noindent
 %This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
 %\bigskip
-\Sexpr{knit_child('./sections/abstract.Rnw')}
+\Sexpr{knit_child('./final_sections/abstract.Rnw')}
 \clearpage
 \tableofcontents
 \clearpage
@@ -147,31 +147,22 @@ ic <- list(s0=s0,i0=i0,r0=r0,w0=w0)
 @
 %Sections
 \section{Background}
-<<child='./sections/background.Rnw'>>=
-@
-\section{Single Patch Models}
-\subsection{Model Introduction And Parameters}
-<<child='./sections/compartmentsAndParameters.Rnw'>>=
-@
-\subsection{Single Patch SIR Model With A Water Compartment}
-<<child='./sections/singlePatch.Rnw'>>=
-@
-\subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
-<<child='./sections/singlePatchAnalysis.Rnw'>>=
-@
-\subsection{Single Patch With Low And High Shedding Compartments}
-<<child='./sections/singlePatchLowHigh.Rnw'>>=
-@
-\section{Multi Patch Model}
-<<child='./sections/multipatch.Rnw'>>=
-@
-\section{Treatment Strategies For Cholera}
-<<child='./sections/treatmentStrategies.Rnw'>>=
-@
-\section{Comparing Treatment Strategies For Cholera}
-\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
-<<child='./sections/NumericalSimulations.Rnw'>>=
-@
+\Sexpr{knit_child('./final_sections/background.Rnw')}
+\section{Basic Model and Parameters}
+\Sexpr{knit_child('./final_sections/modelConstruction.Rnw')}
+\section{Analysis of Single Patch Model}
+\Sexpr{knit_child('./final_sections/singlePatchAnalysis.Rnw')}
+\section{Single Patch Model With Severity}
+\Sexpr{knit_child('./final_sections/singlePatchSeverity.Rnw')}
+\section{Multipatch SIRW Model}
+\Sexpr{knit_child('./final_sections/multipatchModel.Rnw')}
+\section{Multipatch SIRW Model With Severity}
+\Sexpr{knit_child('./final_sections/multipatchSeverity.Rnw')}
+\section{Treatment Strategy Explanations}
+\Sexpr{knit_child('./final_sections/treatmentExplanations.Rnw')}
+\section{Comparison of Treatment Strategies}
+\Sexpr{knit_child('./final_sections/treatmentAnalysis.Rnw')}
+\Sexpr{knit_child('./final_sections/treatmentDiscussion.Rnw')}
 %End Note
 <<cputime,include=FALSE>>=
 total.time <- proc.time() - start.time
@@ -186,3 +177,31 @@ Compile time for this document:
 CPU time to generate this document: \Sexpr{cpu.time.string} seconds.
 \printbibliography
 \end{document}
+%Depreciated old sections
+%Sections
+%\section{Background}
+%<<child='./sections/background.Rnw'>>=
+%@
+%\section{Single Patch Models}
+%\subsection{Model Introduction And Parameters}
+%<<child='./sections/compartmentsAndParameters.Rnw'>>=
+%@
+%\subsection{Single Patch SIR Model With A Water Compartment}
+%<<child='./sections/singlePatch.Rnw'>>=
+%@
+%\subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
+%<<child='./sections/singlePatchAnalysis.Rnw'>>=
+%@
+%\subsection{Single Patch With Low And High Shedding Compartments}
+%<<child='./sections/singlePatchLowHigh.Rnw'>>=
+%@
+%\section{Multi Patch Model}
+%<<child='./sections/multipatch.Rnw'>>=
+%@
+%\section{Treatment Strategies For Cholera}
+%<<child='./sections/treatmentStrategies.Rnw'>>=
+%@
+%\section{Comparing Treatment Strategies For Cholera}
+%\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
+%<<child='./sections/NumericalSimulations.Rnw'>>=
+%@
