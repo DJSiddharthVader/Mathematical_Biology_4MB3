@@ -3,6 +3,7 @@
 \usepackage{scrtime} % for \thistime (this package MUST be listed first!)
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
+\usepackage{movie15}
 \usepackage{placeins}
 \usepackage[displaymath, mathlines]{lineno}
 \usepackage{color}
@@ -50,7 +51,6 @@
 %\noindent
 %This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
 %\bigskip
-\linenumbers
 \Sexpr{knit_child('./sections/abstract.Rnw')}
 \clearpage
 \tableofcontents
