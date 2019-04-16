@@ -24,15 +24,15 @@ The assumptions for the single patch model apply here as well as the following:
     \item No dispersal of infected individuals between patches
     \item All patches have the same parameter values
 \end{itemize}
-The function $D(C,M_C)$ is defined as
+The diffusion function $D(C,M_C)$ is defined as
 \begin{align*}
     \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
     J &= - M_C \cdot \frac{\partial C}{\partial x}
 \end{align*}
-Where the varaibles are
+Where the variables are
 \begin{itemize}
     \item $A$ is the total surface area of the region
-    \item $C$ C is the fraction of the patch population in that compartment
+    \item $C$ is the fraction of the patch population in that compartment ($C = S$, $R$, or $W$)
     \item $x$ is space
     \item $t$ is time
     \item $J$ are the fluxes of each patch
