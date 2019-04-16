@@ -1,4 +1,3 @@
-Papers \cite{link15} \cite{link18} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus likely affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class (\cite{link15}).
 Papers (\cite{link15} \cite{link18}) also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class (\cite{link15}).
 The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($\beta_L, \beta_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
 \begin{align*}
@@ -11,7 +10,7 @@ The model represents an increasing severity model with low and high symptom seve
 The parameters not in the basic single patch model are:
 \begin{itemize}
 	\item $\alpha_L=$ Death rate by cholera for low intensity infectious
-	\item $\alpha_H=$ Death rate by cholera for low intensity infectious
+	\item $\alpha_H=$ Death rate by cholera for high intensity infectious
     \item $\xi_L=$ Shedding rate of cholera into water for low intensity infectives
     \item $\xi_H=$ Shedding rate of cholera into water for high intensity infectives
 	\item $\delta=$ Transition rate from low intensity to high intensity infectiousness
