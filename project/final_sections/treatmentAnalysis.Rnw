@@ -16,8 +16,23 @@ The following are numerical simulations and phase portraits for the base model w
                 '$S_0=',1-i0,
                 ',\\ I_0=',i0,
                 ',\\ R_0=',0,'$',sep='')
+     parameters2 <- paste('Parameters are ',
+                '$\\mu=',mu,
+                ',\\ \\beta_i=',beta_i,
+                ',\\ \\gamma=',round(gamma,2),
+                ',\\ \\sigma=',round(sigma,2),
+                ',\\ \\beta_w=',round(beta_w,2),
+                ',\\ \\xi=',xi,
+                ',\\ \\rho=',rho,
+                ',\\ \\nu=',nu,
+                ',\\ \\eta=',eta,
+                ',\\ \\alpha=',alpha,'$',
+                '. The initial conditions for the model were ',
+                '$S_0= 0.5, 0.6, 0.7, 0.8, 0.9',
+                ',\\ I_0=',0.001,
+                ',\\ R_0=',0,'$',sep='')
     numsimcap <- paste('\\label{fig:num.sim} Plot of the SIRW model for a single patch and various treatment models.',parameters)
-    phasecap <- paste('\\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models.',parameters)
+    phasecap <- paste('\\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models.',parameters2)
 @
 <<num.sim, fig.align='center', echo=F, out.width='6cm', fig.show='hold', fig.cap=numsimcap>>=
 source("SinglePatchAnalysis.R")
