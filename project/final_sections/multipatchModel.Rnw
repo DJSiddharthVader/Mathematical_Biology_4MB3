@@ -1,5 +1,5 @@
-The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
-The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
+The multi-patch model is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
+The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices:
 \begin{align*}
     \frac{dS}{dt}&= \mu N - \mu S - \beta_I S I - \beta_w S W + D(S,M_S)\\
     \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
@@ -13,13 +13,13 @@ The following equations represent the SIRW model for a set of patches where $S,I
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
-    \item$\xi=$ Shedding rate of cholera from I to W class
-    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-    \item$M_S$ The dispersal rate of succeptibles between patches
-    \item$M_R=$ The dispersal rate of recovered people between patches
-    \item$M_W=$ The dispersal rate of water between patches
+    \item$\xi=$ shedding rate of cholera from I to W class
+    \item$\sigma=$	removal rate of cholera from W class (depends on what we define as our water source)
+    \item$M_S$ dispersal rate of succeptibles between patches
+    \item$M_R=$ dispersal rate of recovered people between patches
+    \item$M_W=$ dispersal rate of water between patches
 \end{itemize}
-The assumptions for the single patch model apply here as well as the following:
+The assumptions for the single-patch model apply here as well as the following:
 \begin{itemize}
     \item No dispersal of infected individuals between patches
     \item All patches have the same parameter values
@@ -29,7 +29,7 @@ The diffusion function $D(C,M_C)$ is defined as
     \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
     J &= - M_C \cdot \frac{\partial C}{\partial x}
 \end{align*}
-Where the variables are
+Where the variables are:
 \begin{itemize}
     \item $A$ is the total surface area of the region
     \item $C$ is the fraction of the patch population in that compartment ($C = S$, $R$, or $W$)
