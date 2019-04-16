@@ -40,20 +40,20 @@
     \frac{dW}{dt}&= \xi I  - \sigma W
 \end{align*}
 %Param explanations
-\begin{itemize}
-    \item$\mu=$ natural death rate
-    \item$\beta_I=$ transmission rate between S and I class
-    \item$\beta_w=$ transmission rate between I and W class
-    \item$\gamma=$ recovery rate (I to R class)
-    \item$\alpha=$ death rate from cholera
-    \item$\xi=$ Shedding rate of cholera from I to W class
-    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-\end{itemize}
+%\begin{itemize}
+%    \item$\mu=$ natural death rate
+%    \item$\beta_I=$ transmission rate between S and I class
+%    \item$\beta_w=$ transmission rate between I and W class
+%    \item$\gamma=$ recovery rate (I to R class)
+%    \item$\alpha=$ death rate from cholera
+%    \item$\xi=$ Shedding rate of cholera from I to W class
+%    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+%\end{itemize}
 The assumptions for this model are
 \begin{itemize}
     \item Individuals are assumed to be identical, and the population is homogenously mixed
     \item No waning immunity; once you recover from cholera you cannot return to the susceptible class
-    \item The transmission rate between water the susceptible class  is exponentially distributed
+    \item The transmission rate between water the susceptible class is exponentially distributed
 \end{itemize}
 <<spcaption,echo=FALSE>>=
     spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are ',
