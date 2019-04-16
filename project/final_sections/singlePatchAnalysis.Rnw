@@ -19,7 +19,9 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
-It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
+It also has a global asymptotically stable endemic-equillirbium when ${\mathcal R_0}>1$ as shown in \cite{link9}, using Jacobian stabiity
+analysis to prove local stability and through the use of Lyapunovs' theorem to show global asymptotic stability.
+
 
 %\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
 \begin{align*}
