@@ -1,8 +1,8 @@
 The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics.
 The results of the analysis will aid government officials in implementing intervention strategies by determining optimal  parameters (that represent the different intervention strategies) that would be most effective in lowering the estimated reproductive number $\mathcal R_0$, peak prevalence, and the final size.
 \subsection{Treatment Plan 1: Sanitation of water over time}
-Water, sanitation, and hygiene (WASH) intervention is the most simplest and one of the effective ways of to reduce the spread of cholera.
-One of the easiest ways to implement intervention strategies that is easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}.
+Water, sanitation, and hygiene (WASH) intervention is the simplest and one of the most effective ways of to reduce the spread of cholera.
+One of the easiest ways to implement intervention strategies that are easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}.
 In the following model, a water treatment strategy would affect the water compartment (essentially increasing the removal or death rate of bacteria in water).
 This can be implemented as a new term $\rho$. \par
 %Biologically relevant parameter ranges for \rho
@@ -56,7 +56,7 @@ The following model implements a decrease in the duration of the infectious peri
 	\frac{dW}{dt}&= \xi I  - \sigma W\\
 \end{align*}
 \begin{itemize}
-	\item $\eta=$ is the rate at which individuals recover and leave the I class due to antibiotic tratment
+	\item $\eta=$ the rate at which individuals recover and leave the I class due to antibiotic treatment
 \end{itemize}
 
 
