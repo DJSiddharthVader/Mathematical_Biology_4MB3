@@ -319,7 +319,9 @@ The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as
 		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
-It also has a stable endemic-equillirbium when ${\mathcal R_0}>1$.
+It also has a global asymptotically stable endemic-equillirbium when ${\mathcal R_0}>1$ as shown in \cite{link9}, using Jacobian stabiity
+analysis to prove local stability and through the use of Lyapunovs' theorem to show global asymptotic stability.
+
 
 %\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
 \begin{align*}
@@ -364,15 +366,15 @@ The parameters not in the basic single patch model are:
 The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
 The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
 \begin{align*}
-    \frac{dS}{dt}&= \mu N - \mu S - \beta_i S I - \beta_w S W + D(S,M_S)\\
-    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_I S I - \beta_w S W + D(S,M_S)\\
+    \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
     \frac{dR}{dt}&= \gamma I - \mu R  + D(R,M_R) \\
     \frac{dW}{dt}&= \xi I - \sigma W + D(W,M_W)
 \end{align*}
 %Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
-    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_I=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
@@ -589,7 +591,7 @@ Additionally, timely implementation of oral vaccination in response to an existi
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 7.055S seconds.
+CPU time to generate this document: 7.203S seconds.
 \printbibliography
 \end{document}
 %Depreciated old sections
