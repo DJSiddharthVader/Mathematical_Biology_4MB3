@@ -1,0 +1,18 @@
+%We hope to compare the effectiveness of these methods by comparing the final size, which can be computed from ${\mathcal R_0}$ in $R$ using Lambert's $W$ function, as noted in the supplementary material of \cite{link20}.
+%\begin{equation}
+%    Z({\mathcal R_0}) = 1+\frac{1}{{\mathcal R_0}}W(-{\mathcal R_0}e^{{\mathcal R_0}})
+%\end{equation}
+%If similar final sizes are estimated for multiple treatment strategies, then relative costs of the treatments may be compared to decide between them.
+%Further peak prevelance can estimated from the initial conditions $S_0,I_0$ and ${\mathcal R_0}$ from following expression
+
+%\section{Possible Treatment Strategies for Cholera}
+\subsection{Treatment Model Discussion}
+ %Why should you implement a treatment over another
+  %cost analysis (?) bit; realistic implementation depending on the country
+When comparing the treatments solely based on $\mathcal R_0$ and the final size, it easy to overlook the practicality of each treatment. WASH intervention is the simplest treatment technique, with hygiene and clean water distribution usually the first treatment implementation at the start of an outbreak.
+Chlorination techniques have had a few pitfalls depending on the quality of implementation.
+Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens \citep{link26}.
+In terms of pragmatism, it is impractical to only implement antibiotic prophylaxis to those who are infected as well as those who come in contact with the with the contaminated water source (since mass antibiotic implementation would increase the chance of selecting antibiotic resistant strains) \citep{link23}.
+Cost is not necessairily only monetary, as risk is associted with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare or engineering professions.
+Further work and research needs to be done to define a more formal, specific cost comparison scheme in this case.
+

@@ -1,0 +1,63 @@
+The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics.
+The results of the analysis will aid government officials in implementing intervention strategies by determining optimal  parameters (that represent the different intervention strategies) that would be most effective in lowering the estimated reproductive number $\mathcal R_0$, peak prevalence, and the final size.
+\subsection{Treatment Plan 1: Sanitation of water over time}
+Water, sanitation, and hygiene (WASH) intervention is the most simplest and one of the effective ways of to reduce the spread of cholera.
+One of the easiest ways to implement intervention strategies that is easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}.
+In the following model, a water treatment strategy would affect the water compartment (essentially increasing the removal or death rate of bacteria in water).
+This can be implemented as a new term $\rho$. \par
+%Biologically relevant parameter ranges for \rho
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - b_i SI - b_w S W  \\
+	\frac{dS}{dt}&= b_i S I + b_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W - \rho W\\
+\end{align*}
+
+For example, $\rho$ can either be a constant, or dependent on $I$ or $W$:\\
+$$\rho (I)= \begin{cases}
+			 			\lambda & I \geq 0.1 \\
+			 			0 & 0 \leq I \leq 0.1 \\
+			 			\end{cases}$$
+$\rho$ represents the sanitation (increased removal of cholera) rate of $\lambda$, implemented at certain threshold of infected (in this case the threshold is based on I but can be based on W (i.e. testing water levels for cholera).
+For model simplicity, $\rho$ will be regarded as a constant term and can viewed as a sanitation rate. The biologically plausible range for this parameter is $0 \leq \rho \leq 1$.\\
+%(Not sure about this upper boundary.
+
+%Model assumptions
+In addition to the base model assumptions, this treatment model assumes that treatment of water only affects the concentration of cholera bacteria within water reservoirs which are the only source of water for the population.
+
+\subsection{Treatment Plan 2: Vaccinations on Base Model}
+Cholera vaccine injections were first invented in 1885 and were first used during the mass vaccination campaigns of the Spain outbreaks \citep{link21}.
+Biotechnological advances in the late 20th century have resulted in the creation of immunization via oral cholera vaccines (OCV) which are more effective than their injective equivalent but require two stage dose administration with immunity imparted after one week after the first dose \citep{link21} \citep{link25}.
+Although the London outbreaks occurred prior to the creation of the vaccine, creating a model that implements vaccination techniques is vital for modelling future cholera outbreaks and can be further analyzed to determine the effect on $\mathcal R_0$ and the final size of the epidemic.\\
+This model assumes that vaccination is applied to the susceptible population and not before introduction into the system; this is done instead of vaccination at birth before entry into system since the cholera vaccine is not administered during infancy \citep{link25}.\\
+This model also assumes that the vaccine targets the only strain of the cholera bacteria that has caused the epidemic %(might want to change this wording).
+It is possible that new strains of cholera can create a reccuring endemic (herald waves) with seasonality as described in Tien et al.\citep{link3}.
+
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W - \nu S \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+	\frac{dR}{dt}&= \gamma I - \mu R + \nu S\\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+
+\begin{itemize}
+	\item $\nu=$ is vaccination rate on S class
+\end{itemize}
+
+\subsection{Treatment Plan 3: Antibiotics on Base Model}
+More modern techniques of treating cholera involve the use of antibiotics. Several antibiotics that are regarded as effective against cholera such as azithromicin have been used since the early 1990s \citep{link23}.
+Use of antbiotics when infected effectively shortens the duration of diarrhea and results in fewer bowel movements and lower stool volume \citep{link24}. This biological process can be either be implemented in the base single patch model by lowering the duration of the infectious period (which can be be viewed as an introduction of a new parameter in $dI/dt$) or by lowering the shedding rate into water (which can be implemented by lowering the shedding rate $\xi$).
+The following model implements a decrease in the duration of the infectious period by using the term $ - \eta I$.
+\begin{align*}
+	\frac{dS}{dt}&= \mu N - \mu S - \beta_i SI - \beta_w S W \\
+	\frac{dI}{dt}&= \beta_i S I + \beta_w S W - I (\gamma +\eta + \mu + \alpha ) \\
+	\frac{dR}{dt}&= (\gamma +\eta)I - \mu R \\
+	\frac{dW}{dt}&= \xi I  - \sigma W\\
+\end{align*}
+\begin{itemize}
+	\item $\eta=$ is the rate at which individuals recover and leave the I class due to antibiotic tratment
+\end{itemize}
+
+
+

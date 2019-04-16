@@ -1,0 +1,148 @@
+\subsection{SIRW Model Construction}
+Our model has four distinct departments: susceptible, infectious, recovered, and water compartments \citep{link9}.
+\begin{description}
+    \item [Susceptible] The proportion of the population that is susceptible to being infected by cholera.
+Newborns are directly added to S at a rate $\mu$.
+Individuals leave this compartment in one of two ways. They either die at a rate $\mu$, or come into contact with the pathogen and move into the “Infectious” compartment. Our model assumes equal rates of natural birth and death.
+Interactions of susceptible and infectious individuals from the I compartment yields new infected individuals at a rate of $\beta_I$, and interactions of susceptible individuals with the water compartment W yields new infected individuals at a rate $\beta_w$.\par
+  \item [Infectious] The proportion of individuals that have been infected with cholera.
+Individuals in this compartment are capable of infecting susceptible individuals during interactions at a rate of $\beta_i$.
+They are also capable of contributing to the choleric load of the water compartment by “shedding” the pathogen at a rate $\xi$.
+Although for cholera the rate of transmission from person to person interactions is much lower in reality than the rate of transmission through contact with infected waters, we decided it still has enough significance to be in the model.
+Individuals in this compartment recover at a rate $\gamma$, and move to the recovered compartment, or they die naturally (not from Cholera) at a rate $\mu$ and from Cholera at a rate $\alpha$.
+With advances in medicine over the past decades $\alpha$ is no longer a significant parameter in todays world.\par
+  \item [Recovered] The proportion of individuals that are neither infected with cholera nor susceptible to the pathogen.
+They leave this compartment as they die naturally at a rate $\mu$.
+  \item [Water] The $W$ term is proportional to the concentration of Cholera in the environment (or in this case the water).
+More bacteria enter the compartment as infected individuals shed the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
+\end{description}
+In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below
+summarize the variables and parameters involved.
+%%VARIABLE Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} \\
+		\hline
+		S & Susceptible individuals & individuals \\
+		\hline
+		I & infected individuals & individuals \\
+		\hline
+		R & recovered individuals & individuals \\
+		\hline
+		W & Bacterial concentration in water & cells ml$^{-3}$ \\
+		\hline
+		N & Total number of individuals & individuals\\
+		\hline
+	\end{tabular}
+\end{center}
+%%PARAMETER Table%%
+\begin{center}
+	\begin{tabular}{ | m{1em} | m{8cm}| m{3cm} | m{2.2cm} | }
+		\hline
+		\textbf{ }& \textbf{Description} & \textbf{Units} &  \textbf{Estimate} \\
+		\hline
+		$\mu$ & Natural death/birth rate & day $^{-1}$ & \\
+		\hline
+		$b_i$ &  Person-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$ & \\
+		\hline
+		$b_w$ & water reservoir-person transmission/contact rate & cells ml$^{-3}$ day$^{-1}$&  \\
+		\hline
+		$\beta_i$ & scaled Person-person transmission/contact rate & day$^{-1}$ & 0.25\\
+		\hline
+		$\beta_w$ & scaled water reservoir-person transmission/contact rate & day$^{-1}$& \num{1e-5} to 1 \\
+		\hline
+		%$\kappa$ & Bacterial concentration in water & cells ml$^{-3}$ \\
+		%\hline
+		$\frac{1}{\gamma}$ & Infectious period & day& 2.9 to 14\\
+		\hline
+		$\sigma$ & Bacterial decay/removal from reservoir & day$^{-1}$& $\frac{1}{3}$ to $\frac{1}{41}$ \\
+		\hline
+		$\xi$ & Person to water reservoir shedding rate  & cells ml$^{-3}$ day$^{-1}$ individuals$^{-1}$ & 0.01 to 10\\
+		\hline
+		$\alpha$ & Death rate by cholera & day$^{-1}$& 0.01 to 0.6 \\
+		\hline
+	\end{tabular}
+\end{center}
+Parameter estimates are taken from \cite{link5}, \cite{link8} and \cite{link3}.
+The natural death rate is dependent on various factors such as city or location and year or era of interest.
+%Tikz styles
+\tikzstyle{blocks} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = green!30]
+\tikzstyle{blocki} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = red!30]
+\tikzstyle{blockr} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = yellow!30]
+\tikzstyle{blockb} = [rectangle, draw, rounded corners, text width=3em, text centered, minimum height=3em, fill = blue!30]
+\tikzstyle{blank} = [inner sep=0,outer sep=0]
+\tikzstyle{line} = [draw,->,>=stealth]
+%Diagram
+\begin{center}
+\begin{tikzpicture}[node distance=3cm, auto]
+
+\node [blocks] (S) {S};
+\node [blank, above of=S, yshift=-1cm] (0) { };
+\node [blank, right of=S] (1) { };
+\node [blockb, below of=1, yshift=1.5cm] (W) {W};
+\node [blank, below of=W, yshift=1cm] (2) { };
+\node [blocki, right of=1] (I) {I};
+\node [blockr, right of=I] (R) {R};
+
+\node [blank, below of=S, yshift=1cm] (3) {};
+\node [blank, below of=I, yshift=1cm] (4) {};
+\node [blank, below of=R, yshift=1cm] (5) {};
+
+\path [line] (S) -- node {$\beta_I I + \beta_w W$} (I);
+\path [line] (I) -- node {$\gamma$} (R);
+\path [line] (I) -- node {$\xi$} (W);
+\path [line] (W) -- node[anchor=west] {$\sigma$} (2);
+\path [line] (0) -- node[anchor=west] {$\mu$} (S);
+
+\path [line] (S) -- node[anchor=west] {$\mu$} (3);
+\path [line] (I) -- node[anchor=west] {$\mu$} (4);
+\path [line] (R) -- node[anchor=west] {$\mu$} (5);
+\end{tikzpicture}
+\end{center}
+%Equations
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_I SI - \beta_w S W  \\
+    \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I (\gamma + \mu + \alpha) \\
+    \frac{dR}{dt}&= \gamma I - \mu R \\
+    \frac{dW}{dt}&= \xi I  - \sigma W
+\end{align*}
+%Param explanations
+\begin{itemize}
+    \item$\mu=$ natural death rate
+    \item$\beta_I=$ transmission rate between S and I class
+    \item$\beta_w=$ transmission rate between I and W class
+    \item$\gamma=$ recovery rate (I to R class)
+    \item$\alpha=$ death rate from cholera
+    \item$\xi=$ Shedding rate of cholera from I to W class
+    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+\end{itemize}
+The assumptions for this model are
+\begin{itemize}
+    \item Individuals are assumed to be identical, and the population is homogenously mixed
+    \item No waning immunity; once you recover from cholera you cannot return to the susceptible class
+    \item The transmission rate between water the susceptible class  is exponentially distributed
+\end{itemize}
+<<spcaption,echo=FALSE>>=
+    spcap <- paste('\\label{fig:singlepatch} Plot of the SIRW model for a single patch. Parameters are ',
+                   '$\\mu=',round(mu,2),
+                   '\\ \\beta_I=',round(beta_i,2),
+                   '\\ \\gamma=',round(gamma,2),
+                   '\\ \\sigma=',round(sigma,2),
+                   '\\ \\beta_w=',round(beta_w,2),
+                   '\\ \\alpha=',alpha,
+                   '\\ \\xi=',xi,'$',
+                   '. Further the initial conditions for the model were ',
+                   '$S_0=',1-i0,
+                   '\\ I_0=',i0,
+                   '\\ R_0=',0,'$.',sep='')
+@
+<<<singlePatch,fig.height=4,echo=FALSE,fig.pos='h',fig.cap=spcap>>=
+    source('spatialSIR.R')
+    steps <- 5000
+    tmax <- 400
+    sic <- c(x=s0,y=i0,z=r0,w=w0)
+    singlesoln <- solveSingleModel(singleWaterModel,sic,params, tmax=tmax,steps=steps)
+    plotBaseSoln(singlesoln, xlim=c(0,tmax), ylim=c(0,1), ylab='Population Proportion', xlab='Infectious Period')
+@
+\FloatBarrier

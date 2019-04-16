@@ -1,0 +1,45 @@
+The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
+The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
+\begin{align*}
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_i S I - \beta_w S W + D(S,M_S)\\
+    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
+    \frac{dR}{dt}&= \gamma I - \mu R  + D(R,M_R) \\
+    \frac{dW}{dt}&= \xi I - \sigma W + D(W,M_W)
+\end{align*}
+%Paramters
+\begin{itemize}
+    \item$\mu=$ natural death rate
+    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_w=$ transmission rate between I and W class
+    \item$\gamma=$ recovery rate (I to R class)
+    \item$\alpha=$ death rate from cholera
+    \item$\xi=$ Shedding rate of cholera from I to W class
+    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+    \item$M_S$ The dispersal rate of succeptibles between patches
+    \item$M_R=$ The dispersal rate of recovered people between patches
+    \item$M_W=$ The dispersal rate of water between patches
+\end{itemize}
+The assumptions for the single patch model apply here as well as the following:
+\begin{itemize}
+    \item No dispersal of infected individuals between patches
+    \item All patches have the same parameter values
+\end{itemize}
+The function $D(C,M_C)$ is defined as
+\begin{align*}
+    \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
+    J &= - M_C \cdot \frac{\partial C}{\partial x}
+\end{align*}
+Where the varaibles are
+\begin{itemize}
+    \item $A$ is the total surface area of the region
+    \item $C$ C is the fraction of the patch population in that compartment
+    \item $x$ is space
+    \item $t$ is time
+    \item $J$ are the fluxes of each patch
+    \item $M_C$ is the diffusion coefficient
+\end{itemize}
+Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
+\begin{figure}[htb!]
+    \includemovie{2cm}{2cm}{./gifs/base.gif}
+    \caption{ Gif showing the population fraction in each compartment over time}
+\end{figure}

@@ -1,0 +1,34 @@
+\subsection{Biology of Cholera}
+Although it is listed as one of the oldest known diseases, cholera remains a major public health concern in areas with poor water sanitation with an estimated 1.3--4 million cases every year \citep{link18}.
+Cholera is an infectious disease caused by the bacterium \textit{Vibrio cholerae}.
+The bacterium survives and reproduces in aquatic environments, and is capable of colonizing small intestines \citep{link8}.
+The disease is not airborne, but can be transmitted through contaminated food or water and can survive in some aquatic environments from months to years \citep{link9}.
+The bacterium produces enterotoxins responsible for the symptoms of cholera infection which are severe diarrhea, vomiting and nausea \citep{link11}.
+%Approximately only one in ten people infected develop symptoms, and if not treated urgently, these symptoms can lead to severe dehydration.
+Dehydration thickens the blood, causing circulation problems that can lead to death within a few hours.
+Since dehydration is the main problem, rehydration with clean water and minerals (such as oral rehydration salts (ORS) packages) is the most effective treatment \citep{link18}.
+Current improvements in public health and sanitation largely decrease the likelihood of a cholera outbreak \citep{link18}.\par
+Four major outbreaks of cholera in the 19th century devastated the London population, resulting in tens of thousands of deaths.
+One of the early theories believed to be the cause of spread of cholera was the Miasma theory, suggesting that cholera is an airborne disease and that impurities in the air induced the spread \citep{link1}.
+Thus, the suggested solution in 1848 was to discard the contents of cesspools and raw sewage pits into the River Thames.
+Since Thames was the drinking source of many, the misunderstanding about the method of transmission resulted in heightened number of infected individuals, severely worsening the epidemic \citep{link1}.
+Early studies on cholera, such as the work of John Snow in the mid 19th century, have been pivotal in the development of modern epidemiology.
+However, the abundance of more recent studies using mathematical models to anticipate outbreaks of cholera and planning for interventions is the reason for our focus on this particular disease.
+\subsection{Transmission Dynamics of Cholera}
+Before introducing a simple model to simulate the temporal spread of cholera, we must discuss the processes we plan to analyze and our assumptions.
+The model should include the entire population, which for simplicity we will assume is comprised of only three groups: the susceptible, the infected (or infectious), and the recovered.
+The only area still remaining that has a major impact on the epidemic is the environment, or in this case the water.
+For simplicity we will assume:
+\begin{itemize}
+\item Natural Birth Rate = Natural Death Rate.
+\item The population is equally succeptible to infection.
+\item There is no waning immunity (individuals cannot go back to being susceptible after they recover from cholera).
+\item There is no latency period (no significant latency period was documented in studies).
+\item Only infectious individuals can contaminate the water sources by shedding the pathogen into the water.
+\item The water sources are still.
+\end{itemize}
+The halting remedy suggested in 1848 in London increased the rate of water contamination drastically, which in turn increased the transmission rate from individuals coming into contact with the infected water.
+This is a plausible explanation for why maximum weekly deaths in London increase more than two-fold in the 1848 epidemic compared to the 1832 epidemic \citep{link3}.
+Three possible treatment strategies for controlling cholera outbreaks are vaccination, antibiotic treatment, and water sanitation.
+We will incorporate these into our model to simulate the effect that each of these strategies has on the disease dynamics.
+
