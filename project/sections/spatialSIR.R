@@ -3,7 +3,6 @@ library(deSolve)
 library(ReacTran)
 library(stringr)
 library(oce)
-library(progress)
 
 #Single Patch
 singleWaterModel <- function(t,vars,params){
@@ -79,23 +78,6 @@ compareSPTreatments <- function(ic,params,tmax,steps,...){
     lines(vim,col="brown",lty=1, lwd=4,)
     lines(aim,col="orange",lty=1, lwd=4,)
     legend("topright",lty=c(1,1,1,1), col = treatcol,legend=lentries)
-}
-plotSoln <- function(soln,...){
-    scol <- 'green'
-    icol <- 'red'
-    rcol <- 'black'
-    #plotting
-    plot(x=0,y=0,type='l',...)
-    lines(soln[,'x'],type='l',col=scol)
-    lines(soln[,'y'],type='l',col=icol)
-    lines(soln[,'z'],type='l',col=rcol)
-    legend("topright",
-           legend=c('S','I','R'),
-           col=c('green','red','black'),
-           inset=0.02,
-           box.lty=0,
-           lty=1,
-           cex=0.8)
 }
 #High/low Single Patch
 baseSHL <- function(t,vars,params){
@@ -347,77 +329,6 @@ compareTreatments <- function(ic,params,tmax,steps,...){
     lines(aim,col="orange",lty=1, lwd=4,)
     legend("topright",lty=c(1,1,1,1), col = treatcol,legend=lentries)
 }
-#Gif plotting
-gifplot <- function(rows,cols,soln,tmax){
-    #get data
-    patches <- rows*cols
-    s <- soln[,(0*patches+2):(1*patches+1)]
-    i <- soln[,(1*patches+2):(2*patches+1)]
-    r <- soln[,(2*patches+2):(3*patches+1)]
-    w <- soln[,(3*patches+2):(4*patches+1)]
-    #water bars
-    wticks <- seq(0,max(w),by=max(w)/1000)
-    wcfnc <- colorRamp(c("blue","green"))
-    wlist <- lapply(lapply(wticks,function(x) x/max(w)),wcfnc)
-    wmap <- unlist(lapply(wlist,function(x) rgb(x[1], x[2], x[3],maxColorValue=255)))
-    #color bars
-    ticks <- seq(0,1,by=0.00001)
-    cfnc <- colorRamp(c( "red","yellow","blue" ))
-    rgblist <- lapply(ticks,cfnc)
-    cmap <- unlist(lapply(rgblist,function(x) rgb(x[1], x[2], x[3], maxColorValue=255)))
-    imgdir <- 'heat_map_frames'
-    dir.create(imgdir,showWarnings=FALSE)
-    stepsize <- tmax/dim(i)[1]
-    dec <- 4
-    for (t in 1:dim(i)[1]){#dim(soln)[2]){
-        timestep <- t  #round(t*stepsize,1)
-        name <- paste(imgdir,'/','plotframe',str_pad(t,4,pad='0'),'.png',sep='')
-        png(name)
-        par(mfrow=c(2,2))
-        omar <- par('mar')
-        #S plot
-        drawPalette(zlim=c(0,1),col=cmap)
-        image(z=matrix(s[t,],rows,cols),
-
-              main=paste('S,','Mean %=',round(sum(s[t,]/patches),dec)*100,',Var =',round(var(s[t,]),dec)*100),
-              zlim=c(0,1),
-              col=cmap,
-              axes=FALSE,
-              ask=FALSE)
-        #I plot
-        par(mar=omar)
-        drawPalette(zlim=c(0,1),col=cmap)
-        image(matrix(i[t,],rows,cols),
-              main=paste('I,','Mean %=',round(sum(i[t,]/patches),dec)*100,',Var =',round(var(i[t,]),dec)*100),
-              zlim=c(0,1),
-              col=cmap,
-              axes=FALSE,
-              ask=FALSE)
-        #R plot
-        par(mar=omar)
-        drawPalette(zlim=c(0,1),col=cmap)
-        image(matrix(r[t,],rows,cols),
-              main=paste('R,','Mean %=',round(sum(r[t,]/patches),dec)*100,',Var =',round(var(r[t,]),dec)*100),
-              zlim=c(0,1),
-              col=cmap,
-              axes=FALSE,
-              ask=FALSE)
-        #W plot
-        par(mar=omar)
-        drawPalette(zlim=c(0,max(w)),col=wmap)
-        image(matrix(w[t,],rows,cols),
-              main=paste('W,','Mean =',round(mean(w[t,]),dec),',Var =',round(var(w[t,]),dec)),
-              zlim=c(0,max(w)),
-              col=wmap,
-              axes=FALSE,
-              ask=FALSE)
-        par(oma=c(0,0,2,0))
-        title(paste('Compartments at Time =',timestep),outer=TRUE)
-        dev.off()
-    }
-    mycommand <- paste('convert ',imgdir,'/*.png -delay 150 filtering.gif',sep='')
-    system(mycommand)
-}
 #High/Low Multipatch
 initHLModel <- function(rows,cols,i0,w0){
     p = rows*cols
@@ -606,5 +517,110 @@ compareHLTreatments <- function(ic,params,tmax,steps...){
     lines(ahm,col="orange",lty=1, lwd=4,)
     legend("topright", lty=c(1,1,1,1), col = treatcol,lentries)
 }
+#Misc
+plotBaseSoln <- function(soln,...){
+    scol <- 'green'
+    icol <- 'red'
+    rcol <- 'black'
+    #plotting
+    plot(x=0,y=0,type='l',...)
+    lines(soln[,'x'],type='l',col=scol)
+    lines(soln[,'y'],type='l',col=icol)
+    lines(soln[,'z'],type='l',col=rcol)
+    legend("topright",
+           legend=c('S','I','R'),
+           col=c('green','red','black'),
+           inset=0.02,
+           box.lty=0,
+           lty=1,
+           cex=0.8)
+}
+plotHLSoln <- function(soln,...){
+    scol <- 'green'
+    lcol <- 'orange'
+    hcol <- 'red'
+    rcol <- 'black'
+    #plotting
+    plot(x=0,y=0,type='l',...)
+    lines(soln[,'s'],type='l',col=scol)
+    lines(soln[,'l'],type='l',col=lcol)
+    lines(soln[,'h'],type='l',col=hcol)
+    lines(soln[,'w'],type='l',col=rcol)
+    legend("topright",
+           legend=c('S','I','R'),
+           col=c(scol,lcol,hcol,rcol)
+           inset=0.02,
+           box.lty=0,
+           lty=1,
+           cex=0.8)
+}
+gifplot <- function(rows,cols,soln,tmax){
+    #get data
+    patches <- rows*cols
+    s <- soln[,(0*patches+2):(1*patches+1)]
+    i <- soln[,(1*patches+2):(2*patches+1)]
+    r <- soln[,(2*patches+2):(3*patches+1)]
+    w <- soln[,(3*patches+2):(4*patches+1)]
+    #water bars
+    wticks <- seq(0,max(w),by=max(w)/1000)
+    wcfnc <- colorRamp(c("blue","green"))
+    wlist <- lapply(lapply(wticks,function(x) x/max(w)),wcfnc)
+    wmap <- unlist(lapply(wlist,function(x) rgb(x[1], x[2], x[3],maxColorValue=255)))
+    #color bars
+    ticks <- seq(0,1,by=0.00001)
+    cfnc <- colorRamp(c( "red","yellow","blue" ))
+    rgblist <- lapply(ticks,cfnc)
+    cmap <- unlist(lapply(rgblist,function(x) rgb(x[1], x[2], x[3], maxColorValue=255)))
+    imgdir <- 'heat_map_frames'
+    dir.create(imgdir,showWarnings=FALSE)
+    stepsize <- tmax/dim(i)[1]
+    dec <- 4
+    for (t in 1:dim(i)[1]){#dim(soln)[2]){
+        timestep <- t  #round(t*stepsize,1)
+        name <- paste(imgdir,'/','plotframe',str_pad(t,4,pad='0'),'.png',sep='')
+        png(name)
+        par(mfrow=c(2,2))
+        omar <- par('mar')
+        #S plot
+        drawPalette(zlim=c(0,1),col=cmap)
+        image(z=matrix(s[t,],rows,cols),
 
-
+              main=paste('S,','Mean %=',round(sum(s[t,]/patches),dec)*100,',Var =',round(var(s[t,]),dec)*100),
+              zlim=c(0,1),
+              col=cmap,
+              axes=FALSE,
+              ask=FALSE)
+        #I plot
+        par(mar=omar)
+        drawPalette(zlim=c(0,1),col=cmap)
+        image(matrix(i[t,],rows,cols),
+              main=paste('I,','Mean %=',round(sum(i[t,]/patches),dec)*100,',Var =',round(var(i[t,]),dec)*100),
+              zlim=c(0,1),
+              col=cmap,
+              axes=FALSE,
+              ask=FALSE)
+        #R plot
+        par(mar=omar)
+        drawPalette(zlim=c(0,1),col=cmap)
+        image(matrix(r[t,],rows,cols),
+              main=paste('R,','Mean %=',round(sum(r[t,]/patches),dec)*100,',Var =',round(var(r[t,]),dec)*100),
+              zlim=c(0,1),
+              col=cmap,
+              axes=FALSE,
+              ask=FALSE)
+        #W plot
+        par(mar=omar)
+        drawPalette(zlim=c(0,max(w)),col=wmap)
+        image(matrix(w[t,],rows,cols),
+              main=paste('W,','Mean =',round(mean(w[t,]),dec),',Var =',round(var(w[t,]),dec)),
+              zlim=c(0,max(w)),
+              col=wmap,
+              axes=FALSE,
+              ask=FALSE)
+        par(oma=c(0,0,2,0))
+        title(paste('Compartments at Time =',timestep),outer=TRUE)
+        dev.off()
+    }
+    mycommand <- paste('convert ',imgdir,'/*.png -delay 150 filtering.gif',sep='')
+    system(mycommand)
+}
