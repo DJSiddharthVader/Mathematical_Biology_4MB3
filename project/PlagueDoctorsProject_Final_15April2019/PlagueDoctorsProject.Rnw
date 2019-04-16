@@ -1,0 +1,211 @@
+%Preamble
+\documentclass[12pt]{article}
+\usepackage{scrtime} % for \thistime (this package MUST be listed first!)
+\usepackage[margin=1in]{geometry}
+\usepackage{graphics,graphicx}
+\usepackage{movie15}
+\usepackage{pdfpc-commands}
+\usepackage{placeins}
+\usepackage[displaymath, mathlines]{lineno}
+\usepackage{color}
+\definecolor{aqua}{RGB}{0, 128, 225}
+\usepackage[colorlinks=true,citecolor=aqua,linkcolor=aqua,urlcolor=aqua]{hyperref}
+%For Math stuff
+\usepackage{amsmath} % essential for cases environment
+\usepackage{amsthm} % for theorems and proofs
+\usepackage{amsfonts, array, siunitx} % mathbb
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+%Referenes
+\usepackage[natbib=true,
+            style=nature,
+            citestyle=authoryear,
+            backend=biber,
+            useprefix=true]{biblatex}
+\addbibresource{./plagueDoctors.bib}
+%FANCY HEADER AND FOOTER STUFF
+\usepackage{fancyhdr,lastpage}
+\pagestyle{fancy}
+\fancyhf{} % clear all header and footer parameters
+%%%\lhead{Student Name: \theblank{4cm}}
+%%%\chead{}
+%%%\rhead{Student Number: \theblank{3cm}}
+%%%\lfoot{\small\bfseries\ifnum\thepage<\pageref{LastPage}{CONTINUED\\on next page}\else{LAST PAGE}\fi}
+\lfoot{}
+\cfoot{{\small\bfseries Page \thepage\ of \pageref{LastPage}}}
+\rfoot{}
+\renewcommand\headrulewidth{0pt} % Removes funny header line
+\begin{document}
+%Title
+\title{Examining Control Strategies for Cholera Incorporating Spatial Dynamics}
+\author{
+\underline{\emph{Group Name}}: \texttt{{\color{blue}The Plague Doctors}}\\\\
+\underline{\emph{Group Members}}:\\
+         Sid Reed\ :\ {\color{blue}reeds4@mcmaster.ca}\\
+         Daniel Segura\ :\ {\color{blue}segurad@mcmaster.ca}\\
+         Jessa Mallare\ :\ {\color{blue}mallarej@mcmaster.ca}\\
+         Aref Jadda\ :\ {\color{blue}hossesa@mcmaster.ca}\\
+}
+\date{\today\ @ \thistime}
+\maketitle
+%due date %\bigskip
+%\noindent
+%This assignment is {\bfseries\color{red} due in class} on \textcolor{red}{\bf Wednesday March 27 2019 at 10:30am}.
+%\bigskip
+\Sexpr{knit_child('./final_sections/abstract.Rnw')}
+\clearpage
+\include{./final_sections/executive_summary}
+\clearpage
+\tableofcontents
+\clearpage
+<<global_options,include=FALSE>>=
+#knitr::opts_chunk$set(fig.pos = '!H')
+start.time <- proc.time()
+set.seed(9)
+#single patch base
+mu <- 1/15370
+beta_i <- 0.025 #transmission r. S between I
+gamma <- 1/7 #rate of recovery (days)
+sigma <- 1/25 #rate of water removal
+beta_w <- 0.5 #transmission r. I between W
+xi <- 10 #shedding rate I into W (force it eaual to sigma?)
+alpha <- 0 #death rate by cholera
+#parameters for intensity model
+beta_l <- 0.016 #transmission r. S between I_l
+beta_h <- 0.016 #transmission r. S between I_h
+beta_w <- 0.5 #transmission r. I between W
+delta <- 0.33 #rate of increasing symptom severity
+xi_l <- 0.07 #shedding rate I_l into W; maybe equal to sigma?
+xi_h <- 0.14
+alpha_l <- 0.01 #death rate by cholera with low intensity symptoms
+alpha_h <- 0.05 #death rate by cholera with high int. symptoms
+#treatment params
+rho <- 1/20#parameters for water treatment [day^-1]
+nu <- 1/200#parameters for vaccination [day^-1]
+eta <- round(1/60,5) #parameters for antibiotics [day^-1]
+#spatial params
+rows <- 10
+cols <- rows
+dx <- 0.3
+dy <- dx
+Dsr <- 0.001
+Dl <- Dsr/10
+Dw <- 0.0001
+params <- list(rows=rows,
+               cols=cols,
+               mu=mu,
+               beta_i=beta_i,
+               alpha=alpha,
+               xi=xi,
+               beta_l=beta_l,
+               beta_h=beta_h,
+               beta_w=beta_w,
+               xi_l=xi_l,
+               xi_h=xi_h,
+               gamma=gamma,
+               sigma=sigma,
+               delta=delta,
+               alpha_l=alpha_l,
+               alpha_h=alpha_h,
+               rho=rho,
+               nu=nu,
+               eta=eta,
+               dx=dx,
+               dy=dy,
+               Dsr=Dsr,
+               Dl=Dl,
+               Dw=Dw)
+#Initial conditions
+i0 <- 0.01
+w0 <- 0.03
+s0 <- 1-i0
+r0 <- 0
+icx <- c(x=s0,y=i0,z=r0,w=w0)
+ichl <- c(s=s0,l=i0,h=0,r=r0,w=w0)
+ic <- list(s0=s0,i0=i0,r0=r0,w0=w0)
+#Depreciated
+##params
+#mu <- 1/21170 # avg lifespan 58 yrs == 21170
+#beta_l <- 0.1 #transmission r. S between I
+#beta_h <- beta_l*2 #transmission r. S between I
+#gamma <- 1/8 #rate of recovery (days)
+#sigma <- 1/22 #rate of water removal
+#beta_w <- 0.3 #transmission r. I between W
+#xi_l <- 1/22 #shedding rate I into W (force it equal to sigma)
+#xi_h <- xi_l*10 #shedding rate I into W (force it equal to sigma)
+#delta <- 0.00005
+#alpha_l <- 0 #death rate by cholera
+#alpha_h <- 0.0001 #death rate by cholera
+#Treatment params
+#rhop <- 0.9#parameters for water treatment
+#nup <- 0.9#parameters for vaccination
+#etap <- 0.9#parameters for antibiotics
+#mu <- 0.15
+#alpha <- 0
+#beta_i <- 0.06 #transmission r. S between I
+#gamma <- 1/7 #rate of recovery (days)
+#sigma <- 1/14 #sanitation rate (or 1/lifetime bacteria)
+#beta_w <- 0.15 #transmission r. I between W
+#i0 <- 0.05
+@
+%Sections
+\section{Background}
+\Sexpr{knit_child('./final_sections/background.Rnw')}
+\section{Basic Model and Parameters}
+\Sexpr{knit_child('./final_sections/modelConstruction.Rnw')}
+\section{Analysis of Single Patch Model}
+\Sexpr{knit_child('./final_sections/singlePatchAnalysis.Rnw')}
+\section{Single Patch Model With Severity}
+\Sexpr{knit_child('./final_sections/singlePatchSeverity.Rnw')}
+\section{Multipatch SIRW Model}
+\Sexpr{knit_child('./final_sections/multipatchModel.Rnw')}
+\section{Multipatch SIRW Model With Severity}
+\Sexpr{knit_child('./final_sections/multipatchSeverity.Rnw')}
+\section{Treatment Strategy Explanations}
+\Sexpr{knit_child('./final_sections/treatmentExplanations.Rnw')}
+\section{Comparison of Treatment Strategies}
+\Sexpr{knit_child('./final_sections/treatmentAnalysis.Rnw')}
+\Sexpr{knit_child('./final_sections/treatmentDiscussion.Rnw')}
+%End Note
+<<cputime,include=FALSE>>=
+total.time <- proc.time() - start.time
+cpu.seconds <- summary(total.time)['user']
+cpu.time.string <- as.character(lubridate::seconds_to_period(cpu.seconds))
+@
+\bigskip\vfill
+\centerline{\bf--- END OF PROJECT---}
+\bigskip
+There are 2982 words in the document.\\
+Compile time for this document:
+\today\ @ \thistime\\
+CPU time to generate this document: \Sexpr{cpu.time.string} seconds.
+\printbibliography
+\end{document}
+%Depreciated old sections
+%Sections
+%\section{Background}
+%<<child='./sections/background.Rnw'>>=
+%@
+%\section{Single Patch Models}
+%\subsection{Model Introduction And Parameters}
+%<<child='./sections/compartmentsAndParameters.Rnw'>>=
+%@
+%\subsection{Single Patch SIR Model With A Water Compartment}
+%<<child='./sections/singlePatch.Rnw'>>=
+%@
+%\subsection{Equilibrium and {$\mathcal R_0$} Of The Single Patch Model}
+%<<child='./sections/singlePatchAnalysis.Rnw'>>=
+%@
+%\subsection{Single Patch With Low And High Shedding Compartments}
+%<<child='./sections/singlePatchLowHigh.Rnw'>>=
+%@
+%\section{Multi Patch Model}
+%<<child='./sections/multipatch.Rnw'>>=
+%@
+%\section{Treatment Strategies For Cholera}
+%<<child='./sections/treatmentStrategies.Rnw'>>=
+%@
+%\section{Comparing Treatment Strategies For Cholera}
+%\subsection{Numerical Simulations and Phase Portraits For The Single Patch Model}
+%<<child='./sections/NumericalSimulations.Rnw'>>=
+%@

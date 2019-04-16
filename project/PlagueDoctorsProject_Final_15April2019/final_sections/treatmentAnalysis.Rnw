@@ -1,0 +1,146 @@
+\subsection{Numerical Simulations and Phase Portraits of Base and Treatment Models}
+The following are numerical simulations and phase portraits for the base model with vital dynamics, and the three treatment models.
+<<numsimcap,echo=FALSE>>=
+    parameters <- paste('Parameters are ',
+                '$\\mu=',mu,
+                ',\\ \\beta_i=',beta_i,
+                ',\\ \\gamma=',round(gamma,2),
+                ',\\ \\sigma=',round(sigma,2),
+                ',\\ \\beta_w=',round(beta_w,2),
+                ',\\ \\xi=',xi,
+                ',\\ \\rho=',rho,
+                ',\\ \\nu=',nu,
+                ',\\ \\eta=',eta,
+                ',\\ \\alpha=',alpha,'$',
+                '. The initial conditions for the model were ',
+                '$S_0=',1-i0,
+                ',\\ I_0=',i0,
+                ',\\ R_0=',0,'$',sep='')
+     parameters2 <- paste('Parameters are ',
+                '$\\mu=',mu,
+                ',\\ \\beta_i=',beta_i,
+                ',\\ \\gamma=',round(gamma,2),
+                ',\\ \\sigma=',round(sigma,2),
+                ',\\ \\beta_w=',round(beta_w,2),
+                ',\\ \\xi=',xi,
+                ',\\ \\rho=',rho,
+                ',\\ \\nu=',nu,
+                ',\\ \\eta=',eta,
+                ',\\ \\alpha=',alpha,'$',
+                '. The initial conditions for the model were ',
+                '$S_0= 0.5, 0.6, 0.7, 0.8, 0.9',
+                ',\\ I_0=',0.001,
+                ',\\ R_0=',0,'$',sep='')
+    numsimcap <- paste('\\label{fig:num.sim} Plot of the SIRW model for a single patch and various treatment models.',parameters)
+    phasecap <- paste('\\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models.',parameters2)
+@
+<<num.sim, fig.align='center', echo=F, out.width='6cm', fig.show='hold', fig.cap=numsimcap>>=
+source("SinglePatchAnalysis.R")
+plot.base()#ic=ic,tmax=150,parms=params)
+plot.treat1()
+plot.treat2()
+plot.treat3()
+@
+<<phase.portraits, fig.align='center', echo=F, out.width='6cm', fig.show='hold', fig.cap=phasecap>>=
+phase.portrait()
+phase.portrait.treat1()
+phase.portrait.treat2()
+phase.portrait.treat3()
+@
+\FloatBarrier
+From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in figure \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at lower level of prevalence in comparison to without the treatment.
+All treatments appear to show very similar effects for the single patch model, but how they work in the spatial model may differ, especially since the treatments can be applied heterogenously across the patches in proportion to the initial infectives of each patch.
+%However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
+%All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
+<<mpcaption,echo=FALSE>>=
+    dec <- 5
+    spcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the single patch SIRW model. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_i=',round(params$beta_i,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi=',round(params$xi,dec),
+                   ',\\alpha=',params$alpha,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+    sphlcap <- paste('\\label{fig:multipatch} Plot of different treatments for the single patch model with high and low severity infectives. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_l=',round(params$beta_l,dec),
+                   ',\\beta_h=',round(params$beta_h,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi_l=',round(params$xi_l,dec),
+                   ',\\xi_h=',round(params$xi_h,dec),
+                   ',\\alpha_l=',params$alpha_l,
+                   ',\\alpha_h=',params$alpha_h,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+    mpcap <- paste('\\label{fig:multitreatment} Plot comparing treatments for the multipatch SIRW model. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_i=',round(params$beta_i,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi=',round(params$xi,dec),
+                   ',\\alpha=',params$alpha,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+    mphlcap <- paste('\\label{fig:multipatch} Plot of different treatments for the multipatch model with high and low severity infectives. The parameter values are ',
+                   '$\\mu=',round(params$mu,dec),
+                   ',\\beta_l=',round(params$beta_l,dec),
+                   ',\\beta_h=',round(params$beta_h,dec),
+                   ',\\gamma=',round(params$gamma,dec),
+                   ',\\sigma=',round(params$sigma,dec),
+                   ',\\beta_w=',round(params$beta_w,dec),
+                   ',\\xi_l=',round(params$xi_l,dec),
+                   ',\\xi_h=',round(params$xi_h,dec),
+                   ',\\alpha_l=',params$alpha_l,
+                   ',\\alpha_h=',params$alpha_h,
+                   '$ The initial conditions for the model were ',
+                   '$S_0=',ic$s0,
+                   ',I_0=',ic$i0,
+                   ',R_0=',ic$r0,',$.',
+                   sep='')
+@
+<<compareSP,fig.height=10,fig.width=8,echo=FALSE,fig.cap=spcap>>=
+    source('spatialSIR.R')
+    tmax <- 100
+    steps <- 200
+    compareSPTreatments(icx,params,tmax,steps)
+@
+\FloatBarrier
+<<compareSPHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=sphlcap>>=
+    source('spatialSIR.R')
+    tmax <- 100
+    steps <- 200
+    compareSPHL(ichl,params,tmax,steps)
+@
+\FloatBarrier
+<<compareMP,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mpcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    tmax <- 100
+    steps <- 200
+    compareTreatments(ic,params,tmax,steps)
+@
+\FloatBarrier
+<<compareHL,fig.height=10,fig.width=8,echo=FALSE,fig.cap=mphlcap>>=
+    source('spatialSIR.R')
+    #multipatch
+    tmax <- 150
+    steps <- 200
+    compareHLTreatments(ic,params,tmax,steps)
+@
+\FloatBarrier
+
