@@ -4,6 +4,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
 \usepackage{movie15}
+\usepackage{pdfpc-commands}
 \usepackage{placeins}
 \usepackage[displaymath, mathlines]{lineno}
 \usepackage{color}

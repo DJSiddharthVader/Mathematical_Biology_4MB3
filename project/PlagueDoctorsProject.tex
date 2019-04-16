@@ -54,6 +54,7 @@
 \usepackage[margin=1in]{geometry}
 \usepackage{graphics,graphicx}
 \usepackage{movie15}
+\usepackage{pdfpc-commands}
 \usepackage{placeins}
 \usepackage[displaymath, mathlines]{lineno}
 \usepackage{color}
@@ -106,8 +107,8 @@
 \begin{abstract}
     Cholera has a significant impact on public health, especially in areas with poor water sanitation, with infections estimated to affect between 1.3 and 4 million people annually \citep{link18}.
     Many people globally still lack proper infrastructure or access to clean water\citep{link19}.
-    While vaccines and antibiotics exist, vaccination can be difficult to achieve at necessary levels for stopping an epidemic and widespread antibiotic usage contributes to the development of antibiotic resistance.
-    Considering the spatial dynamics of water sanitation, antibiotic usage and vaccination are important for creating the most effective and efficient treatment regime in preventing cholera epidemics
+    While vaccines and antibiotics exist, vaccination can be difficult to implement at necessary levels for stopping an epidemic and widespread antibiotic usage could contribute to the development of antibiotic resistance.
+    Considering the spatial dynamics of water sanitation, antibiotic usage and vaccination are important for creating the most effective and efficient treatment regime in preventing cholera epidemics.
 \end{abstract}
 
 \clearpage
@@ -172,7 +173,7 @@ They leave this compartment as they die naturally at a rate $\mu$.
 More bacteria enter the compartment as infected individuals shed the pathogen at a rate $\xi$, and the pathogen dies at a rate $\sigma$.
 \end{description}
 \subsection{Variables and Parameters}
-In this paper, we consider the cholera SIWR model as outlined by Tien and Earn \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below summarize the variables and parameters involved.
+In this paper, we consider the cholera SIWR model as outlined by \cite{link9} with the addition of death rate by cholera $\sigma$.  The tables below summarize the variables and parameters involved.
 %%VARIABLE Table%%
 \begin{center}
 	\begin{tabular}{ | m{1em} | m{8.14cm}| m{5.5cm} | }
@@ -263,15 +264,15 @@ The natural death rate is dependent on various factors such as city or location 
     \frac{dW}{dt}&= \xi I  - \sigma W
 \end{align*}
 %Param explanations
-\begin{itemize}
-    \item$\mu=$ natural death rate
-    \item$\beta_I=$ transmission rate between S and I class
-    \item$\beta_w=$ transmission rate between I and W class
-    \item$\gamma=$ recovery rate (I to R class)
-    \item$\alpha=$ death rate from cholera
-    \item$\xi=$ Shedding rate of cholera from I to W class
-    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-\end{itemize}
+%\begin{itemize}
+%    \item$\mu=$ natural death rate
+%   \item$\beta_I=$ transmission rate between S and I class
+%    \item$\beta_w=$ transmission rate between I and W class
+%    \item$\gamma=$ recovery rate (I to R class)
+%    \item$\alpha=$ death rate from cholera
+%    \item$\xi=$ Shedding rate of cholera from I to W class
+%    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
+%\end{itemize}
 The assumptions for this model are
 \begin{itemize}
     \item Individuals are assumed to be identical, and the population is homogenously mixed
@@ -316,25 +317,16 @@ For our model, we have
 The basic reproductive number is computed as the spectral radius of $FV^{-1}$ as seen in \cite{link9}, which is
 \begin{align*}
     {\mathcal R_0} &= \rho(FV^{-1})\\
-		           &=\frac{\beta_i+\beta_w}{\gamma+\mu+\alpha}
+		           &=\frac{\beta_I+\beta_w}{\gamma+\mu+\alpha}
 \end{align*}
 This single patch model has a stable disease-free equillibrium at (S,I,R)=(1,0,0) when ${\mathcal R_0}<1$.
-It also has a global asymptotically stable endemic-equillirbium when ${\mathcal R_0}>1$ as shown in \cite{link9}, using Jacobian stabiity
-analysis to prove local stability and through the use of Lyapunovs' theorem to show global asymptotic stability.
+It also has a global asymptotically stable endemic-equillirbium when ${\mathcal R_0}>1$ as shown in \cite{link9}, using Jacobian stability
+analysis to prove local stability and through the use of Lyapunov's theorem to show global asymptotic stability.
 
-
-%\textbf{Single Patch Model: Severity of Shedding dependent on Intensity of Symptoms (Low and High)}
-\begin{align*}
-	\frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
-	\frac{dI_L}{dt}&= \beta_i S( I_L + I_H) + \beta_w S W - I_L (\mu + \delta + \alpha_L) \\
-	\frac{dI_H}{dt}&= \delta I_L - I_H (\gamma + \mu + \alpha_H) \\
-	\frac{dR}{dt}&= \gamma I_H - \mu R \\
-	\frac{dW}{dt}&= \xi_L I_L + \xi_H I_H  - \sigma W\\
-	\end{align*}
 
 \section{Single Patch Model With Severity}
 
-Papers\cite{link15} \cite{link18} also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class \cite{link15}.
+Papers (\cite{link15} \cite{link18}) also discuss the possibility that cholera affects individuals differently where they do not show symptoms right away, thus affecting the person to water shedding rate, but bacteria are still present in their feces for 1 to 10 days after infection which can be still contribute to the W class (\cite{link15}).
 The model represents an increasing severity model with low and high symptom severity with the assumption that every infectious individual starts off with low intensity symptoms $I_L$ with a lower rate of shedding $\xi_L$ and the symptoms reach a high intensity $I_H$ with a greater rate of shedding $\xi_H$ as well as a different person-person transmission rate ($\beta_L, \beta_H$) and cholera death rate ($\alpha_H, \alpha_L$) depending on symptom severity:
 \begin{align*}
     \frac{dS}{dt}&= \mu N - \mu S - \beta_L S I_L - \beta_H S I_H - \beta_w S W  \\
@@ -345,16 +337,16 @@ The model represents an increasing severity model with low and high symptom seve
 \end{align*}
 The parameters not in the basic single patch model are:
 \begin{itemize}
-	\item $\alpha_L=$ death rate by cholera for low intensity infected
-	\item $\alpha_H=$ death rate by cholera for low intensity infected
+	\item $\alpha_L=$ Death rate by cholera for low intensity infectious
+	\item $\alpha_H=$ Death rate by cholera for high intensity infectious
     \item $\xi_L=$ Shedding rate of cholera into water for low intensity infectives
-    \item $\xi_H=$ Shedding rate of cholera into water for hig intensity infectives
-	\item $\delta=$ Transition rate from low intensity to high intensity infection
+    \item $\xi_H=$ Shedding rate of cholera into water for high intensity infectives
+	\item $\delta=$ Transition rate from low intensity to high intensity infectiousness
 \end{itemize}
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}[h]
-\includegraphics[width=\maxwidth]{figure/_singlePatchHL-1} \caption{\label{fig:basesp} Plot of the SIRW model for a single patch with severity compartments. Parameters are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,L_0=0.01,H_0=0,R_0=0,$.}\label{fig:<singlePatchHL}
+\includegraphics[width=\maxwidth]{figure/_singlePatchHL-1} \caption{\label{fig:basesp} Plot of the SIRW model for a single patch with severity compartments. In red is the high intensity infective proportion and in orange is the low intensity infective proportion. Parameters are $\mu=7e-05,\beta_l=0.016,\beta_h=0.016,\gamma=0.14286,\sigma=0.04,\beta_w=0.5,\xi_l=0.07,\xi_h=0.14,\alpha_l=0.01,\alpha_h=0.05$ The initial conditions for the model were $S_0=0.99,L_0=0.01,H_0=0,R_0=0,$.}\label{fig:<singlePatchHL}
 \end{figure}
 
 
@@ -363,8 +355,8 @@ The parameters not in the basic single patch model are:
 
 \section{Multipatch SIRW Model}
 
-The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
-The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
+The multi-patch model is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
+The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices:
 \begin{align*}
     \frac{dS}{dt}&= \mu N - \mu S - \beta_I S I - \beta_w S W + D(S,M_S)\\
     \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
@@ -378,36 +370,38 @@ The following equations represent the SIRW model for a set of patches where $S,I
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
-    \item$\xi=$ Shedding rate of cholera from I to W class
-    \item$\sigma=$	Removal rate of cholera from W class (depends on what we define as our water source)
-    \item$M_S$ The dispersal rate of succeptibles between patches
-    \item$M_R=$ The dispersal rate of recovered people between patches
-    \item$M_W=$ The dispersal rate of water between patches
+    \item$\xi=$ shedding rate of cholera from I to W class
+    \item$\sigma=$	removal rate of cholera from W class (depends on what we define as our water source)
+    \item$M_S$ dispersal rate of succeptibles between patches
+    \item$M_R=$ dispersal rate of recovered people between patches
+    \item$M_W=$ dispersal rate of water between patches
 \end{itemize}
-The assumptions for the single patch model apply here as well as the following:
+The assumptions for the single-patch model apply here as well as the following:
 \begin{itemize}
     \item No dispersal of infected individuals between patches
     \item All patches have the same parameter values
 \end{itemize}
-The function $D(C,M_C)$ is defined as
+The diffusion function $D(C,M_C)$ is defined as
 \begin{align*}
     \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
     J &= - M_C \cdot \frac{\partial C}{\partial x}
 \end{align*}
-Where the varaibles are
+Where the variables are:
 \begin{itemize}
     \item $A$ is the total surface area of the region
-    \item $C$ C is the fraction of the patch population in that compartment
+    \item $C$ is the fraction of the patch population in that compartment ($C = S$, $R$, or $W$)
     \item $x$ is space
     \item $t$ is time
     \item $J$ are the fluxes of each patch
     \item $M_C$ is the diffusion coefficient
 \end{itemize}
 Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
-\begin{figure}[htb!]
-    \includemovie{2cm}{2cm}{./final_sections/gifs/base.gif}
-    \caption{ Gif showing the population fraction in each compartment over time}
-\end{figure}
+A gif showing the population compartments changing over time can be found in \url{'./final_sections/gifs/base.gif}.
+%\begin{figure}[htb!]
+%    %\includemovie{2cm}{2cm}{./final_sections/gifs/base.gif}
+%    \inlineMovie[loop]{./final_sections/gifs/base.gif}{./final_sections/gifs/base.pdf}{height=0.7\textheight}
+%    \caption{ Gif showing the population fraction in each compartment over time}
+%\end{figure}
 \section{Multipatch SIRW Model With Severity}
 
 This model assumes that you start off with low intensity symptoms (lower rate of shedding) and the symptoms reach a high intensity with a greater rate of shedding.
@@ -434,8 +428,8 @@ The assumptions for the single patch model apply here as well.
 The three treatments that will be analyzed in regard to the single SIWR model are water treatment, vaccination, and antibiotics.
 The results of the analysis will aid government officials in implementing intervention strategies by determining optimal  parameters (that represent the different intervention strategies) that would be most effective in lowering the estimated reproductive number $\mathcal R_0$, peak prevalence, and the final size.
 \subsection{Treatment Plan 1: Sanitation of water over time}
-Water, sanitation, and hygiene (WASH) intervention is the most simplest and one of the effective ways of to reduce the spread of cholera.
-One of the easiest ways to implement intervention strategies that is easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}.
+Water, sanitation, and hygiene (WASH) intervention is the simplest and one of the most effective ways of to reduce the spread of cholera.
+One of the easiest ways to implement intervention strategies that are easily quantifiable and measurable is through water sanitation via chlorination and filtration of water sources \citep{link26}.
 In the following model, a water treatment strategy would affect the water compartment (essentially increasing the removal or death rate of bacteria in water).
 This can be implemented as a new term $\rho$. \par
 %Biologically relevant parameter ranges for \rho
@@ -489,7 +483,7 @@ The following model implements a decrease in the duration of the infectious peri
 	\frac{dW}{dt}&= \xi I  - \sigma W\\
 \end{align*}
 \begin{itemize}
-	\item $\eta=$ is the rate at which individuals recover and leave the I class due to antibiotic tratment
+	\item $\eta=$ the rate at which individuals recover and leave the I class due to antibiotic treatment
 \end{itemize}
 
 
@@ -524,7 +518,7 @@ The following are numerical simulations and phase portraits for the base model w
 
 }
 
-\caption{\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models. Parameters are $\mu=6.50618087182824e-05,\ \beta_i=0.025,\ \gamma=0.14,\ \sigma=0.04,\ \beta_w=0.5,\ \xi=10,\ \rho=0.05,\ \nu=0.005,\ \eta=0.01667,\ \alpha=0$. The initial conditions for the model were $S_0=0.99,\ I_0=0.01,\ R_0=0$}\label{fig:phase.portraits}
+\caption{\label{fig:phase.portraits} Phase portraits for a single patch and various treatment models. Parameters are $\mu=6.50618087182824e-05,\ \beta_i=0.025,\ \gamma=0.14,\ \sigma=0.04,\ \beta_w=0.5,\ \xi=10,\ \rho=0.05,\ \nu=0.005,\ \eta=0.01667,\ \alpha=0$. The initial conditions for the model were $S_0= 0.5, 0.6, 0.7, 0.8, 0.9,\ I_0=0.001,\ R_0=0$}\label{fig:phase.portraits}
 \end{figure}
 
 
@@ -532,8 +526,8 @@ The following are numerical simulations and phase portraits for the base model w
 \FloatBarrier
 From the phase portraits in figure \ref{fig:phase.portraits}, and the time series in figure \ref{fig:num.sim} it is clear that all treatments appear to have an effect on transmission dynamics, causing the infection to peak at lower level of prevalence in comparison to without the treatment.
 All treatments appear to show very similar effects for the single patch model, but how they work in the spatial model may differ, especially since the treatments can be applied heterogenously across the patches in proportion to the initial infectives of each patch.
-However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
-All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
+%However the infectives also appear to recover comparably quickly as well, as seen by the sharp drop off in $I$.
+%All treatments appear to show very similar effects for the single patch model, but how work in the spatial model may differ, espescially singe the treatments can be applied heterogenously across the patches, in proportion to the initial infectives of each patch.
 
 \begin{knitrout}
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{figure}
@@ -582,8 +576,8 @@ WASH intervention is the simplest treatment technique, with hygiene and clean wa
 Chlorination techniques have had a few pitfalls depending on the quality of implementation.
 Well chlorination with liquid bleach which was used during the 2008 cholera outbreak in Guinea Bissau was considered ineffective in maintaining the recommended free residual cholorine amount, whereas the use of chlorinators (slow releasing chlorine tablets) depends on the maintenance by surrounding citizens \citep{link26}.
 In terms of pragmatism, it is impractical to only implement antibiotic prophylaxis to those who are infected as well as those who come in contact with the with the contaminated water source (since mass antibiotic implementation would increase the chance of selecting antibiotic resistant strains) \citep{link23}.
-Cost is not necessarily only monetary, as risk is associated with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare or engineering professions.
-Additionally, timely implementation of oral vaccination in response to an existing epidemic may prove to be challenging without the ability to predict the outbreak and without enough financial support to properly administer an adequate number vaccines to those who are at risk of cholera.
+Cost is not necessarily only monetary, as risk is associated with overuse of antibiotics, water sanitation requires maintenance, all strategies require work from various healthcare and engineering professions.
+Additionally, timely implementation of oral vaccination in response to an existing epidemic may prove to be challenging without the ability to predict the outbreak and without enough financial support to properly administer an adequate number of vaccines to those who are at risk of getting infected with cholera.
 %End Note
 
 \bigskip\vfill
@@ -591,7 +585,7 @@ Additionally, timely implementation of oral vaccination in response to an existi
 \bigskip
 Compile time for this document:
 \today\ @ \thistime\\
-CPU time to generate this document: 7.203S seconds.
+CPU time to generate this document: 7.092S seconds.
 \printbibliography
 \end{document}
 %Depreciated old sections

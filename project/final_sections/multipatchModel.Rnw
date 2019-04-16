@@ -39,7 +39,9 @@ Where the variables are:
     \item $M_C$ is the diffusion coefficient
 \end{itemize}
 Distance between adjacent patches is arbitrarily defined to be $0.3$, thus $A= (0.3)^2 \cdot rows \cdot columns$, which is the area of then entire square region containing all patches.\\
-\begin{figure}[htb!]
-    \includemovie{2cm}{2cm}{./final_sections/gifs/base.gif}
-    \caption{ Gif showing the population fraction in each compartment over time}
-\end{figure}
+A gif showing the population compartments changing over time can be found in \url{'./final_sections/gifs/base.gif}.
+%\begin{figure}[htb!]
+%    %\includemovie{2cm}{2cm}{./final_sections/gifs/base.gif}
+%    \inlineMovie[loop]{./final_sections/gifs/base.gif}{./final_sections/gifs/base.pdf}{height=0.7\textheight}
+%    \caption{ Gif showing the population fraction in each compartment over time}
+%\end{figure}
