@@ -1,15 +1,15 @@
 The multimodel patch is represented as a square matrix of single patch models, with equations governing the diffusion of each population compartment between patches.
 The following equations represent the SIRW model for a set of patches where $S,I,R,W$ are all $N$ by $N$ sqaure matrices
 \begin{align*}
-    \frac{dS}{dt}&= \mu N - \mu S - \beta_i S I - \beta_w S W + D(S,M_S)\\
-    \frac{dI}{dt}&= \beta_i S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
+    \frac{dS}{dt}&= \mu N - \mu S - \beta_I S I - \beta_w S W + D(S,M_S)\\
+    \frac{dI}{dt}&= \beta_I S I + \beta_w S W - I(\gamma + \mu + \alpha)\\
     \frac{dR}{dt}&= \gamma I - \mu R  + D(R,M_R) \\
     \frac{dW}{dt}&= \xi I - \sigma W + D(W,M_W)
 \end{align*}
 %Paramters
 \begin{itemize}
     \item$\mu=$ natural death rate
-    \item$\beta_i=$ transmission rate between S and I class
+    \item$\beta_I=$ transmission rate between S and I class
     \item$\beta_w=$ transmission rate between I and W class
     \item$\gamma=$ recovery rate (I to R class)
     \item$\alpha=$ death rate from cholera
@@ -24,15 +24,15 @@ The assumptions for the single patch model apply here as well as the following:
     \item No dispersal of infected individuals between patches
     \item All patches have the same parameter values
 \end{itemize}
-The function $D(C,M_C)$ is defined as
+The diffusion function $D(C,M_C)$ is defined as
 \begin{align*}
     \frac{\partial C}{\partial t} &= -\frac{1}{A} \cdot \frac{\partial A \cdot J}{\partial x}\\
     J &= - M_C \cdot \frac{\partial C}{\partial x}
 \end{align*}
-Where the varaibles are
+Where the variables are
 \begin{itemize}
     \item $A$ is the total surface area of the region
-    \item $C$ C is the fraction of the patch population in that compartment
+    \item $C$ is the fraction of the patch population in that compartment ($C$ = $S$, $R$, or $W$)
     \item $x$ is space
     \item $t$ is time
     \item $J$ are the fluxes of each patch
