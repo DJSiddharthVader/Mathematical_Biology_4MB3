@@ -112,21 +112,95 @@ date.string <- function(year,month,day) {
 \begin{itemize}
 \item 
 \end{itemize}
-\section*{Total time spent on this project}
-\begin{quote}
-\emph{Group work:} 11 hours
-\emph{Solo work:} 23.5 hours
-\end{quote}
-\end{document}
-%Example entry
-%\section*{\Sexpr{date.string(this.year, 3, 15)}}
-%\textbf{Group Meeting} \\
-%\emph{Approximate Duration: 1 Hour}
-%\begin{itemize}
-%\item We discussed what worked on the last album, and how we want things to go this time.
-%\item John doesn't seem to appreciate that the success of the album was entirely due to my songs.
-%\item I think we should face facts and include only my material on the new album.
-%\item John said Yoko has to be present in the studio all the time.  I hit him.  He swore at me.  Ringo said ``Come on boys -- make nice.''  John hit him.  George meditated in a corner.
-%\item George Martin convinced us to break and reconvene in a couple of days.
-%\end{itemize}
-%Time summary
+\section*{\Sexpr{date.string(this.year, 3, 28)}}
+      \textbf{Group Meeting}\\
+      \emph{Approximate Duration: 1 Hour}
+      \begin{itemize}
+      \item Worked on finishing touches for the draft, and began writing executive summary. 
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 3, 29)}}
+      \textbf{Work Alone} \\
+      \emph{Approximate Duration: 2 hours}
+      \begin{itemize}
+      \item worked on multi-patch model
+      \item Contintued working on editing the introduction and analysis
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 1)}}
+      \textbf{Group Work} \\
+      \emph{Approximate Duration: 2 hours}
+      \begin{itemize}
+      \item Made edits to rough draft based on feedback
+      \item Edited the document to make all sections consistent
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 2)}}
+      \textbf{Group Work} \\
+      \emph{Approximate Duration: 2 hours}
+      \begin{itemize}
+      \item Continued to edit the paper
+      \item Did research on multi-patch models to work on the spreading dynamics
+      \item began to help plan the presentation
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 3)}}
+      \textbf{Group Work} \\
+      \emph{Approximate Duration: 3 hours}
+      \begin{itemize}
+      \item Worked on presentation
+      \item Worked on single patch model analysis
+      \item Found range of basic reproduction number values for cholera
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 4)}}
+      \textbf{Group Work} \\
+      \emph{Approximate Duration: 2 hours}
+      \begin{itemize}
+      \item worked on presentation
+      \item worked on using the intensity model as a way to better represent cholera spreading for the multi-patch model
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 7)}}
+      \textbf{Group Work} \\
+      \emph{Approximate Duration: 5 hours}
+      \begin{itemize}
+      \item Worked on presentation
+      \item Worked on single patch model
+      \item Worked on multi-patch model
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 7)}}
+      \textbf{Work Alone} \\
+      \emph{Approximate Duration: 3 hours}
+      \begin{itemize}
+      \item Worked on presentation
+      \item Practised presentation
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 10)}}
+      \textbf{Work Alone} \\
+      \emph{Approximate Duration: 2 hours}
+      \begin{itemize}
+      \item Worked on executive summary
+      \item Worked on Single-patch analysis
+      \end{itemize}
+      \section*{\Sexpr{date.string(this.year, 4, 15)}}
+      \textbf{Work Alone} \\
+      \emph{Approximate Duration: 5 hours}
+      \begin{itemize}
+      \item Finalized executive summary
+      \item Worked on Single-patch analysis
+      \item Worked on editing Final Draft
+      \end{itemize}
+      \section*{Total time spent on this project}
+      \begin{quote}
+      \emph{Group work:} 26 hours
+      \emph{Solo work:} 32.5 hours
+      \end{quote}
+      \end{document}
+      %Example entry
+      %\section*{\Sexpr{date.string(this.year, 3, 15)}}
+      %\textbf{Group Meeting} \\
+      %\emph{Approximate Duration: 1 Hour}
+      %\begin{itemize}
+      %\item We discussed what worked on the last album, and how we want things to go this time.
+      %\item John doesnt seem to appreciate that the success of the album was entirely due to my songs.
+      %\item I think we should face facts and include only my material on the new album.
+      %\item John said Yoko has to be present in the studio all the time.  I hit him.  He swore at me.  Ringo said ``Come on boys -- make nice.''  John hit him.  George meditated in a corner.
+      %\item George Martin convinced us to break and reconvene in a couple of days.
+      %\end{itemize}
+      %Time summary
+
